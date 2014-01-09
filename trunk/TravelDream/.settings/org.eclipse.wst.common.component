@@ -12,5 +12,8 @@
         <dependent-module archiveName="TravelDreamEJBClient.jar" deploy-path="/" handle="module:/resource/TravelDreamEJBClient/TravelDreamEJBClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="commons-codec-1.9.jar" deploy-path="/lib" handle="module:/classpath/lib/C:/Users/Marcello/Desktop/ing sw2/commons-codec-1.9/commons-codec-1.9.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
 	</wb-module>
 </project-modules>
