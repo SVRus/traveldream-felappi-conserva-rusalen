@@ -78,7 +78,7 @@ CustomerEntityManagementLocal custejb;
         groups.add(Group.EMPLOYEE);
         List <Product> prod=new ArrayList <Product> ();
         List <PrepackedTravelPackage> prep=new ArrayList <PrepackedTravelPackage> ();
-		Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.sha256Hex(employee.getPassword()),,groups,prod, prep);
+		Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.md5Hex(employee.getPassword()),,groups,prod, prep);
 		  	
     	return real;
     	
