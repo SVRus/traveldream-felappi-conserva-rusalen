@@ -19,14 +19,14 @@ public class GiftList implements Serializable {
 		super();
 	}
 @Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private long idGiftList;
+@OneToOne(cascade=CascadeType.ALL)
+@JoinColumn(name="idProduct")
+private Product product;
 private long idCustomer;
 private long idBuyer;
 private String moreInfo;
 private boolean bought;
-private long giftListCode;
-@OneToOne(cascade=CascadeType.ALL)
+@ManyToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="travelPackageFK")
 private TravelPackage travelPackage;
 

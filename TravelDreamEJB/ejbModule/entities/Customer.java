@@ -1,6 +1,7 @@
 package entities;
 
 import entities.RegisteredUser;
+import groupenum.Group;
 
 import java.io.Serializable;
 
@@ -19,6 +20,93 @@ import javax.persistence.*;
 public class Customer extends RegisteredUser implements Serializable {
 
 	
+	public List<CustomizedTravelPackage> getCustomizedTravelPackages() {
+		return customizedTravelPackages;
+	}
+
+
+
+	public void setCustomizedTravelPackages(
+			List<CustomizedTravelPackage> customizedTravelPackages) {
+		this.customizedTravelPackages = customizedTravelPackages;
+	}
+
+
+
+	public List<Customer> getFriends() {
+		return friends;
+	}
+
+
+
+	public void setFriends(List<Customer> friends) {
+		this.friends = friends;
+	}
+
+
+
+	public List<TravelPackage> getPurchasedTravelPackages() {
+		return purchasedTravelPackages;
+	}
+
+
+
+	public void setPurchasedTravelPackages(
+			List<TravelPackage> purchasedTravelPackages) {
+		this.purchasedTravelPackages = purchasedTravelPackages;
+	}
+
+
+
+	public List<TravelPackage> getPreparedForAFriendTravelPackages() {
+		return preparedForAFriendTravelPackages;
+	}
+
+
+
+	public void setPreparedForAFriendTravelPackages(
+			List<TravelPackage> preparedForAFriendTravelPackages) {
+		this.preparedForAFriendTravelPackages = preparedForAFriendTravelPackages;
+	}
+
+
+
+	public List<GiftList> getGiftLists() {
+		return giftLists;
+	}
+
+
+
+	public void setGiftLists(List<GiftList> giftLists) {
+		this.giftLists = giftLists;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+	public Customer(String email, String name, String surname,
+			String telephone, String password, String username,
+			List<Group> groups,
+			List<CustomizedTravelPackage> customizedTravelPackages,
+			List<Customer> friends,
+			List<TravelPackage> purchasedTravelPackages,
+			List<TravelPackage> preparedForAFriendTravelPackages,
+			List<GiftList> giftLists) {
+		super(email, name, surname, telephone, password, username, groups);
+		this.customizedTravelPackages = customizedTravelPackages;
+		this.friends = friends;
+		this.purchasedTravelPackages = purchasedTravelPackages;
+		this.preparedForAFriendTravelPackages = preparedForAFriendTravelPackages;
+		this.giftLists = giftLists;
+	}
+
+
+
 	private static final long serialVersionUID = 1L;
 
 @OneToMany(mappedBy="customizer")	

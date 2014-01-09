@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
     <wb-module deploy-name="TravelDreamEJBClient">
         <wb-resource deploy-path="/" source-path="/ejbModule"/>
+        <dependent-module archiveName="commons-codec-1.9.jar" deploy-path="/" handle="module:/classpath/lib/C:/Users/Marcello/Desktop/ing sw2/commons-codec-1.9/commons-codec-1.9.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>
