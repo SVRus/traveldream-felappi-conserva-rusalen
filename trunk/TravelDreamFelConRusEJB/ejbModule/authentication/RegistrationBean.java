@@ -111,7 +111,13 @@ CustomerEntityManagementLocal custejb;
     	return true;
     }
     
-    
+    private boolean alreadyUsed(String username)
+    {
+		return false;
+    	
+    	
+    	
+    }
     
     
 }
