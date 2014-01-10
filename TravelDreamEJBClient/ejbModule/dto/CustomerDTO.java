@@ -15,5 +15,5 @@ public class CustomerDTO extends GenericUserDTO{
 	
 
 
-
+	
 }
