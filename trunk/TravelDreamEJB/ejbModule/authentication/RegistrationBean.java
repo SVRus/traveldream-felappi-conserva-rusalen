@@ -73,7 +73,7 @@ CustomerEntityManagementLocal custejb;
     	
     }
     private Employee dtoToEmployee(EmployeeDTO employee)
-    {   String username=
+    {   String username=employee.getUsername();
     	List<Group> groups=new ArrayList <Group>();
         groups.add(Group.EMPLOYEE);
         List <Product> prod=new ArrayList <Product> ();
