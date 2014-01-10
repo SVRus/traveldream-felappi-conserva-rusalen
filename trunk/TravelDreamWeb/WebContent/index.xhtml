@@ -71,21 +71,19 @@
 
 	</h:form>			
 
-	<h:form id="signinForm" styleClass="input-form">
+	<h:form id="signinForm" styleClass="input-form"
+		action="j_security_check">
 		<p:panel header="Sign In" id="panel">
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
 	<h:panelGrid columns="2">
 	
-	<p:outputLabel value="Username" for="username" />
-		<p:inputText id="username" label="Username"
-			value="#{auth.username}"
-				required="true" />
+		<p:outputLabel for="j_username" value="Username" />
+		<p:inputText id="j_username" name="j_username" required="true" />
 		
-		<p:outputLabel value="Password" for="passwordIn" />
-		<p:password id="passwordIn" label="Password"
-			value="#{auth.passwordIn}"
-			feedback="true" required="true" />
+		<p:outputLabel for="j_password" value="Password" />
+		<p:password id="j_password" name="j_password" />
+				
 		
 		
 	</h:panelGrid>
