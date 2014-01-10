@@ -74,6 +74,14 @@ private String getPrincipalUsername()
 
 
 
+@Override
+public boolean isLogged() {
+	
+	return context.isCallerInRole("CUSTOMER") ||context.isCallerInRole("EMPLOYEE");
+}
+
+
+
 
 
 
