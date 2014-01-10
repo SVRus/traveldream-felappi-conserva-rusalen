@@ -26,12 +26,7 @@ public class Employee extends RegisteredUser implements Serializable {
 		this.managedProduct = managedProduct;
 		this.managedTravelPackage = managedTravelPackage;
 	}
-	public long getCode() {
-		return code;
-	}
-	public void setCode(long code) {
-		this.code = code;
-	}
+	
 	public List<Product> getManagedProduct() {
 		return managedProduct;
 	}
@@ -51,9 +46,7 @@ public class Employee extends RegisteredUser implements Serializable {
 	public Employee() {
 		super();
 	}
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private long code; //deve essere unica.. come faccio a specificarlo?
-   @OneToMany(cascade=CascadeType.ALL)
+     @OneToMany(cascade=CascadeType.ALL)
    @JoinColumn(name="employeeCreator")
    private List <Product> managedProduct;//inserire la relazione
    @OneToMany(cascade=CascadeType.ALL)
