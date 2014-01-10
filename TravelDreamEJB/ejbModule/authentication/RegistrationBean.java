@@ -93,7 +93,7 @@ CustomerEntityManagementLocal custejb;
         List<TravelPackage> purchasedTravelPackages=new ArrayList<TravelPackage>();
         List<TravelPackage> preparedForAFriendTravelPackages=new ArrayList <TravelPackage>();
         List<GiftList> giftLists=new ArrayList <GiftList>();
-        Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.md5Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,friends,purchasedTravelPackages,preparedForAFriendTravelPackages,giftLists); 
+        Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.sha256Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,friends,purchasedTravelPackages,preparedForAFriendTravelPackages,giftLists); 
         
    	   return real;
     	
