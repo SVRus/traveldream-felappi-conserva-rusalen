@@ -1,6 +1,8 @@
 package authentication;
 
+
 import javax.annotation.Resource;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.EJBContext;
 import javax.ejb.LocalBean;
@@ -9,8 +11,12 @@ import javax.ejb.Stateless;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
+import dto_entitiesconversion.DTOFactory;
+import entities.Customer;
+import entities.Employee;
 import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
+import groupenum.Group;
 
 /**
  * Session Bean implementation class LoginBean
@@ -40,29 +46,42 @@ public LoginBean()
 
 
 
-
 @Override
-public CustomerDTO findLogInCustomer(String username) {
-	
-	return null;
-}
-
-@Override
-public EmployeeDTO findLogInEmployee(String username) {
-	// TODO Auto-generated method stub
-	return null;
-}
+@RolesAllowed({Group._CUSTOMER,Group._EMPLOYEE})
 public GenericUserDTO findLogIn()
 {
-	return null;
+	String username=getPrincipalUsername();
+	GenericUserDTO generic=null;
+	if (context.isCallerInRole("EMPLOYEE"))
+	{
+		generic=DTOFactory.toTDO((Employee)employee.find(username));
+		
+	}
+	else if(context.isCallerInRole("CUSTOMER"))
+	{
+		generic=DTOFactory.toTDO((Customer)customer.find(username));
+		
+	}
+	return generic;
 	
 
 }
-
-public String getPrincipalUsername() 
+private String getPrincipalUsername() 
 {
 	
 	return context.getCallerPrincipal().getName();
 }
+
+
+
+
+
+
+
+
+
+
+
+
     
 }
