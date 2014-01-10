@@ -9,10 +9,34 @@
 	<p:outputLabel value= "#{auth.result}"  />
 	
     <p:outputLabel value= "#{auth.description}"  />
-			
-		
 	
-	<h:form id="signupForm" styleClass="input-form">     
+	<p:layout fullPage="true">  
+  
+    <p:layoutUnit position="north" size="100"   > 
+    <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        .ui-layout-unit-header{background-image:url('background.jpg');}
+    </style> 
+        <h:outputText value="stuff"/>  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
+        <h:outputText value="Rusalen Felappi Conserva" />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
+        <h:outputText value="LANDMARKS" />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+        <h:outputText value="Ricerca" />  
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="center">  
+      
+      <p:layout style="min-width:400px;min-height:200px;" id="layout">  
+    <p:layoutUnit position="west"  size="600" >  
+         <h:form id="signupForm" styleClass="input-form">
 		<p:panel header="Sign Up" id="panel">
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
@@ -65,16 +89,21 @@
 			<p:outputLabel value="I accept the terms and conditions"
 				onclick="termsCheckbox.toggle()" for="terms" />
 		</h:panelGroup>
-	</h:panelGrid>
-	<p:commandButton value="Sign Up"
+		<p:commandButton value="Sign Up"
 		action="#{auth.signUp}"
 		style="display:block; margin:0 auto;"
 		ajax="false" />
+	</h:panelGrid>
+	
 		</p:panel>
 
 	</h:form>			
-
-	<h:form id="login"
+	 
+ 
+    </p:layoutUnit>  
+  
+    <p:layoutUnit position="center">  
+       <h:form id="login"
 			onsubmit="document.getElementById('login').action='j_security_check';"
 			prependId="false">
 		<p:panel header="Sign In" id="panel">
@@ -94,7 +123,41 @@
 	
 		</p:panel>
 
-	</h:form>			
+	</h:form> 
+	
+      
+ 
+       <h:form id="gift"
+			action = "todo">
+		<p:panel header="Vuoi fare un regalo?" id="panel">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+		<h:panelGrid columns="1">
+	
+		<p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
+		<p:inputText id="gift" name="j_username" required="true" />
+		
+		
+		<p:commandButton id="submit" value="Invia codice" ajax="false" />		
+		
+		
+		</h:panelGrid>
+	
+		</p:panel>
+
+	</h:form> 
+       
+       
+    </p:layoutUnit>  
+	
+	</p:layout>  
+    				
+    </p:layoutUnit>  
+  
+</p:layout>  		
+		
+	
+	
 	
 </body> 
 </html>
