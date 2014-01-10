@@ -8,6 +8,9 @@
 <body> 
 	<p:outputLabel value= "#{auth.result}"  />
 	
+    <p:outputLabel value= "#{auth.description}"  />
+			
+		
 	
 	<h:form id="signupForm" styleClass="input-form">
 		<p:panel header="Sign Up" id="panel">
@@ -71,8 +74,9 @@
 
 	</h:form>			
 
-	<h:form id="signinForm" styleClass="input-form"
-		action="j_security_check">
+	<h:form id="login"
+			onsubmit="document.getElementById('login').action='j_security_check';"
+			prependId="false">
 		<p:panel header="Sign In" id="panel">
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
@@ -83,14 +87,11 @@
 		
 		<p:outputLabel for="j_password" value="Password" />
 		<p:password id="j_password" name="j_password" />
-				
+		<p:commandButton id="submit" value="Login" ajax="false" />		
 		
 		
 	</h:panelGrid>
-	<p:commandButton value="Sign In"
-		action="#{auth.signIn}"
-		style="display:block; margin:0 auto;"
-		ajax="false" />
+	
 		</p:panel>
 
 	</h:form>			

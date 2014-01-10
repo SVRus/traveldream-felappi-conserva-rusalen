@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import dto.CustomerDTO;
+import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="auth")
@@ -27,11 +28,13 @@ public class AuthBean {
 	private String username;
 	private String passwordIn;
 	private String result;
+	private String description;
 	
 	@EJB
 	private RegistrationBeanLocal registration;
 	// private LoginBean login
-
+@EJB
+private LoginBeanLocal login;
 
 	public String signIn()
 	{
@@ -48,6 +51,19 @@ public class AuthBean {
 	}
 	
 	
+	public String getDescription() {
+		if (login.isLogged())
+		return login.findLogIn().toString();
+		else
+			return "non loggato";
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
 	public String signUp()
 	{
 		boolean success;
