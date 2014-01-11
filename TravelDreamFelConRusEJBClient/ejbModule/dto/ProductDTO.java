@@ -4,23 +4,73 @@ import java.util.Date;
 
 
 public class ProductDTO {
-
-	private long idProduct=-1;
+	
+	
+	private long idtravelpackage;
+	private String employeeCreator;
+    private String name;
+	private long idProduct;
 	private float cost;
 	private Date timeStart;
 	private Date timeEnd;
-	public ProductDTO(long idProduct, float cost, Date timeStart, Date timeEnd) {
+	
+	/**
+	 * constructor without the idproduct: used during the creation phase
+	 * @param idtravelpackage
+	 * @param employeeCreator
+	 * @param name
+	 * @param cost
+	 * @param timeStart
+	 * @param timeEnd
+	 */
+	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
+			float cost, Date timeStart, Date timeEnd) {
 		super();
+		this.idtravelpackage = idtravelpackage;
+		this.employeeCreator = employeeCreator;
+		this.name = name;
+		this.cost = cost;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+	}
+	/**
+	 * constructor with the idproduct: it can't be used during the creation phase
+	 * @param idtravelpackage
+	 * @param employeeCreator
+	 * @param name
+	 * @param idProduct
+	 * @param cost
+	 * @param timeStart
+	 * @param timeEnd
+	 */
+	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
+			long idProduct, float cost, Date timeStart, Date timeEnd) {
+		super();
+		this.idtravelpackage = idtravelpackage;
+		this.employeeCreator = employeeCreator;
+		this.name = name;
 		this.idProduct = idProduct;
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 	}
-	public ProductDTO(float cost, Date timeStart, Date timeEnd) {
-		super();
-		this.cost = cost;
-		this.timeStart = timeStart;
-		this.timeEnd = timeEnd;
+	public long getIdtravelpackage() {
+		return idtravelpackage;
+	}
+	public void setIdtravelpackage(long idtravelpackage) {
+		this.idtravelpackage = idtravelpackage;
+	}
+	public String getEmployeeCreator() {
+		return employeeCreator;
+	}
+	public void setEmployeeCreator(String employeeCreator) {
+		this.employeeCreator = employeeCreator;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public long getIdProduct() {
 		return idProduct;

@@ -11,18 +11,11 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("HOTEL")
 public class Hotel extends Product implements Serializable {
-private String name;
 private String area;
 private String place;
 private String room_type;
 private String more_info;
-	public String getName() {
-	return name;
-}
-
-public void setName(String name) {
-	this.name = name;
-}
+	
 
 public String getArea() {
 	return area;
