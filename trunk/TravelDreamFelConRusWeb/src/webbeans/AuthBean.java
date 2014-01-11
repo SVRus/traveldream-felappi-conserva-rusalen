@@ -2,13 +2,16 @@ package webbeans;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
+import dto.ProductDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
@@ -31,10 +34,9 @@ public class AuthBean {
 	private String description;
 	
 	@EJB
-	private RegistrationBeanLocal registration;
+	private GenericUserManagementBeanLocal generic;
 	// private LoginBean login
-@EJB
-private LoginBeanLocal login;
+
 
 	public String signIn()
 	{
@@ -52,8 +54,8 @@ private LoginBeanLocal login;
 	
 	
 	public String getDescription() {
-		if (login.isLogged())
-		return login.findLogIn().toString();
+		if (generic.isLogged())
+		return generic.findLogIn().toString();
 		else
 			return "non loggato";
 	}
@@ -67,8 +69,9 @@ private LoginBeanLocal login;
 	public String signUp()
 	{
 		boolean success;
-		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username);
-		success = registration.customerRegister(customer);
+		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <ProductDTO>(),new ArrayList<Long>());
+		
+		success = generic.customerRegister(customer);
 		if(success)
 		{
 		result ="registrato";

@@ -25,6 +25,26 @@ private float cost;
 private Date timeStart;
 @Temporal(TemporalType.TIMESTAMP)
 private Date timeEnd;
+private String name;
+public String getName() {
+	return name;
+}
+
+
+public void setName(String name) {
+	this.name = name;
+}
+
+
+public long getEmployeeCreator() {
+	return employeeCreator;
+}
+
+
+public void setEmployeeCreator(long employeeCreator) {
+	this.employeeCreator = employeeCreator;
+}
+
 
 @ManyToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="idtravelpackage")

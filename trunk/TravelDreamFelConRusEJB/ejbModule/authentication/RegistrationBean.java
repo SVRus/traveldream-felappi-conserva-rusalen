@@ -25,7 +25,10 @@ import entitymanagement.EmployeeEntityManagementLocal;
 import groupenum.Group;
 
 /**
+ *  
  * Session Bean implementation class RegistrationBean
+ * It exploits the beans {@link entitymanagement.EmployeeEntityManagemen} and {@link entitymanagement.CustomerEntityManagement}
+ * @overview It is used to handle the registration phase
  */
 @Stateless
 @LocalBean
@@ -40,7 +43,12 @@ CustomerEntityManagementLocal custejb;
     public RegistrationBean() {
         // TODO Auto-generated constructor stub
     }
-    
+    /**
+     * @author Marcello
+     * This method let the employee register by adding him to the group employee {@link entitymanagement.EmployeeEntityManagement#create(Employee)}
+     * @param employee --> entity describing the employee in the db
+     * @return a boolean value describing the registration outcome
+     */
     
     public boolean employeeRegister(EmployeeDTO employee)
     {
@@ -57,7 +65,12 @@ CustomerEntityManagementLocal custejb;
     return true;
     }
     
-    
+    /**
+     * @author Marcello
+     * This method let the customer register by adding him to the group customer {@link entitymanagement.CustomerEntityManagement#create(Customer)}
+     * @param customer --> entity describing the customer in the db
+     * @return a boolean value describing the registration outcome
+     */
     public boolean customerRegister(CustomerDTO customer)
     {
     	Customer cust=dtoToCustomer(customer);
@@ -74,7 +87,14 @@ CustomerEntityManagementLocal custejb;
     	return true;
     	
     }
+    /**
+     * @author Marcello
+     * Private method that transform the EmployeeDTO in the entity employee
+     * @param employee -->the employee DTO acquired from the web tier 
+     * @return the entity Employee translated from the EmployeeDTO
+     */
     private Employee dtoToEmployee(EmployeeDTO employee)
+    //TODO da finire
     {   String username=employee.getUsername();
     	List<Group> groups=new ArrayList <Group>();
         groups.add(Group.EMPLOYEE);
@@ -86,6 +106,12 @@ CustomerEntityManagementLocal custejb;
     	
     	
     }
+    /**
+     * @author Marcello
+     * Private method that transform the CustomerDTO in the entity customer
+     * @param customer -->the customer DTO acquired from the web tier
+     * @return the entity Customer translated from the CustomerDTO
+     */
     private Customer dtoToCustomer(CustomerDTO customer)
     {
     	List<Group> groups=new ArrayList <Group>();
@@ -100,9 +126,15 @@ CustomerEntityManagementLocal custejb;
    	   return real;
     	
     }
+    /**
+     * @author Marcello
+     * @param username
+     * @return
+     */
     public boolean customerUnregister(String username)
-    {   
-    	try{
+    {   //TODO da finire
+    	try
+    	{
     	emploejb.find(username);
     	}
     	catch(Exception e){
@@ -111,13 +143,7 @@ CustomerEntityManagementLocal custejb;
     	return true;
     }
     
-    private boolean alreadyUsed(String username)
-    {
-		return false;
-    	
-    	
-    	
-    }
+    
     
     
 }

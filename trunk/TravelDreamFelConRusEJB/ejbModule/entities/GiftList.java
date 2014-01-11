@@ -22,8 +22,7 @@ public class GiftList implements Serializable {
 @OneToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="idProduct")
 private Product product;
-private long idCustomer;
-private long idBuyer;
+private String idBuyer;
 private String moreInfo;
 private boolean bought;
 @ManyToOne(cascade=CascadeType.ALL)

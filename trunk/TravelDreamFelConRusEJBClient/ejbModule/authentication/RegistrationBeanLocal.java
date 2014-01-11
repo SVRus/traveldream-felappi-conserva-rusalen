@@ -8,6 +8,7 @@ import dto.EmployeeDTO;
 @Local
 public interface RegistrationBeanLocal {
 public boolean customerRegister(CustomerDTO customer);
+public boolean employeeRegister(EmployeeDTO employee);
 
 
 

@@ -3,6 +3,8 @@ package userManagement;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 
+
+
 /**
  * Session Bean implementation class GuestManagementBean
  */
@@ -10,6 +12,9 @@ import javax.ejb.Stateful;
 @LocalBean
 public class GuestManagementBean implements GuestManagementBeanLocal {
 
+
+
+	
     /**
      * Default constructor. 
      */
