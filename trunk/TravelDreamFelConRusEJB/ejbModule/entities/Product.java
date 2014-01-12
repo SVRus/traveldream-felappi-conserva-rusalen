@@ -16,8 +16,53 @@ import dto.ProductDTO;
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="PRODUCT_TYPE")
 public class Product implements Serializable {
+public Product()
+{}
+	/**
+	 * constructor used during the update phase
+	 * @param idProduct
+	 * @param cost
+	 * @param timeStart
+	 * @param timeEnd
+	 * @param name
+	 * @param travel
+	 */
+	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
+			String name, TravelPackage travel) {
+		super();
+		this.idProduct = idProduct;
+		this.cost = cost;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.name = name;
+		this.travel = travel;
+	}
 
-	
+
+
+
+/**
+ * constructor used during the creation phase
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param name
+ * @param travel
+ */
+	public Product(float cost, Date timeStart, Date timeEnd, String name,
+			TravelPackage travel) {
+		super();
+		this.cost = cost;
+		this.timeStart = timeStart;
+		this.timeEnd = timeEnd;
+		this.name = name;
+		this.travel = travel;
+	}
+
+
+
+
+
 	private static final long serialVersionUID = 1L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)

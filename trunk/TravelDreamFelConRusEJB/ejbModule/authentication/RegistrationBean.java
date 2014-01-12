@@ -43,27 +43,9 @@ CustomerEntityManagementLocal custejb;
     public RegistrationBean() {
         // TODO Auto-generated constructor stub
     }
-    /**
-     * @author Marcello
-     * This method let the employee register by adding him to the group employee {@link entitymanagement.EmployeeEntityManagement#create(Employee)}
-     * @param employee --> entity describing the employee in the db
-     * @return a boolean value describing the registration outcome
-     */
+   
     
-    public boolean employeeRegister(EmployeeDTO employee)
-    {
-    	Employee emplo=dtoToEmployee(employee);
-    try{
-    	emploejb.create(emplo);
-       }	
-    	
-    	catch(Exception e)
-    	{
-    		
-    		return false;
-    	}
-    return true;
-    }
+   
     
     /**
      * @author Marcello
