@@ -8,8 +8,7 @@ import javax.ejb.EJBContext;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import dto.CustomerDTO;
-import dto.EmployeeDTO;
+
 import dto.GenericUserDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.Customer;
@@ -43,7 +42,7 @@ EJBContext context;
     
 public LoginBean() 
 {
-        // TODO Auto-generated constructor stub
+        
 }
 
 /**
