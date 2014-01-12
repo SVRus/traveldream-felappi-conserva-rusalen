@@ -13,6 +13,36 @@ import javax.persistence.*;
 public class GiftList implements Serializable {
 
 	
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public String getIdBuyer() {
+		return idBuyer;
+	}
+	public void setIdBuyer(String idBuyer) {
+		this.idBuyer = idBuyer;
+	}
+	public String getMoreInfo() {
+		return moreInfo;
+	}
+	public void setMoreInfo(String moreInfo) {
+		this.moreInfo = moreInfo;
+	}
+	public boolean isBought() {
+		return bought;
+	}
+	public void setBought(boolean bought) {
+		this.bought = bought;
+	}
+	public TravelPackage getTravelPackage() {
+		return travelPackage;
+	}
+	public void setTravelPackage(TravelPackage travelPackage) {
+		this.travelPackage = travelPackage;
+	}
 	private static final long serialVersionUID = 1L;
 
 	public GiftList() {

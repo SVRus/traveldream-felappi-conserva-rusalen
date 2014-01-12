@@ -31,6 +31,8 @@ CustomerEntityManagementLocal customer;
  
 @EJB
 EmployeeEntityManagementLocal employee;
+@EJB
+DTOFactory factory;
 
 @Resource
 EJBContext context;
@@ -58,12 +60,12 @@ public GenericUserDTO findLogIn()
 	GenericUserDTO generic=null;
 	if (context.isCallerInRole("EMPLOYEE"))
 	{
-		generic=DTOFactory.toTDO((Employee)employee.find(username));
+		generic=factory.toTDO((Employee)employee.find(username));
 		
 	}
 	else if(context.isCallerInRole("CUSTOMER"))
 	{
-		generic=DTOFactory.toTDO((Customer)customer.find(username));
+		generic=factory.toTDO((Customer)customer.find(username));
 		
 	}
 	return generic;

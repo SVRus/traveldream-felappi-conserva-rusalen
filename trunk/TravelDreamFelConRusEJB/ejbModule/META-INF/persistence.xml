@@ -14,5 +14,8 @@
 		<class>entities.Product</class>
 		<class>entities.RegisteredUser</class>
 		<class>entities.TravelPackage</class>
+		<properties>
+			<property name="eclipselink.ddl-generation" value="create-tables"/>
+		</properties>
 	</persistence-unit>
 </persistence>

@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
+import dto.GiftListDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
@@ -69,7 +70,7 @@ public class AuthBean {
 	public String signUp()
 	{
 		boolean success;
-		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <ProductDTO>(),new ArrayList<Long>());
+		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <GiftListDTO>(),new ArrayList<Long>());
 		
 		success = generic.customerRegister(customer);
 		if(success)

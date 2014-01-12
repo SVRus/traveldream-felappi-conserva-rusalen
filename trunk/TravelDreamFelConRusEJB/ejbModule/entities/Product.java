@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import dto.ProductDTO;
+
 /**
  * Entity implementation class for Entity: Product
  *
@@ -26,6 +28,9 @@ private Date timeStart;
 @Temporal(TemporalType.TIMESTAMP)
 private Date timeEnd;
 private String name;
+
+
+
 public String getName() {
 	return name;
 }
@@ -36,21 +41,13 @@ public void setName(String name) {
 }
 
 
-public long getEmployeeCreator() {
-	return employeeCreator;
-}
 
-
-public void setEmployeeCreator(long employeeCreator) {
-	this.employeeCreator = employeeCreator;
-}
 
 
 @ManyToOne(cascade=CascadeType.ALL)
 @JoinColumn(name="idtravelpackage")
 private TravelPackage travel;
 
-private long employeeCreator;
 public long getIdProduct() {
 	return idProduct;
 }
@@ -103,5 +100,4 @@ public void setTravel(TravelPackage travel) {
 public long getIdproduct() {
 	return idProduct;
 }
-
 }
