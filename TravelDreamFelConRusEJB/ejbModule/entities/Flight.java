@@ -1,7 +1,10 @@
 package entities;
 
 import entities.Product;
+
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -13,6 +16,33 @@ import javax.persistence.*;
 public class Flight extends Product implements Serializable {
 
 	
+	
+	public Flight(long idProduct, float cost, Date timeStart, Date timeEnd,
+			String name, TravelPackage travel, String flight_company,
+			String area_start, String area_end, String place_start,
+			String place_end, String more_info) {
+		super(idProduct, cost, timeStart, timeEnd, name, travel);
+		this.flight_company = flight_company;
+		this.area_start = area_start;
+		this.area_end = area_end;
+		this.place_start = place_start;
+		this.place_end = place_end;
+		this.more_info = more_info;
+	}
+	
+	public Flight(float cost, Date timeStart, Date timeEnd, String name,
+			TravelPackage travel, String flight_company, String area_start,
+			String area_end, String place_start, String place_end,
+			String more_info) {
+		super(cost, timeStart, timeEnd, name, travel);
+		this.flight_company = flight_company;
+		this.area_start = area_start;
+		this.area_end = area_end;
+		this.place_start = place_start;
+		this.place_end = place_end;
+		this.more_info = more_info;
+	}
+
 	public String getFlight_company() {
 		return flight_company;
 	}

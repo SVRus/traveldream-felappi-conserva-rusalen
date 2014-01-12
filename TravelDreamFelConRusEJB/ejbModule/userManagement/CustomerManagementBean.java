@@ -1,12 +1,12 @@
 package userManagement;
 
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 
 /**
  * Session Bean implementation class CustomerManagementBean
  */
-@Stateful
+@Stateless
 @LocalBean
 public class CustomerManagementBean implements CustomerManagementBeanLocal {
 
