@@ -3,6 +3,8 @@ package travelPackageManagement;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import dto.PrepackedTravelPackageDTO;
+
 /**
  * Session Bean implementation class TravelPackageCreateBean
  */
@@ -16,5 +18,12 @@ public class TravelPackageCRUDBean implements TravelPackageCRUDBeanLocal {
     public TravelPackageCRUDBean() {
         // TODO Auto-generated constructor stub
     }
+
+	
+	@Override
+	public boolean createPrepacked(PrepackedTravelPackageDTO prepacked) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
