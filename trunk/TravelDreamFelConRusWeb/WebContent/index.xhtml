@@ -81,14 +81,43 @@
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		<h:outputText value="" />
+		
 		<h:panelGroup>
-			<p:selectBooleanCheckbox required="true" id="terms"
-				label="Accept terms and conditions"
-				value="#{auth.acceptedTerms}"
-				widgetVar="termsCheckbox" />
-			<p:outputLabel value="I accept the terms and conditions"
-				onclick="termsCheckbox.toggle()" for="terms" />
+		 
+		<p:selectBooleanCheckbox  id="check"
+      			 
+               onchange="toggle('#{requestScope.foo.clientId}'); return false;" />
+      
+      
+      <p:outputLabel value="Impiegato" for="check" />  
+       
+      
 		</h:panelGroup>
+		 <p:watermark for="code" value="Codice impiegato *" />
+      <p:inputText label="Codice"
+			value="#{auth.code}"
+      	binding="#{requestScope.foo}" id="code" style="display: none" />
+    	<script type="text/javascript">
+      	function toggle(id) {
+        var element = document.getElementById(id);
+        if(element.style.display == 'block') {
+          element.style.display = 'none';
+        } else {
+          element.style.display = 'block'
+        }
+      }
+        </script>	
+        
+      	<h:panelGroup>
+		<p:selectBooleanCheckbox required="true" id="terms"
+			label="Accept terms and conditions"
+			value="#{auth.acceptedTerms}"
+			widgetVar="termsCheckbox" />
+		<p:outputLabel value="I accept the terms and conditions"
+			onclick="termsCheckbox.toggle()" for="terms" />
+	</h:panelGroup>
+      
+  
 		<p:commandButton value="Sign Up"
 		action="#{auth.signUp}"
 		style="display:block; margin:0 auto;"
