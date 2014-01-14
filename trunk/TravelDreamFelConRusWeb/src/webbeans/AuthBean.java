@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
+import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
@@ -33,16 +34,32 @@ public class AuthBean {
 	private String passwordIn;
 	private String result;
 	private String description;
-	private String code;
+	private Long code;
+	private boolean checked;
 	
-		public String getCode() {
+	
+		public boolean isChecked() {
+		return checked;
+	}
+
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
+
+		
+		public Long getCode() {
 		return code;
 	}
 
 
-	public void setCode(String code) {
+	public void setCode(Long code) {
 		this.code = code;
 	}
+
+
+
 		@EJB
 	private GenericUserManagementBeanLocal generic;
 	// private LoginBean login
@@ -79,16 +96,35 @@ public class AuthBean {
 	public String signUp()
 	{
 		boolean success;
+		if (checked)
+		{
 		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <GiftListDTO>(),new ArrayList<Long>());
-		
+			
 		success = generic.customerRegister(customer);
+			
 		if(success)
 		{
-		result ="registrato";
+		result ="cliente registrato";
 		}
 		else
 		result ="registrazione fallita";
 		return result;
+		}
+		else
+		{
+			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code);
+			
+			success = generic.employeeRegister(employee);
+				
+			if(success)
+			{
+			result ="impiegato registrato";
+			}
+			else
+			result ="registrazione fallita";
+			return result;
+		}
+		
 		
 		
 		
