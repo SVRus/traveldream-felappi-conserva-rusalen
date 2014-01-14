@@ -14,12 +14,10 @@ import entities.Flight;
 import entities.Hotel;
 import entities.Outing;
 import entities.Product;
-import entities.TravelPackage;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
-import groupenum.Group;
 
 /**
  * Session Bean implementation class ProductCreateBean
