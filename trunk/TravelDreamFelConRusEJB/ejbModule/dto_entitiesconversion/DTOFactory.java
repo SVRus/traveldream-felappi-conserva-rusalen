@@ -118,7 +118,10 @@ ProductEntityManagementLocal proman;
 	
 	public  EmployeeDTO toTDO(Employee employee)
 	{
-		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername());
+		
+		
+		
+		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername(),employee.getCode());
 		return emplo;
 		
 		

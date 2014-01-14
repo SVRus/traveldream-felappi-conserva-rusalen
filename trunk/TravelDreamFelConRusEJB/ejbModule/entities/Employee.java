@@ -18,15 +18,26 @@ import javax.persistence.*;
 public class Employee extends RegisteredUser implements Serializable {
 	
 	
+	public Code getCode() {
+		return code;
+	}
+
+	public void setCode(Code code) {
+		this.code = code;
+	}
+
+	
+	
 	public Employee(String email, String name, String surname,
 			String telephone, String password, String username,
 			List<Group> groups, List<Product> managedProduct,
-			List<PrepackedTravelPackage> managedTravelPackage) {
+			List<PrepackedTravelPackage> managedTravelPackage, Code code) {
 		super(email, name, surname, telephone, password, username, groups);
 		this.managedProduct = managedProduct;
 		this.managedTravelPackage = managedTravelPackage;
+		this.code = code;
 	}
-	
+
 	public List<Product> getManagedProduct() {
 		return managedProduct;
 	}
@@ -52,5 +63,8 @@ public class Employee extends RegisteredUser implements Serializable {
    @OneToMany(cascade=CascadeType.ALL)
    @JoinColumn(name="idPrepackedTravelPackage")
    private List <PrepackedTravelPackage> managedTravelPackage;//inserire la relazione
-   
+  
+   @OneToOne(cascade=CascadeType.ALL)
+   @JoinColumn(name="code")
+   private Code code; 
 }

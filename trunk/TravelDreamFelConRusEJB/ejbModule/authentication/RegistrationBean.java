@@ -9,10 +9,14 @@ import javax.ejb.Stateless;
 
 
 
+
+
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
+import entities.Code;
 import entities.Customer;
 import entities.CustomizedTravelPackage;
 import entities.Employee;
@@ -20,6 +24,7 @@ import entities.GiftList;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.TravelPackage;
+import entitymanagement.CodeEntityManagementLocal;
 import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import groupenum.Group;
@@ -37,6 +42,8 @@ public class RegistrationBean implements RegistrationBeanLocal {
 EmployeeEntityManagementLocal emploejb;
 @EJB
 CustomerEntityManagementLocal custejb;
+@EJB
+CodeEntityManagementLocal codeejb;
     /**
      * Default constructor. 
      */
@@ -69,6 +76,28 @@ CustomerEntityManagementLocal custejb;
     	return true;
     	
     }
+    public boolean employeeRegister (EmployeeDTO employee)
+    {   Long code=codeejb.find(employee.getCode());
+        if (code==null || !employee.getCode().equals(code))
+    	return false;
+    	
+    	Employee emp=dtoToEmployee(employee);
+    	try {
+    		emploejb.create(emp);
+    		
+    	}
+    	
+    	catch(Exception e)
+    	{   e.printStackTrace();;
+    		return false;
+    		
+    	}
+    	return true;
+    	
+    	
+    }
+    
+    
     /**
      * @author Marcello
      * Private method that transform the EmployeeDTO in the entity employee
@@ -76,13 +105,13 @@ CustomerEntityManagementLocal custejb;
      * @return the entity Employee translated from the EmployeeDTO
      */
     private Employee dtoToEmployee(EmployeeDTO employee)
-    //TODO da finire
     {   String username=employee.getUsername();
     	List<Group> groups=new ArrayList <Group>();
         groups.add(Group.EMPLOYEE);
         List <Product> prod=new ArrayList <Product> ();
         List <PrepackedTravelPackage> prep=new ArrayList <PrepackedTravelPackage> ();
-		Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.md5Hex(employee.getPassword()),,groups,prod, prep);
+        Code code=new Code(employee.getCode());
+        Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.md5Hex(employee.getPassword()),employee.getUsername(),groups,prod, prep,code);
 		  	
     	return real;
     	
