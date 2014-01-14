@@ -8,12 +8,12 @@ import javax.ejb.Stateless;
  */
 @Stateless
 @LocalBean
-public class TravelPackageCreateBean implements TravelPackageCreateBeanLocal {
+public class TravelPackageCRUDBean implements TravelPackageCRUDBeanLocal {
 
     /**
      * Default constructor. 
      */
-    public TravelPackageCreateBean() {
+    public TravelPackageCRUDBean() {
         // TODO Auto-generated constructor stub
     }
 
