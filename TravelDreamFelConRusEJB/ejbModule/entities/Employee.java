@@ -64,7 +64,7 @@ public class Employee extends RegisteredUser implements Serializable {
    @JoinColumn(name="idPrepackedTravelPackage")
    private List <PrepackedTravelPackage> managedTravelPackage;//inserire la relazione
   
-   @OneToOne(cascade=CascadeType.ALL)
+   @OneToOne()
    @JoinColumn(name="code")
    private Code code; 
 }

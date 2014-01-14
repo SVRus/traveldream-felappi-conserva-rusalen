@@ -77,10 +77,14 @@ CodeEntityManagementLocal codeejb;
     	
     }
     public boolean employeeRegister (EmployeeDTO employee)
-    {   Long code=codeejb.find(employee.getCode());
-        if (code==null || !employee.getCode().equals(code))
+    {   Code code=((Code)(codeejb.find(employee.getCode())));
+        if (code==null )
     	return false;
-    	
+        long codelong=code.getCode();
+        
+        
+    	if (employee.getCode()==(codelong))
+    	{
     	Employee emp=dtoToEmployee(employee);
     	try {
     		emploejb.create(emp);
@@ -91,6 +95,7 @@ CodeEntityManagementLocal codeejb;
     	{   e.printStackTrace();;
     		return false;
     		
+    	}
     	}
     	return true;
     	
@@ -105,7 +110,7 @@ CodeEntityManagementLocal codeejb;
      * @return the entity Employee translated from the EmployeeDTO
      */
     private Employee dtoToEmployee(EmployeeDTO employee)
-    {   String username=employee.getUsername();
+    {   
     	List<Group> groups=new ArrayList <Group>();
         groups.add(Group.EMPLOYEE);
         List <Product> prod=new ArrayList <Product> ();
