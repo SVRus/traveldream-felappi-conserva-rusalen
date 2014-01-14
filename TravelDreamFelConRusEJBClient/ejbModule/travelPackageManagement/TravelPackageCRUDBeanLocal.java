@@ -2,6 +2,8 @@ package travelPackageManagement;
 
 import javax.ejb.Local;
 
+import dto.PrepackedTravelPackageDTO;
+
 @Local
 public interface TravelPackageCRUDBeanLocal 
 {
