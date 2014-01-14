@@ -1,6 +1,5 @@
 package dto;
 
-import javax.validation.constraints.Pattern;
 
 public class GenericUserDTO {
 private String email;

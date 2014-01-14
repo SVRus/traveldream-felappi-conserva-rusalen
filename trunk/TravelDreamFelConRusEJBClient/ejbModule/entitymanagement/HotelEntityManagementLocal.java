@@ -7,6 +7,7 @@ public interface HotelEntityManagementLocal {
 
 	public <Hotel> void create(Hotel hotel);
 	public <Hotel>  Hotel find(Object id);
-	
+	public <Hotel> void edit (Hotel hotel);
+
 	
 }

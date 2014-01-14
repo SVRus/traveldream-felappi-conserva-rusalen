@@ -35,22 +35,22 @@ ProductEntityManagementLocal proman;
 	private  ProductDTO productToDTO(Product product)
 	{ 
 		ProductDTO result=null;
-	    Long idtravelpackage=
+	    Long idtravelpackage= proman.findTravelPackageContainer(product.getIdProduct());
 		if (product instanceof  Flight)
 		{   product=(Flight)product;
-			result=new FlightDTO(product.getTravel().getIdtravelpackage(),proman.findEmployeeCreator(product.getIdproduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea_end(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
+			result=new FlightDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea_end(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
 			
 		}
 		else if (product instanceof Outing)
 		{
 			product=(Outing)product;
-			result=new OutingDTO(product.getTravel().getIdtravelpackage(),proman.findEmployeeCreator(product.getIdproduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea());
+			result=new OutingDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea());
 			
 		}
 		else if (product instanceof Hotel)
 		{
 			product=(Hotel)product;
-			result=new HotelDTO(product.getTravel().getIdtravelpackage(),proman.findEmployeeCreator(product.getIdproduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info());
+			result=new HotelDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info());
 			
 		}
 		return result;

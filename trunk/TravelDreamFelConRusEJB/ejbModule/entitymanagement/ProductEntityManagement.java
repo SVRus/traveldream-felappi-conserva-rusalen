@@ -42,10 +42,10 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     }
     public long findTravelPackageContainer(long idproduct)
     {
-    	String query="selsect idtravelpackage")";
+    	String query="selsect idtravelpackage from Product where idproduct:=idproduct ";
     	Query q = em.createQuery(query, Product.class);
     	q.setParameter("idproduct", idproduct);
-    	String result=(String) q.getSingleResult();
+    	long result=(long) q.getSingleResult();
     	return result;
     	
     	

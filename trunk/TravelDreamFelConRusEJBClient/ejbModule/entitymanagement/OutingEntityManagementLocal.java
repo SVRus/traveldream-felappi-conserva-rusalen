@@ -6,4 +6,6 @@ import javax.ejb.Local;
 public interface OutingEntityManagementLocal {
 	public <Outing> void create(Outing outing);
 	public <Outing>  Outing find(Object id);
+	public <Outing> void edit (Outing outing);
+
 }

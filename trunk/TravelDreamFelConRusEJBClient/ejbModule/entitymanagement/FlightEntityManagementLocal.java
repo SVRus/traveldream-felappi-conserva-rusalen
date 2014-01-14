@@ -6,4 +6,5 @@ import javax.ejb.Local;
 public interface FlightEntityManagementLocal {
 	public <Flight> void create(Flight flight);
 	public <Flight>  Flight find(Object id);
+	public <Flight> void edit (Flight flight);
 }

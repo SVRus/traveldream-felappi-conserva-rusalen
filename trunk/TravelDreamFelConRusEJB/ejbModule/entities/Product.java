@@ -129,7 +129,5 @@ public void setTimeEnd(Date timeEnd) {
 }
 
 
-public long getIdproduct() {
-	return idProduct;
-}
+
 }

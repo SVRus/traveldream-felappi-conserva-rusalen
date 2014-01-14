@@ -28,11 +28,13 @@ CodeEntityManagementLocal codeejb;
     public DBFeed() {
         // TODO Auto-generated constructor stub
     }
+    
+   /** 
      @PostConstruct
     public void feed()
     {     
     	 Code code=new Code(123456789);
     	 codeejb.create(code);
     }
-    
+    **/
 }
