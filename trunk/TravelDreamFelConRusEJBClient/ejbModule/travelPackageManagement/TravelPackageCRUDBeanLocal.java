@@ -3,6 +3,6 @@ package travelPackageManagement;
 import javax.ejb.Local;
 
 @Local
-public interface TravelPackageCreateBeanLocal {
+public interface TravelPackageCRUDBeanLocal {
 
 }
