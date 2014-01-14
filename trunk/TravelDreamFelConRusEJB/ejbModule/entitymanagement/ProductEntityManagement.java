@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import entities.Employee;
 import entities.Product;
 import entities.RegisteredUser;
+import entities.TravelPackage;
 
 /**
  * Session Bean implementation class ProductEntityManagement
@@ -39,6 +40,15 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	return result;
     	
     }
-    
+    public long findTravelPackageContainer(long idproduct)
+    {
+    	String query="selsect idtravelpackage")";
+    	Query q = em.createQuery(query, Product.class);
+    	q.setParameter("idproduct", idproduct);
+    	String result=(String) q.getSingleResult();
+    	return result;
+    	
+    	
+    }
     
 }

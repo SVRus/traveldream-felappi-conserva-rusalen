@@ -21,28 +21,25 @@ public class Code implements Serializable {
 		this.code = code;
 	}
 
-	public Employee getEmployee() {
-		return employee;
-	}
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}
 	private static final long serialVersionUID = 1L;
 
 	public Code() {
 		super();
 	}
    @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  
    private long code;
 
-   @OneToOne(mappedBy="code",cascade=CascadeType.ALL)
-   private Employee employee;
+  
 
 public Code(long code) {
 	super();
 	this.code = code;
 	
 }
+
+
+
+
 }

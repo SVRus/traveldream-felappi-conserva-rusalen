@@ -104,7 +104,8 @@ private Date time_start;
 private String description;
 @Column(unique=true)
 private String name;
-@OneToMany(mappedBy="travel",cascade=CascadeType.ALL)
+@OneToMany(cascade=CascadeType.ALL)
+@JoinColumn(name="idtravelpackage")
 private List<Product> products;
 private long idCustomerBuyer;
 private long idCustomerFriendOwner;
