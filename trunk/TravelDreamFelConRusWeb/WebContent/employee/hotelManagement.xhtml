@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+	<h:head></h:head> 
+	<body> 
+		<p:layout fullPage="true">  
+  
+	    <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
+	        <h:outputText value="North unit content." />  
+	    </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
+	        <h:outputText value="South unit content." />  
+	    </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
+	        <h:outputText value="West unit content." />  
+	    </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+	        <h:outputText value="Right unit content." />
+	        <p:button outcome="gestProd" value="Gestisci prodotti" icon="ui-icon-star">  
+    		<f:param name="productId" value="10" />  
+			</p:button>  
+			<p:button outcome="gestPac" value="Gestisci pacchetti" icon="ui-icon-star">  
+    		<f:param name="pacId" value="10" />  
+			</p:button>  
+	    </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="center">  
+	        <h:form id="form">  
+  	<p:dataTable id="hotels" var="hotel" 
+                 value="#{hotelManagement.hotelModel}"  paginator="true" rows="10"   
+                 selection="#{hotelManagement.selectedHotel}">
+  
+        <f:facet name="header">  
+            RadioButton Based Selection  
+        </f:facet>  
+  
+        <p:column selectionMode="single" style="width:2%" />  
+  	
+	 
+   	<p:column headerText="IdHotel">  
+            #{hotel.idProduct}  
+        </p:column>  
+  
+        <p:column headerText="Creatore">  
+            #{hotel.employeeCreator}  
+        </p:column>  
+  
+        <p:column headerText="Nome" >  
+            #{hotel.name}  
+        </p:column>  
+  
+        <p:column headerText="Costo">  
+            #{hotel.cost}  
+        </p:column>  
+         <p:column headerText="Data inizio">  
+            #{hotel.timeStart}  
+        </p:column>  
+         <p:column headerText="Data fine">  
+            #{hotel.timeEnd}  
+        </p:column>  
+         
+         <p:column headerText="Località">  
+            #{hotel.area}  
+        </p:column>  
+         <p:column headerText="Luogo">  
+            #{hotel.place}  
+        </p:column>  
+         <p:column headerText="Tipo camera">  
+            #{hotel.room_type}  
+        </p:column>  
+         <p:column headerText="Altre indicazioni">  
+            #{hotel.more_info}  
+        </p:column>  
+        
+  
+         
+    </p:dataTable>  
+    
+    
+     </h:form> 
+	    </p:layoutUnit>  
+	  
+		</p:layout>  
+	</body> 
+	
+	
+</html>
