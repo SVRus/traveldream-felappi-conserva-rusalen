@@ -23,6 +23,7 @@ import entities.Flight;
 import entities.GiftList;
 import entities.Hotel;
 import entities.Outing;
+import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.TravelPackage;
 import entitymanagement.ProductEntityManagementLocal;
@@ -34,7 +35,7 @@ ProductEntityManagementLocal proman;
 	private  ProductDTO productToDTO(Product product)
 	{ 
 		ProductDTO result=null;
-	
+	    Long idtravelpackage=
 		if (product instanceof  Flight)
 		{   product=(Flight)product;
 			result=new FlightDTO(product.getTravel().getIdtravelpackage(),proman.findEmployeeCreator(product.getIdproduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea_end(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
@@ -89,7 +90,16 @@ ProductEntityManagementLocal proman;
 		}
 		return travelid;
 	}
-	
+	private  ArrayList <Long> prepackedTravelPackageToLong(List <PrepackedTravelPackage> travellist)
+	{
+		ArrayList <Long> travelid=new ArrayList <Long>();
+		Iterator <PrepackedTravelPackage> iter = travellist.iterator();
+		while(iter.hasNext())
+		{
+			travelid.add(iter.next().getIdtravelpackage());
+		}
+		return travelid;
+	}
 	private ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
 	{
 		ArrayList <ProductDTO> result =new ArrayList <ProductDTO> ();
@@ -118,10 +128,9 @@ ProductEntityManagementLocal proman;
 	
 	public  EmployeeDTO toTDO(Employee employee)
 	{
-		
-		
-		
-		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername(),employee.getCode());
+		ArrayList<ProductDTO> managedproduct=productListToDTO(employee.getManagedProduct());
+		ArrayList<Long> managedTravelPackage=prepackedTravelPackageToLong(employee.getManagedTravelPackage());
+		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername(),employee.getCode().getCode(),managedproduct,managedTravelPackage);
 		return emplo;
 		
 		

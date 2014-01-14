@@ -17,8 +17,8 @@ public class Outing extends Product implements Serializable {
 
 	
 	public Outing(float cost, Date timeStart, Date timeEnd, String name,
-			TravelPackage travel, String description, String area) {
-		super(cost, timeStart, timeEnd, name, travel);
+			 String description, String area) {
+		super(cost, timeStart, timeEnd, name);
 		this.description = description;
 		this.area = area;
 	}
@@ -26,8 +26,8 @@ public class Outing extends Product implements Serializable {
 
 
 	public Outing(long idProduct, float cost, Date timeStart, Date timeEnd,
-			String name, TravelPackage travel, String description, String area) {
-		super(idProduct, cost, timeStart, timeEnd, name, travel);
+			String name,  String description, String area) {
+		super(idProduct, cost, timeStart, timeEnd, name);
 		this.description = description;
 		this.area = area;
 	}

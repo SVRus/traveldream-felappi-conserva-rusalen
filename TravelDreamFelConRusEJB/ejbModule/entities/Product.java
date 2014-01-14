@@ -28,14 +28,14 @@ public Product()
 	 * @param travel
 	 */
 	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
-			String name, TravelPackage travel) {
+			String name) {
 		super();
 		this.idProduct = idProduct;
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.name = name;
-		this.travel = travel;
+		;
 	}
 
 
@@ -49,15 +49,14 @@ public Product()
  * @param name
  * @param travel
  */
-	public Product(float cost, Date timeStart, Date timeEnd, String name,
-			TravelPackage travel) {
+	public Product(float cost, Date timeStart, Date timeEnd, String name
+			) {
 		super();
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.name = name;
-		this.travel = travel;
-	}
+			}
 
 
 
@@ -89,9 +88,6 @@ public void setName(String name) {
 
 
 
-@ManyToOne(cascade=CascadeType.ALL)
-@JoinColumn(name="idtravelpackage")
-private TravelPackage travel;
 
 public long getIdProduct() {
 	return idProduct;
@@ -130,15 +126,6 @@ public Date getTimeEnd() {
 
 public void setTimeEnd(Date timeEnd) {
 	this.timeEnd = timeEnd;
-}
-
-public TravelPackage getTravel() {
-	return travel;
-}
-
-
-public void setTravel(TravelPackage travel) {
-	this.travel = travel;
 }
 
 
