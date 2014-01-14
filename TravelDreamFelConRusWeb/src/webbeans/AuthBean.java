@@ -33,8 +33,17 @@ public class AuthBean {
 	private String passwordIn;
 	private String result;
 	private String description;
+	private String code;
 	
-	@EJB
+		public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+		@EJB
 	private GenericUserManagementBeanLocal generic;
 	// private LoginBean login
 
