@@ -116,7 +116,7 @@ CodeEntityManagementLocal codeejb;
         List <Product> prod=new ArrayList <Product> ();
         List <PrepackedTravelPackage> prep=new ArrayList <PrepackedTravelPackage> ();
         Code code=new Code(employee.getCode());
-        Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.md5Hex(employee.getPassword()),employee.getUsername(),groups,prod, prep,code);
+        Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.sha256Hex(employee.getPassword()),employee.getUsername(),groups,prod, prep,code);
 		  	
     	return real;
     	
