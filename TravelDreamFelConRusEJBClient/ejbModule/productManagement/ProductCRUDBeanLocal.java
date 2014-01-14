@@ -5,7 +5,7 @@ import javax.ejb.Local;
 import dto.ProductDTO;
 
 @Local
-public interface ProductCreateBeanLocal {
+public interface ProductCRUDBeanLocal {
     public boolean createProduct(ProductDTO productdto);
 
 }
