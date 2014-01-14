@@ -98,7 +98,6 @@ private String username;
 
 
 @ElementCollection(targetClass = Group.class)
-
 @CollectionTable(name = "USER_GROUP",
                 joinColumns = @JoinColumn(name = "username"))
 @Enumerated(EnumType.STRING)
