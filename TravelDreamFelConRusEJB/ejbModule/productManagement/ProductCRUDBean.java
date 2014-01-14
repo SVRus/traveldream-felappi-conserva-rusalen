@@ -18,6 +18,7 @@ import entities.TravelPackage;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
+import entitymanagement.ProductEntityManagementLocal;
 import groupenum.Group;
 
 /**
@@ -25,7 +26,7 @@ import groupenum.Group;
  */
 @Stateless
 @LocalBean
-public class ProductCreateBean implements ProductCreateBeanLocal {
+public class ProductCRUDBean implements ProductCRUDBeanLocal {
 @EJB
 OutingEntityManagementLocal outing;
 @EJB
@@ -34,10 +35,13 @@ HotelEntityManagementLocal hotel;
 FlightEntityManagementLocal flight;
 @EJB
 ConsistencyCheckBeanLocal check;
+@EJB
+ProductEntityManagementLocal prod;
+
     /**
      * Default constructor. 
      */
-    public ProductCreateBean() {
+    public ProductCRUDBean() {
        
     }
    
@@ -115,5 +119,97 @@ ConsistencyCheckBeanLocal check;
     	}
     	return entity;
     }
-    
+    public boolean delete(ProductDTO productdto)
+    {
+    	boolean ok=false;
+		try 
+		{
+				Product product=prod.find(productdto.getIdProduct());
+				prod.remove(product);
+				ok=true;
+		}
+    	catch (Exception e)
+		{
+    		ok=false;
+    		
+		}
+    	return ok;  	
+    	
+    }
+    public boolean updateProduct(ProductDTO productdto)
+    {   Product product=productDTOToEntityUpdate(productdto);
+    	boolean ok=false;
+    	if( product instanceof Hotel)
+    	{
+    		try
+    		{   
+    			hotel.edit(product);
+    			
+    			ok=true;
+    		}
+    		catch(Exception e)
+    		{
+    			ok=false;
+    			
+    		}
+    	}
+    	else if(product instanceof Outing)
+    	{
+    		try
+    		{   
+    			outing.edit(product);
+    			
+    			ok=true;
+    		}
+    		catch(Exception e)
+    		{
+    			ok=false;
+    			
+    		}
+    		
+    		
+    	}
+    	else if(product instanceof Flight)
+    	{
+    		try
+    		{   
+    			flight.edit(product);
+    			
+    			ok=true;
+    		}
+    		catch(Exception e)
+    		{
+    			ok=false;
+    			
+    		}
+    		
+    	}
+    	    	
+    	
+    	return ok;
+    	
+    }
+
+
+    private Product productDTOToEntityUpdate(ProductDTO product)
+    {
+    	Product entity=null;
+    	if(product instanceof HotelDTO )
+    	{
+    		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info());
+    	}
+    	else if (product instanceof FlightDTO)
+    	{
+    		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea_end(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info());   		
+    		
+    	
+    	}
+    	else if (product instanceof OutingDTO)
+    	{
+    		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea());
+    		
+    	}
+    	return entity;
+    }
+
 }
