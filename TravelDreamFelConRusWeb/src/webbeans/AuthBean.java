@@ -61,8 +61,9 @@ public class AuthBean {
 
 
 		@EJB
-	private GenericUserManagementBeanLocal generic;
-	// private LoginBean login
+	private RegistrationBeanLocal generic;
+	@EJB
+		private LoginBeanLocal login;
 
 
 	public String signIn()
@@ -81,8 +82,8 @@ public class AuthBean {
 	
 	
 	public String getDescription() {
-		if (generic.isLogged())
-		return generic.findLogIn().toString();
+		if (login.isLogged())
+		return login.findLogIn().toString();
 		else
 			return "non loggato";
 	}
@@ -96,7 +97,7 @@ public class AuthBean {
 	public String signUp()
 	{
 		boolean success;
-		if (checked)
+		if (!checked)
 		{
 		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <GiftListDTO>(),new ArrayList<Long>());
 			
@@ -112,7 +113,7 @@ public class AuthBean {
 		}
 		else
 		{
-			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code);
+			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code,new ArrayList<ProductDTO>(),new ArrayList<Long> ());
 			
 			success = generic.employeeRegister(employee);
 				
