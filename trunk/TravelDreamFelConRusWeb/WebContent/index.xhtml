@@ -6,9 +6,7 @@
       xmlns:p="http://primefaces.org/ui"> 
 <h:head></h:head> 
 <body> 
-	<p:outputLabel value= "#{auth.result}"  />
-	
-    <p:outputLabel value= "#{auth.description}"  />
+
 	
 	<p:layout fullPage="true">  
   
@@ -36,6 +34,9 @@
       
       <p:layout style="min-width:400px;min-height:200px;" id="layout">  
     <p:layoutUnit position="west"  size="600" >  
+        	<p:outputLabel value= "#{auth.result}"  />
+	
+    <p:outputLabel value= "#{auth.description}"  />
          <h:form id="signupForm" styleClass="input-form">
 		<p:panel header="Sign Up" id="panel">
 		<p:messages id="messages" showDetail="true" showSummary="false"
@@ -85,7 +86,7 @@
 		<h:panelGroup>
 		 
 		<p:selectBooleanCheckbox  id="check"
-      			 
+      			 value="{auth.checked}"
                onchange="toggle('#{requestScope.foo.clientId}'); return false;" />
       
       
