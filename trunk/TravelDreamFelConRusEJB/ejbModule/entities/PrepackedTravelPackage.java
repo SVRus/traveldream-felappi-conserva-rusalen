@@ -21,5 +21,5 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
 	public PrepackedTravelPackage() {
 		super();
 	}
-  private long employeeCreator; 
+
 }

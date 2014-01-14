@@ -21,8 +21,6 @@ public class CustomizedTravelPackage extends TravelPackage implements Serializab
 	public CustomizedTravelPackage() {
 		super();
 	}
-
 @ManyToOne(cascade=CascadeType.ALL)
-@JoinColumn(name="idregistereduser")
- private Customer customizer;
+Customer customizer;
 }

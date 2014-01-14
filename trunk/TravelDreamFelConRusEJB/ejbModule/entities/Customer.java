@@ -109,7 +109,8 @@ public class Customer extends RegisteredUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-@OneToMany(mappedBy="customizer")	
+@OneToMany(cascade=CascadeType.ALL)	
+@JoinColumn(name="idcustomer")
 private List <CustomizedTravelPackage> customizedTravelPackages;
 
 
