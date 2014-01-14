@@ -42,7 +42,7 @@ ConsistencyCheckBeanLocal check;
     public ProductCreateBean() {
        
     }
-    @RolesAllowed({Group._EMPLOYEE})
+   
     public boolean createProduct(ProductDTO productdto)
     {   Product product=productDTOToEntity(productdto);
 		boolean ok=false;

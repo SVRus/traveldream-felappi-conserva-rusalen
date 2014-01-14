@@ -29,10 +29,7 @@ RegistrationBeanLocal register;
         // TODO Auto-generated constructor stub
     }
 
-    public boolean employeeRegister(EmployeeDTO employee)
-    {
-    	return register.employeeRegister(employee);
-    }
+   
     
     public boolean customerRegister(CustomerDTO customer)
     {
@@ -49,6 +46,14 @@ RegistrationBeanLocal register;
 	public GenericUserDTO findLogIn() {
 		
 		return login.findLogIn();
+	}
+
+
+
+	@Override
+	public boolean employeeRegister(EmployeeDTO employee) {
+		
+		return   employeeRegister ( employee);
 	}
     
    
