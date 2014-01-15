@@ -2,6 +2,8 @@ package dto;
 
 import java.util.Date;
 
+import stateenum.State;
+
 public class FlightDTO extends ProductDTO {
 	private String flight_company;
 	private String area_start;
@@ -29,8 +31,8 @@ public class FlightDTO extends ProductDTO {
 	public FlightDTO(long idtravelpackage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, String flight_company,
 			String area_start, String area_end, String place_start,
-			String place_end, String more_info) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd);
+			String place_end, String more_info,State state) {
+		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.area_end = area_end;
@@ -57,9 +59,9 @@ public class FlightDTO extends ProductDTO {
 	public FlightDTO(long idtravelpackage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			String flight_company, String area_start, String area_end,
-			String place_start, String place_end, String more_info) {
+			String place_start, String place_end, String more_info,State state) {
 		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd);
+				timeStart, timeEnd,state);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.area_end = area_end;
