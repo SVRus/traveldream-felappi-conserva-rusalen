@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import productManagement.ProductCRUDBeanLocal;
+import stateenum.State;
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
@@ -44,13 +45,11 @@ public class HotelManagementBean {
 	  
 	  //valori di prova
 	  static Date data1= new Date();
-	  private static ArrayList<HotelDTO> hotels
-      = new ArrayList<HotelDTO>(Arrays.asList(
-      new HotelDTO(11, "ciao", "ciao", 11,data1 , data1, "ciao",  "ciao",  "ciao",  "ciao")
-      ));	
+	  private static ArrayList<HotelDTO> hotels;
+      
 	  
 	  public String addHotel() {		 
-	      HotelDTO hot = new HotelDTO(11, "ciao", "ciao", 11,data1 ,data1 , "ciao",  "ciao",  "ciao",  "ciao");
+	      HotelDTO hot = new HotelDTO(11, "ciao", "ciao",1, 11,data1 ,data1 , "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE);
 	      
 	      hotels.add(hot);
 	      return null;
@@ -63,7 +62,7 @@ public class HotelManagementBean {
 		  cal.add(Calendar.MONTH, -5);
 		  hotels
 	      = new ArrayList<HotelDTO>(Arrays.asList(
-	      new HotelDTO(11, "ciao", "ciao", 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao")
+	      new HotelDTO(11, "ciao", "ciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
 	      ));	
 		  
 	       hotelModel = new HotelDataModel(hotels);  
