@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import stateenum.State;
+
 /**
  * Entity implementation class for Entity: Flight
  *
@@ -20,8 +22,8 @@ public class Flight extends Product implements Serializable {
 	public Flight(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name,  String flight_company,
 			String area_start, String area_end, String place_start,
-			String place_end, String more_info) {
-		super(idProduct, cost, timeStart, timeEnd, name);
+			String place_end, String more_info,State state) {
+		super(idProduct, cost, timeStart, timeEnd, name, state);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.area_end = area_end;
@@ -33,8 +35,8 @@ public class Flight extends Product implements Serializable {
 	public Flight(float cost, Date timeStart, Date timeEnd, String name,
 			 String flight_company, String area_start,
 			String area_end, String place_start, String place_end,
-			String more_info) {
-		super(cost, timeStart, timeEnd, name);
+			String more_info,State state) {
+		super(cost, timeStart, timeEnd, name, state);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.area_end = area_end;

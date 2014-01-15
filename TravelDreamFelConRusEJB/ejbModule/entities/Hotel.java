@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import stateenum.State;
+
 /**
  * Entity implementation class for Entity: Hotel
  *
@@ -30,8 +32,8 @@ public class Hotel extends Product implements Serializable {
  */
 public Hotel(float cost, Date timeStart, Date timeEnd, String name,
 			 String area, String place, String room_type,
-			String more_info) {
-		super(cost, timeStart, timeEnd, name);
+			String more_info,State state) {
+		super(cost, timeStart, timeEnd, name, state);
 		this.area = area;
 		this.place = place;
 		this.room_type = room_type;
@@ -52,8 +54,8 @@ public Hotel(float cost, Date timeStart, Date timeEnd, String name,
  */
 public Hotel(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name, String area, String place,
-			String room_type, String more_info) {
-		super(idProduct, cost, timeStart, timeEnd, name);
+			String room_type, String more_info,State state) {
+		super(idProduct, cost, timeStart, timeEnd, name,state);
 		this.area = area;
 		this.place = place;
 		this.room_type = room_type;
