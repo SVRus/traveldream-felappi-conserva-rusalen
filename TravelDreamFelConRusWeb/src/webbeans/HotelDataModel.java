@@ -1,5 +1,6 @@
 package webbeans;
 
+import java.io.Serializable;
 import java.util.List;  
 
 import javax.faces.model.ListDataModel;  
@@ -8,7 +9,7 @@ import org.primefaces.model.SelectableDataModel;
 
 import dto.HotelDTO;
   
-public class HotelDataModel extends ListDataModel<HotelDTO> implements SelectableDataModel<HotelDTO> {    
+public class HotelDataModel extends ListDataModel<HotelDTO> implements SelectableDataModel<HotelDTO>, Serializable {    
   
     public HotelDataModel() {  
     }  

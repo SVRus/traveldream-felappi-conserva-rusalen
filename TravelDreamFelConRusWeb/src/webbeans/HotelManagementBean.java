@@ -1,4 +1,5 @@
 package webbeans;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -22,7 +23,7 @@ import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="hotelManagement", eager = true)
 @SessionScoped
-public class HotelManagementBean {
+public class HotelManagementBean implements Serializable{
 	private HotelDTO selectedHotel;
 	
 	 private long idtravelpackage;
@@ -45,13 +46,23 @@ public class HotelManagementBean {
 	  
 	  //valori di prova
 	  static Date data1= new Date();
-	  private static ArrayList<HotelDTO> hotels;
-      
+	  private  ArrayList<HotelDTO> hotels;
+	  private  ArrayList<HotelDTO> filteredHotels;
 	  
-	  public String addHotel() {		 
+	  
+	  public  ArrayList<HotelDTO> getFilteredHotels() {
+		return filteredHotels;
+	}
+
+	public  void setFilteredHotels(ArrayList<HotelDTO> filteredHotels) {
+		this.filteredHotels = filteredHotels;
+	}
+
+	public String addHotel() {		 
 	      HotelDTO hot = new HotelDTO(11, "ciao", "ciao",1, 11,data1 ,data1 , "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE);
 	      
 	      hotels.add(hot);
+	      
 	      return null;
 	   }
 	 
@@ -63,7 +74,9 @@ public class HotelManagementBean {
 		  hotels
 	      = new ArrayList<HotelDTO>(Arrays.asList(
 	      new HotelDTO(11, "ciao", "ciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
-	      ));	
+	      ,new HotelDTO(111, "gciao", "gciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
+	    	      )
+	      );	
 		  
 	       hotelModel = new HotelDataModel(hotels);  
 	   }  
