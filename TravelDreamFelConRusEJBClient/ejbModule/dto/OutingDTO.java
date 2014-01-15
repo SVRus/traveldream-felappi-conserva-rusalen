@@ -2,6 +2,8 @@ package dto;
 
 import java.util.Date;
 
+import stateenum.State;
+
 public class OutingDTO extends ProductDTO {
 	private String description;
 	private String area;
@@ -18,8 +20,8 @@ public class OutingDTO extends ProductDTO {
 	 */
 	public OutingDTO(long idtravelpackage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, String description,
-			String area) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd);
+			String area,State state) {
+		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd, state);
 		this.description = description;
 		this.area = area;
 	}
@@ -54,9 +56,9 @@ public class OutingDTO extends ProductDTO {
 	 */
 	public OutingDTO(long idtravelpackage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,
-			String description, String area) {
+			String description, String area,State state) {
 		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd);
+				timeStart, timeEnd,state);
 		this.description = description;
 		this.area = area;
 	}

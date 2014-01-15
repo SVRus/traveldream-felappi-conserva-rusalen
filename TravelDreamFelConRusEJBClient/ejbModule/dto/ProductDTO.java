@@ -2,10 +2,18 @@ package dto;
 
 import java.util.Date;
 
+import stateenum.State;
+
 
 public class ProductDTO {
 	
 	
+	public State getState() {
+		return state;
+	}
+	public void setState(State state) {
+		this.state = state;
+	}
 	private long idtravelpackage;
 	private String employeeCreator;
     private String name;
@@ -13,6 +21,7 @@ public class ProductDTO {
 	private float cost;
 	private Date timeStart;
 	private Date timeEnd;
+	private State state;
 	
 	/**
 	 * constructor without the idproduct: used during the creation phase
@@ -24,7 +33,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
-			float cost, Date timeStart, Date timeEnd) {
+			float cost, Date timeStart, Date timeEnd,State state) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.employeeCreator = employeeCreator;
@@ -32,6 +41,7 @@ public class ProductDTO {
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
+		this.state=state;
 	}
 	/**
 	 * constructor with the idproduct: it can't be used during the creation phase
@@ -44,7 +54,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
-			long idProduct, float cost, Date timeStart, Date timeEnd) {
+			long idProduct, float cost, Date timeStart, Date timeEnd,State state) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.employeeCreator = employeeCreator;
@@ -53,6 +63,7 @@ public class ProductDTO {
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
+		this.state=state;
 	}
 	public long getIdtravelpackage() {
 		return idtravelpackage;
