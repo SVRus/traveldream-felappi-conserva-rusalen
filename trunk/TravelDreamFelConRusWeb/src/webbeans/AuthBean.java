@@ -13,6 +13,7 @@ import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
+import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
@@ -113,7 +114,7 @@ public class AuthBean {
 		}
 		else
 		{
-			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code,new ArrayList<ProductDTO>(),new ArrayList<Long> ());
+			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code,new ArrayList<ProductDTO>(),new ArrayList<PrepackedTravelPackageDTO> ());
 			
 			success = generic.employeeRegister(employee);
 				
