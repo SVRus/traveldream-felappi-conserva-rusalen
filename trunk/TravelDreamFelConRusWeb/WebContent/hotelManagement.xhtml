@@ -1,11 +1,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"> 
-    <h:head></h:head> 
+      xmlns:p="http://primefaces.org/ui">
+       <h:head></h:head> 
+       
     <body> 
+    
         <p:layout fullPage="true">  
   
         <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
@@ -30,30 +33,33 @@
             </p:button>  
         </p:layoutUnit>  
       
-      <p:layoutUnit position="center">  
-	
-    <p:dataTable id="hotels" var="hotel" 
-                 value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"   
-                 selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
-                 filteredValue="#{hotelManagement.filteredHotels}" >
+ <p:layoutUnit position="center">  
+  <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        .ui-layout-unit-header{background-image:url('background.jpg');}
+    </style> 
+        <h:form id="form">  
+  
+    <p:dataTable var="hotel" value="#{hotelManagement.hotels}" rowKey="#{hotel.name}" paginator="true" rows="10"  
+                selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
+                filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable">  
+  
   
         <f:facet name="header">  
-            RadioButton Based Selection  
+            Hotels  
         </f:facet>  
   
-      
-     
-    <p:column headerText="IdHotel" sortBy="idProduct" filterBy="idProduct" id="idProduct">  
+        <p:column headerText="Model" sortBy="name" filterBy="name" id="name">  
+            #{hotel.name}  
+        </p:column>  
+   <p:column headerText="IdHotel" sortBy="idProduct" filterBy="idProduct" id="idProduct">  
             #{hotel.idProduct}  
         </p:column>  
-  
         <p:column headerText="Creatore" sortBy="employeeCreator" filterBy="employeeCreator" id="employeeCreator">  
             #{hotel.employeeCreator}  
         </p:column>  
   
-        <p:column headerText="Nome" sortBy="name" filterBy="name" id="name">  
-            #{hotel.name}  
-        </p:column>  
+       
   
         <p:column headerText="Costo" sortBy="cost" filterBy="cost" id="cost">  
             #{hotel.cost}  
@@ -79,14 +85,15 @@
         </p:column>  
         
   
-         
+  
     </p:dataTable>  
-    
-    
-        </p:layoutUnit>  
-      
-        </p:layout>  
+  
+   
+  
+</h:form>  
+          </p:layoutUnit>          
+           </p:layout>  
     </body> 
     
-    
 </html>
+

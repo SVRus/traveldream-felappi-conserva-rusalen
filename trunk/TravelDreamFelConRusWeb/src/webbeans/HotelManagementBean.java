@@ -1,14 +1,19 @@
 package webbeans;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+
+import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
@@ -21,12 +26,21 @@ import dto.HotelDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
-@ManagedBean(name="hotelManagement", eager = true)
-@SessionScoped
+@ManagedBean(name="hotelManagement")
+@ViewScoped
 public class HotelManagementBean implements Serializable{
 	private HotelDTO selectedHotel;
+	private HotelDTO[] selectedHotels;  
+	private HotelDTO newHotel;
 	
-	 private long idtravelpackage;
+	 public HotelDTO getNewHotel() {
+		return newHotel;
+	}
+
+	public void setNewHotel(HotelDTO newHotel) {
+		this.newHotel = newHotel;
+	}
+	private long idtravelpackage;
 	 private String employeeCreator;
 	 private long idProduct;
 	 private String name;
@@ -46,15 +60,44 @@ public class HotelManagementBean implements Serializable{
 	  
 	  //valori di prova
 	  static Date data1= new Date();
-	  private  ArrayList<HotelDTO> hotels;
-	  private  ArrayList<HotelDTO> filteredHotels;
+	  private  List<HotelDTO> hotels;
+	  private  List<HotelDTO> filteredHotels;
 	  
+	  public void nuovoHot(ActionEvent actionEvent) {  
+	        RequestContext context = RequestContext.getCurrentInstance();  
+	        FacesMessage msg = null;  
+	        boolean loggedIn = false;  
+	        /*  
+	        if(username != null  &&&& username.equals("admin") && password != null  && password.equals("admin")) {  
+	            loggedIn = true;  
+	            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);  
+	        } else {  
+	            loggedIn = false;  
+	            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
+	        }  */
+	        newHotel = new HotelDTO(11, name, "ciao", 11,data1 ,data1 , "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE);
+		      
+	        productCRUD.createProduct(newHotel);
+	        System.out.println("metodo");
+	        
+	        //FacesContext.getCurrentInstance().addMessage(null, msg);  
+	        //context.addCallbackParam("loggedIn", loggedIn);  
+	        
+	        
+	    }  
 	  
-	  public  ArrayList<HotelDTO> getFilteredHotels() {
+	  public void newHotel()
+	  {
+		  
+		  productCRUD.createProduct(newHotel);
+		  
+	  }
+	  
+	  public  List<HotelDTO> getFilteredHotels() {
 		return filteredHotels;
 	}
 
-	public  void setFilteredHotels(ArrayList<HotelDTO> filteredHotels) {
+	public  void setFilteredHotels(List<HotelDTO> filteredHotels) {
 		this.filteredHotels = filteredHotels;
 	}
 
@@ -72,16 +115,28 @@ public class HotelManagementBean implements Serializable{
 		  cal.add(Calendar.HOUR, 2);
 		  cal.add(Calendar.MONTH, -5);
 		  hotels
-	      = new ArrayList<HotelDTO>(Arrays.asList(
+	      = Arrays.asList(
 	      new HotelDTO(11, "ciao", "ciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
-	      ,new HotelDTO(111, "gciao", "gciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
+	      ,new HotelDTO(222, "gciao", "gciao",21, 211,cal.getTime() ,cal.getTime(), "2ciao",  "2ciao",  "2ciao",  "2ciao",State.AVAILABLE)
 	    	      )
-	      );	
+	      ;	
 		  
 	       hotelModel = new HotelDataModel(hotels);  
 	   }  
 
-	   public String deleteHotel(HotelDTO hot) {
+	   public HotelDTO[] getSelectedHotels() {
+		return selectedHotels;
+	}
+
+	public void setSelectedHotels(HotelDTO[] selectedHotels) {
+		this.selectedHotels = selectedHotels;
+	}
+
+	public void setHotels(List<HotelDTO> hotels) {
+		this.hotels = hotels;
+	}
+
+	public String deleteHotel(HotelDTO hot) {
 	      hotels.remove(hot);		
 	      return null;
 	   }
@@ -104,7 +159,7 @@ public class HotelManagementBean implements Serializable{
 	   }
 	  
 
-   public ArrayList<HotelDTO> getHotels() {
+   public List<HotelDTO> getHotels() {
       return hotels;
    }
 	 
@@ -187,6 +242,14 @@ public class HotelManagementBean implements Serializable{
 	}
 	public void setMore_info(String more_info) {
 		this.more_info = more_info;
+	}
+
+	public ProductCRUDBeanLocal getProductCRUD() {
+		return productCRUD;
+	}
+
+	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
+		this.productCRUD = productCRUD;
 	}
 	 
 	 
