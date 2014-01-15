@@ -29,6 +29,10 @@ import authentication.RegistrationBeanLocal;
 @ManagedBean(name="hotelManagement")
 @ViewScoped
 public class HotelManagementBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private HotelDTO selectedHotel;
 	private HotelDTO[] selectedHotels;  
 	private HotelDTO newHotel;
@@ -55,6 +59,7 @@ public class HotelManagementBean implements Serializable{
 	    
 	  private HotelDataModel hotelModel;  
 	  //non ancora utilizzato
+	  @EJB
 	  private ProductCRUDBeanLocal productCRUD;
 	  
 	  
@@ -64,24 +69,26 @@ public class HotelManagementBean implements Serializable{
 	  private  List<HotelDTO> filteredHotels;
 	  
 	  public void nuovoHot(ActionEvent actionEvent) {  
-	        RequestContext context = RequestContext.getCurrentInstance();  
-	        FacesMessage msg = null;  
-	        boolean loggedIn = false;  
-	        /*  
-	        if(username != null  &&&& username.equals("admin") && password != null  && password.equals("admin")) {  
-	            loggedIn = true;  
-	            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);  
-	        } else {  
-	            loggedIn = false;  
-	            msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
-	        }  */
-	        newHotel = new HotelDTO(11, name, "ciao", 11,data1 ,data1 , "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE);
-		      
-	        productCRUD.createProduct(newHotel);
-	        System.out.println("metodo");
-	        
-	        //FacesContext.getCurrentInstance().addMessage(null, msg);  
-	        //context.addCallbackParam("loggedIn", loggedIn);  
+	       
+				RequestContext context = RequestContext.getCurrentInstance();
+				FacesMessage msg = null;
+				boolean loggedIn = false;
+				/*  
+				if(username != null  &&&& username.equals("admin") && password != null  && password.equals("admin")) {  
+				    loggedIn = true;  
+				    msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);  
+				} else {  
+				    loggedIn = false;  
+				    msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");  
+				}  */
+				newHotel = new HotelDTO(11, "capra", "ciao", 11, data1, data1,
+						"ciao", "ciao", "ciao", "ciao", State.AVAILABLE);
+				msg = new FacesMessage("", "Welcome");
+				loggedIn = productCRUD.createProduct(newHotel);
+				
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+				context.addCallbackParam("loggedIn", loggedIn);
+			  
 	        
 	        
 	    }  
@@ -244,13 +251,7 @@ public class HotelManagementBean implements Serializable{
 		this.more_info = more_info;
 	}
 
-	public ProductCRUDBeanLocal getProductCRUD() {
-		return productCRUD;
-	}
-
-	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
-		this.productCRUD = productCRUD;
-	}
+	
 	 
 	 
 	

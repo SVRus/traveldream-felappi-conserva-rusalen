@@ -11,7 +11,12 @@ import dto.HotelDTO;
   
 public class HotelDataModel extends ListDataModel<HotelDTO> implements SelectableDataModel<HotelDTO>, Serializable {    
   
-    public HotelDataModel() {  
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public HotelDataModel() {  
     }  
   
     public HotelDataModel(List<HotelDTO> data) {  
