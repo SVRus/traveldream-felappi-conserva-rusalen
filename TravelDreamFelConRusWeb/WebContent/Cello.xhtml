@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+       <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  
+        <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
+            <h:outputText value="North unit content." />  
+        </p:layoutUnit>  
+      
+        <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
+            <h:outputText value="South unit content." />  
+        </p:layoutUnit>  
+      
+        <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
+            <h:outputText value="West unit content." />  
+        </p:layoutUnit>  
+      
+        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+            <h:outputText value="Right unit content." />
+            <p:button  value="Gestisci prodotti" icon="ui-icon-star">  
+            <f:param name="productId" value="10" />  
+            </p:button>  
+            <p:button  value="Gestisci pacchetti" icon="ui-icon-star">  
+            <f:param name="pacId" value="10" />  
+            </p:button>  
+        </p:layoutUnit>  
+      
+ <p:layoutUnit position="center">  
+	<h:form id="form">  
+  
+    <p:dataTable var="hotel" value="#{hotelManagement.hotels}" rowKey="#{hotel.name}" paginator="true" rows="10"  
+                selection="#{hotelManagement.selectedHotel}" selectionMode="single" filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable">  
+  
+  
+        <f:facet name="header">  
+            List of Cars  
+        </f:facet>  
+  
+        <p:column headerText="Model" sortBy="name" filterBy="name" id="name">  
+            #{hotel.name}  
+        </p:column>  
+   <p:column headerText="IdHotel" sortBy="idProduct" filterBy="idProduct" id="idProduct">  
+            #{hotel.idProduct}  
+        </p:column>  
+        <p:column headerText="Creatore" sortBy="employeeCreator" filterBy="employeeCreator" id="employeeCreator">  
+            #{hotel.employeeCreator}  
+        </p:column>  
+  
+       
+  
+        <p:column headerText="Costo" sortBy="cost" filterBy="cost" id="cost">  
+            #{hotel.cost}  
+        </p:column>  
+         <p:column headerText="Data inizio" sortBy="timeStart" filterBy="timeStart" id="timeStart">  
+            #{hotel.timeStart}  
+        </p:column>  
+         <p:column headerText="Data fine" sortBy="timeEnd" filterBy="timeEnd" id="timeEnd">  
+            #{hotel.timeEnd}  
+        </p:column>  
+         
+         <p:column headerText="Località" sortBy="area" filterBy="area" id="area">  
+            #{hotel.area}  
+        </p:column>  
+         <p:column headerText="Luogo" sortBy="place" filterBy="place" id="place">  
+            #{hotel.place}  
+        </p:column>  
+         <p:column headerText="Tipo camera" sortBy="room_type" filterBy="room_type" id="room_type">  
+            #{hotel.room_type}  
+        </p:column>  
+         <p:column headerText="Altre indicazioni" sortBy="more_info" filterBy="more_info" id="more_info">  
+            #{hotel.more_info}  
+        </p:column>  
+        
+  
+  
+    </p:dataTable>  
+  
+   
+  
+</h:form>  
+          </p:layoutUnit>          
+           </p:layout>  
+    </body> 
+    
+</html>
