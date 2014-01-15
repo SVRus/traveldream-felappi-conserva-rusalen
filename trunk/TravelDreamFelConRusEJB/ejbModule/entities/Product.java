@@ -5,7 +5,7 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import dto.ProductDTO;
+import stateenum.State;
 
 /**
  * Entity implementation class for Entity: Product
@@ -26,21 +26,29 @@ public Product()
 	 * @param timeEnd
 	 * @param name
 	 * @param travel
+	 * @param state
 	 */
 	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
-			String name) {
+			String name,State state) {
 		super();
 		this.idProduct = idProduct;
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.name = name;
-		;
+		this.state=state;
+		
 	}
 
 
 
 
+public State getState() {
+		return state;
+	}
+	public void setState(State state) {
+		this.state = state;
+	}
 /**
  * constructor used during the creation phase
  * @param cost
@@ -49,13 +57,14 @@ public Product()
  * @param name
  * @param travel
  */
-	public Product(float cost, Date timeStart, Date timeEnd, String name
+	public Product(float cost, Date timeStart, Date timeEnd, String name,State state
 			) {
 		super();
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.name = name;
+		this.state=state;
 			}
 
 
@@ -73,6 +82,8 @@ private Date timeStart;
 private Date timeEnd;
 private String name;
 
+@Enumerated(EnumType.STRING)
+private State state;
 
 
 public String getName() {

@@ -7,6 +7,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import stateenum.State;
+
 /**
  * Entity implementation class for Entity: Outing
  *
@@ -17,8 +19,8 @@ public class Outing extends Product implements Serializable {
 
 	
 	public Outing(float cost, Date timeStart, Date timeEnd, String name,
-			 String description, String area) {
-		super(cost, timeStart, timeEnd, name);
+			 String description, String area,State state) {
+		super(cost, timeStart, timeEnd, name, state);
 		this.description = description;
 		this.area = area;
 	}
@@ -26,8 +28,8 @@ public class Outing extends Product implements Serializable {
 
 
 	public Outing(long idProduct, float cost, Date timeStart, Date timeEnd,
-			String name,  String description, String area) {
-		super(idProduct, cost, timeStart, timeEnd, name);
+			String name,  String description, String area,State state) {
+		super(idProduct, cost, timeStart, timeEnd, name,state);
 		this.description = description;
 		this.area = area;
 	}
