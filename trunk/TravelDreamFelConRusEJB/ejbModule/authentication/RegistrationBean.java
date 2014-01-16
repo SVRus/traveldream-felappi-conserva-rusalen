@@ -12,10 +12,12 @@ import javax.ejb.Stateless;
 
 
 
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
+import dto_entitiesconversion.DTOFactory;
 import entities.Code;
 import entities.Customer;
 import entities.CustomizedTravelPackage;
@@ -39,11 +41,13 @@ import groupenum.Group;
 @LocalBean
 public class RegistrationBean implements RegistrationBeanLocal {
 @EJB
-EmployeeEntityManagementLocal emploejb;
+private EmployeeEntityManagementLocal emploejb;
 @EJB
-CustomerEntityManagementLocal custejb;
+private CustomerEntityManagementLocal custejb;
 @EJB
-CodeEntityManagementLocal codeejb;
+private CodeEntityManagementLocal codeejb;
+@EJB
+private DTOFactory dto;
     /**
      * Default constructor. 
      */
@@ -62,7 +66,7 @@ CodeEntityManagementLocal codeejb;
      */
     public boolean customerRegister(CustomerDTO customer)
     {
-    	Customer cust=dtoToCustomer(customer);
+    	Customer cust=dto.dtoToCustomer(customer);
     	try {
     		custejb.create(cust);
     		
@@ -85,7 +89,7 @@ CodeEntityManagementLocal codeejb;
         
     	if (employee.getCode()==(codelong))
     	{
-    	Employee emp=dtoToEmployee(employee);
+    	Employee emp=dto.dtoToEmployee(employee);
     	try {
     		emploejb.create(emp);
     		
@@ -102,46 +106,7 @@ CodeEntityManagementLocal codeejb;
     	
     }
     
-    
-    /**
-     * @author Marcello
-     * Private method that transform the EmployeeDTO in the entity employee
-     * @param employee -->the employee DTO acquired from the web tier 
-     * @return the entity Employee translated from the EmployeeDTO
-     */
-    private Employee dtoToEmployee(EmployeeDTO employee)
-    {   
-    	List<Group> groups=new ArrayList <Group>();
-        groups.add(Group.EMPLOYEE);
-        List <Product> prod=new ArrayList <Product> ();
-        List <PrepackedTravelPackage> prep=new ArrayList <PrepackedTravelPackage> ();
-        Code code=new Code(employee.getCode());
-        Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.sha256Hex(employee.getPassword()),employee.getUsername(),groups,prod, prep,code);
-		  	
-    	return real;
-    	
-    	
-    }
-    /**
-     * @author Marcello
-     * Private method that transform the CustomerDTO in the entity customer
-     * @param customer -->the customer DTO acquired from the web tier
-     * @return the entity Customer translated from the CustomerDTO
-     */
-    private Customer dtoToCustomer(CustomerDTO customer)
-    {
-    	List<Group> groups=new ArrayList <Group>();
-        groups.add(Group.CUSTOMER);
-        List<CustomizedTravelPackage> customizedTravelPackages=new ArrayList <CustomizedTravelPackage>();
-        List<Customer> friends=new ArrayList <Customer>();
-        List<TravelPackage> purchasedTravelPackages=new ArrayList<TravelPackage>();
-        List<TravelPackage> preparedForAFriendTravelPackages=new ArrayList <TravelPackage>();
-        List<GiftList> giftLists=new ArrayList <GiftList>();
-        Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.sha256Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,friends,purchasedTravelPackages,preparedForAFriendTravelPackages,giftLists); 
-        
-   	   return real;
-    	
-    }
+   
     /**
      * @author Marcello
      * @param username
