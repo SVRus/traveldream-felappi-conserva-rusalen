@@ -171,7 +171,7 @@ private Date time_start;
 private String description;
 @Column(unique=true)
 private String name;
-@OneToMany(cascade=CascadeType.ALL)
+@OneToMany()
 @JoinColumn(name="idtravelpackage")
 private List<Product> products;
 private long idCustomerBuyer;
@@ -184,6 +184,23 @@ private Date purchaseTime;
 
 	public TravelPackage() {
 		super();
+	}
+
+
+
+	public TravelPackage(Date time_end, Date time_start, String description,
+			String name, List<Product> products, long idCustomerBuyer,
+			long idCustomerFriendOwner, long friendCode, Date purchaseTime) {
+		super();
+		this.time_end = time_end;
+		this.time_start = time_start;
+		this.description = description;
+		this.name = name;
+		this.products = products;
+		this.idCustomerBuyer = idCustomerBuyer;
+		this.idCustomerFriendOwner = idCustomerFriendOwner;
+		this.friendCode = friendCode;
+		this.purchaseTime = purchaseTime;
 	}
    
 }
