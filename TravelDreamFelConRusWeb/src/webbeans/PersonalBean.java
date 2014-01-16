@@ -50,7 +50,6 @@ public void update()
 {
 generic=(EmployeeDTO)login.findLogIn();
 
-
 }
 public boolean isLoggato() {
 	return login.isLogged();
