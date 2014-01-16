@@ -8,7 +8,7 @@
 <body> 
 
  <h:form id="form">
- <p:dataTable var="hotel" value="#{hotelManagement.hotels}" rowKey="#{hotel.name}" paginator="true" rows="10"  
+ <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
                 selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
                 filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
