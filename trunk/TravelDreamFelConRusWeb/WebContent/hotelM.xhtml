@@ -18,7 +18,6 @@
                 <f:facet name="header">
                     Lista Hotel
                 </f:facet>  
-                <p:column selectionMode="single" style="width:18px" />  
                 <p:column  sortBy="#{hotel.name}">
                     <f:facet name="header">
                         <h:outputText value="Nome" />
@@ -33,7 +32,7 @@
                <f:facet name="footer">
                     <p:commandButton id="effectsDialogButton" value="Nuovo Hotel" onclick="PF('dlg3').show();" type="button" /> 
                     <p:commandButton value="Nuovo Hotel" oncomplete="newUserDialog.show()" icon="ui-icon-star" title="Creates new user"/>
-                    <p:commandButton value="Cancella Hotel" actionListener="#{userController.doDeleteUsers}" update="hoteltable" icon="ui-icon-trash"/>
+                    <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
                 </f:facet>
               </p:dataTable>
          </h:form>   
@@ -57,11 +56,11 @@
         	
         <script type="text/javascript">  
     function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            PF('dlg').jq.effect("shake", { times:5 }, 100);  
+        if( !args.loggedIn) {  
+            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
         }   
         else {  
-            PF('dlg').hide();  
+            PF('dlg3').hide();  
             $('#loginLink').fadeOut();  
         }  
     }  
