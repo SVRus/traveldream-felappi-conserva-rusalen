@@ -4,7 +4,19 @@ import java.util.Date;
 import java.util.List;
 
 public class PrepackedTravelPackageDTO extends TravelPakageDTO {
-
+/**
+ * 
+ * @param idtravelpackage
+ * @param time_end
+ * @param time_start
+ * @param description
+ * @param name
+ * @param products
+ * @param idCustomerBuyer
+ * @param idCustomerFriendOwner
+ * @param friendCode
+ * @param purchaseTime
+ */
 	public PrepackedTravelPackageDTO(long idtravelpackage, Date time_end,
 			Date time_start, String description, String name,
 			List<ProductDTO> products, long idCustomerBuyer,
@@ -14,4 +26,7 @@ public class PrepackedTravelPackageDTO extends TravelPakageDTO {
 		
 	}
 
+	
+	
+	
 }

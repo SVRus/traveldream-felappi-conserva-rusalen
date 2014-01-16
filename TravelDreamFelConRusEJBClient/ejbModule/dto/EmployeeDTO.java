@@ -12,11 +12,11 @@ public class EmployeeDTO extends GenericUserDTO {
 		this.managedproduct = managedproduct;
 	}
 
-	public ArrayList<Long> getManagedTravelPackage() {
+	public ArrayList<PrepackedTravelPackageDTO> getManagedTravelPackage() {
 		return managedTravelPackage;
 	}
 
-	public void setManagedTravelPackage(ArrayList<Long> managedTravelPackage) {
+	public void setManagedTravelPackage(ArrayList<PrepackedTravelPackageDTO> managedTravelPackage) {
 		this.managedTravelPackage = managedTravelPackage;
 	}
 
@@ -33,7 +33,7 @@ public class EmployeeDTO extends GenericUserDTO {
 public EmployeeDTO(String email, String name, String surname,
 			String telephone, String password, String username, long code,
 			ArrayList<ProductDTO> managedproduct,
-			ArrayList<Long> managedTravelPackage) {
+			ArrayList<PrepackedTravelPackageDTO> managedTravelPackage) {
 		super(email, name, surname, telephone, password, username);
 		this.code = code;
 		this.managedproduct = managedproduct;
@@ -44,7 +44,7 @@ public EmployeeDTO(String email, String name, String surname,
 
 private long code	;
 private ArrayList <ProductDTO> managedproduct;	
-private ArrayList <Long> managedTravelPackage;
+private ArrayList <PrepackedTravelPackageDTO> managedTravelPackage;
 
 	   
 }
