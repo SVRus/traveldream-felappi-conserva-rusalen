@@ -1,6 +1,10 @@
 package productManagement;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
@@ -11,6 +15,7 @@ import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
 import dto.ProductDTO;
+import dto_entitiesconversion.DTOFactory;
 import entities.Flight;
 import entities.Hotel;
 import entities.Outing;
@@ -34,7 +39,8 @@ HotelEntityManagementLocal hotel;
 FlightEntityManagementLocal flight;
 @EJB
 ProductEntityManagementLocal prod;
-
+@EJB
+DTOFactory dto;
 
     /**
      * Default constructor. 
@@ -213,6 +219,33 @@ ProductEntityManagementLocal prod;
     		
     	}
     	return entity;
+    }
+    public List <HotelDTO> findAllHotels()
+    {
+    	
+    	List <Hotel> lista=hotel.findAll();
+    	List <Product> listaProduct=new ArrayList <Product> ();
+    	Iterator <Hotel> iter=lista.iterator();
+    	while (iter.hasNext())
+    	{
+    		listaProduct.add(iter.next());
+    		
+    	}
+    	List <ProductDTO> hotels=dto.productListToDTO(listaProduct);
+    	Iterator <ProductDTO> iter1=hotels.iterator();
+    	
+    	List <HotelDTO> listaa =new ArrayList <HotelDTO>();
+    	
+    	while (iter1.hasNext())
+    	{
+    		listaa.add((HotelDTO)iter1.next());
+    		
+    	}
+    	
+    	return listaa;
+    	
+    	
+    	
     }
 
 }

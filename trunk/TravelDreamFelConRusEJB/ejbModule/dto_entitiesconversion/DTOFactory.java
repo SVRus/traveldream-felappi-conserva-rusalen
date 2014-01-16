@@ -19,6 +19,7 @@ import dto.OutingDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.FlightDTO;
+import dto.StageDTO;
 import entities.Code;
 import entities.Customer;
 import entities.CustomizedTravelPackage;
@@ -121,7 +122,26 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
 		
 		
 	}
-	private ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
+	private List<StageDTO> createStagesFromProducts(List<Product> products)
+	{
+		List<StageDTO> stages=new ArrayList <StageDTO>();
+		Iterator <Product> iter= products.iterator();
+		
+		
+		while (iter.hasNext())
+		{
+			stages.add()
+			
+			
+		}
+		
+		return stages;
+		
+		
+	}
+	
+	
+	public ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
 	{
 		ArrayList <ProductDTO> result =new ArrayList <ProductDTO> ();
 		Iterator <Product> iter =prodlist.iterator();
