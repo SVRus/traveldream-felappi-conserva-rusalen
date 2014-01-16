@@ -58,13 +58,13 @@ public long getIdtravelpackage() {
 	}
 
 
-	public List<ProductDTO> getProducts() {
-		return products;
+	public List<StageDTO> getProducts() {
+		return stages;
 	}
 
 
-	public void setProducts(List<ProductDTO> products) {
-		this.products = products;
+	public void setProducts(List<StageDTO> stages) {
+		this.stages = stages;
 	}
 
 
@@ -113,7 +113,7 @@ private Date time_end;
 private Date time_start;
 private String description;
 private String name;
-private List<ProductDTO> products;	
+private List<StageDTO> stages;	
 private long idCustomerBuyer;	
 private long idCustomerFriendOwner;
 private long friendCode;
@@ -121,7 +121,7 @@ private Date purchaseTime;
 
 
 public TravelPakageDTO(long idtravelpackage, Date time_end, Date time_start,
-		String description, String name, List<ProductDTO> products,
+		String description, String name, List<StageDTO> stages,
 		long idCustomerBuyer, long idCustomerFriendOwner, long friendCode,
 		Date purchaseTime) {
 	super();
@@ -130,7 +130,7 @@ public TravelPakageDTO(long idtravelpackage, Date time_end, Date time_start,
 	this.time_start = time_start;
 	this.description = description;
 	this.name = name;
-	this.products = products;
+	this.stages = stages;
 	this.idCustomerBuyer = idCustomerBuyer;
 	this.idCustomerFriendOwner = idCustomerFriendOwner;
 	this.friendCode = friendCode;
