@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -72,7 +73,7 @@ public class HotelManagementBean implements Serializable{
 	       
 				RequestContext context = RequestContext.getCurrentInstance();
 				FacesMessage msg = null;
-				boolean loggedIn = false;
+				boolean loggedIn = true;
 				/*  
 				if(username != null  &&&& username.equals("admin") && password != null  && password.equals("admin")) {  
 				    loggedIn = true;  
@@ -117,20 +118,32 @@ public class HotelManagementBean implements Serializable{
 	   }
 	 
 	  public HotelManagementBean() { 
-		  Calendar cal = Calendar.getInstance();
+		  
+		  /*Calendar cal = Calendar.getInstance();
 		  cal.set(2009, Calendar.DECEMBER, 12);
 		  cal.add(Calendar.HOUR, 2);
-		  cal.add(Calendar.MONTH, -5);
-		  hotels
-	      = Arrays.asList(
+		  cal.add(Calendar.MONTH, -5);*/
+		   /*Arrays.asList(
 	      new HotelDTO(11, "ciao", "ciao",1, 11,cal.getTime() ,cal.getTime(), "ciao",  "ciao",  "ciao",  "ciao",State.AVAILABLE)
 	      ,new HotelDTO(222, "gciao", "gciao",21, 211,cal.getTime() ,cal.getTime(), "2ciao",  "2ciao",  "2ciao",  "2ciao",State.AVAILABLE)
 	    	      )
-	      ;	
+	      ;	*/
 		  
-	       hotelModel = new HotelDataModel(hotels);  
+	      
 	   }  
+	  @PostConstruct
+	  public void update()
+	  {
+		  newHotel = new HotelDTO(11, "capra", "ciao", 11, data1, data1,
+					"ciao", "ciao", "ciao", "ciao", State.AVAILABLE);
+			boolean loggedIn = productCRUD.createProduct(newHotel);
+			
+	  hotels
+	  = productCRUD.findAllHotels();
+	  hotelModel = new HotelDataModel(hotels);  
 
+	  }
+	  
 	   public HotelDTO[] getSelectedHotels() {
 		return selectedHotels;
 	}
@@ -143,9 +156,10 @@ public class HotelManagementBean implements Serializable{
 		this.hotels = hotels;
 	}
 
-	public String deleteHotel(HotelDTO hot) {
-	      hotels.remove(hot);		
-	      return null;
+	public void deleteHotel(ActionEvent actionEvent) {
+		
+	    productCRUD.delete(selectedHotel);
+	    
 	   }
 	    
 	   public String editHotel(HotelDTO hot){
