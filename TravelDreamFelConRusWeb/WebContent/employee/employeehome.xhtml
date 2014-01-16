@@ -31,6 +31,9 @@
 	    </p:layoutUnit>  
 	  
 	    <p:layoutUnit position="center">  
+	     <p:layout style="min-width:400px;min-height:200px;" id="layout">  
+    		<p:layoutUnit position="west"  size="600" >  
+      
 	        <h:form id="emplyeeModify" styleClass="input-form">
 				<p:panel header="Modifica i tuoi dati" id="panel">
 				<p:messages id="messages" showDetail="true" showSummary="false"
@@ -40,11 +43,11 @@
 					<p:inputText id="username" label="Username"
 					value="#{x.username}"
 						required="true" />
-					<p:outputLabel value="First Name" for="firstname" />
+					<p:outputLabel value="Nome" for="firstname" />
 					<p:inputText id="firstname" label="First Name"
 						value="#{x.firstName}"
 						required="true" />
-					<p:outputLabel value="Last Name" for="lastname" />
+					<p:outputLabel value="Cognome" for="lastname" />
 					<p:inputText id="lastname" label="Last Name"
 						value="#{x.lastName}"
 							required="true" />
@@ -83,6 +86,12 @@
 				</p:panel>
 
 			</h:form>	
+			</p:layoutUnit> 
+			<p:layoutUnit position="center">  
+    			Roba
+    			  
+    	     </p:layoutUnit> 
+			</p:layout> 
 	    </p:layoutUnit>  
 	  
 		</p:layout>  
