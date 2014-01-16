@@ -58,16 +58,20 @@ public GenericUserDTO findLogIn()
 {
 	String username=getPrincipalUsername();
 	GenericUserDTO generic=null;
+	System.out.print(username);
+	
 	if (context.isCallerInRole("EMPLOYEE"))
 	{
 		generic=factory.toTDO((Employee)employee.find(username));
-		
+		System.out.println(generic.toString()+"impiegato");
 	}
 	else if(context.isCallerInRole("CUSTOMER"))
 	{
 		generic=factory.toTDO((Customer)customer.find(username));
-		
+		System.out.println(generic.toString()+"cliente");
 	}
+	
+	System.out.print(generic.toString());
 	return generic;
 	
 
@@ -92,7 +96,7 @@ private String getPrincipalUsername()
 @Override
 public boolean isLogged() {
 	
-	return context.isCallerInRole("CUSTOMER") ||context.isCallerInRole("EMPLOYEE");
+	return context.isCallerInRole(Group._CUSTOMER) ||context.isCallerInRole(Group._EMPLOYEE);
 }
 
 
