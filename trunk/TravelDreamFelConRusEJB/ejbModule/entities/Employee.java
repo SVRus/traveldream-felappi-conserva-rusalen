@@ -57,7 +57,7 @@ public class Employee extends RegisteredUser implements Serializable {
 	public Employee() {
 		super();
 	}
-   @OneToMany(cascade=CascadeType.ALL)
+   @OneToMany(cascade={CascadeType.PERSIST ,CascadeType.MERGE})
    @JoinColumn(name="idemployee")
    private List <Product> managedProduct;
    @OneToMany(cascade=CascadeType.ALL)

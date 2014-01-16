@@ -1,6 +1,7 @@
 package productManagement;
 
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -32,9 +33,8 @@ HotelEntityManagementLocal hotel;
 @EJB
 FlightEntityManagementLocal flight;
 @EJB
-ConsistencyCheckBeanLocal check;
-@EJB
 ProductEntityManagementLocal prod;
+
 
     /**
      * Default constructor. 
@@ -45,6 +45,8 @@ ProductEntityManagementLocal prod;
    
     public boolean createProduct(ProductDTO productdto)
     {   Product product=productDTOToEntity(productdto);
+   
+   
 		boolean ok=false;
 		if( product instanceof Hotel)
 		{
@@ -96,6 +98,9 @@ ProductEntityManagementLocal prod;
     	return ok;
     	
    }
+    
+    
+    
     
     private Product productDTOToEntity(ProductDTO product)
     {

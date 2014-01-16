@@ -14,6 +14,7 @@ import stateenum.State;
  *
  */
 @Entity
+
 @DiscriminatorValue("HOTEL")
 public class Hotel extends Product implements Serializable {
 	

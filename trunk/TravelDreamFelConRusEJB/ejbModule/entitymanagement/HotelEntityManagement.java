@@ -1,8 +1,11 @@
 package entitymanagement;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import entities.Hotel;
 
@@ -25,4 +28,15 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 	protected EntityManager getEntityManager() {
 		 return em;
 	}
+
+public  List<Hotel> findAll()
+{
+	Query query = em.createNamedQuery("findeveryhotel");
+	
+	List<Hotel> hotel = query.getResultList();
+	return hotel;
+	
+
+}
+
 }

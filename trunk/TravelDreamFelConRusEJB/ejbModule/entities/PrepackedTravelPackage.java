@@ -20,10 +20,9 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
 	
 	public PrepackedTravelPackage(Date time_end,
 			Date time_start, String description, String name,
-			List<Product> products, long idCustomerBuyer,
-			long idCustomerFriendOwner, long friendCode, Date purchaseTime) {
+			List<Product> products, long friendCode, Date purchaseTime) {
 		super(time_end, time_start, description, name, products,
-				idCustomerBuyer, idCustomerFriendOwner, friendCode, purchaseTime);
+				 friendCode, purchaseTime);
 		// TODO Auto-generated constructor stub
 	}
 

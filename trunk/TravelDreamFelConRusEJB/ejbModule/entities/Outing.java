@@ -14,6 +14,7 @@ import stateenum.State;
  *
  */
 @Entity
+
 @DiscriminatorValue("OUTING")
 public class Outing extends Product implements Serializable {
 
