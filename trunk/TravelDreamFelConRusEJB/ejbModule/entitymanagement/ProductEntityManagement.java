@@ -32,21 +32,30 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
 	}
     
     public String findEmployeeCreator(long idproduct)
-    {
-    	String query="select employeecreator from Product  where idproduct:=idproduct";
-    	Query q = em.createQuery(query, Product.class);
-    	q.setParameter("idproduct", idproduct);
-    	String result=(String) q.getSingleResult();
+    {Query query = em.createNativeQuery("SELECT idemployee FROM product WHERE idProduct =?");
+    query.setParameter(1, new Long(idproduct));
+    
+   
+    	String result=(String) query.getSingleResult();
+    	
     	return result;
     	
     }
-    public long findTravelPackageContainer(long idproduct)
+    public Long findTravelPackageContainer(long idproduct)
     {
-    	String query="selsect idtravelpackage from Product where idproduct:=idproduct ";
-    	Query q = em.createQuery(query, Product.class);
-    	q.setParameter("idproduct", idproduct);
-    	long result=(long) q.getSingleResult();
-    	return result;
+    	System.out.println("id product"+idproduct);
+    	
+    	
+    	Query q = em.createNativeQuery("SELECT IDTRAVELPACKAGE FROM PRODUCT WHERE IDPRODUCT=?");
+    	System.out.print("ciao");
+    	q.setParameter(1, idproduct);
+    	Object result= q.getSingleResult();
+    	if (result==null)
+    		result=new Long(0);
+    	
+    		
+    	
+    	return (Long)result;
     	
     	
     }
