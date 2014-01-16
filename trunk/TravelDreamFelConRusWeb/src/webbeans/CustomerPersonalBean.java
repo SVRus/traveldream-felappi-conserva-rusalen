@@ -23,8 +23,8 @@ public class CustomerPersonalBean {
 	private String email;
 	//private int phoneNumber;
 	private Date birthdate;
-	@EJB
-	private GenericUserManagementBeanLocal generic;
+//	@EJB
+//	private GenericUserManagementBeanLocal generic;
 	
 	
 	public String modify()
