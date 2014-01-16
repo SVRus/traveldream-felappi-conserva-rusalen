@@ -14,6 +14,7 @@ import stateenum.State;
  *
  */
 @Entity
+
 @DiscriminatorValue("FLIGHT")
 public class Flight extends Product implements Serializable {
 

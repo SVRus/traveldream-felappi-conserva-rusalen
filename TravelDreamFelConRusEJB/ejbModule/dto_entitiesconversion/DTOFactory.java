@@ -9,13 +9,17 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
+import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.FlightDTO;
+import entities.Code;
 import entities.Customer;
 import entities.CustomizedTravelPackage;
 import entities.Employee;
@@ -26,12 +30,16 @@ import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.TravelPackage;
+import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
+import groupenum.Group;
 @Stateless
 @LocalBean
 public class DTOFactory {
 @EJB
 ProductEntityManagementLocal proman;
+@EJB
+PrepackedTravelPackageEntityManagementLocal pretrav;
 	private  ProductDTO productToDTO(Product product)
 	{ 
 		ProductDTO result=null;
@@ -90,15 +98,28 @@ ProductEntityManagementLocal proman;
 		}
 		return travelid;
 	}
-	private  ArrayList <Long> prepackedTravelPackageToLong(List <PrepackedTravelPackage> travellist)
+	private  ArrayList <PrepackedTravelPackageDTO> prepackedTravelPackageToDTO(List <PrepackedTravelPackage> travellist)
 	{
-		ArrayList <Long> travelid=new ArrayList <Long>();
+		ArrayList <PrepackedTravelPackageDTO> travelid=new ArrayList <PrepackedTravelPackageDTO>();
 		Iterator <PrepackedTravelPackage> iter = travellist.iterator();
 		while(iter.hasNext())
-		{
-			travelid.add(iter.next().getIdtravelpackage());
+		{   long idtravel=iter.next().getIdtravelpackage();
+		    
+			travelid.add(pretrav.find(idtravel));
 		}
 		return travelid;
+	}
+	
+	
+	private PrepackedTravelPackageDTO simplePrepackedTravelPackageToDTO(PrepackedTravelPackage pre)
+	{
+		PrepackedTravelPackageDTO predto=new PrepackedTravelPackageDTO(pre.getIdtravelpackage(),);
+		
+		
+		return null;
+		
+		
+		
 	}
 	private ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
 	{
@@ -129,7 +150,7 @@ ProductEntityManagementLocal proman;
 	public  EmployeeDTO toTDO(Employee employee)
 	{
 		ArrayList<ProductDTO> managedproduct=productListToDTO(employee.getManagedProduct());
-		ArrayList<Long> managedTravelPackage=prepackedTravelPackageToLong(employee.getManagedTravelPackage());
+		ArrayList<PrepackedTravelPackageDTO> managedTravelPackage=new ArrayList <PrepackedTravelPackageDTO>();
 		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername(),employee.getCode().getCode(),managedproduct,managedTravelPackage);
 		return emplo;
 		
@@ -155,5 +176,74 @@ ProductEntityManagementLocal proman;
 	   
 	return giftDTO;
     }
+   
+   /**
+    * @author Marcello
+    * Private method that transform the EmployeeDTO in the entity employee
+    * @param employee -->the employee DTO acquired from the web tier 
+    * @return the entity Employee translated from the EmployeeDTO
+    */
+   public Employee dtoToEmployee(EmployeeDTO employee)
+   {   
+   	List<Group> groups=new ArrayList <Group>();
+       groups.add(Group.EMPLOYEE);
+       ArrayList <ProductDTO> listproddto=employee.getManagedproduct();
+       List <Product> prod=new ArrayList <Product> ();
 
+       Iterator <ProductDTO> iter=listproddto.iterator();
+       while(iter.hasNext())
+       {
+    	   prod.add(productDTOToEntity(iter.next()));
+    	   
+       }
+       
+       
+       List <PrepackedTravelPackage> prep=new ArrayList <PrepackedTravelPackage> ();
+       Code code=new Code(employee.getCode());
+       Employee real=new Employee(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(), DigestUtils.sha256Hex(employee.getPassword()),employee.getUsername(),groups,prod, prep,code);
+		  	
+   	return real;
+   	
+   	
+   }
+   /**
+    * @author Marcello
+    * Private method that transform the CustomerDTO in the entity customer
+    * @param customer -->the customer DTO acquired from the web tier
+    * @return the entity Customer translated from the CustomerDTO
+    */
+   public Customer dtoToCustomer(CustomerDTO customer)
+   {
+   	List<Group> groups=new ArrayList <Group>();
+       groups.add(Group.CUSTOMER);
+       List<CustomizedTravelPackage> customizedTravelPackages=new ArrayList <CustomizedTravelPackage>();
+       List<Customer> friends=new ArrayList <Customer>();
+       List<TravelPackage> purchasedTravelPackages=new ArrayList<TravelPackage>();
+       List<TravelPackage> preparedForAFriendTravelPackages=new ArrayList <TravelPackage>();
+       List<GiftList> giftLists=new ArrayList <GiftList>();
+       Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.sha256Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,friends,purchasedTravelPackages,preparedForAFriendTravelPackages,giftLists); 
+       
+  	   return real;
+   	
+   }
+   public Product productDTOToEntity(ProductDTO product)
+   {
+   	Product entity=null;
+   	if(product instanceof HotelDTO )
+   	{
+   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
+   	}
+   	else if (product instanceof FlightDTO)
+   	{
+   		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea_end(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		
+   	
+   	}
+   	else if (product instanceof OutingDTO)
+   	{
+   		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
+   		
+   	}
+   	return entity;
+   }
 }
