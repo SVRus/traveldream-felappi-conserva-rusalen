@@ -41,11 +41,18 @@ public class DTOFactory {
 ProductEntityManagementLocal proman;
 @EJB
 PrepackedTravelPackageEntityManagementLocal pretrav;
+
+
+
+
 	private  ProductDTO productToDTO(Product product)
-	{ 
+	{ System.out.println("il prodotto è "+product.toString());
 		ProductDTO result=null;
 	    Long idtravelpackage= proman.findTravelPackageContainer(product.getIdProduct());
-		if (product instanceof  Flight)
+		
+	    
+	    
+	    if (product instanceof  Flight)
 		{   
 			result=new FlightDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea_end(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info(),product.getState());
 			
