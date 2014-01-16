@@ -29,14 +29,6 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 		 return em;
 	}
 
-public  List<Hotel> findAll()
-{
-	Query query = em.createNamedQuery("findeveryhotel");
-	
-	List<Hotel> hotel = query.getResultList();
-	return hotel;
-	
 
-}
 
 }
