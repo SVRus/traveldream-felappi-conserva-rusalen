@@ -153,7 +153,7 @@ private String description;
 @Column(unique=true)
 private String name;
 @OneToMany()
-@JoinColumn(name="idtravelpackage")
+@JoinColumn(name="IDTRAVELPACKAGE")
 private List<Product> products;
 
 private long friendCode;

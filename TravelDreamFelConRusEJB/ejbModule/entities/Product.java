@@ -12,7 +12,7 @@ import stateenum.State;
  *
  */
 @Entity
-@NamedQuery(name = "findeveryproduct", query = "SELECT b FROM Product b ")
+//@NamedNativeQuery(name="find", query="SELECT IDTRAVELPACKAGE FROM PRODUCT WHERE IDPRODUCT=?",resultClass=Employee.class)
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="PRODUCT_TYPE")
 public class Product implements Serializable {
@@ -31,7 +31,7 @@ public Product()
 	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name,State state) {
 		super();
-		this.idProduct = idProduct;
+		this.idproduct = idProduct;
 		this.cost = cost;
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
@@ -74,7 +74,7 @@ public State getState() {
 	private static final long serialVersionUID = 1L;
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
-private long idProduct;
+private long idproduct;
 private float cost;
 @Temporal(TemporalType.TIMESTAMP)
 private Date timeStart;
@@ -101,12 +101,12 @@ public void setName(String name) {
 
 
 public long getIdProduct() {
-	return idProduct;
+	return idproduct;
 }
 
 
 public void setIdProduct(long idProduct) {
-	this.idProduct = idProduct;
+	this.idproduct = idproduct;
 }
 
 
