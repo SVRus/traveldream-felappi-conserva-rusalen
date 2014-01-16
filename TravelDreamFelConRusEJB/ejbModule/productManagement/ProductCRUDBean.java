@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -224,13 +223,16 @@ DTOFactory dto;
     {
     	
     	List <Hotel> lista=hotel.findAll();
+    	System.out.println(lista.toString());
     	List <Product> listaProduct=new ArrayList <Product> ();
     	Iterator <Hotel> iter=lista.iterator();
     	while (iter.hasNext())
-    	{
-    		listaProduct.add(iter.next());
-    		
+    	{Hotel parziale=iter.next();
+    	System.out.println(parziale.toString());
+    		listaProduct.add(parziale);
+    		System.out.println("aggiunto 1");
     	}
+    	System.out.println(listaProduct.toString());
     	List <ProductDTO> hotels=dto.productListToDTO(listaProduct);
     	Iterator <ProductDTO> iter1=hotels.iterator();
     	

@@ -15,7 +15,9 @@
 		<class>entities.RegisteredUser</class>
 		<class>entities.TravelPackage</class>
 		<properties>
+			<property name="eclipselink.jpa.uppercase-column-names"          value="true"/>
 			<property name="eclipselink.ddl-generation" value="create-tables"/>
+			
 		</properties>
 	</persistence-unit>
 </persistence>
