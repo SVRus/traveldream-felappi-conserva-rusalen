@@ -22,29 +22,16 @@ import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
+import dto.OutingDTO;
+import dto.OutingDTO;
 import dto.ProductDTO;
-import dto.HotelDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
-@ManagedBean(name="hotelManagement")
+@ManagedBean(name="outingManagement")
 @ViewScoped
-public class HotelManagementBean implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private HotelDTO selectedHotel;
-	private HotelDTO[] selectedHotels;  
-	private HotelDTO newHotel;
-	
-	 public HotelDTO getNewHotel() {
-		return newHotel;
-	}
+public class OutingManagementBean {
 
-	public void setNewHotel(HotelDTO newHotel) {
-		this.newHotel = newHotel;
-	}
 	private long idtravelpackage;
 	 private String employeeCreator;
 	 private long idProduct;
@@ -56,116 +43,66 @@ public class HotelManagementBean implements Serializable{
 	 private String place;
 	 private String room_type;
 	 private String more_info;
-	 
-	    
-	  private HotelDataModel hotelModel;  
-	  @EJB
+	  private OutingDataModel outingModel;  
+	  public OutingDataModel getOutingModel() {
+		return outingModel;
+	}
+
+
+
+	@EJB
 	  private ProductCRUDBeanLocal productCRUD;
 	  
 	  
 	  //valori di prova
 	  static Date data1= new Date();
-	  private  List<HotelDTO> hotels;
-	  private  List<HotelDTO> filteredHotels;
+	  private  List<OutingDTO> outings;
+	  private  List<OutingDTO> filteredOutings;
+	  
 	  
 	  @PostConstruct
 	  public void update()
 	  {
 		
-	  hotels
-	  = productCRUD.findAllHotels();
-	  hotelModel = new HotelDataModel(hotels);  
+	  outings
+	  = productCRUD.findAllOutings();
+	  outingModel = new OutingDataModel(outings);  
 
 	  }
 	  
 	 
 	  
-	  public void newHotel(ActionEvent actionEvent)
+	  public void newOuting(ActionEvent actionEvent)
 	  {
-			newHotel = new HotelDTO(23, name, name, 23, data1, data1,
+			newOuting = new OutingDTO(23, name, name, 23, data1, data1,
 					name, name, name, name, State.AVAILABLE);
-			productCRUD.createProduct(newHotel);
-			System.out.println("avrei dovuto creare un hotel");
-			hotels.add(newHotel);
+			productCRUD.createProduct(newOuting);
+			System.out.println("avrei dovuto creare un outing");
+			outings.add(newOuting);
 		
 		  
 	  }
-	  public void deleteHotel(ActionEvent actionEvent) {
+	  public void deleteOuting(ActionEvent actionEvent) {
 			
-		    productCRUD.delete(selectedHotel);
-		    hotels.remove(selectedHotel);
+		    productCRUD.delete(selectedOuting);
+		    outings.remove(selectedOuting);
 		    
 		   }
-	  public void updateHotel(ActionEvent actionEvent){
+	  public void updateOuting(ActionEvent actionEvent){
 			
-				hotels.remove(selectedHotel);
-			   newHotel = new HotelDTO(23, selectedHotel.getName(), selectedHotel.getName(), 23, data1, data1,
-					   selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), State.AVAILABLE);
-				productCRUD.updateProduct(newHotel);
-				System.out.println("avrei dovuto creare un hotel");
-				hotels.add(newHotel);
+				outings.remove(selectedOuting);
+			   newOuting = new OutingDTO(23, selectedOuting.getName(), selectedOuting.getName(), 23, data1, data1,
+					   selectedOuting.getName(), selectedOuting.getName(), selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
+				productCRUD.updateProduct(newOuting);
+				System.out.println("avrei dovuto creare un outing");
+				outings.add(newOuting);
 			   
 		   }
 	  
-	  public HotelDTO[] getSelectedHotels() {
-			return selectedHotels;
+
+		public void setOutingModel(OutingDataModel outingModel) {
+			this.outingModel = outingModel;
 		}
-	  public  List<HotelDTO> getFilteredHotels() {
-		return filteredHotels;
-	}
-
-	public  void setFilteredHotels(List<HotelDTO> filteredHotels) {
-		this.filteredHotels = filteredHotels;
-	}
-
-	
-	 
-	  public HotelManagementBean() { 
-		        
-	   }  
-	
-
-	public void setSelectedHotels(HotelDTO[] selectedHotels) {
-		this.selectedHotels = selectedHotels;
-	}
-
-	public void setHotels(List<HotelDTO> hotels) {
-		this.hotels = hotels;
-	}
-
-	
-	    
-	 
-
-	   public String saveHotel(){
-		 //TODO
-		   
-	      //set "canEdit" of all employees to false 
-	     // for (HotelDTO hot : hotels){
-	         //hotel.setCanEdit(false);
-	      //}		
-	      return null;
-	   }
-	  
-
-   public List<HotelDTO> getHotels() {
-      return productCRUD.findAllHotels();
-   }
-	 
-	  
-	
-	public HotelDTO getSelectedHotel() {
-		return selectedHotel;
-	}
-	public void setSelectedHotel(HotelDTO selectedHotel) {
-		this.selectedHotel = selectedHotel;
-	}
-	public HotelDataModel getHotelModel() {
-		return hotelModel;
-	}
-	public void setHotelModel(HotelDataModel hotelModel) {
-		this.hotelModel = hotelModel;
-	}
 	public long getIdtravelpackage() {
 		return idtravelpackage;
 	}
@@ -232,11 +169,31 @@ public class HotelManagementBean implements Serializable{
 	public void setMore_info(String more_info) {
 		this.more_info = more_info;
 	}
-
+	
+	public ProductCRUDBeanLocal getProductCRUD() {
+		return productCRUD;
+	}
+	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
+		this.productCRUD = productCRUD;
+	}
+	public static Date getData1() {
+		return data1;
+	}
+	public static void setData1(Date data1) {
+		OutingManagementBean.data1 = data1;
+	}
+	public List<OutingDTO> getOutings() {
+		return outings;
+	}
+	public void setOutings(List<OutingDTO> outings) {
+		this.outings = outings;
+	}
+	public List<OutingDTO> getFilteredOutings() {
+		return filteredOutings;
+	}
+	public void setFilteredOutings(List<OutingDTO> filteredOutings) {
+		this.filteredOutings = filteredOutings;
+	}
 	
 	 
-	 
-	
-
-	
 }
