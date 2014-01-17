@@ -9,16 +9,19 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import authentication.LoginBeanLocal;
 import concistencyCheck.ConsistencyCheckBeanLocal;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
 import dto.ProductDTO;
 import dto_entitiesconversion.DTOFactory;
+import entities.Employee;
 import entities.Flight;
 import entities.Hotel;
 import entities.Outing;
 import entities.Product;
+import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
@@ -40,6 +43,10 @@ FlightEntityManagementLocal flight;
 ProductEntityManagementLocal prod;
 @EJB
 DTOFactory dto;
+@EJB
+EmployeeEntityManagementLocal emplo;
+
+
 
     /**
      * Default constructor. 
@@ -105,7 +112,25 @@ DTOFactory dto;
    }
     
     
-    
+    public boolean createProductFromEmployee(ProductDTO product,String username)
+    {
+		Employee employee=emplo.find(username);
+		Product prod=this.productDTOToEntity(product);
+    	employee.getManagedProduct().add(prod);
+    	try
+    	{
+    		emplo.edit(employee);
+    		
+    		return true;
+    	}
+    	catch(Exception e)
+    	{
+    	return false;
+    	}
+    	
+    	
+    	
+    }
     
     private Product productDTOToEntity(ProductDTO product)
     {
@@ -279,7 +304,7 @@ DTOFactory dto;
     public List <FlightDTO> findAllFlights()
     {
     	
-    	List <Flight> lista=outing.findAll();
+    	List <Flight> lista=flight.findAll();
     	List <Product> listaProduct=new ArrayList <Product> ();
     	Iterator <Flight> iter=lista.iterator();
     	while (iter.hasNext())
