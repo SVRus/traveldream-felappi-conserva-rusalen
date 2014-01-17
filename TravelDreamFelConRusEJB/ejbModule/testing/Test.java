@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto_entitiesconversion.DTOFactory;
@@ -70,7 +71,7 @@ public class Test {
 	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new Date(),new Date(),"","",lista,0,new Date());
 	    pre.edit(travel);
 	    System.out.println(travel.getProducts());
-	    System.out.println(dto.simplePrepackedTravelPackageToDTO((PrepackedTravelPackage)pre.find(new Long(1))).getStages().toString());
+	    System.out.println(dto.simpleTravelPackageToDTO((PrepackedTravelPackage)pre.find(new Long(1))).getStages().toString());
 	    
 	}
 	
@@ -87,7 +88,19 @@ public class Test {
 		}
 		
 	}
-	
-	
+	@Before
+	public void before2()
+	{
+		HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+		
+	}
+	@org.junit.Test
+	public void test2()
+	{		
+		FlightDTO hotel=new FlightDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+
+		
+		
+	}
 
 }
