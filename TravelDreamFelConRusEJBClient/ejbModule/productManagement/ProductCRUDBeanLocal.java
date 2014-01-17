@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.ProductDTO;
 
@@ -13,7 +14,7 @@ public interface ProductCRUDBeanLocal {
     public boolean delete(ProductDTO productdto);
     public boolean updateProduct(ProductDTO productdto);
     public List <HotelDTO> findAllHotels();
-    
+    public List <FlightDTO> findAllFlights();
     
     
     
