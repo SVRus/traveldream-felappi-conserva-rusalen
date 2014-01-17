@@ -31,8 +31,7 @@
         </p:layoutUnit>  
       
       <p:layoutUnit position="center">  
-	  
-   <h:form id="form">
+	  <h:form id="form">
  <p:dataTable var="outing" value="#{outingManagement.outingModel}" rowKey="#{outing.name}" paginator="true" rows="10"  
                 selection="#{outingManagement.selectedOuting}" selectionMode="single" 
                 filteredValue="#{outingManagement.filteredOutings}" id="outingtable"
@@ -70,13 +69,19 @@
                
                <f:facet name="footer">
                     <p:commandButton id="effectsDialogButton" value="Nuovo Outing" onclick="PF('dlg3').show();" type="button" /> 
-                    <p:commandButton value="Cancella Outing" actionListener="#{outingManagement.deleteOuting}" update="outingtable" icon="ui-icon-trash"/>
+                     <p:commandButton value="Cancella Outing" actionListener="#{outingManagement.deleteOuting}" update="outingtable" icon="ui-icon-trash"/>
                 </f:facet>
 
               </p:dataTable>
          </h:form>   
          
-         <p:dialog header="Nuovo Outing" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+       
+    
+    
+        </p:layoutUnit>  
+      
+        </p:layout>  
+          <p:dialog header="Nuovo Outing" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
      <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
             <h:outputLabel for="username" value="Nome:" />  
@@ -107,12 +112,46 @@
         }  
     }  
 </script>  	    
-            
-    
-    
-        </p:layoutUnit>  
+             <p:dialog header="Modifica Outing" widgetVar="userDialog" resizable="false" id="userDlg" > 
+               <h:form id="userDetailForm">
+                <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
+			<h:outputText value="Nome :"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.name}" />
+						<h:inputText value="#{outingManagement.selectedOuting.name}"/>
+      		<f:facet name="footer">
+                     
+                            <p:commandButton value="Update" update=":form:outingtable"  
+                            oncomplete="userDialog.hide(); " actionListener="#{outingManagement.updateOuting}"/>
+                    </f:facet>
+			
+                </p:panelGrid> 
+             </h:form>
+          </p:dialog> 
+                         
+             
+         
       
-        </p:layout>  
+<p:growl id="growl" showDetail="true" life="5000" />
+         
+<script type="text/javascript">  
+    function handleSubmitRequest(xhr, status, args, dialogName, formName) {  
+            dialog = jQuery('#'+dialogName);
+        if(args.validationFailed) {  
+            dialog.effect("shake", { times:3 }, 100);  
+        } else {
+            clearForm(formName);
+            newUserDialog.hide(); 
+            userDialog.hide(); 
+        }  
+    }
+    function clearForm(formName){
+        jQuery('#'+formName).each(function(){
+	        this.reset();
+	});
+    }
+</script> 
+ 
+        
     </body> 
     
     
