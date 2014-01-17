@@ -33,59 +33,59 @@
       <p:layoutUnit position="center">  
 	  
    <h:form id="form">
- <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
-                selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
-                filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
+ <p:dataTable var="flight" value="#{flightManagement.flightModel}" rowKey="#{flight.name}" paginator="true" rows="10"  
+                selection="#{flightManagement.selectedFlight}" selectionMode="single" 
+                filteredValue="#{flightManagement.filteredFlights}" id="flighttable"
                  rowsPerPageTemplate="10,15,50">  
     
 
   
                 <f:facet name="header">
-                    Lista Hotel
+                    Lista Flight
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                <p:column  headerText="Nome" sortBy="#{flight.name}" filterBy="#{flight.name}" id="name">
                     
                     
-                    <p:commandLink value="#{hotel.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{hotel}" target="#{hotelManagement.selectedHotel}" />    
+                    <p:commandLink value="#{flight.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{flight}" target="#{flightManagement.selectedFlight}" />    
                     </p:commandLink>
                 	</p:column>
-                      <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
-                      #{hotel.area}  
+                      <p:column  headerText="Area" sortBy="#{flight.area}" filterBy="#{flight.area}" id="area">
+                      #{flight.area}  
                       </p:column> 
-                       <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
-                      #{hotel.place}  
+                       <p:column  headerText="Luogo" sortBy="#{flight.place}" filterBy="#{flight.place}" id="place">  
+                      #{flight.place}  
                       </p:column> 
-                       <p:column  headerText="Data Inizio" sortBy="#{hotel.timeStart}" filterBy="#{hotel.timeStart}" id="timeStart">  
-                      #{hotel.timeStart}  
+                       <p:column  headerText="Data Inizio" sortBy="#{flight.timeStart}" filterBy="#{flight.timeStart}" id="timeStart">  
+                      #{flight.timeStart}  
                       </p:column> 
-                       <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
-                      #{hotel.timeEnd}  
+                       <p:column  headerText="Data Fine" sortBy="#{flight.timeEnd}" filterBy="#{flight.timeEnd}" id="timeEnd">  
+                      #{flight.timeEnd}  
                       </p:column> 
-                       <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
-                      #{hotel.area}  
+                       <p:column  headerText="Tipo" sortBy="#{flight.room_type}" filterBy="#{flight.room_type}" id="room_type">  
+                      #{flight.area}  
                       </p:column> 
 
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo Hotel" onclick="PF('dlg3').show();" type="button" /> 
-                    <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
+                    <p:commandButton id="effectsDialogButton" value="Nuovo Flight" onclick="PF('dlg3').show();" type="button" /> 
+                    <p:commandButton value="Cancella Flight" actionListener="#{flightManagement.deleteFlight}" update="flighttable" icon="ui-icon-trash"/>
                 </f:facet>
 
               </p:dataTable>
          </h:form>   
          
-         <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+         <p:dialog header="Nuovo Flight" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
      <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
             <h:outputLabel for="username" value="Nome:" />  
-            <p:inputText value="#{hotelManagement.name}"   
+            <p:inputText value="#{flightManagement.name}"   
                     id="username" required="true" label="username" />  
               
             <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"   
-                    actionListener="#{hotelManagement.newHotel}"  
+                <p:commandButton id="loginButton" value="Crea" update=":form:flighttable"   
+                    actionListener="#{flightManagement.newFlight}"  
                    oncomplete="dlg3.hide();"/>  
                 
                

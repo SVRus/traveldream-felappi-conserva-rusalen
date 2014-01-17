@@ -11,22 +11,36 @@
  <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
                 selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
                 filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
-                paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                        lazy="true" rowsPerPageTemplate="10,15,50">  
-  
+                 rowsPerPageTemplate="10,15,50">  
+    
+
   
                 <f:facet name="header">
                     Lista Hotel
                 </f:facet>  
-                <p:column  sortBy="#{hotel.name}">
-                    <f:facet name="header">
-                        <h:outputText value="Nome" />
-                    </f:facet>
+                
+                <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                    
                     
                     <p:commandLink value="#{hotel.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
                         <f:setPropertyActionListener value="#{hotel}" target="#{hotelManagement.selectedHotel}" />    
                     </p:commandLink>
-                </p:column>
+                	</p:column>
+                      <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
+                      #{hotel.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
+                      #{hotel.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{hotel.timeStart}" filterBy="#{hotel.timeStart}" id="timeStart">  
+                      #{hotel.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
+                      #{hotel.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.area}  
+                      </p:column> 
 
                
                <f:facet name="footer">
@@ -34,22 +48,26 @@
                     <p:commandButton value="Nuovo Hotel" oncomplete="newUserDialog.show()" icon="ui-icon-star" title="Creates new user"/>
                     <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
                 </f:facet>
+
               </p:dataTable>
          </h:form>   
          
          <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+     <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
             <h:outputLabel for="username" value="Nome:" />  
             <p:inputText value="#{hotelManagement.name}"   
                     id="username" required="true" label="username" />  
               
-              
             <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update="growl"   
-                    actionListener="#{hotelManagement.nuovoHot}"   
-                    oncomplete="handleLoginRequest(xhr, status, args)"/>  
+                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"   
+                    actionListener="#{hotelManagement.newHotel}"  
+                   oncomplete="dlg3.hide();"/>  
+                
+               
             </f:facet>  
         </h:panelGrid>  
+        </h:form>
         
         
         	</p:dialog> 
@@ -65,14 +83,16 @@
         }  
     }  
 </script>  	    
-             <p:dialog header="Informazioni Hotel" widgetVar="userDialog" resizable="false" id="userDlg" > 
+             <p:dialog header="Modifica Hotel" widgetVar="userDialog" resizable="false" id="userDlg" > 
                <h:form id="userDetailForm">
                 <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
 			<h:outputText value="Nome :"></h:outputText>
                         <h:outputText value="#{hotelManagement.selectedHotel.name}" />
 						<h:inputText value="#{hotelManagement.selectedHotel.name}"/>
       		<f:facet name="footer">
-                            <p:commandButton value="Update" update=":form:hoteltable, :growl"  oncomplete="handleSubmitRequest(xhr, status, args, 'userDlg','newUserForm'); " actionListener="#{hotelManagement.updateHotel}"/>
+                     
+                            <p:commandButton value="Update" update=":form:hoteltable"  
+                            oncomplete="userDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
                     </f:facet>
 			
                 </p:panelGrid> 
@@ -80,18 +100,7 @@
           </p:dialog> 
                          
              
-          <p:dialog header="Crea Hotel" widgetVar="newUserDialog" resizable="false" id="newUserDlg" > 
-              <h:form id="newUserForm">
-                <p:panelGrid id="displayNewUser" columns="2" cellpadding="4" style="margin:0 auto;">   
-			<h:outputText value="Nome :"></h:outputText>
-                        <p:inputText value="#{hotelManagement.newHotel.name}" required="true" requiredMessage="Please Enter Username!"/>
-			<f:facet name="footer">
-                            <p:commandButton value="Crea" update=":form:hoteltable, :growl"  oncomplete=" handleSubmitRequest(xhr, status, args, 'newUserDlg','newUserForm');" actionListener="#{hotelManagement.newHotel}"/>
-                            <p:commandButton type="reset" value="Reset"></p:commandButton>                            
-                    </f:facet>
-                </p:panelGrid>  
-              </h:form>
-          </p:dialog> 
+         
       
 <p:growl id="growl" showDetail="true" life="5000" />
          
