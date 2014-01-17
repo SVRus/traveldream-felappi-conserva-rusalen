@@ -7,10 +7,11 @@
 <h:head></h:head> 
 <body> 
 
+
 <h:form id="form">  
    <style type="text/css">
         .ui-widget{font-size:90% !important;}  
-        .ui-layout-unit-header{background-image:url('background.gif');}
+        .ui-panel {background-image:url('background.gif');}
     </style> 
     <p:dataTable id="cars" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
                  selection="#{tableBean.selectedCar}">  
@@ -104,12 +105,47 @@
         </h:panelGrid>  
     </p:dialog>  
   
-    <p:dialog id="multiDialog" header="Car Detail" widgetVar="multiCarDialog"  
+    <p:dialog id="multiDialogPanel" header="Car Detail" widgetVar="multiCarDialog"  
               height="300" showEffect="fade" hideEffect="explode">  
   
         <p:dataList id="displayMulti" value="#{tableBean.selectedCars}" var="selectedCar">  
             Model: #{selectedCar.model}, Year: #{selectedCar.year}  
-        </p:dataList>  
+        </p:dataList>
+        <p:dataTable id="multiCarsDialog" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
+                 selection="#{tableBean.selectedCars}">  
+  
+        <f:facet name="header">  
+            Checkbox Based Selection  
+        </f:facet>  
+  
+        <p:column selectionMode="multiple" style="width:2%" />  
+  
+        <p:column headerText="Model" style="width:25%">  
+            #{car.model}  
+        </p:column>  
+  
+        <p:column headerText="Year" style="width:25%">  
+            #{car.year}  
+        </p:column>  
+  
+        <p:column headerText="Manufacturer" style="width:24%">  
+            #{car.manufacturer}  
+        </p:column>  
+  
+        <p:column headerText="Color" style="width:24%">  
+            #{car.color}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="multiViewButtonDialog" value="View" icon="ui-icon-search"  
+                             update=":form:displayMulti" oncomplete="PF('multiCarDialog').show()"/>  
+       	 <p:commandButton id="provaAction" value="Aggiorna" icon="ui-icon-search"  
+                             update=":form:multiCars" action="#{tableBean.aggiorna}"/>  
+        
+        </f:facet>  
+        
+        
+    </p:dataTable>    
          <p:commandButton id="provaAction" value="Aggiorna" icon="ui-icon-search"  
                              update=":form:multiCars" action="#{tableBean.aggiorna}"
                               oncomplete= "multiCarDialog.hide();"/>  
@@ -177,11 +213,9 @@
         </h:panelGrid>  
     </p:dialog>  
 </h:form>  
-
   
-    
 
                       
 </body> 
 </html>
-                      
+  
