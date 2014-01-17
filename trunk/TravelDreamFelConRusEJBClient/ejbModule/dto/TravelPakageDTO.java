@@ -138,6 +138,16 @@ public TravelPakageDTO(long idtravelpackage, Date time_end, Date time_start,
 }
 
 
+public List<StageDTO> getStages() {
+	return stages;
+}
+
+
+public void setStages(List<StageDTO> stages) {
+	this.stages = stages;
+}
+
+
 
 
 

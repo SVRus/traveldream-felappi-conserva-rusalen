@@ -22,6 +22,7 @@ public class ProductDTO {
 	private Date timeStart;
 	private Date timeEnd;
 	private State state;
+	private String area;
 	
 	/**
 	 * constructor without the idproduct: used during the creation phase
@@ -33,7 +34,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
-			float cost, Date timeStart, Date timeEnd,State state) {
+			float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.employeeCreator = employeeCreator;
@@ -42,6 +43,7 @@ public class ProductDTO {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.state=state;
+		this.area=area;
 	}
 	/**
 	 * constructor with the idproduct: it can't be used during the creation phase
@@ -54,7 +56,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
-			long idProduct, float cost, Date timeStart, Date timeEnd,State state) {
+			long idProduct, float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.employeeCreator = employeeCreator;
@@ -64,6 +66,13 @@ public class ProductDTO {
 		this.timeStart = timeStart;
 		this.timeEnd = timeEnd;
 		this.state=state;
+		this.area=area;
+	}
+	public String getArea() {
+		return area;
+	}
+	public void setArea(String area) {
+		this.area = area;
 	}
 	public long getIdtravelpackage() {
 		return idtravelpackage;
