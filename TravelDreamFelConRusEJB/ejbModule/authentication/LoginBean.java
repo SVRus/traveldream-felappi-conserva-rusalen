@@ -81,7 +81,7 @@ public GenericUserDTO findLogIn()
  * Thid method is used to get the primary key (username) of the user holding the session
  * @return the username of the user holding the session
  */
-private String getPrincipalUsername() 
+public String getPrincipalUsername() 
 {
 	
 	return context.getCallerPrincipal().getName();
