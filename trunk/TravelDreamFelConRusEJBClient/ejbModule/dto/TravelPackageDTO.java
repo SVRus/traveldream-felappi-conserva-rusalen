@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class TravelPakageDTO 
+public class TravelPackageDTO 
 {
 
 
@@ -120,7 +120,7 @@ private long friendCode;
 private Date purchaseTime;
 
 
-public TravelPakageDTO(long idtravelpackage, Date time_end, Date time_start,
+public TravelPackageDTO(long idtravelpackage, Date time_end, Date time_start,
 		String description, String name, List<StageDTO> stages,
 		long idCustomerBuyer, long idCustomerFriendOwner, long friendCode,
 		Date purchaseTime) {

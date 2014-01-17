@@ -20,26 +20,26 @@ public class CustomerDTO extends GenericUserDTO{
 
 
 
-	public ArrayList<Long> getPurchasedTravelPackage() {
+	public ArrayList<TravelPackageDTO> getPurchasedTravelPackage() {
 		return purchasedTravelPackage;
 	}
 
 
 
-	public void setPurchasedTravelPackage(ArrayList<Long> purchasedTravelPackage) {
+	public void setPurchasedTravelPackage(ArrayList<TravelPackageDTO> purchasedTravelPackage) {
 		this.purchasedTravelPackage = purchasedTravelPackage;
 	}
 
 
 
-	public ArrayList<Long> getPreparedForAFriendTravelPackage() {
+	public ArrayList<TravelPackageDTO> getPreparedForAFriendTravelPackage() {
 		return preparedForAFriendTravelPackage;
 	}
 
 
 
 	public void setPreparedForAFriendTravelPackage(
-			ArrayList<Long> preparedForAFriendTravelPackage) {
+			ArrayList<TravelPackageDTO> preparedForAFriendTravelPackage) {
 		this.preparedForAFriendTravelPackage = preparedForAFriendTravelPackage;
 	}
 
@@ -57,32 +57,32 @@ public class CustomerDTO extends GenericUserDTO{
 
 
 
-	public ArrayList<Long> getCustomizedTravelPackage() {
+	public ArrayList<CustomizedTravelPackageDTO> getCustomizedTravelPackage() {
 		return customizedTravelPackage;
 	}
 
 
 
-	public void setCustomizedTravelPackage(ArrayList<Long> customizedTravelPackage) {
+	public void setCustomizedTravelPackage(ArrayList<CustomizedTravelPackageDTO> customizedTravelPackage) {
 		this.customizedTravelPackage = customizedTravelPackage;
 	}
 
 
 
 	private ArrayList <String> friends;
-	private ArrayList <Long> purchasedTravelPackage; 
-	private ArrayList <Long> preparedForAFriendTravelPackage;
+	private ArrayList <TravelPackageDTO> purchasedTravelPackage; 
+	private ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage;
 	private ArrayList <GiftListDTO> giftlist;
-	private ArrayList <Long> customizedTravelPackage;
+	private ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage;
 	
 	
 	
 	public CustomerDTO(String email, String name, String surname,
 			String telephone, String password, String username,
-			ArrayList<String> friends, ArrayList<Long> purchasedTravelPackage,
-			ArrayList<Long> preparedForAFriendTravelPackage,
+			ArrayList<String> friends, ArrayList<TravelPackageDTO> purchasedTravelPackage,
+			ArrayList<TravelPackageDTO> preparedForAFriendTravelPackage,
 			ArrayList<GiftListDTO> giftlist,
-			ArrayList<Long> customizedTravelPackage) {
+			ArrayList<CustomizedTravelPackageDTO> customizedTravelPackage) {
 		super(email, name, surname, telephone, password, username);
 		this.friends = friends;
 		this.purchasedTravelPackage = purchasedTravelPackage;
