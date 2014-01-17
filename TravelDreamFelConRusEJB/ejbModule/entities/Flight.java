@@ -24,10 +24,9 @@ public class Flight extends Product implements Serializable {
 			String name,  String flight_company,
 			String area_start, String area_end, String place_start,
 			String place_end, String more_info,State state) {
-		super(idProduct, cost, timeStart, timeEnd, name, state);
+		super(idProduct, cost, timeStart, timeEnd, name, state,area_end);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
-		this.area_end = area_end;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
@@ -37,10 +36,9 @@ public class Flight extends Product implements Serializable {
 			 String flight_company, String area_start,
 			String area_end, String place_start, String place_end,
 			String more_info,State state) {
-		super(cost, timeStart, timeEnd, name, state);
+		super(cost, timeStart, timeEnd, name, state,area_end);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
-		this.area_end = area_end;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
@@ -58,12 +56,7 @@ public class Flight extends Product implements Serializable {
 	public void setArea_start(String area_start) {
 		this.area_start = area_start;
 	}
-	public String getArea_end() {
-		return area_end;
-	}
-	public void setArea_end(String area_end) {
-		this.area_end = area_end;
-	}
+	
 	public String getPlace_start() {
 		return place_start;
 	}
@@ -85,7 +78,6 @@ public class Flight extends Product implements Serializable {
 	private static final long serialVersionUID = 1L;
 private String flight_company;
 private String area_start;
-private String area_end;
 private String place_start;
 private String place_end;
 private String more_info;

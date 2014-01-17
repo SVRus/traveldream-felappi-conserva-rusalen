@@ -1,5 +1,7 @@
 package entitymanagement;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -59,5 +61,21 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	
     	
     }
+    public List <String> findEveryArea(long id)
+    {
+ 	   List <String> listString ;
+ 	   Query query = em.createNativeQuery("SELECT distinct area FROM product where idtravelpackage=? ");
+ 	  query.setParameter(1, id);
+ 	   
+ 	    	listString = (List <String> ) query.getResultList();
+ 	    	
+ 	    	return listString;
+ 	   
+ 	   
+ 	   
+ 	}
+    
+    
+    
     
 }

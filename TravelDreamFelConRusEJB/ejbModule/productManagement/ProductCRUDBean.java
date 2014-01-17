@@ -116,7 +116,7 @@ DTOFactory dto;
     	}
     	else if (product instanceof FlightDTO)
     	{
-    		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea_end(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+    		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
     		
     	
     	}
@@ -208,7 +208,7 @@ DTOFactory dto;
     	}
     	else if (product instanceof FlightDTO)
     	{
-    		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea_end(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+    		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
     		
     	
     	}
@@ -249,5 +249,58 @@ DTOFactory dto;
     	
     	
     }
-
+    public List <OutingDTO> findAllOutings()
+    {
+    	
+    	List <Outing> lista=outing.findAll();
+    	List <Product> listaProduct=new ArrayList <Product> ();
+    	Iterator <Outing> iter=lista.iterator();
+    	while (iter.hasNext())
+    	{
+    		Outing parziale=iter.next();
+    		listaProduct.add(parziale);
+    	}
+    	List <ProductDTO> outings=dto.productListToDTO(listaProduct);
+    	Iterator <ProductDTO> iter1=outings.iterator();
+    	
+    	List <OutingDTO> listaa =new ArrayList <OutingDTO>();
+    	
+    	while (iter1.hasNext())
+    	{
+    		listaa.add((OutingDTO)iter1.next());
+    		
+    	}
+    	
+    	return listaa;
+    	
+    	
+    	
+    }
+    public List <FlightDTO> findAllFlights()
+    {
+    	
+    	List <Flight> lista=outing.findAll();
+    	List <Product> listaProduct=new ArrayList <Product> ();
+    	Iterator <Flight> iter=lista.iterator();
+    	while (iter.hasNext())
+    	{
+    		Flight parziale=iter.next();
+    		listaProduct.add(parziale);
+    	}
+    	List <ProductDTO> outings=dto.productListToDTO(listaProduct);
+    	Iterator <ProductDTO> iter1=outings.iterator();
+    	
+    	List <FlightDTO> listaa =new ArrayList <FlightDTO>();
+    	
+    	while (iter1.hasNext())
+    	{
+    		listaa.add((FlightDTO)iter1.next());
+    		
+    	}
+    	
+    	return listaa;
+    	
+    	
+    	
+    }
 }

@@ -2,6 +2,7 @@ package entitymanagement;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -11,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.PrepackedTravelPackage;
+import entities.Product;
 
 /**
  * Session Bean implementation class PrepackedTravelPackageEntityManagement
@@ -33,14 +35,25 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
         return em;
     }
 
-    public PrepackedTravelPackage findPrepackedTravelPackageByName(String name)
-    {
-    	String query="select travel from PrepackedTravelPackage travel where name:=name";
-    	Query q = em.createQuery(query, PrepackedTravelPackage.class);
-    	q.setParameter("name", name);
-    	PrepackedTravelPackage travel=(PrepackedTravelPackage) q.getSingleResult();
-    	return travel;
-    }
+    public Long findIdEmployeeCreator(Long idPrepackedTravelPackage)
+	{
+		Query query = em.createNativeQuery("SELECT  idemployeecreator FROM prepackedtravelpackage where idtravelpackage=? ");
+   	     query.setParameter(1, idPrepackedTravelPackage);
+   	   Long id;
+   	    	Object result=  query.getSingleResult();
+   	    	if (result==null)
+   	    	id=new Long(0);
+   	    	else
+   	    	id=(Long)result;
+    	
+		return id;
+		
+		
+		
+		
+		
+	}
+	
     
     
 }

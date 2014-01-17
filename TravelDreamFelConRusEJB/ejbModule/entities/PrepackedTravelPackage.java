@@ -32,4 +32,6 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
 		super();
 	}
 
+	
+	
 }
