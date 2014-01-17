@@ -7,7 +7,6 @@ import stateenum.State;
 public class FlightDTO extends ProductDTO {
 	private String flight_company;
 	private String area_start;
-	private String area_end;
 	private String place_start;
 	private String place_end;
 	private String more_info;
@@ -32,10 +31,9 @@ public class FlightDTO extends ProductDTO {
 			float cost, Date timeStart, Date timeEnd, String flight_company,
 			String area_start, String area_end, String place_start,
 			String place_end, String more_info,State state) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state);
+		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state,area_end);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
-		this.area_end = area_end;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
@@ -61,10 +59,9 @@ public class FlightDTO extends ProductDTO {
 			String flight_company, String area_start, String area_end,
 			String place_start, String place_end, String more_info,State state) {
 		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd,state);
+				timeStart, timeEnd,state,area_end);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
-		this.area_end = area_end;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
@@ -81,12 +78,7 @@ public class FlightDTO extends ProductDTO {
 	public void setArea_start(String area_start) {
 		this.area_start = area_start;
 	}
-	public String getArea_end() {
-		return area_end;
-	}
-	public void setArea_end(String area_end) {
-		this.area_end = area_end;
-	}
+	
 	public String getPlace_start() {
 		return place_start;
 	}

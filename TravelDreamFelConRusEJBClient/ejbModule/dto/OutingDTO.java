@@ -6,7 +6,6 @@ import stateenum.State;
 
 public class OutingDTO extends ProductDTO {
 	private String description;
-	private String area;
 	/**
 	 * constructor without the idproduct: used during the creation phase
 	 * @param idtravelpackage
@@ -21,9 +20,8 @@ public class OutingDTO extends ProductDTO {
 	public OutingDTO(long idtravelpackage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, String description,
 			String area,State state) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd, state);
+		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd, state,area);
 		this.description = description;
-		this.area = area;
 	}
 	
 	public String getDescription() {
@@ -34,13 +32,7 @@ public class OutingDTO extends ProductDTO {
 		this.description = description;
 	}
 
-	public String getArea() {
-		return area;
-	}
-
-	public void setArea(String area) {
-		this.area = area;
-	}
+	
 
 	/**
 	 * constructor with the idproduct: it can't be used during the creation phase
@@ -58,9 +50,8 @@ public class OutingDTO extends ProductDTO {
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			String description, String area,State state) {
 		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd,state);
+				timeStart, timeEnd,state,area);
 		this.description = description;
-		this.area = area;
 	}
 
 

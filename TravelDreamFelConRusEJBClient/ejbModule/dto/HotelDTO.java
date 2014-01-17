@@ -5,7 +5,6 @@ import java.util.Date;
 import stateenum.State;
 
 public class HotelDTO extends ProductDTO {
-	private String area;
 	private String place;
 	private String room_type;
 	private String more_info;
@@ -27,8 +26,7 @@ public class HotelDTO extends ProductDTO {
 	public HotelDTO(long idtravelpackage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, String area,
 			String place, String room_type, String more_info,State state) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state);
-		this.area = area;
+		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state,area);
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
@@ -51,18 +49,12 @@ public class HotelDTO extends ProductDTO {
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			String area, String place, String room_type, String more_info,State state) {
 		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd,state);
-		this.area = area;
+				timeStart, timeEnd,state,area);
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
 	}
-	public String getArea() {
-		return area;
-	}
-	public void setArea(String area) {
-		this.area = area;
-	}
+
 	public String getPlace() {
 		return place;
 	}
