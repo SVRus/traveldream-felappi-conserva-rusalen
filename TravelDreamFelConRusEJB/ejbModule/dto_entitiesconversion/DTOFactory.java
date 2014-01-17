@@ -20,7 +20,6 @@ import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.FlightDTO;
 import dto.StageDTO;
-import dto.StageDTO1;
 import dto.TravelPackageDTO;
 import entities.Code;
 import entities.Customer;
@@ -194,23 +193,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		
 	}
 	
-	public StageDTO1 fromListToStage(List <ProductDTO> productList )
-	{ FlightDTO start=null;
-	  FlightDTO  end=null;
-	  List <OutingDTO> outingList=new ArrayList <OutingDTO> ();
-	  HotelDTO hotel=null;
-	  Iterator <ProductDTO> iter=productList.iterator();
-	  while (iter.hasNext())
-	  {
-		  ProductDTO product=iter.next();
-		  if(product instanceof FlightDTO && ((FlightDTO)product).)
-		  
-		  
-		  
-	  }
-		
-		
-	}
+
 	
 	
 	public ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
