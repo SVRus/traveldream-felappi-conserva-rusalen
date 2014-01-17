@@ -24,6 +24,7 @@ import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.OutingDTO;
 import dto.OutingDTO;
+import dto.OutingDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
@@ -31,6 +32,11 @@ import authentication.RegistrationBeanLocal;
 @ManagedBean(name="outingManagement")
 @ViewScoped
 public class OutingManagementBean {
+	private OutingDTO selectedOuting;
+	private OutingDTO[] selectedOutings;  
+	private OutingDTO newOuting;
+	
+
 
 	private long idtravelpackage;
 	 private String employeeCreator;
@@ -194,6 +200,39 @@ public class OutingManagementBean {
 	public void setFilteredOutings(List<OutingDTO> filteredOutings) {
 		this.filteredOutings = filteredOutings;
 	}
-	
+	public OutingDTO getSelectedOuting() {
+		return selectedOuting;
+	}
+
+
+
+	public void setSelectedOuting(OutingDTO selectedOuting) {
+		this.selectedOuting = selectedOuting;
+	}
+
+
+
+	public OutingDTO[] getSelectedOutings() {
+		return selectedOutings;
+	}
+
+
+
+	public void setSelectedOutings(OutingDTO[] selectedOutings) {
+		this.selectedOutings = selectedOutings;
+	}
+
+
+
+	public OutingDTO getNewOuting() {
+		return newOuting;
+	}
+
+
+
+	public void setNewOuting(OutingDTO newOuting) {
+		this.newOuting = newOuting;
+	}
+
 	 
 }
