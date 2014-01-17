@@ -21,18 +21,16 @@ public class Outing extends Product implements Serializable {
 	
 	public Outing(float cost, Date timeStart, Date timeEnd, String name,
 			 String description, String area,State state) {
-		super(cost, timeStart, timeEnd, name, state);
+		super(cost, timeStart, timeEnd, name, state,area);
 		this.description = description;
-		this.area = area;
 	}
 
 
 
 	public Outing(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name,  String description, String area,State state) {
-		super(idProduct, cost, timeStart, timeEnd, name,state);
+		super(idProduct, cost, timeStart, timeEnd, name,state,area);
 		this.description = description;
-		this.area = area;
 	}
 
 
@@ -49,21 +47,10 @@ public class Outing extends Product implements Serializable {
 
 
 
-	public String getArea() {
-		return area;
-	}
-
-
-
-	public void setArea(String area) {
-		this.area = area;
-	}
-
 
 
 	private static final long serialVersionUID = 1L;
 private String description;
-private String area;
 
 	
 	

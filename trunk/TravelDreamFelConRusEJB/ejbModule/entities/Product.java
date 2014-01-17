@@ -12,7 +12,6 @@ import stateenum.State;
  *
  */
 @Entity
-//@NamedNativeQuery(name="find", query="SELECT IDTRAVELPACKAGE FROM PRODUCT WHERE IDPRODUCT=?",resultClass=Employee.class)
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="PRODUCT_TYPE")
 public class Product implements Serializable {
@@ -29,7 +28,7 @@ public Product()
 	 * @param state
 	 */
 	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
-			String name,State state) {
+			String name,State state,String area) {
 		super();
 		this.idproduct = idProduct;
 		this.cost = cost;
@@ -37,6 +36,7 @@ public Product()
 		this.timeEnd = timeEnd;
 		this.name = name;
 		this.state=state;
+		this.area=area;
 		
 	}
 
@@ -57,7 +57,7 @@ public State getState() {
  * @param name
  * @param travel
  */
-	public Product(float cost, Date timeStart, Date timeEnd, String name,State state
+	public Product(float cost, Date timeStart, Date timeEnd, String name,State state,String area
 			) {
 		super();
 		this.cost = cost;
@@ -65,6 +65,7 @@ public State getState() {
 		this.timeEnd = timeEnd;
 		this.name = name;
 		this.state=state;
+		this.area=area;
 			}
 
 
@@ -85,7 +86,20 @@ private String name;
 @Enumerated(EnumType.STRING)
 private State state;
 
+private String area;
 
+public long getIdproduct() {
+	return idproduct;
+}
+public void setIdproduct(long idproduct) {
+	this.idproduct = idproduct;
+}
+public String getArea() {
+	return area;
+}
+public void setArea(String area) {
+	this.area = area;
+}
 public String getName() {
 	return name;
 }
@@ -140,5 +154,5 @@ public void setTimeEnd(Date timeEnd) {
 }
 
 
-
+  
 }

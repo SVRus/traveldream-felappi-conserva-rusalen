@@ -33,20 +33,26 @@ import entities.Product;
 import entities.TravelPackage;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
+import entitymanagement.TravelPackageEntityManagement;
+import entitymanagement.TravelPackageEntityManagementLocal;
 import groupenum.Group;
 @Stateless
 @LocalBean
 public class DTOFactory {
 @EJB
-ProductEntityManagementLocal proman;
+private ProductEntityManagementLocal proman;
 @EJB
-PrepackedTravelPackageEntityManagementLocal pretrav;
+private PrepackedTravelPackageEntityManagementLocal pretrav;
+@EJB
+TravelPackageEntityManagementLocal travel;
 
 
 
 
-	private  ProductDTO productToDTO(Product product)
-	{ System.out.println("il prodotto è "+product.toString());
+	 private ProductDTO productToDTO(Product product)
+
+	{ 
+	System.out.println("il prodotto è "+product.toString());
 		ProductDTO result=null;
 	    Long idtravelpackage= proman.findTravelPackageContainer(product.getIdProduct());
 		
@@ -54,7 +60,7 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
 	    
 	    if (product instanceof  Flight)
 		{   
-			result=new FlightDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea_end(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info(),product.getState());
+			result=new FlightDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info(),product.getState());
 			
 		}
 		else if (product instanceof Outing)
@@ -106,46 +112,71 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
 		}
 		return travelid;
 	}
-	private  ArrayList <PrepackedTravelPackageDTO> prepackedTravelPackageToDTO(List <PrepackedTravelPackage> travellist)
+	public  ArrayList <PrepackedTravelPackageDTO> prepackedTravelPackageToDTO(List <PrepackedTravelPackage> travellist)
 	{
 		ArrayList <PrepackedTravelPackageDTO> travelid=new ArrayList <PrepackedTravelPackageDTO>();
 		Iterator <PrepackedTravelPackage> iter = travellist.iterator();
 		while(iter.hasNext())
-		{   long idtravel=iter.next().getIdtravelpackage();
+		{   
+			PrepackedTravelPackageDTO pretravel=simplePrepackedTravelPackageToDTO(iter.next());
 		    
-			travelid.add(pretrav.find(idtravel));
+			travelid.add(pretravel);
 		}
 		return travelid;
 	}
 	
 	
-	private PrepackedTravelPackageDTO simplePrepackedTravelPackageToDTO(PrepackedTravelPackage pre)
-	{
-		PrepackedTravelPackageDTO predto=new PrepackedTravelPackageDTO(pre.getIdtravelpackage(),);
+	public PrepackedTravelPackageDTO simplePrepackedTravelPackageToDTO(PrepackedTravelPackage pre)
+	{ 
+	  List <StageDTO> stageList=findStage(pre);
+	  Long idCustomerBuyer=travel.findIdCustomerBuyer(pre.getIdtravelpackage());
+	  System.out.println(idCustomerBuyer);
+	  Long idCustomerFriendOwner=travel.findIdCustomerFriendOwner(pre.getIdtravelpackage());
+	  System.out.println(idCustomerFriendOwner);
+	  Long idEmployeeCreator=pretrav.findIdEmployeeCreator(pre.getIdtravelpackage());
+	  System.out.println(idEmployeeCreator);
+	  PrepackedTravelPackageDTO predto=new PrepackedTravelPackageDTO(pre.getIdtravelpackage(),pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idEmployeeCreator);
 		
 		
-		return null;
+		return predto;
 		
 		
 		
 	}
-	private List<StageDTO> createStagesFromProducts(List<Product> products)
+	
+	private List <StageDTO> findStage( TravelPackage travel)
 	{
-		List<StageDTO> stages=new ArrayList <StageDTO>();
-		Iterator <Product> iter= products.iterator();
-		
-		
-		while (iter.hasNext())
+		List <ProductDTO> productList=productListToDTO(travel.getProducts());
+		List <String> areaList=proman.findEveryArea(travel.getIdtravelpackage());
+		List <StageDTO> stageList=new ArrayList <StageDTO> ();
+		Iterator <String> iter=areaList.iterator();
+		while(iter.hasNext())
 		{
-			stages.add()
-			
+		  	String area=iter.next();
+		  	List <ProductDTO> forStage=new ArrayList <ProductDTO> ();
+		  	Iterator <ProductDTO> iter1=productList.iterator();
+		  	while(iter1.hasNext())
+		  	{
+		  		ProductDTO prod=iter1.next();
+		  		if(prod.getArea().equals(area))
+		  			forStage.add(prod);
+		  		
+		  	}
+		  			
+		  	
+		  	StageDTO stage=new StageDTO(forStage,area);
+		  	stageList.add(stage);
+		  	
 			
 		}
 		
-		return stages;
+		return stageList;
+		
 		
 		
 	}
+	
+	
 	
 	
 	public ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
@@ -177,7 +208,7 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
 	public  EmployeeDTO toTDO(Employee employee)
 	{
 		ArrayList<ProductDTO> managedproduct=productListToDTO(employee.getManagedProduct());
-		ArrayList<PrepackedTravelPackageDTO> managedTravelPackage=new ArrayList <PrepackedTravelPackageDTO>();
+		ArrayList<PrepackedTravelPackageDTO> managedTravelPackage=prepackedTravelPackageToDTO(employee.getManagedTravelPackage());
 		EmployeeDTO emplo=new EmployeeDTO(employee.getEmail(),employee.getName(),employee.getSurname(),employee.getTelephone(),employee.getPassword(),employee.getUsername(),employee.getCode().getCode(),managedproduct,managedTravelPackage);
 		return emplo;
 		
@@ -206,7 +237,7 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
    
    /**
     * @author Marcello
-    * Private method that transform the EmployeeDTO in the entity employee
+    * Private method that transform the EmployeeDTO in the entity employee, used during the registration phase
     * @param employee -->the employee DTO acquired from the web tier 
     * @return the entity Employee translated from the EmployeeDTO
     */
@@ -233,6 +264,12 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
    	
    	
    }
+   
+   
+   
+   
+   
+   
    /**
     * @author Marcello
     * Private method that transform the CustomerDTO in the entity customer
@@ -262,7 +299,7 @@ PrepackedTravelPackageEntityManagementLocal pretrav;
    	}
    	else if (product instanceof FlightDTO)
    	{
-   		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea_end(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
    		
    	
    	}

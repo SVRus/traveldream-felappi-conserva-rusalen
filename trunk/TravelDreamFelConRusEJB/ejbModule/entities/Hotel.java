@@ -34,8 +34,8 @@ public class Hotel extends Product implements Serializable {
 public Hotel(float cost, Date timeStart, Date timeEnd, String name,
 			 String area, String place, String room_type,
 			String more_info,State state) {
-		super(cost, timeStart, timeEnd, name, state);
-		this.area = area;
+		super(cost, timeStart, timeEnd, name, state,area);
+		
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
@@ -56,26 +56,18 @@ public Hotel(float cost, Date timeStart, Date timeEnd, String name,
 public Hotel(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name, String area, String place,
 			String room_type, String more_info,State state) {
-		super(idProduct, cost, timeStart, timeEnd, name,state);
-		this.area = area;
+		super(idProduct, cost, timeStart, timeEnd, name,state,area);
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
 	}
 
-private String area;
 private String place;
 private String room_type;
 private String more_info;
 	
 
-public String getArea() {
-	return area;
-}
 
-public void setArea(String area) {
-	this.area = area;
-}
 
 public String getPlace() {
 	return place;
