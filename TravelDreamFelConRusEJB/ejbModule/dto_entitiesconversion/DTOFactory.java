@@ -1,7 +1,6 @@
 package dto_entitiesconversion;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import javax.ejb.Stateless;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import dto.CustomerDTO;
+import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.HotelDTO;
@@ -20,6 +20,8 @@ import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.FlightDTO;
 import dto.StageDTO;
+import dto.StageDTO1;
+import dto.TravelPackageDTO;
 import entities.Code;
 import entities.Customer;
 import entities.CustomizedTravelPackage;
@@ -31,9 +33,9 @@ import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.TravelPackage;
+import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
-import entitymanagement.TravelPackageEntityManagement;
 import entitymanagement.TravelPackageEntityManagementLocal;
 import groupenum.Group;
 @Stateless
@@ -44,8 +46,9 @@ private ProductEntityManagementLocal proman;
 @EJB
 private PrepackedTravelPackageEntityManagementLocal pretrav;
 @EJB
-TravelPackageEntityManagementLocal travel;
-
+private TravelPackageEntityManagementLocal travel;
+@EJB
+private CustomizedTravelPackageEntityManagementLocal custrav;
 
 
 
@@ -92,23 +95,29 @@ TravelPackageEntityManagementLocal travel;
 		return cusString;
 		
 	}
-	private  ArrayList <Long> travelPackageToLong(List <TravelPackage> travellist)
+	private  ArrayList <TravelPackageDTO> travelPackageToDTO(List <TravelPackage> travellist)
 	{
-		ArrayList <Long> travelid=new ArrayList <Long>();
+		ArrayList <TravelPackageDTO> travelid=new ArrayList <TravelPackageDTO>();
 		Iterator <TravelPackage> iter = travellist.iterator();
 		while(iter.hasNext())
 		{
-			travelid.add(iter.next().getIdtravelpackage());
+			TravelPackage travelsimple=iter.next();
+			
+			travelid.add(this.simpleTravelPackageToDTO(travelsimple));
+		
+		
+		
+		
 		}
 		return travelid;
 	}
-	private  ArrayList <Long> customizedTravelPackageToLong(List <CustomizedTravelPackage> travellist)
+	private  ArrayList <CustomizedTravelPackageDTO> customizedTravelPackageToDTO(List <CustomizedTravelPackage> travellist)
 	{
-		ArrayList <Long> travelid=new ArrayList <Long>();
+		ArrayList <CustomizedTravelPackageDTO> travelid=new ArrayList <CustomizedTravelPackageDTO>();
 		Iterator <CustomizedTravelPackage> iter = travellist.iterator();
 		while(iter.hasNext())
 		{
-			travelid.add(iter.next().getIdtravelpackage());
+			travelid.add((CustomizedTravelPackageDTO)simpleTravelPackageToDTO(iter.next()));
 		}
 		return travelid;
 	}
@@ -118,7 +127,7 @@ TravelPackageEntityManagementLocal travel;
 		Iterator <PrepackedTravelPackage> iter = travellist.iterator();
 		while(iter.hasNext())
 		{   
-			PrepackedTravelPackageDTO pretravel=simplePrepackedTravelPackageToDTO(iter.next());
+			PrepackedTravelPackageDTO pretravel=(PrepackedTravelPackageDTO)simpleTravelPackageToDTO(iter.next());
 		    
 			travelid.add(pretravel);
 		}
@@ -126,21 +135,30 @@ TravelPackageEntityManagementLocal travel;
 	}
 	
 	
-	public PrepackedTravelPackageDTO simplePrepackedTravelPackageToDTO(PrepackedTravelPackage pre)
+	public TravelPackageDTO simpleTravelPackageToDTO(TravelPackage pre)
 	{ 
+	  Long idtravelpackage=pre.getIdtravelpackage();
 	  List <StageDTO> stageList=findStage(pre);
-	  Long idCustomerBuyer=travel.findIdCustomerBuyer(pre.getIdtravelpackage());
+	  Long idCustomerBuyer=travel.findIdCustomerBuyer(idtravelpackage);
 	  System.out.println(idCustomerBuyer);
-	  Long idCustomerFriendOwner=travel.findIdCustomerFriendOwner(pre.getIdtravelpackage());
+	  Long idCustomerFriendOwner=travel.findIdCustomerFriendOwner(idtravelpackage);
 	  System.out.println(idCustomerFriendOwner);
-	  Long idEmployeeCreator=pretrav.findIdEmployeeCreator(pre.getIdtravelpackage());
+	  
+	  TravelPackageDTO dto=null;
+	  if(pre instanceof PrepackedTravelPackage)
+	  
+	  {
+	  Long idEmployeeCreator=pretrav.findIdEmployeeCreator(idtravelpackage);
 	  System.out.println(idEmployeeCreator);
-	  PrepackedTravelPackageDTO predto=new PrepackedTravelPackageDTO(pre.getIdtravelpackage(),pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idEmployeeCreator);
-		
-		
-		return predto;
-		
-		
+	   dto=new PrepackedTravelPackageDTO(idtravelpackage,pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idEmployeeCreator);
+	  }
+	  else if (pre instanceof CustomizedTravelPackage)
+	  {
+		  Long idCustomizer=custrav.findIdCustomizer(idtravelpackage);
+		  dto=new CustomizedTravelPackageDTO(idtravelpackage,pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idCustomizer);
+		  
+	  }
+		return dto;
 		
 	}
 	
@@ -176,7 +194,23 @@ TravelPackageEntityManagementLocal travel;
 		
 	}
 	
-	
+	public StageDTO1 fromListToStage(List <ProductDTO> productList )
+	{ FlightDTO start=null;
+	  FlightDTO  end=null;
+	  List <OutingDTO> outingList=new ArrayList <OutingDTO> ();
+	  HotelDTO hotel=null;
+	  Iterator <ProductDTO> iter=productList.iterator();
+	  while (iter.hasNext())
+	  {
+		  ProductDTO product=iter.next();
+		  if(product instanceof FlightDTO && ((FlightDTO)product).)
+		  
+		  
+		  
+	  }
+		
+		
+	}
 	
 	
 	public ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
@@ -194,10 +228,10 @@ TravelPackageEntityManagementLocal travel;
 	public CustomerDTO toTDO(Customer customer)
 	{   
 		ArrayList <String> friends=customerListToString(customer.getFriends());
-		ArrayList <Long> purchasedTravelPackage = travelPackageToLong(customer.getPurchasedTravelPackages());
-		ArrayList <Long> preparedForAFriendTravelPackage=travelPackageToLong(customer.getPreparedForAFriendTravelPackages());
+		ArrayList <TravelPackageDTO> purchasedTravelPackage = travelPackageToDTO(customer.getPurchasedTravelPackages());
+		ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage=travelPackageToDTO(customer.getPreparedForAFriendTravelPackages());
 	    ArrayList <GiftListDTO> giftList =giftListCollectionTODTO(customer.getGiftLists());
-	    ArrayList <Long> customizedTravelPackage=customizedTravelPackageToLong(customer.getCustomizedTravelPackages());
+	    ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage=this.customizedTravelPackageToDTO(customer.getCustomizedTravelPackages());
 	   	CustomerDTO cust=new CustomerDTO(customer.getEmail(),customer.getName(), customer.getSurname(),customer.getTelephone(), customer.getPassword(),customer.getUsername(),friends,purchasedTravelPackage,preparedForAFriendTravelPackage,giftList,customizedTravelPackage);
 
 		return cust;
@@ -310,4 +344,6 @@ TravelPackageEntityManagementLocal travel;
    	}
    	return entity;
    }
+   
+  
 }
