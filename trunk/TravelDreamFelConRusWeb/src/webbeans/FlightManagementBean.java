@@ -23,6 +23,7 @@ import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.FlightDTO;
+import dto.FlightDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
@@ -31,7 +32,9 @@ import authentication.RegistrationBeanLocal;
 @ViewScoped
 public class FlightManagementBean {
 
-	 
+	private FlightDTO selectedFlight;
+	private FlightDTO[] selectedFlights;  
+	private FlightDTO newFlight;
 		private long idtravelpackage;
 		 private String employeeCreator;
 		 private long idProduct;
@@ -283,6 +286,42 @@ public class FlightManagementBean {
 
 		public void setFlightModel(FlightDataModel flightModel) {
 			this.flightModel = flightModel;
+		}
+
+
+
+		public FlightDTO getSelectedFlight() {
+			return selectedFlight;
+		}
+
+
+
+		public void setSelectedFlight(FlightDTO selectedFlight) {
+			this.selectedFlight = selectedFlight;
+		}
+
+
+
+		public FlightDTO[] getSelectedFlights() {
+			return selectedFlights;
+		}
+
+
+
+		public void setSelectedFlights(FlightDTO[] selectedFlights) {
+			this.selectedFlights = selectedFlights;
+		}
+
+
+
+		public FlightDTO getNewFlight() {
+			return newFlight;
+		}
+
+
+
+		public void setNewFlight(FlightDTO newFlight) {
+			this.newFlight = newFlight;
 		}
 		  
 
