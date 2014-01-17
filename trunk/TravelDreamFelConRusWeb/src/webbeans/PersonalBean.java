@@ -2,14 +2,20 @@ package webbeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
+import productManagement.ProductCRUDBeanLocal;
+import stateenum.State;
 import authentication.LoginBeanLocal;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
+import dto.HotelDTO;
+import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 @ManagedBean(name="personal")
 public class PersonalBean implements Serializable{
@@ -22,7 +28,8 @@ public class PersonalBean implements Serializable{
 
 @EJB
 private LoginBeanLocal login;
-
+@EJB
+private ProductCRUDBeanLocal procrud;
 public LoginBeanLocal getLogin() {
 	return login;
 }
@@ -41,14 +48,52 @@ private String email;
 private long code;
 boolean loggato;
 private ArrayList<ProductDTO> managedproduct;
-private ArrayList<Long> managedTravelPackage;
+private ArrayList<PrepackedTravelPackageDTO> managedTravelPackage;
+private String products;
+private String managed;
+public String getProducts() {
+	return products;
+}
+
+
+public void setProducts(String products) {
+	this.products = products;
+}
+
+
+public String getManaged() {
+	return generic.getManagedTravelPackage().toString();
+}
+
+
+public void setManaged(String managed) {
+	this.managed = managed;
+}
+
+
 public PersonalBean() {
 	
 }
 @PostConstruct
 public void update()
 {
+
+HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+HotelDTO  hotel1=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+HotelDTO  hotel2= new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
+HotelDTO  hotel3=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area2",  "test",  "test",  "test",State.AVAILABLE);
+
+procrud.createProductFromEmployee(hotel, login.getPrincipalUsername());
+procrud.createProductFromEmployee(hotel1, login.getPrincipalUsername());
+procrud.createProductFromEmployee(hotel2, login.getPrincipalUsername());
+procrud.createProductFromEmployee(hotel3, login.getPrincipalUsername());
+
 generic=(EmployeeDTO)login.findLogIn();
+
+
+
+
+
 
 }
 public boolean isLoggato() {
@@ -135,13 +180,13 @@ public void setManagedproduct(ArrayList<ProductDTO> managedproduct) {
 
 
 
-public ArrayList<Long> getManagedTravelPackage() {
+public ArrayList<PrepackedTravelPackageDTO> getManagedTravelPackage() {
 	return generic.getManagedTravelPackage();
 }
 
 
 
-public void setManagedTravelPackage(ArrayList<Long> managedTravelPackage) {
+public void setManagedTravelPackage(ArrayList<PrepackedTravelPackageDTO> managedTravelPackage) {
 	this.managedTravelPackage = managedTravelPackage;
 }
 
