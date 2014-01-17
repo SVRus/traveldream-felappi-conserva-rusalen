@@ -17,6 +17,7 @@ public interface ProductCRUDBeanLocal {
     public List <HotelDTO> findAllHotels();
     public List <FlightDTO> findAllFlights();
     public List <OutingDTO> findAllOutings();
+    public boolean createProductFromEmployee(ProductDTO product,String username);
 
     
     

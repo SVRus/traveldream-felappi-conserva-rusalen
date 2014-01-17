@@ -3,7 +3,7 @@ package dto;
 import java.util.Date;
 import java.util.List;
 
-public class PrepackedTravelPackageDTO extends TravelPakageDTO {
+public class PrepackedTravelPackageDTO extends TravelPackageDTO {
 
 /**
  * 
