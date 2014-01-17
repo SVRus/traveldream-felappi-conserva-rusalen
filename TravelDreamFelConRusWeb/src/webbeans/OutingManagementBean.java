@@ -81,7 +81,7 @@ public class OutingManagementBean {
 	  public void newOuting(ActionEvent actionEvent)
 	  {
 			newOuting = new OutingDTO(23, name, name, 23, data1, data1,
-					name, name, name, name, State.AVAILABLE);
+					name, name, State.AVAILABLE);
 			productCRUD.createProduct(newOuting);
 			System.out.println("avrei dovuto creare un outing");
 			outings.add(newOuting);
@@ -98,7 +98,7 @@ public class OutingManagementBean {
 			
 				outings.remove(selectedOuting);
 			   newOuting = new OutingDTO(23, selectedOuting.getName(), selectedOuting.getName(), 23, data1, data1,
-					   selectedOuting.getName(), selectedOuting.getName(), selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
+					   selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
 				productCRUD.updateProduct(newOuting);
 				System.out.println("avrei dovuto creare un outing");
 				outings.add(newOuting);

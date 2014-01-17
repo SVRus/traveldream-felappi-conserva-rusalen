@@ -70,15 +70,17 @@ public class FlightManagementBean {
 		  flights
 		  = productCRUD.findAllFlights();
 		  flightModel = new FlightDataModel(flights);  
-
+		  
 		  }
 		  
 		 
 		  
 		  public void newFlight(ActionEvent actionEvent)
 		  {
-				newFlight = new FlightDTO(23, name, name, 23, data1, data1,
-						name, name, name, name, State.AVAILABLE);
+			 		
+				newFlight = new FlightDTO(22, name, name, 22, data1, data1, name, name, name, name, name, name, State.AVAILABLE);
+				  
+						
 				productCRUD.createProduct(newFlight);
 				System.out.println("avrei dovuto creare un flight");
 				flights.add(newFlight);
@@ -94,8 +96,8 @@ public class FlightManagementBean {
 		  public void updateFlight(ActionEvent actionEvent){
 				
 					flights.remove(selectedFlight);
-				   newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,
-						   selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), State.AVAILABLE);
+					  
+					newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), State.AVAILABLE);
 					productCRUD.updateProduct(newFlight);
 					System.out.println("avrei dovuto creare un flight");
 					flights.add(newFlight);
