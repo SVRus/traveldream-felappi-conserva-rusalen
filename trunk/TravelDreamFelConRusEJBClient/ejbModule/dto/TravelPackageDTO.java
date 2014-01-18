@@ -58,42 +58,50 @@ public long getIdtravelpackage() {
 	}
 
 
-	public List<StageDTO> getProducts() {
-		return stages;
-	}
 
 
-	public void setProducts(List<StageDTO> stages) {
-		this.stages = stages;
-	}
-
-
-	public long getIdCustomerBuyer() {
+	public String getIdCustomerBuyer() {
 		return idCustomerBuyer;
 	}
 
 
-	public void setIdCustomerBuyer(long idCustomerBuyer) {
+	public void setIdCustomerBuyer(String idCustomerBuyer) {
 		this.idCustomerBuyer = idCustomerBuyer;
 	}
 
 
-	public long getIdCustomerFriendOwner() {
+	public String getIdCustomerFriendOwner() {
 		return idCustomerFriendOwner;
 	}
 
 
-	public void setIdCustomerFriendOwner(long idCustomerFriendOwner) {
+	public TravelPackageDTO(Date time_end, Date time_start, String description,
+			String name, List<StageDTO> stages, String idCustomerBuyer,
+			String idCustomerFriendOwner, String friendCode, Date purchaseTime) {
+		super();
+		this.time_end = time_end;
+		this.time_start = time_start;
+		this.description = description;
+		this.name = name;
+		this.stages = stages;
+		this.idCustomerBuyer = idCustomerBuyer;
+		this.idCustomerFriendOwner = idCustomerFriendOwner;
+		this.friendCode = friendCode;
+		this.purchaseTime = purchaseTime;
+	}
+
+
+	public void setIdCustomerFriendOwner(String idCustomerFriendOwner) {
 		this.idCustomerFriendOwner = idCustomerFriendOwner;
 	}
 
 
-	public long getFriendCode() {
+	public String getFriendCode() {
 		return friendCode;
 	}
 
 
-	public void setFriendCode(long friendCode) {
+	public void setFriendCode(String friendCode) {
 		this.friendCode = friendCode;
 	}
 
@@ -114,15 +122,15 @@ private Date time_start;
 private String description;
 private String name;
 private List<StageDTO> stages;	
-private long idCustomerBuyer;	
-private long idCustomerFriendOwner;
-private long friendCode;
+private String idCustomerBuyer;	
+private String idCustomerFriendOwner;
+private String friendCode;
 private Date purchaseTime;
 
 
 public TravelPackageDTO(long idtravelpackage, Date time_end, Date time_start,
 		String description, String name, List<StageDTO> stages,
-		long idCustomerBuyer, long idCustomerFriendOwner, long friendCode,
+		String idCustomerBuyer, String idCustomerFriendOwner, String friendCode,
 		Date purchaseTime) {
 	super();
 	this.idtravelpackage = idtravelpackage;

@@ -21,14 +21,23 @@ public class PrepackedTravelPackageDTO extends TravelPackageDTO {
  */
 	public PrepackedTravelPackageDTO(long idtravelpackage, Date time_end,
 			Date time_start, String description, String name,
-			List<StageDTO> stages, long idCustomerBuyer,
-			long idCustomerFriendOwner, long friendCode, Date purchaseTime,
+			List<StageDTO> stages, String idCustomerBuyer,
+			String idCustomerFriendOwner, String friendCode, Date purchaseTime,
 			long idEmployeeCreator) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
 				idCustomerBuyer, idCustomerFriendOwner, friendCode,
 				purchaseTime);
 		this.idEmployeeCreator = idEmployeeCreator;
 	}
+
+	public PrepackedTravelPackageDTO(Date time_end, Date time_start,
+		String description, String name, List<StageDTO> stages,
+		String idCustomerBuyer, String idCustomerFriendOwner,
+		String friendCode, Date purchaseTime, long idEmployeeCreator) {
+	super(time_end, time_start, description, name, stages, idCustomerBuyer,
+			idCustomerFriendOwner, friendCode, purchaseTime);
+	this.idEmployeeCreator = idEmployeeCreator;
+}
 
 	long idEmployeeCreator;
 	
