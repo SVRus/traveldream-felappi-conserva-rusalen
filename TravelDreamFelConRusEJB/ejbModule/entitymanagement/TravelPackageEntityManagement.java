@@ -29,33 +29,31 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
 		 return em;
 	}
     
-    public Long findIdCustomerBuyer(Long idTravelPackage)
+    public String findIdCustomerBuyer(Long idTravelPackage)
     {
     	Query query = em.createNativeQuery("SELECT  idcustomerbuyer FROM travelpackage where idtravelpackage=? ");
    	  query.setParameter(1, idTravelPackage);
-   	   Long id;
+   	  
    	    	Object result=  query.getSingleResult();
    	    	if (result==null)
-   	    	id=new Long(0);
+   	    	return null;
    	    	else
-   	    		id=(Long)result;
+   	    	return (String)result;
    	    	
-    	System.out.println(" questo è l'id"+id);
-		return id;
+    	
     }
     
-    public Long findIdCustomerFriendOwner(Long idTravelPackage)
+    public String findIdCustomerFriendOwner(Long idTravelPackage)
     {
     	Query query = em.createNativeQuery("SELECT  idcustomerfriendowner FROM travelpackage where idtravelpackage=? ");
      	  query.setParameter(1, idTravelPackage);
-     	   Long id;
+     	   
      	    	Object result=  query.getSingleResult();
      	    	if (result==null)
-     	    	id=new Long(0);
+     	    	return null;
      	    	else
-     	    	id=(Long)result;
-     	    	System.out.println(" questo è l'id"+id);
-  		return id;
+     	    	
+  		return (String)(result);
     }
     
     

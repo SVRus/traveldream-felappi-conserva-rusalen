@@ -115,7 +115,7 @@ EmployeeEntityManagementLocal emplo;
     public boolean createProductFromEmployee(ProductDTO product,String username)
     {
 		Employee employee=emplo.find(username);
-		Product prod=this.productDTOToEntity(product);
+		Product prod=productDTOToEntity(product);
     	employee.getManagedProduct().add(prod);
     	try
     	{
