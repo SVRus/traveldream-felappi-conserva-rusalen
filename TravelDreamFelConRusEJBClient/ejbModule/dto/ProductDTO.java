@@ -14,7 +14,7 @@ public class ProductDTO {
 	public void setState(State state) {
 		this.state = state;
 	}
-	private long idtravelpackage;
+	private long idstage;
 	private String employeeCreator;
     private String name;
 	private long idProduct;
@@ -26,17 +26,17 @@ public class ProductDTO {
 	
 	/**
 	 * constructor without the idproduct: used during the creation phase
-	 * @param idtravelpackage
+	 * @param idstage
 	 * @param employeeCreator
 	 * @param name
 	 * @param cost
 	 * @param timeStart
 	 * @param timeEnd
 	 */
-	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
+	public ProductDTO(long idstage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
-		this.idtravelpackage = idtravelpackage;
+		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
 		this.name = name;
 		this.cost = cost;
@@ -47,7 +47,7 @@ public class ProductDTO {
 	}
 	/**
 	 * constructor with the idproduct: it can't be used during the creation phase
-	 * @param idtravelpackage
+	 * @param idstage
 	 * @param employeeCreator
 	 * @param name
 	 * @param idProduct
@@ -55,10 +55,10 @@ public class ProductDTO {
 	 * @param timeStart
 	 * @param timeEnd
 	 */
-	public ProductDTO(long idtravelpackage, String employeeCreator, String name,
+	public ProductDTO(long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
-		this.idtravelpackage = idtravelpackage;
+		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
 		this.name = name;
 		this.idProduct = idProduct;
@@ -74,11 +74,12 @@ public class ProductDTO {
 	public void setArea(String area) {
 		this.area = area;
 	}
-	public long getIdtravelpackage() {
-		return idtravelpackage;
+	
+	public long getIdstage() {
+		return idstage;
 	}
-	public void setIdtravelpackage(long idtravelpackage) {
-		this.idtravelpackage = idtravelpackage;
+	public void setIdstage(long idstage) {
+		this.idstage = idstage;
 	}
 	public String getEmployeeCreator() {
 		return employeeCreator;

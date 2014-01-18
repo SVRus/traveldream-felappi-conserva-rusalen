@@ -6,6 +6,6 @@ import javax.ejb.Local;
 public interface TravelPackageEntityManagementLocal {
 
 	
-	public Long findIdCustomerBuyer(Long idTravelPackage);
-    public Long findIdCustomerFriendOwner(Long idTravelPackage);
+	public String findIdCustomerBuyer(Long idTravelPackage);
+    public String findIdCustomerFriendOwner(Long idTravelPackage);
 }
