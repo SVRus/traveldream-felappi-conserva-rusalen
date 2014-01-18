@@ -43,12 +43,12 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	return result;
     	
     }
-    public Long findTravelPackageContainer(long idproduct)
+    public Long findStageContainer(long idproduct)
     {
     	System.out.println("id product"+idproduct);
     	
     	
-    	Query q = em.createNativeQuery("SELECT IDTRAVELPACKAGE FROM PRODUCT WHERE IDPRODUCT=?");
+    	Query q = em.createNativeQuery("SELECT IDSTAGE FROM PRODUCT WHERE IDPRODUCT=?");
     	System.out.print("ciao");
     	q.setParameter(1, idproduct);
     	Object result= q.getSingleResult();
@@ -61,19 +61,7 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	
     	
     }
-    public List <String> findEveryArea(long id)
-    {
- 	   List <String> listString ;
- 	   Query query = em.createNativeQuery("SELECT distinct area FROM product where idtravelpackage=? ");
- 	  query.setParameter(1, id);
- 	   
- 	    	listString = (List <String> ) query.getResultList();
- 	    	
- 	    	return listString;
- 	   
- 	   
- 	   
- 	}
+    
     
     
     

@@ -1,9 +1,16 @@
 package travelPackageManagement;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import dto.PrepackedTravelPackageDTO;
+import dto.TravelPackageDTO;
+import entities.Employee;
+import entities.Product;
+import entities.TravelPackage;
+import entitymanagement.EmployeeEntityManagementLocal;
+import entitymanagement.TravelPackageEntityManagementLocal;
 
 /**
  * Session Bean implementation class TravelPackageCreateBean
@@ -11,7 +18,10 @@ import dto.PrepackedTravelPackageDTO;
 @Stateless
 @LocalBean
 public class TravelPackageCRUDBean implements TravelPackageCRUDBeanLocal {
-
+@EJB
+TravelPackageEntityManagementLocal travman;
+@EJB
+EmployeeEntityManagementLocal emplo;
     /**
      * Default constructor. 
      */
@@ -21,9 +31,22 @@ public class TravelPackageCRUDBean implements TravelPackageCRUDBeanLocal {
 
 	
 	@Override
-	public boolean createPrepacked(PrepackedTravelPackageDTO prepacked) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createTravelFromEmployee(TravelPackageDTO prepacked,String username) {
+		Employee employee=emplo.find(username);
+		TravelPackage travel=productDTOToEntity(product);
+    	employee.getManagedTravelPackage().add(prod);
+    	try
+    	{
+    		emplo.edit(employee);
+    		
+    		return true;
+    	}
+    	catch(Exception e)
+    	{
+    	return false;
+    	}
+    	
+		
 	}
 
 }

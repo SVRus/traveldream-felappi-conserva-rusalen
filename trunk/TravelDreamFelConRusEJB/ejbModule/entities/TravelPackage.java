@@ -26,13 +26,13 @@ public class TravelPackage implements Serializable {
 
 
 
-	public long getFriendCode() {
+	public String getFriendCode() {
 		return friendCode;
 	}
 
 
 
-	public void setFriendCode(long friendCode) {
+	public void setFriendCode(String friendCode) {
 		this.friendCode = friendCode;
 	}
 
@@ -51,8 +51,8 @@ public class TravelPackage implements Serializable {
 
 
 	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
-			String description, String name, List<Product> products,
-			long idCustomerBuyer, long idCustomerFriendOwner, long friendCode,
+			String description, String name, List<Stage> stages,
+			 String friendCode,
 			Date purchaseTime) {
 		super();
 		this.idtravelpackage = idtravelpackage;
@@ -60,10 +60,38 @@ public class TravelPackage implements Serializable {
 		this.time_start = time_start;
 		this.description = description;
 		this.name = name;
-		this.products = products;
+		this.stages = stages;
 		
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;
+	}
+
+
+
+	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
+			String description, String name, List<Stage> stages,
+			String friendCode, Date purchaseTime) {
+		super();
+		this.idtravelpackage = idtravelpackage;
+		this.time_end = time_end;
+		this.time_start = time_start;
+		this.description = description;
+		this.name = name;
+		this.stages = stages;
+		this.friendCode = friendCode;
+		this.purchaseTime = purchaseTime;
+	}
+
+
+
+	public List<Stage> getStages() {
+		return stages;
+	}
+
+
+
+	public void setStages(List<Stage> stages) {
+		this.stages = stages;
 	}
 
 
@@ -132,15 +160,7 @@ public void setName(String name) {
 
 
 
-public List<Product> getProducts() {
-	return products;
-}
 
-
-
-public void setProducts(List<Product> products) {
-	this.products = products;
-}
 
 
 
@@ -154,9 +174,9 @@ private String description;
 private String name;
 @OneToMany()
 @JoinColumn(name="IDTRAVELPACKAGE")
-private List<Product> products;
+private List<Stage> stages;
 
-private long friendCode;
+private String friendCode;
 
 @Temporal (TemporalType.TIMESTAMP)
 private Date purchaseTime;
@@ -169,13 +189,13 @@ private Date purchaseTime;
 
 
 	public TravelPackage(Date time_end, Date time_start, String description,
-			String name, List<Product> products,  long friendCode, Date purchaseTime) {
+			String name, List<Stage> stages,  String friendCode, Date purchaseTime) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;
 		this.description = description;
 		this.name = name;
-		this.products = products;
+		this.stages = stages;
 	
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;

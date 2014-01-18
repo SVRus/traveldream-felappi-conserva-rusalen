@@ -1,6 +1,7 @@
 package dto_entitiesconversion;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import entities.Hotel;
 import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
+import entities.Stage;
 import entities.TravelPackage;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
@@ -56,7 +58,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 	{ 
 	System.out.println("il prodotto è "+product.toString());
 		ProductDTO result=null;
-	    Long idtravelpackage= proman.findTravelPackageContainer(product.getIdProduct());
+	    Long idtravelpackage= proman.findStageContainer(product.getIdProduct());
 		
 	    
 	    
@@ -137,10 +139,10 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 	public TravelPackageDTO simpleTravelPackageToDTO(TravelPackage pre)
 	{ 
 	  Long idtravelpackage=pre.getIdtravelpackage();
-	  List <StageDTO> stageList=findStage(pre);
-	  Long idCustomerBuyer=travel.findIdCustomerBuyer(idtravelpackage);
+	  List <StageDTO> stageList=travelToStageDTO(pre);
+	  String idCustomerBuyer=travel.findIdCustomerBuyer(idtravelpackage);
 	  System.out.println(idCustomerBuyer);
-	  Long idCustomerFriendOwner=travel.findIdCustomerFriendOwner(idtravelpackage);
+	  String idCustomerFriendOwner=travel.findIdCustomerFriendOwner(idtravelpackage);
 	  System.out.println(idCustomerFriendOwner);
 	  
 	  TravelPackageDTO dto=null;
@@ -161,38 +163,37 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		
 	}
 	
-	private List <StageDTO> findStage( TravelPackage travel)
+	/**
+	 * @param travel
+	 * @return
+	 */
+	
+	private List <StageDTO> travelToStageDTO( TravelPackage travel)
 	{
-		List <ProductDTO> productList=productListToDTO(travel.getProducts());
-		List <String> areaList=proman.findEveryArea(travel.getIdtravelpackage());
-		List <StageDTO> stageList=new ArrayList <StageDTO> ();
-		Iterator <String> iter=areaList.iterator();
+		List <Stage> stageList=travel.getStages();
+		
+		List <StageDTO> stageDTOList=new ArrayList <StageDTO> ();
+		Iterator <Stage> iter=stageList.iterator();
 		while(iter.hasNext())
 		{
-		  	String area=iter.next();
-		  	List <ProductDTO> forStage=new ArrayList <ProductDTO> ();
-		  	Iterator <ProductDTO> iter1=productList.iterator();
-		  	while(iter1.hasNext())
-		  	{
-		  		ProductDTO prod=iter1.next();
-		  		if(prod.getArea().equals(area))
-		  			forStage.add(prod);
-		  		
-		  	}
+		  	Stage stage=iter.next();
+		  	
+		  	List <ProductDTO> forStage=productListToDTO(stage.getProducts());
+		  	
 		  			
 		  	
-		  	StageDTO stage=new StageDTO(forStage,area);
-		  	stageList.add(stage);
-		  	
+		  	StageDTO stageDTO=new StageDTO(stage.getIdStage(),forStage,stage.getArea());
+		  	stageDTOList.add(stageDTO);
 			
 		}
 		
-		return stageList;
+		return stageDTOList;
 		
 		
 		
 	}
 	
+		  	
 
 	
 	
@@ -327,6 +328,156 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
    	}
    	return entity;
    }
+   public TravelPackage travelPackageDTOToEntity(TravelPackageDTO travel, boolean createUpdate)
+   {
+	  TravelPackage travelpackage=null;
+	  List <Stage> stages=null;
+	  if(createUpdate)
+	  {
+		  stages=stageListDTOToEntity(travel.getStages());
+		  if(travel instanceof PrepackedTravelPackageDTO)
+		  {
+			  travelpackage=new PrepackedTravelPackage(travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime());
+				
+			  
+		  }
+		  else if(travel instanceof CustomizedTravelPackageDTO)
+		  {
+			  travelpackage=new CustomizedTravelPackage(travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime());
+			  
+		  }
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+	  }
+	  else
+	  {
+		  stages=stageListDTOToEntityUpdate(travel.getStages());
+		  if(travel instanceof PrepackedTravelPackageDTO)
+		  {
+			  travelpackage=new PrepackedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime());
+		  }
+		  else if(travel instanceof CustomizedTravelPackageDTO)
+		  {
+			  
+			  travelpackage=new CustomizedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime());
+			  
+		  }
+	  }
+	   
+	  
+	  
+	  
+	   return travelpackage;
+	   
+	   
+	   
+	   
+	   
+	   
+   }
+   private  List<Stage> stageListDTOToEntity(List <StageDTO> stagesDTOList)
+   {
+	   
+	   List <Stage> stages=new ArrayList <Stage>();
+	   Iterator <StageDTO> iter=stagesDTOList.iterator();
+	   while (iter.hasNext())
+	   {
+		   Stage stage=stageDTOToEntity(iter.next());
+		   stages.add(stage);
+		   
+	   }
+	   return stages;
+	   
+   }
+   private List <Stage>  stageListDTOToEntityUpdate(List <StageDTO> stagesDTOList)
+   {
+	   List <Stage> stages=new ArrayList <Stage>();
+	   Iterator <StageDTO> iter=stagesDTOList.iterator();
+	   while (iter.hasNext())
+	   {
+		   Stage stage=stageDTOToEntityUpdate(iter.next());
+		   stages.add(stage);
+		   
+	   }
+	   return stages;
+	   
+	   
+	   
+	   
+	   
+   }
+	   
+	   private List <Product> productDTOListToEntity(List <ProductDTO> productDTOList)
+	   {   List <Product> productList= new ArrayList <Product> ();
+		   Iterator <ProductDTO> iter=productDTOList.iterator();
+		   while(iter.hasNext())
+		   {
+			   productList.add(productDTOToEntity(iter.next()));
+			   
+			   
+		   }
+		return productList;
+		   
+		   
+	   }
+   private Stage stageDTOToEntity(StageDTO stagedto)
+   {
+	   
+	   
+	   
+	return new Stage(stagedto.getArea(),productDTOListToEntity(stagedto.getProducts()));
+	   
+	   
+	   
+   }
+   private Stage stageDTOToEntityUpdate(StageDTO stagedto)
+   {
+	   
+	   
+	   return new Stage(stagedto.getIdStage(),stagedto.getArea(),productDTOListToEntityUpdate(stagedto.getProducts()));
+   }
    
-  
+   
+   private Product productDTOToEntityUpdate(ProductDTO product)
+   {
+   	Product entity=null;
+   	if(product instanceof HotelDTO )
+   	{
+   		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
+   	}
+   	else if (product instanceof FlightDTO)
+   	{
+   		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		
+   	
+   	}
+   	else if (product instanceof OutingDTO)
+   	{
+   		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
+   		
+   	}
+   	return entity;
+   }
+
+   
+   private List <Product> productDTOListToEntityUpdate(List <ProductDTO> productDTOList)
+   {   List <Product> productList=new ArrayList <Product> ();
+	   Iterator <ProductDTO> iter=productDTOList.iterator();
+	   while(iter.hasNext())
+	   {
+		   productList.add(productDTOToEntityUpdate(iter.next()));
+		   
+		   
+	   }
+	   
+	   
+	return productList;
+	   
+   }
+   
 }
