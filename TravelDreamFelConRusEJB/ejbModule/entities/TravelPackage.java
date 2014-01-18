@@ -50,21 +50,7 @@ public class TravelPackage implements Serializable {
 
 
 
-	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
-			String description, String name, List<Stage> stages,
-			 String friendCode,
-			Date purchaseTime) {
-		super();
-		this.idtravelpackage = idtravelpackage;
-		this.time_end = time_end;
-		this.time_start = time_start;
-		this.description = description;
-		this.name = name;
-		this.stages = stages;
-		
-		this.friendCode = friendCode;
-		this.purchaseTime = purchaseTime;
-	}
+	
 
 
 
