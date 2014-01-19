@@ -33,6 +33,7 @@ import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.Stage;
 import entities.TravelPackage;
+import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
@@ -53,29 +54,73 @@ private TravelPackageEntityManagementLocal travel;
 private CustomizedTravelPackageEntityManagementLocal custrav;
 @EJB
 private RegisteredUserEntityManagementLocal regman;
+@EJB
+private CustomerEntityManagementLocal cusman;
 
-private Employee employeeDTOToEntity(EmployeeDTO emplodto)
+private Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
 {
-	public Employee(String email, String name, String surname,
-			String telephone, String password, String username,
-			List<Group> groups, List<Product> managedProduct,
-			List<PrepackedTravelPackage> managedTravelPackage, Code code)
+	
 	List <Group> groups=regman.findGroups(emplodto.getUsername());
 	List <Product> products=productDTOListToEntityUpdate(emplodto.getManagedproduct());
-	List <PrepackedTravelPackage> prepacked=travelPackageDTOListToEntity(emplodto.getManagedTravelPackage());
-	Employee emplo=new Employee (emplodto.getEmail(),emplodto.getName(),emplodto.getPassword(),emplodto.getUsername(),groups,products,);
-	
+	List <PrepackedTravelPackage> prepacked=prepackedTravelPackageDTOListToEntity(emplodto.getManagedTravelPackage());
+	Employee emplo=new Employee (emplodto.getEmail(),emplodto.getName(),emplodto.getSurname(),emplodto.getTelephone(),emplodto.getPassword(),emplodto.getUsername(),groups,products,prepacked,new Code(emplodto.getCode()));
+	return emplo;
 }
 
 
-private Customer customerDTOToEntity(CustomerDTO cusdto)
+private Customer customerDTOToEntityUpdate(CustomerDTO cusdto)
+{
+	List <Group> groups =regman.findGroups(cusdto.getUsername());
+	public Customer(String email, String name, String surname,
+			String telephone, String password, String username,
+			List<Group> groups,
+			List<CustomizedTravelPackage> customizedTravelPackages,
+			List<Customer> friends,
+			List<TravelPackage> purchasedTravelPackages,
+			List<TravelPackage> preparedForAFriendTravelPackages,
+			List<GiftList> giftLists)
+	List <CustomizedTravelPackage> customized=customizedTravelPackageDTOListToEntity(cusdto.getCustomizedTravelPackage());
+	List <Customer> friends=stringListToCustomer(cusdto.getFriends());
+	List <TravelPackage> purchasedTravelPackages=travelPackageDTOListToEntity(cusdto.getPurchasedTravelPackage());
+	List <TravelPackage> preparedForAFriendTravelPackages=travelPackageDTOListToEntity(cusdto.getPreparedForAFriendTravelPackage());
+	List <GiftList> giftLists=
+	
+	
+	return null;
+}
+
+private ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftListsDTO)
+{
+	ArrayList<GiftList> giftLists=new ArrayList <GiftList> ();
+	Iterator <GiftListDTO> iter=giftListsDTO.iterator();
+	while(iter.hasNext())
+	{
+		GiftList giftList=
+		
+	}
+	
+	
+}
+private ArrayList <GiftList> simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 {
 	
-
+	
+	
 }
 
 
 
+private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstring)
+{
+	ArrayList <Customer> friends=new ArrayList <Customer> ();
+	Iterator <String> iter=friendstring.iterator();
+	while(iter.hasNext())
+	{
+		Customer customer=cusman.find(iter.next());
+		friends.add(customer);
+	}
+ return friends;
+}
 
 	 private ProductDTO productToDTO(Product product)
 
@@ -410,6 +455,36 @@ private Customer customerDTOToEntity(CustomerDTO cusdto)
 	   
    }
    
+   
+   private List <CustomizedTravelPackage> customizedTravelPackageDTOListToEntity( ArrayList <CustomizedTravelPackageDTO> pretraveldtolist)
+   {
+	   ArrayList <CustomizedTravelPackage> travellist=new ArrayList<CustomizedTravelPackage>();
+	   Iterator <CustomizedTravelPackageDTO> iter=pretraveldtolist.iterator();
+	   while(iter.hasNext())
+	   {
+		   TravelPackage travel=travelPackageDTOToEntity(iter.next(), false);
+		   travellist.add((CustomizedTravelPackage)travel);
+	   }
+	   
+	   return travellist;
+	      
+   }
+   
+   
+   
+   private List <PrepackedTravelPackage> prepackedTravelPackageDTOListToEntity( ArrayList <PrepackedTravelPackageDTO> pretraveldtolist)
+   {
+	   ArrayList <PrepackedTravelPackage> travellist=new ArrayList<PrepackedTravelPackage>();
+	   Iterator <PrepackedTravelPackageDTO> iter=pretraveldtolist.iterator();
+	   while(iter.hasNext())
+	   {
+		   TravelPackage travel=travelPackageDTOToEntity(iter.next(), false);
+		   travellist.add((PrepackedTravelPackage)travel);
+	   }
+	   
+	   return travellist;
+	      
+   }
    private List <TravelPackage>  travelPackageDTOListToEntity( ArrayList <TravelPackageDTO> traveldtolist)
    {
 	   ArrayList <TravelPackage> travellist=new ArrayList<TravelPackage>();
