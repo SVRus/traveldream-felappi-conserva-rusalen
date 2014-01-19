@@ -32,18 +32,19 @@
       
       <p:layoutUnit position="center">  
 	  <h:form id="form">
-	   <p:dataTable var="flight" value="#{stageManagementBean.flightStart}">  
+	   <p:dataTable var="flight" value="#{stageManagementBean.flightList}">  
         <p:column headerText="Model">  
-            <h:outputText value="#{flight.model}" />  
+            <h:outputText value="#{flight.name}" />  
         </p:column>  
   
         <p:column headerText="Year">  
-            <h:outputText value="#{flight.year}" />  
+            <h:outputText value="#{flight.area_start}" />  
         </p:column>  
       </p:dataTable>  
     
  	</h:form>
-        
+        </p:layoutUnit>
+        </p:layout>
     </body> 
     
     
