@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -38,13 +39,13 @@ public class TravelPackage implements Serializable {
 
 
 
-	public Date getPurchaseTime() {
+	public Calendar getPurchaseTime() {
 		return purchaseTime;
 	}
 
 
 
-	public void setPurchaseTime(Date purchaseTime) {
+	public void setPurchaseTime(Calendar purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
 
@@ -54,9 +55,9 @@ public class TravelPackage implements Serializable {
 
 
 
-	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
+	public TravelPackage(long idtravelpackage, Calendar time_end, Calendar time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Date purchaseTime) {
+			String friendCode, Calendar purchaseTime) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.time_end = time_end;
@@ -71,7 +72,7 @@ public class TravelPackage implements Serializable {
 
 
 	public List<Stage> getStages() {
-		return stages;
+		return new ArrayList< Stage> (stages) ;
 	}
 
 
@@ -98,25 +99,25 @@ public void setIdtravelpackage(long idtravelpackage) {
 
 
 
-public Date getTime_end() {
+public Calendar getTime_end() {
 	return time_end;
 }
 
 
 
-public void setTime_end(Date time_end) {
+public void setTime_end(Calendar time_end) {
 	this.time_end = time_end;
 }
 
 
 
-public Date getTime_start() {
+public Calendar getTime_start() {
 	return time_start;
 }
 
 
 
-public void setTime_start(Date time_start) {
+public void setTime_start(Calendar time_start) {
 	this.time_start = time_start;
 }
 
@@ -151,21 +152,21 @@ public void setName(String name) {
 
 
 @Temporal (TemporalType.TIMESTAMP)
-private Date time_end;
+private Calendar time_end;
 @Temporal (TemporalType.TIMESTAMP)
 
-private Date time_start;
+private Calendar time_start;
 private String description;
 @Column(unique=true)
 private String name;
-@OneToMany()
+@OneToMany(cascade=CascadeType.ALL)
 @JoinColumn(name="IDTRAVELPACKAGE")
 private List<Stage> stages;
 
 private String friendCode;
 
 @Temporal (TemporalType.TIMESTAMP)
-private Date purchaseTime;
+private Calendar purchaseTime;
 
 
 	public TravelPackage() {
@@ -174,8 +175,8 @@ private Date purchaseTime;
 
 
 
-	public TravelPackage(Date time_end, Date time_start, String description,
-			String name, List<Stage> stages,  String friendCode, Date purchaseTime) {
+	public TravelPackage(Calendar time_end,Calendar time_start, String description,
+			String name, List<Stage> stages,  String friendCode, Calendar purchaseTime) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;

@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -48,7 +49,7 @@ public class Stage implements Serializable {
 		Area = area;
 	}
 	public List<Product> getProducts() {
-		return products;
+		return new ArrayList <Product> (products);
 	}
 	public void setProducts(List<Product> products) {
 		this.products = products;

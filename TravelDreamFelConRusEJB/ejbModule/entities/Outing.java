@@ -3,6 +3,7 @@ package entities;
 import entities.Product;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -14,12 +15,12 @@ import stateenum.State;
  *
  */
 @Entity
-
+ 
 @DiscriminatorValue("OUTING")
 public class Outing extends Product implements Serializable {
 
 	
-	public Outing(float cost, Date timeStart, Date timeEnd, String name,
+	public Outing(float cost, Calendar timeStart, Calendar timeEnd, String name,
 			 String description, String area,State state) {
 		super(cost, timeStart, timeEnd, name, state,area);
 		this.description = description;
@@ -27,7 +28,7 @@ public class Outing extends Product implements Serializable {
 
 
 
-	public Outing(long idProduct, float cost, Date timeStart, Date timeEnd,
+	public Outing(long idProduct, float cost, Calendar timeStart,Calendar timeEnd,
 			String name,  String description, String area,State state) {
 		super(idProduct, cost, timeStart, timeEnd, name,state,area);
 		this.description = description;

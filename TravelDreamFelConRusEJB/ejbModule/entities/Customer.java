@@ -6,6 +6,7 @@ import groupenum.Group;
 import java.io.Serializable;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -34,7 +35,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 	public List<Customer> getFriends() {
-		return friends;
+		return new ArrayList<Customer> (friends);
 	}
 
 
@@ -46,7 +47,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 	public List<TravelPackage> getPurchasedTravelPackages() {
-		return purchasedTravelPackages;
+		return new ArrayList <TravelPackage>(purchasedTravelPackages);
 	}
 
 
@@ -59,7 +60,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 	public List<TravelPackage> getPreparedForAFriendTravelPackages() {
-		return preparedForAFriendTravelPackages;
+		return new ArrayList <TravelPackage>(preparedForAFriendTravelPackages);
 	}
 
 
@@ -72,7 +73,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 	public List<GiftList> getGiftLists() {
-		return giftLists;
+		return  new ArrayList <GiftList> (giftLists);
 	}
 
 

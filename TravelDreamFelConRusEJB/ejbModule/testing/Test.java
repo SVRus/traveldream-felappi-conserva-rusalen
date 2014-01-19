@@ -22,6 +22,7 @@ import stateenum.State;
 import entities.Hotel;
 import entities.PrepackedTravelPackage;
 import entities.Product;
+import entities.Stage;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 
@@ -44,10 +45,10 @@ public class Test {
 	
 	@Before
 	public  void before()
-	{HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-	 HotelDTO  hotel1=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-	 HotelDTO  hotel2= new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
-	 HotelDTO  hotel3=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area2",  "test",  "test",  "test",State.AVAILABLE);
+	{HotelDTO hotel=new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+	 HotelDTO  hotel1=new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
+	 HotelDTO  hotel2= new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
+	 HotelDTO  hotel3=new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "area2",  "test",  "test",  "test",State.AVAILABLE);
 
 	 prod.createProduct(hotel);
 	 prod.createProduct(hotel1);
@@ -61,17 +62,32 @@ public class Test {
 		
 		
 		 
-		 List <Product> lista=new ArrayList <Product> ();
-		
-		lista.add((Hotel)hot.find(new Long(1)));
-		lista.add((Hotel)hot.find(new Long(2)));
-		lista.add((Hotel)hot.find(new Long(3)));
-		lista.add((Hotel)hot.find(new Long(4)));
-
-	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new Date(),new Date(),"","",lista,0,new Date());
+		 List <Product> lista1=new ArrayList <Product> ();
+		List <Product> lista2=new ArrayList <Product> ();
+		lista1.add((Hotel)hot.find(new Long(1)));
+		lista1.add((Hotel)hot.find(new Long(2)));
+		lista2.add((Hotel)hot.find(new Long(3)));
+		lista2.add((Hotel)hot.find(new Long(4)));
+          Stage stage1=new Stage("area1",lista1);
+          Stage stage2=new Stage ("area2",lista2);
+          List <Stage> stages=new ArrayList <Stage> ();
+          stages.add(stage1);
+          stages.add(stage2);
+	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new Date(),new Date(),"","",stages,"0",new Date());
 	    pre.edit(travel);
-	    System.out.println(travel.getProducts());
-	    System.out.println(dto.simpleTravelPackageToDTO((PrepackedTravelPackage)pre.find(new Long(1))).getStages().toString());
+	    PrepackedTravelPackage travel2=pre.find(new Long(1));
+	    System.out.println(travel2.toString());
+	   List <Stage> stages1=travel2.getStages();
+	   ArrayList <Stage> stages2=new ArrayList <Stage> (stages1);
+	    System.out.println(stages2.toString());
+	    
+        Iterator <Stage> iter=stages2.iterator();
+        while(iter.hasNext())
+        {
+        	System.out.print(iter.next().getProducts().toString());
+        	
+        }
+
 	    
 	}
 	
@@ -88,19 +104,6 @@ public class Test {
 		}
 		
 	}
-	@Before
-	public void before2()
-	{
-		HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-		
-	}
-	@org.junit.Test
-	public void test2()
-	{		
-		FlightDTO hotel=new FlightDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
 
-		
-		
-	}
 
 }
