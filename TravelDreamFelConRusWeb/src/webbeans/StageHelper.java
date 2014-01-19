@@ -55,24 +55,9 @@ public class StageHelper {
 		for (int i = 0; i < this.getStageSize(); i++) {
 			if(stage.getProducts().get(i) instanceof FlightDTO)
 			{
-				if(i>0)
-				{
-					if(stage.getProducts().get(i-1).getTimeStart().compareTo(stage.getProducts().get(i).getTimeStart())>0)
-						return (FlightDTO) stage.getProducts().get(i);
-					
-				}
-				else if (this.getStageSize()>1)
-				{
-				
-					if(stage.getProducts().get(i+1).getTimeStart().compareTo(stage.getProducts().get(i).getTimeStart())<=0)
-						return (FlightDTO) stage.getProducts().get(i);
-				
-				}
-				else if (this.getStageSize()==1)
-				{
-					FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
-					if( flightTemp.getArea_start())
-				}
+				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
+				if( !flightTemp.getArea_start().equals(this.stage.getArea()))
+				return flightTemp;
 			}
 		}
 		return null;
@@ -84,19 +69,9 @@ public class StageHelper {
 		for (int i = 0; i < this.getStageSize(); i++) {
 			if(stage.getProducts().get(i) instanceof FlightDTO)
 			{
-				if(i>0)
-				{
-					if(stage.getProducts().get(i-1).getTimeStart().compareTo(stage.getProducts().get(i).getTimeStart())<=0)
-						return (FlightDTO) stage.getProducts().get(i);
-					
-				}
-				else
-				{
-				if(this.getStageSize()>1)
-					if(stage.getProducts().get(i+1).getTimeStart().compareTo(stage.getProducts().get(i).getTimeStart())>0)
-						return (FlightDTO) stage.getProducts().get(i);
-				
-				}
+				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
+				if( flightTemp.getArea_start().equals(this.stage.getArea()))
+				return flightTemp;
 			}
 		}
 		return null;

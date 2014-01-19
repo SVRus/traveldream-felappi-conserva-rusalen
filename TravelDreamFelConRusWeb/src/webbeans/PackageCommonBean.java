@@ -1,5 +1,7 @@
 package webbeans;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -21,6 +23,7 @@ import stateenum.State;
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
+import dto.FlightDTO;
 import dto.GiftListDTO;
 import dto.ProductDTO;
 import dto.HotelDTO;
@@ -41,8 +44,22 @@ public class PackageCommonBean implements Serializable{
 	
 	
 	public PackageCommonBean() {
-		FlightDTO 
 		
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(),  new GregorianCalendar(), "ciao", "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", State.AVAILABLE);
+		List<ProductDTO> lista = new ArrayList<ProductDTO>();
+		lista.add(volo);
+		
+		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");	
+		
+		System.out.println("Ho inizializzato");
+	}
+	public void aggiorna()
+	{
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(), new GregorianCalendar(), "ciao", "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", State.AVAILABLE);
+		List<ProductDTO> lista = new ArrayList<ProductDTO>();
+		lista.add(volo);
+		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");		
+		System.out.println("Ho inizializzato");
 	}
 	public TravelPackageDTO getCurrentPackage() {
 		return currentPackage;

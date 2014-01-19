@@ -35,6 +35,7 @@ import authentication.RegistrationBeanLocal;
 public class StageManagementBean {
 	private FlightDTO flightStart;
 	private StageHelper stageHelper;
+	private List<FlightDTO> flightList;
 	
 	@ManagedProperty(value="#{PackageCommon}")
 	private PackageCommonBean common;
@@ -42,8 +43,12 @@ public class StageManagementBean {
 	@PostConstruct
 	  public void update()
 	  {
-	  stageHelper= new StageHelper(common.getCurrentStage());	
-	  flightStart= stageHelper.flightStart();
+		common.aggiorna();
+		stageHelper= new StageHelper(common.getCurrentStage());	
+	  
+		flightStart= stageHelper.flightStart();
+		flightList.add(flightStart);
+	  System.out.println("sono in stage management");
 	  
 
 	  }

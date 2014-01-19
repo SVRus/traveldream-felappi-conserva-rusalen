@@ -1,5 +1,6 @@
 package webbeans;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -64,7 +65,7 @@ public class HotelManagementBean implements Serializable{
 	  
 	  
 	  //valori di prova
-	  static Date data1= new Date();
+	  static GregorianCalendar data1= new GregorianCalendar();
 	  private  List<HotelDTO> hotels;
 	  private  List<HotelDTO> filteredHotels;
 	  
