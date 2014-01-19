@@ -96,7 +96,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		return cusString;
 		
 	}
-	private  ArrayList <TravelPackageDTO> travelPackageToDTO(List <TravelPackage> travellist)
+	public  ArrayList <TravelPackageDTO> travelPackageToDTO(List <TravelPackage> travellist)
 	{
 		ArrayList <TravelPackageDTO> travelid=new ArrayList <TravelPackageDTO>();
 		Iterator <TravelPackage> iter = travellist.iterator();
@@ -112,7 +112,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		}
 		return travelid;
 	}
-	private  ArrayList <CustomizedTravelPackageDTO> customizedTravelPackageToDTO(List <CustomizedTravelPackage> travellist)
+	public  ArrayList <CustomizedTravelPackageDTO> customizedTravelPackageToDTO(List <CustomizedTravelPackage> travellist)
 	{
 		ArrayList <CustomizedTravelPackageDTO> travelid=new ArrayList <CustomizedTravelPackageDTO>();
 		Iterator <CustomizedTravelPackage> iter = travellist.iterator();
