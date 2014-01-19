@@ -13,8 +13,8 @@ public interface TravelPackageCRUDBeanLocal
 {
 	public boolean createTravelFromEmployee(TravelPackageDTO prepacked,String username) ;
 	public boolean updateTravelPackage(TravelPackageDTO traveldto);
-	 public boolean delete(TravelPackageDTO traveldto);
-	 public List <PrepackedTravelPackageDTO> findAllPrepacked();
+	public boolean delete(TravelPackageDTO traveldto);
+	public List <PrepackedTravelPackageDTO> findAllPrepacked();
     public List <CustomizedTravelPackageDTO> findAllCustomized();
 
 	
