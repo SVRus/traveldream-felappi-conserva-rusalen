@@ -111,29 +111,29 @@
         <p:dataList id="displayMulti" value="#{tableBean.selectedCars}" var="selectedCar">  
             Model: #{selectedCar.model}, Year: #{selectedCar.year}  
         </p:dataList>
-        <p:dataTable id="multiCarsDialog" var="car" value="#{tableBean.mediumCarsModel}" paginator="true" rows="10"  
-                 selection="#{tableBean.selectedCars}">  
+        <p:dataTable id="multiCarsDialog" var="car2" value="#{tableBean.mediumCarsModel2}" paginator="true" rows="10"  
+                 selection="#{tableBean.selectedCar2}">  
   
         <f:facet name="header">  
             Checkbox Based Selection  
         </f:facet>  
   
-        <p:column selectionMode="multiple" style="width:2%" />  
+        <p:column selectionMode="single" style="width:2%" />  
   
         <p:column headerText="Model" style="width:25%">  
-            #{car.model}  
+            #{car2.model}  
         </p:column>  
   
         <p:column headerText="Year" style="width:25%">  
-            #{car.year}  
+            #{car2.year}  
         </p:column>  
   
         <p:column headerText="Manufacturer" style="width:24%">  
-            #{car.manufacturer}  
+            #{car2.manufacturer}  
         </p:column>  
   
         <p:column headerText="Color" style="width:24%">  
-            #{car.color}  
+            #{car2.color}  
         </p:column>  
   
         <f:facet name="footer">  
@@ -151,7 +151,7 @@
                               oncomplete= "multiCarDialog.hide();"/>  
          
          <p:commandButton id="loginButton" value="Crea" update=":form:multiCars"   
-                    actionListener="#{tableBean.aggiornaL}" 
+                    action="#{tableBean.aggiornaL2}" 
                     oncomplete="handleLoginRequest(xhr, status, args)" />
                                          
       
@@ -163,8 +163,8 @@
            
     }  
       </script>
-  <p:dataTable var="car" value="#{tableBean.mediumCarsModel}" rowKey="#{car.model}" paginator="true" rows="10"  
-                selection="#{tableBean.selectedCar}" selectionMode="single" filteredValue="#{tableBean.filteredCars}" id="carsTable">  
+  <p:dataTable var="car2" value="#{tableBean.mediumCarsModel2}" rowKey="#{car2.model}" paginator="true" rows="10"  
+                selection="#{tableBean.selectedCar2}" selectionMode="single"  id="carsTable">  
   
         <p:ajax event="rowSelect" update=":form:display" oncomplete="carDialog.show()" />  
   
@@ -172,20 +172,20 @@
             List of Cars  
         </f:facet>  
   
-        <p:column headerText="Model" sortBy="#{car.model}" filterBy="#{car.model}" id="model">  
-            #{car.model}  
+        <p:column headerText="Model" sortBy="#{car2.model}"  id="model">  
+            #{car2.model}  
         </p:column>  
   
         <p:column headerText="Year" sortBy="year" filterBy="year" id="year">  
-            #{car.year}  
+            #{car2.year}  
         </p:column>  
   
         <p:column headerText="Manufacturer" sortBy="manufacturer" filterBy="manufacturer" id="manufacturer">  
-            #{car.manufacturer}  
+            #{car2.manufacturer}  
         </p:column>  
   
         <p:column headerText="Color" sortBy="color" filterBy="color" id="color">  
-            #{car.color}"  
+            #{car2.color}"  
         </p:column>  
   
     </p:dataTable>  
@@ -196,20 +196,20 @@
         <h:panelGrid id="display" columns="2" cellpadding="4">  
   
             <f:facet name="header">  
-                <p:graphicImage value="/images/cars/#{tableBean.selectedCar.manufacturer}.jpg"/>  
+                <p:graphicImage value="/images/cars/#{tableBean.selectedCar2.manufacturer}.jpg"/>  
             </f:facet>  
   
             <h:outputText value="Model:" />  
-            <h:outputText value="#{tableBean.selectedCar.model}" id="model"/>  
+            <h:outputText value="#{tableBean.selectedCar2.model}" id="model"/>  
   
             <h:outputText value="Year:" />  
-            <h:outputText value="#{tableBean.selectedCar.year}" id="year"/>  
+            <h:outputText value="#{tableBean.selectedCar2.year}" id="year"/>  
   
             <h:outputText value="Manufacturer:" />  
-            <h:outputText value="#{tableBean.selectedCar.manufacturer}" id="manufacturer"/>  
+            <h:outputText value="#{tableBean.selectedCar2.manufacturer}" id="manufacturer"/>  
   
             <h:outputText value="Color:" />  
-            <h:outputText value="#{tableBean.selectedCar.color}" id="color"/>  
+            <h:outputText value="#{tableBean.selectedCar2.color}" id="color"/>  
         </h:panelGrid>  
     </p:dialog>  
 </h:form>  
