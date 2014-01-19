@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,22 +19,22 @@ public long getIdtravelpackage() {
 	}
 
 
-	public Date getTime_end() {
+	public Calendar getTime_end() {
 		return time_end;
 	}
 
 
-	public void setTime_end(Date time_end) {
+	public void setTime_end(Calendar time_end) {
 		this.time_end = time_end;
 	}
 
 
-	public Date getTime_start() {
+	public Calendar getTime_start() {
 		return time_start;
 	}
 
 
-	public void setTime_start(Date time_start) {
+	public void setTime_start(Calendar time_start) {
 		this.time_start = time_start;
 	}
 
@@ -75,9 +76,9 @@ public long getIdtravelpackage() {
 	}
 
 
-	public TravelPackageDTO(Date time_end, Date time_start, String description,
+	public TravelPackageDTO(Calendar time_end, Calendar time_start, String description,
 			String name, List<StageDTO> stages, String idCustomerBuyer,
-			String idCustomerFriendOwner, String friendCode, Date purchaseTime) {
+			String idCustomerFriendOwner, String friendCode, Calendar purchaseTime) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;
@@ -106,32 +107,32 @@ public long getIdtravelpackage() {
 	}
 
 
-	public Date getPurchaseTime() {
+	public Calendar getPurchaseTime() {
 		return purchaseTime;
 	}
 
 
-	public void setPurchaseTime(Date purchaseTime) {
+	public void setPurchaseTime(Calendar purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
 
 
 private long idtravelpackage;
-private Date time_end;
-private Date time_start;
+private Calendar time_end;
+private Calendar time_start;
 private String description;
 private String name;
 private List<StageDTO> stages;	
 private String idCustomerBuyer;	
 private String idCustomerFriendOwner;
 private String friendCode;
-private Date purchaseTime;
+private Calendar purchaseTime;
 
 
-public TravelPackageDTO(long idtravelpackage, Date time_end, Date time_start,
+public TravelPackageDTO(long idtravelpackage, Calendar time_end,Calendar time_start,
 		String description, String name, List<StageDTO> stages,
 		String idCustomerBuyer, String idCustomerFriendOwner, String friendCode,
-		Date purchaseTime) {
+		Calendar purchaseTime) {
 	super();
 	this.idtravelpackage = idtravelpackage;
 	this.time_end = time_end;

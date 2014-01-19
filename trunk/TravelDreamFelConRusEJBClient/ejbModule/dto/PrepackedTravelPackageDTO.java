@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +20,10 @@ public class PrepackedTravelPackageDTO extends TravelPackageDTO {
  * @param purchaseTime
  * @param idEmployeeCreator
  */
-	public PrepackedTravelPackageDTO(long idtravelpackage, Date time_end,
-			Date time_start, String description, String name,
+	public PrepackedTravelPackageDTO(long idtravelpackage, Calendar time_end,
+			Calendar time_start, String description, String name,
 			List<StageDTO> stages, String idCustomerBuyer,
-			String idCustomerFriendOwner, String friendCode, Date purchaseTime,
+			String idCustomerFriendOwner, String friendCode, Calendar purchaseTime,
 			long idEmployeeCreator) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
 				idCustomerBuyer, idCustomerFriendOwner, friendCode,
@@ -30,10 +31,10 @@ public class PrepackedTravelPackageDTO extends TravelPackageDTO {
 		this.idEmployeeCreator = idEmployeeCreator;
 	}
 
-	public PrepackedTravelPackageDTO(Date time_end, Date time_start,
+	public PrepackedTravelPackageDTO(Calendar time_end, Calendar time_start,
 		String description, String name, List<StageDTO> stages,
 		String idCustomerBuyer, String idCustomerFriendOwner,
-		String friendCode, Date purchaseTime, long idEmployeeCreator) {
+		String friendCode, Calendar purchaseTime, long idEmployeeCreator) {
 	super(time_end, time_start, description, name, stages, idCustomerBuyer,
 			idCustomerFriendOwner, friendCode, purchaseTime);
 	this.idEmployeeCreator = idEmployeeCreator;

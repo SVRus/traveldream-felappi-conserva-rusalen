@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StageDTO {
@@ -10,23 +11,23 @@ private long idStage;
 public void setIdStage(long idStage) {
 	this.idStage = idStage;
 }
-	public StageDTO(long idStage, List<ProductDTO> products, String area) {
+	public StageDTO(long idStage, ArrayList<ProductDTO> products, String area) {
 	super();
 	this.idStage = idStage;
 	this.products = products;
 	Area = area;
 }
-	private List <ProductDTO> products;
+	private ArrayList <ProductDTO> products;
 	String Area;
-	public StageDTO(List<ProductDTO> products, String area) {
+	public StageDTO(ArrayList<ProductDTO> products, String area) {
 		super();
 		this.products = products;
 		Area = area;
 	}
-	public List<ProductDTO> getProducts() {
+	public ArrayList<ProductDTO> getProducts() {
 		return products;
 	}
-	public void setProducts(List<ProductDTO> products) {
+	public void setProducts(ArrayList<ProductDTO> products) {
 		this.products = products;
 	}
 	public String getArea() {

@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import stateenum.State;
@@ -19,8 +20,8 @@ public class ProductDTO {
     private String name;
 	private long idProduct;
 	private float cost;
-	private Date timeStart;
-	private Date timeEnd;
+	private Calendar timeStart;
+	private Calendar timeEnd;
 	private State state;
 	private String area;
 	
@@ -34,7 +35,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idstage, String employeeCreator, String name,
-			float cost, Date timeStart, Date timeEnd,State state,String area) {
+			float cost, Calendar timeStart, Calendar timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
@@ -56,7 +57,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idstage, String employeeCreator, String name,
-			long idProduct, float cost, Date timeStart, Date timeEnd,State state,String area) {
+			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
@@ -105,16 +106,16 @@ public class ProductDTO {
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
-	public Date getTimeStart() {
+	public Calendar getTimeStart() {
 		return timeStart;
 	}
-	public void setTimeStart(Date timeStart) {
+	public void setTimeStart(Calendar timeStart) {
 		this.timeStart = timeStart;
 	}
-	public Date getTimeEnd() {
+	public Calendar getTimeEnd() {
 		return timeEnd;
 	}
-	public void setTimeEnd(Date timeEnd) {
+	public void setTimeEnd(Calendar timeEnd) {
 		this.timeEnd = timeEnd;
 	}
 
