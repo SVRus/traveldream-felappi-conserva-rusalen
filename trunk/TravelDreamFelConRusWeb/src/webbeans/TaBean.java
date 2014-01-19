@@ -33,7 +33,7 @@ import authentication.RegistrationBeanLocal;
 @ManagedBean
 @ViewScoped
   
-public class TableBean implements Serializable {  
+public class TaBean implements Serializable {  
   
     private final static String[] colors;  
   
@@ -73,60 +73,47 @@ public class TableBean implements Serializable {
 		this.filteredCars = filteredCars;
 	}
 
-	private List<Car> cars;  
-	private List<Car> cars2;  
+	private List<Car> cars3;  
+	
+    private Car selectedCar3;  
   
-    private Car selectedCar; 
+    private Car[] selectedCars3;  
    
-  
-    private Car[] selectedCars;  
-    private Car[] selectedCars2;  
-    
  
-    public Car[] getSelectedCars2() {
-		return selectedCars2;
-	}
-	public void setSelectedCars2(Car[] selectedCars2) {
-		this.selectedCars2 = selectedCars2;
-	}
+  
+	
+	
+    private CarDataModel mediumCarsModel3;  
+    
 
-	private Car selectedCar2;  
-    
-    private CarDataModel mediumCarsModel;  
-    
-    private CarDataModel mediumCarsModel2;  
-    
-    public TableBean() {  
+ 
+    public TaBean() {  
          }  
     @PostConstruct
 	  public void update()
 	  {
-    	 cars = new ArrayList<Car>();  
+    	 cars3 = new ArrayList<Car>();  
          
-         populateCars(cars, 5);  
+         populateCars(cars3, 5);  
    
-         mediumCarsModel = new CarDataModel(cars); 
-         cars2 = new ArrayList<Car>();  
-         
-         populateCars2(cars2, 5);  
-   
-         mediumCarsModel2 = new CarDataModel(cars2); 
+         mediumCarsModel3 = new CarDataModel(cars3); 
+       
          System.out.println("ciao ho popolato");
-         System.out.println(cars.get(2).getColor());
+         System.out.println(cars3.get(2).getColor());
    
 	  }
     public void aggiorna()
     {
-    	cars.add(new Car("66666",1999,"Special Model","Grey"));	
+    	cars3.add(new Car("66666",1999,"Special Model","Grey"));	
     }
     
 	public void aggiornaL(ActionEvent actionEvent) {
-	  	cars.add(selectedCar2);	
-	    System.out.println(selectedCar2.getModel());
+	  	cars3.add(selectedCar3);	
+	    System.out.println(selectedCar3.getModel());
 	}
-	public void aggiornaL2() {
-	  	cars.add(selectedCar2);	
-	    System.out.println(selectedCar2.getModel());
+	public void aggiornaL3() {
+	  	cars3.add(selectedCar3);	
+	    System.out.println(selectedCar3.getModel());
 	}
     
     private void populateCars(List<Car> list, int size) {
@@ -147,18 +134,18 @@ public class TableBean implements Serializable {
     	list.add(new Car("88555",1999,"Hodfndda","Yellow"));
     	}
     public Car[] getSelectedCars() {  
-        return selectedCars;  
+        return selectedCars3;  
     }  
-    public void setSelectedCars(Car[] selectedCars) {  
-        this.selectedCars = selectedCars;  
-    }  
-  
-    public Car getSelectedCar() {  
-        return selectedCar;  
+    public void setSelectedCars(Car[] selectedCars3) {  
+        this.selectedCars3 = selectedCars3;  
     }  
   
-    public void setSelectedCar(Car selectedCar) {  
-        this.selectedCar = selectedCar;  
+    public Car getSelectedCar3() {  
+        return selectedCar3;  
+    }  
+  
+    public void setSelectedCar3(Car selectedCar3) {  
+        this.selectedCar3 = selectedCar3;  
     }  
   
     private void populateRandomCars(List<Car> list, int size) {  
@@ -171,13 +158,13 @@ public class TableBean implements Serializable {
     }  
   
     public List<Car> getCars() {
-		return cars;
+		return cars3;
 	}
-	public void setCars(List<Car> cars) {
-		this.cars = cars;
+	public void setCars(List<Car> cars3) {
+		this.cars3 = cars3;
 	}
-	public void setMediumCarsModel(CarDataModel mediumCarsModel) {
-		this.mediumCarsModel = mediumCarsModel;
+	public void setMediumCarsModel3(CarDataModel mediumCarsModel3) {
+		this.mediumCarsModel3 = mediumCarsModel3;
 	}
 	private String getRandomColor() {  
         return colors[(int) (Math.random() * 10)];  
@@ -191,27 +178,12 @@ public class TableBean implements Serializable {
         return UUID.randomUUID().toString().substring(0, 8);  
     }  
   
-    public CarDataModel getMediumCarsModel() {  
-        return mediumCarsModel;  
+    public CarDataModel getMediumCarsModel3() {  
+        return mediumCarsModel3;  
     }
-	public List<Car> getCars2() {
-		return cars2;
-	}
-	public void setCars2(List<Car> cars2) {
-		this.cars2 = cars2;
-	}
-	public Car getSelectedCar2() {
-		return selectedCar2;
-	}
-	public void setSelectedCar2(Car selectedCar2) {
-		this.selectedCar2 = selectedCar2;
-	}
-	public CarDataModel getMediumCarsModel2() {
-		return mediumCarsModel2;
-	}
-	public void setMediumCarsModel2(CarDataModel mediumCarsModel2) {
-		this.mediumCarsModel2 = mediumCarsModel2;
-	}
+	
+	
+	
 	public static String[] getColors() {
 		return colors;
 	}
