@@ -4,7 +4,9 @@ package entities;
 import groupenum.Group;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 
@@ -64,7 +66,7 @@ public class RegisteredUser implements Serializable {
 		this.username = username;
 	}
 	public List<Group> getGroups() {
-		return groups;
+		return new ArrayList <Group> (groups);
 	}
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
@@ -103,7 +105,7 @@ private String username;
 @Enumerated(EnumType.STRING)
 @Column(name="groupname")
 private List<Group> groups;
-	public RegisteredUser() {
+public RegisteredUser() {
 		super();
 	}
    

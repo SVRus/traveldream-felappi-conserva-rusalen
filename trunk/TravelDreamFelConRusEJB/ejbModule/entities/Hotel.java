@@ -3,6 +3,7 @@ package entities;
 import entities.Product;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -31,7 +32,7 @@ public class Hotel extends Product implements Serializable {
  * @param room_type
  * @param more_info
  */
-public Hotel(float cost, Date timeStart, Date timeEnd, String name,
+public Hotel(float cost,Calendar timeStart, Calendar timeEnd, String name,
 			 String area, String place, String room_type,
 			String more_info,State state) {
 		super(cost, timeStart, timeEnd, name, state,area);
@@ -53,7 +54,7 @@ public Hotel(float cost, Date timeStart, Date timeEnd, String name,
  * @param room_type
  * @param more_info
  */
-public Hotel(long idProduct, float cost, Date timeStart, Date timeEnd,
+public Hotel(long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
 			String name, String area, String place,
 			String room_type, String more_info,State state) {
 		super(idProduct, cost, timeStart, timeEnd, name,state,area);

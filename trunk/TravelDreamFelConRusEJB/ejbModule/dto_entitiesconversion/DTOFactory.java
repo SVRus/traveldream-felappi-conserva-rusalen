@@ -1,7 +1,6 @@
 package dto_entitiesconversion;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,8 +34,10 @@ import entities.Product;
 import entities.Stage;
 import entities.TravelPackage;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
+import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
+import entitymanagement.RegisteredUserEntityManagementLocal;
 import entitymanagement.TravelPackageEntityManagementLocal;
 import groupenum.Group;
 @Stateless
@@ -50,6 +51,29 @@ private PrepackedTravelPackageEntityManagementLocal pretrav;
 private TravelPackageEntityManagementLocal travel;
 @EJB
 private CustomizedTravelPackageEntityManagementLocal custrav;
+@EJB
+private RegisteredUserEntityManagementLocal regman;
+
+private Employee employeeDTOToEntity(EmployeeDTO emplodto)
+{
+	public Employee(String email, String name, String surname,
+			String telephone, String password, String username,
+			List<Group> groups, List<Product> managedProduct,
+			List<PrepackedTravelPackage> managedTravelPackage, Code code)
+	List <Group> groups=regman.findGroups(emplodto.getUsername());
+	List <Product> products=productDTOListToEntityUpdate(emplodto.getManagedproduct());
+	List <PrepackedTravelPackage> prepacked=travelPackageDTOListToEntity(emplodto.getManagedTravelPackage());
+	Employee emplo=new Employee (emplodto.getEmail(),emplodto.getName(),emplodto.getPassword(),emplodto.getUsername(),groups,products,);
+	
+}
+
+
+private Customer customerDTOToEntity(CustomerDTO cusdto)
+{
+	
+
+}
+
 
 
 
@@ -111,7 +135,12 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		
 		}
 		return travelid;
+		
 	}
+	
+	
+	
+	
 	public  ArrayList <CustomizedTravelPackageDTO> customizedTravelPackageToDTO(List <CustomizedTravelPackage> travellist)
 	{
 		ArrayList <CustomizedTravelPackageDTO> travelid=new ArrayList <CustomizedTravelPackageDTO>();
@@ -178,7 +207,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 		{
 		  	Stage stage=iter.next();
 		  	
-		  	List <ProductDTO> forStage=productListToDTO(stage.getProducts());
+		  	ArrayList <ProductDTO> forStage=productListToDTO(stage.getProducts());
 		  	
 		  			
 		  	
@@ -197,7 +226,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 
 	
 	
-	public ArrayList<ProductDTO> productListToDTO(List <Product> prodlist)
+	public ArrayList <ProductDTO> productListToDTO(List <Product> prodlist)
 	{
 		ArrayList <ProductDTO> result =new ArrayList <ProductDTO> ();
 		Iterator <Product> iter =prodlist.iterator();
@@ -380,6 +409,20 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 	   
 	   
    }
+   
+   private List <TravelPackage>  travelPackageDTOListToEntity( ArrayList <TravelPackageDTO> traveldtolist)
+   {
+	   ArrayList <TravelPackage> travellist=new ArrayList<TravelPackage>();
+	   Iterator <TravelPackageDTO> iter=traveldtolist.iterator();
+	   while(iter.hasNext())
+	   {
+		   TravelPackage travel=travelPackageDTOToEntity(iter.next(), false);
+		   travellist.add(travel);
+	   }
+	   
+	   return travellist;
+   }
+   
    private  List<Stage> stageListDTOToEntity(List <StageDTO> stagesDTOList)
    {
 	   
@@ -465,7 +508,7 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
    }
 
    
-   private List <Product> productDTOListToEntityUpdate(List <ProductDTO> productDTOList)
+   private List <Product> productDTOListToEntityUpdate(ArrayList <ProductDTO> productDTOList)
    {   List <Product> productList=new ArrayList <Product> ();
 	   Iterator <ProductDTO> iter=productDTOList.iterator();
 	   while(iter.hasNext())

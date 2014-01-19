@@ -4,6 +4,7 @@ import entities.RegisteredUser;
 import groupenum.Group;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -39,13 +40,13 @@ public class Employee extends RegisteredUser implements Serializable {
 	}
 
 	public List<Product> getManagedProduct() {
-		return managedProduct;
+		return new ArrayList <Product> (managedProduct);
 	}
 	public void setManagedProduct(List<Product> managedProduct) {
 		this.managedProduct = managedProduct;
 	}
 	public List<PrepackedTravelPackage> getManagedTravelPackage() {
-		return managedTravelPackage;
+		return new ArrayList <PrepackedTravelPackage>(managedTravelPackage);
 	}
 	public void setManagedTravelPackage(
 			List<PrepackedTravelPackage> managedTravelPackage) {
