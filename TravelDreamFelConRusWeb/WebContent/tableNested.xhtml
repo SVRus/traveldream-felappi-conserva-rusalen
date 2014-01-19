@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head></h:head> 
+<body> 
+
+
+<h:form id="form">  
+   <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        .ui-panel {background-image:url('background.gif');}
+    </style> 
+     <p:dataTable id="multiCars" var="car" value="#{taBean.mediumCarsModel3}" paginator="true" rows="10"  
+                 selection="#{taBean.selectedCar3}">  
+  
+        <f:facet name="header">  
+            Checkbox Based Selection  
+        </f:facet>  
+  
+        <p:column selectionMode="single" style="width:2%" />  
+  
+        <p:column headerText="Model" style="width:25%">  
+            #{car.model}  
+        </p:column>  
+  
+        <p:column headerText="Year" style="width:25%">  
+            #{car.year}  
+        </p:column>  
+  
+        <p:column headerText="Manufacturer" style="width:24%">  
+            #{car.manufacturer}  
+        </p:column>  
+  
+        <p:column headerText="Color" style="width:24%">  
+            #{car.color}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+            <p:commandButton id="multiViewButton" value="View" icon="ui-icon-search"  
+                              oncomplete="PF('multiCarDialog').show()"/>  
+       	 <p:commandButton id="provaAction" value="Aggiorna" icon="ui-icon-search"  
+                             update=":form:multiCars" action="#{tableBean.aggiorna}"/>  
+        
+        </f:facet>  
+        
+        
+    </p:dataTable>  
+      
+    
+       
+</h:form>  
+<p:dialog id="multiDialogPanel" header="Car Detail" widgetVar="multiCarDialog"  
+              height="300" showEffect="fade" hideEffect="explode"
+               appendToBody="true">  
+  		<h:form id="due">
+       
+        <p:dataTable id="multiCarsDialog" var="car3" value="#{taBean.mediumCarsModel3}" paginator="true" rows="10"  
+                 selection="#{taBean.selectedCar3}"
+                >  
+  
+        <f:facet name="header">  
+            Checkbox Based Selection  
+        </f:facet>  
+  
+        <p:column selectionMode="single" style="width:2%" />  
+  
+        <p:column headerText="Model" style="width:25%">  
+            #{car3.model}  
+        </p:column>  
+  
+        <p:column headerText="Year" style="width:25%">  
+            #{car3.year}  
+        </p:column>  
+  
+        <p:column headerText="Manufacturer" style="width:24%">  
+            #{car3.manufacturer}  
+        </p:column>  
+  
+        <p:column headerText="Color" style="width:24%">  
+            #{car3.color}  
+        </p:column>  
+  
+        <f:facet name="footer">  
+           	 <p:commandButton id="provaAction" value="Aggiorna" icon="ui-icon-search"  
+                             update=":form:multiCars" action="#{taBean.aggiornaL3}"/>  
+        
+        </f:facet>  
+        
+        
+    </p:dataTable>    
+        
+                                         
+      </h:form>
+    </p:dialog>  
+     <script type="text/javascript">  
+      function handleLoginRequest(xhr, status, args) {  
+        
+            PF('multiCarDialog').hide();  
+           
+    }  
+      </script>
+  
+
+                      
+</body> 
+</html>
+  
+      
+      
