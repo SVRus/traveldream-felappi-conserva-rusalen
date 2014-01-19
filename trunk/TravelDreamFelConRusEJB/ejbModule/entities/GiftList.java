@@ -49,13 +49,13 @@ public class GiftList implements Serializable {
 		super();
 	}
 @Id
-@OneToOne(cascade=CascadeType.ALL)
+@OneToOne()
 @JoinColumn(name="idProduct")
 private Product product;
 private String idBuyer;
 private String moreInfo;
 private boolean bought;
-@ManyToOne(cascade=CascadeType.ALL)
+@ManyToOne()
 @JoinColumn(name="travelPackageFK")
 private TravelPackage travelPackage;
 
