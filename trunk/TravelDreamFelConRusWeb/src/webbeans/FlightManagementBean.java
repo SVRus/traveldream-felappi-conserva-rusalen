@@ -1,5 +1,6 @@
 package webbeans;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -58,8 +59,8 @@ public class FlightManagementBean {
 		  
 		  
 		  //valori di prova
-		  static Date data1= new Date();
-		  private  List<FlightDTO> flights;
+		  static GregorianCalendar data1= new GregorianCalendar();
+			  private  List<FlightDTO> flights;
 		  private  List<FlightDTO> filteredFlights;
 		  
 		  
@@ -250,13 +251,13 @@ public class FlightManagementBean {
 
 
 
-		public static Date getData1() {
+		public static GregorianCalendar getData1() {
 			return data1;
 		}
 
 
 
-		public static void setData1(Date data1) {
+		public static void setData1(GregorianCalendar data1) {
 			FlightManagementBean.data1 = data1;
 		}
 

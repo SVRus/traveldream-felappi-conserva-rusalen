@@ -1,5 +1,6 @@
 package webbeans;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -61,8 +62,8 @@ public class OutingManagementBean {
 	  
 	  
 	  //valori di prova
-	  static Date data1= new Date();
-	  private  List<OutingDTO> outings;
+	  static GregorianCalendar data1= new GregorianCalendar();
+		 private  List<OutingDTO> outings;
 	  private  List<OutingDTO> filteredOutings;
 	  
 	  
@@ -182,10 +183,10 @@ public class OutingManagementBean {
 	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
 		this.productCRUD = productCRUD;
 	}
-	public static Date getData1() {
+	public static GregorianCalendar getData1() {
 		return data1;
 	}
-	public static void setData1(Date data1) {
+	public static void setData1(GregorianCalendar data1) {
 		OutingManagementBean.data1 = data1;
 	}
 	public List<OutingDTO> getOutings() {
