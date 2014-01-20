@@ -9,6 +9,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 
+
+
+import dto.EmployeeDTO;
 import dto.GenericUserDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.Customer;
@@ -100,7 +103,19 @@ public boolean isLogged() {
 }
 
 
+public boolean updateEmployee(EmployeeDTO emplodto)
+{
+	Employee emplo=factory.employeeDTOToEntityUpdate(emplodto);
+	try {
+		employee.edit(emplo);
+		return true;
+	} catch (Exception e) {
+		return false;
+	}
 
+
+
+}
 
 
 

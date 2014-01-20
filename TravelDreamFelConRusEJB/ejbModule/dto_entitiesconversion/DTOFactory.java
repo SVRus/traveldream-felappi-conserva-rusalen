@@ -49,7 +49,7 @@ private ProductEntityManagementLocal proman;
 @EJB
 private PrepackedTravelPackageEntityManagementLocal pretrav;
 @EJB
-private TravelPackageEntityManagementLocal travel;
+private TravelPackageEntityManagementLocal travman;
 @EJB
 private CustomizedTravelPackageEntityManagementLocal custrav;
 @EJB
@@ -57,7 +57,7 @@ private RegisteredUserEntityManagementLocal regman;
 @EJB
 private CustomerEntityManagementLocal cusman;
 
-private Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
+public Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
 {
 	
 	List <Group> groups=regman.findGroups(emplodto.getUsername());
@@ -71,22 +71,13 @@ private Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
 private Customer customerDTOToEntityUpdate(CustomerDTO cusdto)
 {
 	List <Group> groups =regman.findGroups(cusdto.getUsername());
-	public Customer(String email, String name, String surname,
-			String telephone, String password, String username,
-			List<Group> groups,
-			List<CustomizedTravelPackage> customizedTravelPackages,
-			List<Customer> friends,
-			List<TravelPackage> purchasedTravelPackages,
-			List<TravelPackage> preparedForAFriendTravelPackages,
-			List<GiftList> giftLists)
+	
 	List <CustomizedTravelPackage> customized=customizedTravelPackageDTOListToEntity(cusdto.getCustomizedTravelPackage());
-	List <Customer> friends=stringListToCustomer(cusdto.getFriends());
 	List <TravelPackage> purchasedTravelPackages=travelPackageDTOListToEntity(cusdto.getPurchasedTravelPackage());
-	List <TravelPackage> preparedForAFriendTravelPackages=travelPackageDTOListToEntity(cusdto.getPreparedForAFriendTravelPackage());
-	List <GiftList> giftLists=
+	List <GiftList> giftLists=giftListDTOToEntity(cusdto.getGiftlist());
+	Customer customer=new Customer(cusdto.getEmail(),cusdto.getName(),cusdto.getSurname(),cusdto.getTelephone(),cusdto.getPassword(),cusdto.getUsername(),groups,customized,purchasedTravelPackages,giftLists);
 	
-	
-	return null;
+	return customer;
 }
 
 private ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftListsDTO)
@@ -95,14 +86,20 @@ private ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftLi
 	Iterator <GiftListDTO> iter=giftListsDTO.iterator();
 	while(iter.hasNext())
 	{
-		GiftList giftList=
-		
+		GiftList giftList=this.simpleGiftListDTOToEntity(iter.next());
+		giftLists.add(giftList);
 	}
 	
-	
+	return giftLists;
 }
-private ArrayList <GiftList> simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
+private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 {
+	Product product= productDTOToEntityUpdate(giftListDTO.getProduct());
+	TravelPackage travel=travman.find(giftListDTO.getTravelPackageid());
+	
+	GiftList giftList=new GiftList(product,giftListDTO.getIdBuyer(),giftListDTO.getMoreInfo(),giftListDTO.isBought(),travel);
+	
+	return giftList;
 	
 	
 	
@@ -110,7 +107,7 @@ private ArrayList <GiftList> simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 
 
 
-private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstring)
+/*private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstring)
 {
 	ArrayList <Customer> friends=new ArrayList <Customer> ();
 	Iterator <String> iter=friendstring.iterator();
@@ -120,7 +117,7 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
 		friends.add(customer);
 	}
  return friends;
-}
+}*/
 
 	 private ProductDTO productToDTO(Product product)
 
@@ -152,7 +149,7 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
 		
 	}
 	
-	private  ArrayList <String> customerListToString(List<Customer> friends)
+	/*private  ArrayList <String> customerListToString(List<Customer> friends)
 	{  
 		ArrayList <String> cusString=new ArrayList<String> (); 
 		Iterator<Customer> iter =friends.iterator();
@@ -164,7 +161,7 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
 		
 		return cusString;
 		
-	}
+	}*/
 	public  ArrayList <TravelPackageDTO> travelPackageToDTO(List <TravelPackage> travellist)
 	{
 		ArrayList <TravelPackageDTO> travelid=new ArrayList <TravelPackageDTO>();
@@ -214,9 +211,9 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
 	{ 
 	  Long idtravelpackage=pre.getIdtravelpackage();
 	  List <StageDTO> stageList=travelToStageDTO(pre);
-	  String idCustomerBuyer=travel.findIdCustomerBuyer(idtravelpackage);
+	  String idCustomerBuyer=travman.findIdCustomerBuyer(idtravelpackage);
 	  System.out.println(idCustomerBuyer);
-	  String idCustomerFriendOwner=travel.findIdCustomerFriendOwner(idtravelpackage);
+	  String idCustomerFriendOwner=travman.findIdCustomerFriendOwner(idtravelpackage);
 	  System.out.println(idCustomerFriendOwner);
 	  
 	  TravelPackageDTO dto=null;
@@ -285,12 +282,12 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
 	}
 	public CustomerDTO toTDO(Customer customer)
 	{   
-		ArrayList <String> friends=customerListToString(customer.getFriends());
+		//ArrayList <String> friends=customerListToString(customer.getFriends());
 		ArrayList <TravelPackageDTO> purchasedTravelPackage = travelPackageToDTO(customer.getPurchasedTravelPackages());
-		ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage=travelPackageToDTO(customer.getPreparedForAFriendTravelPackages());
+		//ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage=travelPackageToDTO(customer.getPreparedForAFriendTravelPackages());
 	    ArrayList <GiftListDTO> giftList =giftListCollectionTODTO(customer.getGiftLists());
 	    ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage=this.customizedTravelPackageToDTO(customer.getCustomizedTravelPackages());
-	   	CustomerDTO cust=new CustomerDTO(customer.getEmail(),customer.getName(), customer.getSurname(),customer.getTelephone(), customer.getPassword(),customer.getUsername(),friends,purchasedTravelPackage,preparedForAFriendTravelPackage,giftList,customizedTravelPackage);
+	   	CustomerDTO cust=new CustomerDTO(customer.getEmail(),customer.getName(), customer.getSurname(),customer.getTelephone(), customer.getPassword(),customer.getUsername()/*,friends*/,purchasedTravelPackage/*,preparedForAFriendTravelPackage*/,giftList,customizedTravelPackage);
 
 		return cust;
 		
@@ -364,7 +361,7 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
    
    /**
     * @author Marcello
-    * Private method that transform the CustomerDTO in the entity customer
+    * Private method that transform the CustomerDTO in the entity customer , used during the registration phase
     * @param customer -->the customer DTO acquired from the web tier
     * @return the entity Customer translated from the CustomerDTO
     */
@@ -373,11 +370,11 @@ private ArrayList <Customer> stringListToCustomer(ArrayList <String> friendstrin
    	List<Group> groups=new ArrayList <Group>();
        groups.add(Group.CUSTOMER);
        List<CustomizedTravelPackage> customizedTravelPackages=new ArrayList <CustomizedTravelPackage>();
-       List<Customer> friends=new ArrayList <Customer>();
-       List<TravelPackage> purchasedTravelPackages=new ArrayList<TravelPackage>();
-       List<TravelPackage> preparedForAFriendTravelPackages=new ArrayList <TravelPackage>();
-       List<GiftList> giftLists=new ArrayList <GiftList>();
-       Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.sha256Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,friends,purchasedTravelPackages,preparedForAFriendTravelPackages,giftLists); 
+/*       List<Customer> friends=new ArrayList <Customer>();
+*/       List<TravelPackage> purchasedTravelPackages=new ArrayList<TravelPackage>();
+/*       List<TravelPackage> preparedForAFriendTravelPackages=new ArrayList <TravelPackage>();
+*/       List<GiftList> giftLists=new ArrayList <GiftList>();
+       Customer real=new Customer(customer.getEmail(),customer.getName(),customer.getSurname(),customer.getTelephone(),DigestUtils.sha256Hex(customer.getPassword()),customer.getUsername(),groups,customizedTravelPackages,/*friends,*/purchasedTravelPackages/*,preparedForAFriendTravelPackages*/,giftLists); 
        
   	   return real;
    	

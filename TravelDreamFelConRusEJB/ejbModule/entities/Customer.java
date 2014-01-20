@@ -34,7 +34,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 
-	public List<Customer> getFriends() {
+	/*public List<Customer> getFriends() {
 		return new ArrayList<Customer> (friends);
 	}
 
@@ -42,7 +42,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 	public void setFriends(List<Customer> friends) {
 		this.friends = friends;
-	}
+	}*/
 
 
 
@@ -59,7 +59,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 
 
-	public List<TravelPackage> getPreparedForAFriendTravelPackages() {
+	/*public List<TravelPackage> getPreparedForAFriendTravelPackages() {
 		return new ArrayList <TravelPackage>(preparedForAFriendTravelPackages);
 	}
 
@@ -69,7 +69,7 @@ public class Customer extends RegisteredUser implements Serializable {
 			List<TravelPackage> preparedForAFriendTravelPackages) {
 		this.preparedForAFriendTravelPackages = preparedForAFriendTravelPackages;
 	}
-
+*/
 
 
 	public List<GiftList> getGiftLists() {
@@ -94,15 +94,15 @@ public class Customer extends RegisteredUser implements Serializable {
 			String telephone, String password, String username,
 			List<Group> groups,
 			List<CustomizedTravelPackage> customizedTravelPackages,
-			List<Customer> friends,
+			/*List<Customer> friends,*/
 			List<TravelPackage> purchasedTravelPackages,
-			List<TravelPackage> preparedForAFriendTravelPackages,
+			/*List<TravelPackage> preparedForAFriendTravelPackages,*/
 			List<GiftList> giftLists) {
 		super(email, name, surname, telephone, password, username, groups);
 		this.customizedTravelPackages = customizedTravelPackages;
-		this.friends = friends;
+		//this.friends = friends;
 		this.purchasedTravelPackages = purchasedTravelPackages;
-		this.preparedForAFriendTravelPackages = preparedForAFriendTravelPackages;
+		//this.preparedForAFriendTravelPackages = preparedForAFriendTravelPackages;
 		this.giftLists = giftLists;
 	}
 
@@ -116,16 +116,16 @@ private List <CustomizedTravelPackage> customizedTravelPackages;
 
 
 
-@ManyToMany(cascade=CascadeType.ALL)
+/*@ManyToMany(cascade=CascadeType.ALL)
 @JoinTable(name = "friendship", joinColumns = @JoinColumn(name = "friendA"),inverseJoinColumns = @JoinColumn(name = "friendB"))
-private List <Customer> friends;
+private List <Customer> friends;*/
 @OneToMany(cascade=CascadeType.ALL)
 @JoinColumn(name="idCustomerBuyer")
 private List <TravelPackage> purchasedTravelPackages;
 
-@OneToMany(cascade=CascadeType.ALL)
+/*@OneToMany(cascade=CascadeType.ALL)
 @JoinColumn(name="idCustomerFriendOwner")
-private List <TravelPackage> preparedForAFriendTravelPackages;
+private List <TravelPackage> preparedForAFriendTravelPackages;*/
 @OneToMany (cascade=CascadeType.ALL)
 @JoinColumn(name="idCustomer")
 private List <GiftList> giftLists;
