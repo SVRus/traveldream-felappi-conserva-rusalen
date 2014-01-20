@@ -8,7 +8,8 @@ public class GiftListDTO {
 	private String moreInfo;
 	private boolean bought;
 	private long travelPackageid;
-	
+	private String idCustomerCreator;
+	//TODO
 	
 	
 	public GiftListDTO(ProductDTO product, String idBuyer, String moreInfo,

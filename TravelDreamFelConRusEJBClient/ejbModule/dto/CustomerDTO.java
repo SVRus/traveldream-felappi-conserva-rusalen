@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class CustomerDTO extends GenericUserDTO{
 
-	public ArrayList<String> getFriends() {
+/*	public ArrayList<String> getFriends() {
 		return friends;
 	}
 
@@ -16,7 +16,7 @@ public class CustomerDTO extends GenericUserDTO{
 
 	public void setFriends(ArrayList<String> friends) {
 		this.friends = friends;
-	}
+	}*/
 
 
 
@@ -31,7 +31,7 @@ public class CustomerDTO extends GenericUserDTO{
 	}
 
 
-
+/*
 	public ArrayList<TravelPackageDTO> getPreparedForAFriendTravelPackage() {
 		return preparedForAFriendTravelPackage;
 	}
@@ -42,7 +42,7 @@ public class CustomerDTO extends GenericUserDTO{
 			ArrayList<TravelPackageDTO> preparedForAFriendTravelPackage) {
 		this.preparedForAFriendTravelPackage = preparedForAFriendTravelPackage;
 	}
-
+*/
 
 
 	public ArrayList<GiftListDTO> getGiftlist() {
@@ -69,9 +69,9 @@ public class CustomerDTO extends GenericUserDTO{
 
 
 
-	private ArrayList <String> friends;
+	//private ArrayList <String> friends;
 	private ArrayList <TravelPackageDTO> purchasedTravelPackage; 
-	private ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage;
+	//private ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage;
 	private ArrayList <GiftListDTO> giftlist;
 	private ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage;
 	
@@ -79,14 +79,14 @@ public class CustomerDTO extends GenericUserDTO{
 	
 	public CustomerDTO(String email, String name, String surname,
 			String telephone, String password, String username,
-			ArrayList<String> friends, ArrayList<TravelPackageDTO> purchasedTravelPackage,
-			ArrayList<TravelPackageDTO> preparedForAFriendTravelPackage,
+			/*ArrayList<String> friends,*/ ArrayList<TravelPackageDTO> purchasedTravelPackage,
+			/*ArrayList<TravelPackageDTO> preparedForAFriendTravelPackage,*/
 			ArrayList<GiftListDTO> giftlist,
 			ArrayList<CustomizedTravelPackageDTO> customizedTravelPackage) {
 		super(email, name, surname, telephone, password, username);
-		this.friends = friends;
+		//this.friends = friends;
 		this.purchasedTravelPackage = purchasedTravelPackage;
-		this.preparedForAFriendTravelPackage = preparedForAFriendTravelPackage;
+		//this.preparedForAFriendTravelPackage = preparedForAFriendTravelPackage;
 		this.giftlist = giftlist;
 		this.customizedTravelPackage = customizedTravelPackage;
 	}
