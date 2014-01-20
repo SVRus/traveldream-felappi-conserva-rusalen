@@ -12,55 +12,26 @@ public class FlightDTO extends ProductDTO {
 	private String place_end;
 	private String more_info;
 	
+
 	
-	/**
-	 * constructor without the idproduct: used during the creation phase
-	 * @param idtravelpackage
-	 * @param employeeCreator
-	 * @param name
-	 * @param cost
-	 * @param timeStart
-	 * @param timeEnd
-	 * @param flight_company
-	 * @param area_start
-	 * @param area_end
-	 * @param place_start
-	 * @param place_end
-	 * @param more_info
-	 */
-	public FlightDTO(long idtravelpackage, String employeeCreator, String name,
-			float cost, Calendar timeStart, Calendar timeEnd, String flight_company,
-			String area_start, String area_end, String place_start,
-			String place_end, String more_info,State state) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd,state,area_end);
+	public FlightDTO(long idstage, String employeeCreator, String name,
+			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+			State state, String area, String flight_company, String area_start,
+			String place_start, String place_end, String more_info) {
+		super(idstage, employeeCreator, name, idProduct, cost, timeStart,
+				timeEnd, state, area);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
 	}
-	/**
-	 * constructor with the idproduct: it can't be used during the creation phase
-	 * @param idtravelpackage
-	 * @param employeeCreator
-	 * @param name
-	 * @param idProduct
-	 * @param cost
-	 * @param timeStart
-	 * @param timeEnd
-	 * @param flight_company
-	 * @param area_start
-	 * @param area_end
-	 * @param place_start
-	 * @param place_end
-	 * @param more_info
-	 */
-	public FlightDTO(long idtravelpackage, String employeeCreator, String name,
-			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
-			String flight_company, String area_start, String area_end,
-			String place_start, String place_end, String more_info,State state) {
-		super(idtravelpackage, employeeCreator, name, idProduct, cost,
-				timeStart, timeEnd,state,area_end);
+	public FlightDTO(long idstage, String employeeCreator, String name,
+			float cost, Calendar timeStart, Calendar timeEnd, State state,
+			String area, String flight_company, String area_start,
+			String place_start, String place_end, String more_info) {
+		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,
+				area);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.place_start = place_start;
