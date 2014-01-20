@@ -58,5 +58,20 @@ private String description;
 	public Outing() {
 		super();
 	}
+   public boolean equals(Object object)
+   {
+	   
+	   
+	   if(! (object instanceof Outing))
+	return false;
+	   return equals((Outing)object);
+   }
+   
+   public boolean equals(Outing outing)
+   {
+	   
+   return super.equals(outing)	;   
+	   
+	}
    
 }

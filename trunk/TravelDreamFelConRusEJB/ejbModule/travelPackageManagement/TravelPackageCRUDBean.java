@@ -1,5 +1,6 @@
 package travelPackageManagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -126,6 +127,12 @@ DTOFactory dto;
 		
 		
 	}
-	
+	public CustomizedTravelPackageDTO createCustomizedTravelPackage (CustomizedTravelPackageDTO customizedInput)
+	{
+		
+		
+		return trav.;
+			
+	}
 	
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.CustomizedTravelPackageDTO;
 import entities.RegisteredUser;
 import entities.TravelPackage;
 
@@ -56,8 +57,7 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
   		return (String)(result);
     }
     
-    
-    
+   
     
 
 }

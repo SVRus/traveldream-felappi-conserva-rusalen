@@ -26,4 +26,11 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 	protected EntityManager getEntityManager() {
 		 return em;
 	}
+    
+    public boolean findEnoughFlight()
+    {
+    	
+    	
+    }
+   
 }

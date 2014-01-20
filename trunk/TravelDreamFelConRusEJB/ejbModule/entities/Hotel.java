@@ -4,7 +4,6 @@ import entities.Product;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.persistence.*;
 
@@ -20,44 +19,27 @@ import stateenum.State;
 public class Hotel extends Product implements Serializable {
 	
 
-/**
- * constructor used during the update phase
- * @param cost
- * @param timeStart
- * @param timeEnd
- * @param name
- * @param travel
- * @param area
- * @param place
- * @param room_type
- * @param more_info
- */
-public Hotel(float cost,Calendar timeStart, Calendar timeEnd, String name,
-			 String area, String place, String room_type,
-			String more_info,State state) {
-		super(cost, timeStart, timeEnd, name, state,area);
-		
+
+
+
+
+
+
+public Hotel(float cost, Calendar timeStart, Calendar timeEnd, String name,
+			State state, String area, String place, String room_type,
+			String more_info) {
+		super(cost, timeStart, timeEnd, name, state, area);
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
+		
 	}
-/**
- * constructor used during the creation phase
- * @param idProduct
- * @param cost
- * @param timeStart
- * @param timeEnd
- * @param name
- * @param travel
- * @param area
- * @param place
- * @param room_type
- * @param more_info
- */
-public Hotel(long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
-			String name, String area, String place,
-			String room_type, String more_info,State state) {
-		super(idProduct, cost, timeStart, timeEnd, name,state,area);
+
+public Hotel(long idProduct, float cost, Calendar timeStart,
+			Calendar timeEnd, String name, State state, String area ,String room_type, String more_info,
+			
+			String place) {
+		super(idProduct, cost, timeStart, timeEnd, name, state, area);
 		this.place = place;
 		this.room_type = room_type;
 		this.more_info = more_info;
@@ -66,7 +48,6 @@ public Hotel(long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
 private String place;
 private String room_type;
 private String more_info;
-	
 
 
 
@@ -99,5 +80,19 @@ public void setMore_info(String more_info) {
 	public Hotel() {
 		super();
 	}
-   
+	   public boolean equals(Object object)
+	   {
+		   
+		   
+		   if(! (object instanceof Outing))
+		return false;
+		   return equals((Hotel)object);
+	   }
+	   
+	   public boolean equals(Hotel hotel)
+	   {
+		   
+	   return super.equals(hotel)&&place.equalsIgnoreCase(hotel.getPlace())&&room_type.equalsIgnoreCase(hotel.getRoom_type());
+		   
+		}
 }
