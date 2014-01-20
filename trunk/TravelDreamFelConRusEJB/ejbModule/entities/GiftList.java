@@ -13,6 +13,15 @@ import javax.persistence.*;
 public class GiftList implements Serializable {
 
 	
+	public GiftList(Product product, String idBuyer, String moreInfo,
+			boolean bought, TravelPackage travelPackage) {
+		super();
+		this.product = product;
+		this.idBuyer = idBuyer;
+		this.moreInfo = moreInfo;
+		this.bought = bought;
+		this.travelPackage = travelPackage;
+	}
 	public Product getProduct() {
 		return product;
 	}
