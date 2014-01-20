@@ -153,6 +153,16 @@ public void setTimeEnd(Calendar timeEnd) {
 	this.timeEnd = timeEnd;
 }
 
+public boolean equals(Object object)
+{
+  if(!(object instanceof Product))	
+	  return false;
+  return equals((Product)object);
 
+}
+public  boolean equals(Product product)
+{
   
+	return cost==product.getCost() && timeStart.equals(product.getTimeStart())&&timeEnd.equals(product.getTimeEnd())&&name.equalsIgnoreCase(product.getName())&&area.equals(product.getArea())&&state==product.getState();
+}
 }

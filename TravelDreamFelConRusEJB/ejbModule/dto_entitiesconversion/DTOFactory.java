@@ -1,6 +1,7 @@
 package dto_entitiesconversion;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.ejb.Stateless;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import stateenum.State;
 import dto.CustomerDTO;
 import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
@@ -124,25 +126,25 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	{ 
 	System.out.println("il prodotto è "+product.toString());
 		ProductDTO result=null;
-	    Long idtravelpackage= proman.findStageContainer(product.getIdProduct());
+	    Long idstage= proman.findStageContainer(product.getIdProduct());
 		
 	    
 	    
 	    if (product instanceof  Flight)
 		{   
-			result=new FlightDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info(),product.getState());
+			result=new FlightDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getState(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
 			
 		}
 		else if (product instanceof Outing)
 		{
 			
-			result=new OutingDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState());
+			result=new OutingDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState());
 			
 		}
 		else if (product instanceof Hotel)
 		{
 			
-			result=new HotelDTO(idtravelpackage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info(),product.getState());
+			result=new HotelDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getState(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info());
 			
 		}
 		return result;
@@ -384,7 +386,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	Product entity=null;
    	if(product instanceof HotelDTO )
    	{
-   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
+   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),((HotelDTO)product).getPlace());
    	}
    	else if (product instanceof FlightDTO)
    	{
@@ -558,16 +560,16 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    }
    
    
-   private Product productDTOToEntityUpdate(ProductDTO product)
+   public Product productDTOToEntityUpdate(ProductDTO product)
    {
    	Product entity=null;
    	if(product instanceof HotelDTO )
    	{
-   		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
+   		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),((HotelDTO)product).getPlace());
    	}
    	else if (product instanceof FlightDTO)
    	{
-   		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
    		
    	
    	}

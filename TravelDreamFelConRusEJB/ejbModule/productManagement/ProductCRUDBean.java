@@ -56,7 +56,7 @@ EmployeeEntityManagementLocal emplo;
     }
    
     public boolean createProduct(ProductDTO productdto)
-    {   Product product=productDTOToEntity(productdto);
+    {   Product product=dto.productDTOToEntity(productdto);
    
    
 		boolean ok=false;
@@ -115,7 +115,7 @@ EmployeeEntityManagementLocal emplo;
     public boolean createProductFromEmployee(ProductDTO product,String username)
     {
 		Employee employee=emplo.find(username);
-		Product prod=productDTOToEntity(product);
+		Product prod=dto.productDTOToEntity(product);
     	employee.getManagedProduct().add(prod);
     	try
     	{
@@ -132,26 +132,7 @@ EmployeeEntityManagementLocal emplo;
     	
     }
     
-    private Product productDTOToEntity(ProductDTO product)
-    {
-    	Product entity=null;
-    	if(product instanceof HotelDTO )
-    	{
-    		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
-    	}
-    	else if (product instanceof FlightDTO)
-    	{
-    		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
-    		
-    	
-    	}
-    	else if (product instanceof OutingDTO)
-    	{
-    		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
-    		
-    	}
-    	return entity;
-    }
+   
     public boolean delete(ProductDTO productdto)
     {
     	boolean ok=false;
@@ -170,7 +151,7 @@ EmployeeEntityManagementLocal emplo;
     	
     }
     public boolean updateProduct(ProductDTO productdto)
-    {   Product product=productDTOToEntityUpdate(productdto);
+    {   Product product=dto.productDTOToEntityUpdate(productdto);
     	boolean ok=false;
     	if( product instanceof Hotel)
     	{
@@ -224,26 +205,7 @@ EmployeeEntityManagementLocal emplo;
     }
 
 
-    private Product productDTOToEntityUpdate(ProductDTO product)
-    {
-    	Product entity=null;
-    	if(product instanceof HotelDTO )
-    	{
-    		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),product.getState());
-    	}
-    	else if (product instanceof FlightDTO)
-    	{
-    		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getArea(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
-    		
-    	
-    	}
-    	else if (product instanceof OutingDTO)
-    	{
-    		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
-    		
-    	}
-    	return entity;
-    }
+  
     public List <HotelDTO> findAllHotels()
     {
     	
@@ -328,4 +290,7 @@ EmployeeEntityManagementLocal emplo;
     	
     	
     }
+    
+    
+  
 }

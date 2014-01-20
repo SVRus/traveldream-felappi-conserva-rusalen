@@ -21,30 +21,31 @@ public class Flight extends Product implements Serializable {
 
 	
 	
-	public Flight(long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
-			String name,  String flight_company,
-			String area_start, String area_end, String place_start,
-			String place_end, String more_info,State state) {
-		super(idProduct, cost, timeStart, timeEnd, name, state,area_end);
-		this.flight_company = flight_company;
-		this.area_start = area_start;
-		this.place_start = place_start;
-		this.place_end = place_end;
-		this.more_info = more_info;
-	}
 	
-	public Flight(float cost, Calendar timeStart, Calendar timeEnd, String name,
-			 String flight_company, String area_start,
-			String area_end, String place_start, String place_end,
-			String more_info,State state) {
-		super(cost, timeStart, timeEnd, name, state,area_end);
+
+
+	public Flight(float cost, Calendar timeStart, Calendar timeEnd,
+			String name, String area, String flight_company,
+			String area_start, String place_start, String place_end,
+			String more_info, State state) {
+		super(cost, timeStart, timeEnd, name, state, area);
 		this.flight_company = flight_company;
 		this.area_start = area_start;
 		this.place_start = place_start;
 		this.place_end = place_end;
 		this.more_info = more_info;
 	}
-
+	public Flight(long idProduct, float cost, Calendar timeStart,
+			Calendar timeEnd, String name, String area,
+			String flight_company, String area_start, String place_start,
+			String place_end, String more_info,  State state) {
+		super(idProduct, cost, timeStart, timeEnd, name, state, area);
+		this.flight_company = flight_company;
+		this.area_start = area_start;
+		this.place_start = place_start;
+		this.place_end = place_end;
+		this.more_info = more_info;
+	}
 	public String getFlight_company() {
 		return flight_company;
 	}
@@ -85,5 +86,18 @@ private String more_info;
 	public Flight() {
 		super();
 	}
-   
+	  public boolean equals(Object object)
+	   {
+		   
+		   
+		   if(! (object instanceof Outing))
+		return false;
+		   return equals((Flight)object);
+	   }
+	  public boolean equals(Flight flight)
+	   {
+		   
+	   return super.equals(flight)&&flight_company.equalsIgnoreCase(flight.getFlight_company())&&area_start.equalsIgnoreCase(flight.getArea_start())&&place_start.equalsIgnoreCase(flight.getPlace_start())&&place_end.equalsIgnoreCase(flight.getPlace_end());
+		   
+		}
 }
