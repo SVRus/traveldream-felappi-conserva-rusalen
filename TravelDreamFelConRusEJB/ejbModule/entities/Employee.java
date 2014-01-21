@@ -58,10 +58,10 @@ public class Employee extends RegisteredUser implements Serializable {
 	public Employee() {
 		super();
 	}
-   @OneToMany(cascade={CascadeType.ALL})
+   @OneToMany()
    @JoinColumn(name="idemployee")
    private List <Product> managedProduct;
-   @OneToMany(cascade=CascadeType.ALL)
+   @OneToMany()
    @JoinColumn(name="idEmployeeCreator")
    private List <PrepackedTravelPackage> managedTravelPackage;//inserire la relazione
   
