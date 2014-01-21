@@ -9,7 +9,7 @@ public class OutingDTO extends ProductDTO {
 	private String description;
 	/**
 	 * constructor without the idproduct: used during the creation phase
-	 * @param idtravelpackage
+	 * @param idstage
 	 * @param employeeCreator
 	 * @param name
 	 * @param cost
@@ -18,10 +18,10 @@ public class OutingDTO extends ProductDTO {
 	 * @param description
 	 * @param area
 	 */
-	public OutingDTO(long idtravelpackage, String employeeCreator, String name,
+	public OutingDTO(long idstage, String employeeCreator, String name,
 			float cost, Calendar timeStart, Calendar timeEnd, String description,
 			String area,State state) {
-		super(idtravelpackage, employeeCreator, name, cost, timeStart, timeEnd, state,area);
+		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,area);
 		this.description = description;
 	}
 	
@@ -37,7 +37,7 @@ public class OutingDTO extends ProductDTO {
 
 	/**
 	 * constructor with the idproduct: it can't be used during the creation phase
-	 * @param idtravelpackage
+	 * @param idstage
 	 * @param employeeCreator
 	 * @param name
 	 * @param idProduct
@@ -47,10 +47,10 @@ public class OutingDTO extends ProductDTO {
 	 * @param description
 	 * @param area
 	 */
-	public OutingDTO(long idtravelpackage, String employeeCreator, String name,
+	public OutingDTO(long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
 			String description, String area,State state) {
-		super(idtravelpackage, employeeCreator, name, idProduct, cost,
+		super(idstage, employeeCreator, name, idProduct, cost,
 				timeStart, timeEnd,state,area);
 		this.description = description;
 	}
