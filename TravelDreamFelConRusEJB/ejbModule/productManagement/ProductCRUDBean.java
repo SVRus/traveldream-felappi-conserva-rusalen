@@ -114,7 +114,7 @@ LoginBeanLocal log;
    }
     
     
-    public boolean createProductFromEmployee(ProductDTO product,String username)
+    public boolean createProductFromEmployee(ProductDTO product)
     {   System.out.print(log.getPrincipalUsername()+"sono io");
 		Employee employee=(Employee)emplo.find(log.getPrincipalUsername());
 		Product prod=dto.productDTOToEntityUpdate(product);
