@@ -12,7 +12,23 @@ public class FlightDTO extends ProductDTO {
 	private String place_end;
 	private String more_info;
 	
-
+/**
+ * 
+ * @param idstage
+ * @param employeeCreator
+ * @param name
+ * @param idProduct
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param state
+ * @param area
+ * @param flight_company
+ * @param area_start
+ * @param place_start
+ * @param place_end
+ * @param more_info
+ */
 	
 	public FlightDTO(long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,

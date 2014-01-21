@@ -11,7 +11,7 @@ import dto.TravelPackageDTO;
 @Local
 public interface TravelPackageCRUDBeanLocal 
 {
-	public boolean createTravelFromEmployee(TravelPackageDTO prepacked,String username) ;
+	public boolean createTravelFromEmployee(TravelPackageDTO prepacked) ;
 	public boolean updateTravelPackage(TravelPackageDTO traveldto);
 	public boolean delete(TravelPackageDTO traveldto);
 	public List <PrepackedTravelPackageDTO> findAllPrepacked();
