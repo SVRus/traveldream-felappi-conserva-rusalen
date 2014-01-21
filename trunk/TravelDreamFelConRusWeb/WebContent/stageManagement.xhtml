@@ -7,10 +7,16 @@
     <h:head></h:head> 
     <body> 
         <p:layout fullPage="true">  
-  
-        <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="North unit content." />  
-        </p:layoutUnit>  
+  <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        .ui-layout-unit-header{background-image:url('background.gif');}
+    </style> 
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+		</p:layoutUnit>  
       
         <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
             <h:outputText value="South unit content." />  
@@ -20,31 +26,150 @@
             <h:outputText value="West unit content." />  
         </p:layoutUnit>  
       
-        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-            <h:outputText value="Right unit content." />
-            <p:button outcome="temp" value="Gestisci prodotti" icon="ui-icon-star">  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
-            <f:param name="pacId" value="10" />  
-            </p:button>  
-        </p:layoutUnit>  
+       
       
       <p:layoutUnit position="center">  
-	  <h:form id="form">
-	   <p:dataTable var="flight" value="#{stageManagementBean.flightList}">  
-        <p:column headerText="Model">  
+       <p:layout style="min-width:400px;min-height:200px;" id="layout">  
+    <p:layoutUnit position="west"  size="600" >  
+       
+	  <h:form id="form1">
+	   <p:dataTable var="flight" value="#{stageManagement.flightList}">  
+	     <f:facet name="header">
+                    Volo di partenza
+                </f:facet> 
+        <p:column headerText="Nome">  
             <h:outputText value="#{flight.name}" />  
         </p:column>  
   
-        <p:column headerText="Year">  
+        <p:column headerText="Area di partenza">  
             <h:outputText value="#{flight.area_start}" />  
         </p:column>  
+         <f:facet name="footer">
+                    <p:commandButton value="Inserisci" /> 
+                     <p:commandButton value="Cancella" />
+                </f:facet>
       </p:dataTable>  
+      <p:separator id="separator"/>  
+      
+      <p:dataTable var="flight" value="#{stageManagement.flightStart}">
+        <f:facet name="header">
+                    Volo di ritorno
+                </f:facet>   
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flight.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Area di partenza">  
+            <h:outputText value="#{flight.area_start}" />  
+        </p:column>  
+          <f:facet name="footer">
+                      <p:commandButton value="Inserisci" /> 
+                     <p:commandButton value="Cancella" />
+                </f:facet>
+      </p:dataTable> 
+      <p:separator id="separator1"/>  
+      <p:dataTable var="flight" value="#{stageManagement.flightStart}">  
+        <f:facet name="header">
+                    Hotel
+                </f:facet> 
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flight.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Area di partenza">  
+            <h:outputText value="#{flight.area_start}" />  
+        </p:column>  
+          <f:facet name="footer">
+                      <p:commandButton value="Inserisci" /> 
+                     <p:commandButton value="Cancella" />
+                </f:facet>
+      </p:dataTable> 
+      </h:form>
     
- 	</h:form>
-        </p:layoutUnit>
+       </p:layoutUnit>  
+  
+    <p:layoutUnit position="center">  
+<h:form id="form">
+ <p:dataTable var="outing" value="#{outingManagement.outingModel}" rowKey="#{outing.name}" paginator="true" rows="10"  
+                selection="#{outingManagement.selectedOuting}" selectionMode="single" 
+                filteredValue="#{outingManagement.filteredOutings}" id="outingtable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                    Lista Outing
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{outing.name}" filterBy="#{outing.name}" id="name">
+                    
+                    
+                    <p:commandLink value="#{outing.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{outing}" target="#{outingManagement.selectedOuting}" />    
+                    </p:commandLink>
+                	</p:column>
+                      <p:column  headerText="Area" sortBy="#{outing.area}" filterBy="#{outing.area}" id="area">
+                      #{outing.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{outing.place}" filterBy="#{outing.place}" id="place">  
+                      #{outing.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{outing.timeStart}" filterBy="#{outing.timeStart}" id="timeStart">  
+                      #{outing.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{outing.timeEnd}" filterBy="#{outing.timeEnd}" id="timeEnd">  
+                      #{outing.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Tipo" sortBy="#{outing.room_type}" filterBy="#{outing.room_type}" id="room_type">  
+                      #{outing.area}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                    <p:commandButton id="effectsDialogButton" value="Nuovo Outing" onclick="PF('dlg3').show();" type="button" /> 
+                     <p:commandButton value="Cancella Outing" actionListener="#{outingManagement.deleteOuting}" update="outingtable" icon="ui-icon-trash"/>
+                </f:facet>
+
+              </p:dataTable>
+         </h:form>   
+         
+     </p:layoutUnit>  
+	
+	</p:layout>  
+    
+ 	    </p:layoutUnit>
         </p:layout>
+           <p:dialog header="Nuovo Outing" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+     <h:form>
+     <h:panelGrid columns="2" cellpadding="5">  
+            <h:outputLabel for="username" value="Nome:" />  
+            <p:inputText value="#{outingManagement.name}"   
+                    id="username" required="true" label="username" />  
+              
+            <f:facet name="footer">  
+                <p:commandButton id="loginButton" value="Crea" update=":form:outingtable"   
+                    actionListener="#{outingManagement.newOuting}"  
+                   oncomplete="dlg3.hide();"/>  
+                
+               
+            </f:facet>  
+        </h:panelGrid>  
+        </h:form>
+        
+        
+        	</p:dialog> 
+        	
+        <script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if( !args.loggedIn) {  
+            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            PF('dlg3').hide();  
+            $('#loginLink').fadeOut();  
+        }  
+    }  
+</script>  	    
     </body> 
     
     
