@@ -8,7 +8,11 @@
        <from-view-id>allPackages.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>sel</from-outcome>
-           <to-view-id>/hotelManagement.xhtml</to-view-id>
+           <to-view-id>
+           <redirect> 
+           /hotelManagement.xhtml
+           </redirect>
+           </to-view-id>
        </navigation-case>
     </navigation-rule>
 
