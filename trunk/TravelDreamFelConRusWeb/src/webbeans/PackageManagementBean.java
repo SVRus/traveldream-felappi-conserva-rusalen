@@ -72,8 +72,8 @@ private List<TravelPackageDTO> packageList;
 public void update()
 {
 ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(), new GregorianCalendar(), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(), new GregorianCalendar(), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
 
 StageDTO stage= new StageDTO(prodotti, "Africa");	
 ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
@@ -86,6 +86,12 @@ System.out.println("Ciao ho popolato i pacchetti");
 
 }
 
+//METODO DI PROVA
+public String selection()
+{
+	System.out.println("sel");
+	return "sel";
+}
 
 
 public Calendar getTime_end() {
