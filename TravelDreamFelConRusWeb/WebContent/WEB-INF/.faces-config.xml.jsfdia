@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PROCESS model-entity="JSFProcess"/>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:allPackages.xhtml" PATH="allPackages.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:allPackages.xhtml:0" NAME="item"
+   PATH="allPackages.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="sel::#hotelManagement.xhtml" NAME="output"
+    PATH="/hotelManagement.xhtml" TARGET="rules:#hotelManagement.xhtml"
+    TITLE="sel" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#hotelManagement.xhtml"
+  PATH="/hotelManagement.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
