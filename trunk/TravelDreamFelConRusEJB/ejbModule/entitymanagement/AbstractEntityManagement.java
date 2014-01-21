@@ -51,5 +51,5 @@ public int count() {
     return ((Long) q.getSingleResult()).intValue();
 }
 
-
+public abstract List <T> findAllByParameter(Object par);
 }

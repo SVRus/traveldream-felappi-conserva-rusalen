@@ -61,6 +61,13 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	
     	
     }
+
+
+	@Override
+	public List findAllByParameter(Object par) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     
     
