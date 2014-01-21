@@ -115,12 +115,14 @@ LoginBeanLocal log;
     
     
     public boolean createProductFromEmployee(ProductDTO product,String username)
-    {
+    {   System.out.print(log.getPrincipalUsername()+"sono io");
 		Employee employee=(Employee)emplo.find(log.getPrincipalUsername());
-		Product prod=dto.productDTOToEntity(product);
-    	employee.getManagedProduct().add(prod);
+		Product prod=dto.productDTOToEntityUpdate(product);
+    	List <Product> products=employee.getManagedProduct();
+    	products.add(prod);
+    	employee.setManagedProduct(products);
     	try
-    	{   createProduct(product);
+    	{  
     		emplo.edit(employee);
     		
     		
