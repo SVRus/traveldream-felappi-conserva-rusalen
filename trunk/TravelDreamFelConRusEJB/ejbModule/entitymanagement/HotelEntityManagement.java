@@ -1,6 +1,7 @@
 package entitymanagement;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import stateenum.State;
 import entities.Hotel;
 import entities.Outing;
 
@@ -42,5 +44,16 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 		return new ArrayList <Hotel> ();
 	}
 
-
+public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar time,String area) {
+		
+		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state and c.timestart=:timestart and c.area=:area  ");
+		q.setParameter("state", state);
+		q.setParameter("timestart",time);
+		q.setParameter("area", area);
+		List <Hotel> list=q.getResultList();
+		if(list!=null)
+		return new ArrayList <Hotel> (list);
+		else
+		return new ArrayList <Hotel> ();
+	}
 }

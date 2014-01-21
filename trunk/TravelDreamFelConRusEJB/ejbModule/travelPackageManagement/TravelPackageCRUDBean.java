@@ -1,15 +1,14 @@
 package travelPackageManagement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.PrepackedTravelPackageDTO;
-import dto.ProductDTO;
 import dto.TravelPackageDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.CustomizedTravelPackage;
@@ -38,6 +37,8 @@ EmployeeEntityManagementLocal emplo;
 TravelPackageEntityManagementLocal trav; 
 @EJB
 DTOFactory dto;
+@EJB
+LoginBeanLocal log;
     /**
      * Default constructor. 
      */
@@ -47,7 +48,8 @@ DTOFactory dto;
 
 	
 	@Override
-	public boolean createTravelFromEmployee(TravelPackageDTO prepacked,String username) {
+	public boolean createTravelFromEmployee(TravelPackageDTO prepacked) {
+		String username=log.getPrincipalUsername();
 		Employee employee=emplo.find(username);
 		TravelPackage travel=dto.travelPackageDTOToEntity(prepacked, true);
     	employee.getManagedTravelPackage().add((PrepackedTravelPackage)travel);
@@ -127,12 +129,6 @@ DTOFactory dto;
 		
 		
 	}
-	public CustomizedTravelPackageDTO createCustomizedTravelPackage (CustomizedTravelPackageDTO customizedInput)
-	{
-		
-		
-		return trav.;
-			
-	}
+
 	
 }

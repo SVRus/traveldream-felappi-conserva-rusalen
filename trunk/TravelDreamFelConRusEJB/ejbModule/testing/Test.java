@@ -71,20 +71,24 @@ public class Test {
 	    		emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
 List <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.EMPLOYEE);
-	    //emplo=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
+	    emplo=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername123",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
 	  
-	    EmployeeDTO emplodto=new EmployeeDTO("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername12",new Long (123456789),new ArrayList<ProductDTO>(),new ArrayList <PrepackedTravelPackageDTO>());
+	    EmployeeDTO emplodto=new EmployeeDTO("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername123",new Long (123456789),new ArrayList<ProductDTO>(),new ArrayList <PrepackedTravelPackageDTO>());
 	    reg.employeeRegister(emplodto);
-	    hoteldto=new HotelDTO(0, "pippo", "io", 11,new GregorianCalendar() ,new GregorianCalendar(), State.AVAILABLE,  "area1",  "place1",  "singola","info");
 	    
-	    System.out.println(prod.createProductFromEmployee(hoteldto, emplodto.getUsername()));
+	  hoteldto=new HotelDTO(0, "pippo", "io", 11,new GregorianCalendar() ,new GregorianCalendar(), State.AVAILABLE,  "area1",  "place1",  "singola","info");
+	   Hotel hotel=(Hotel)dto.productDTOToEntity(hoteldto) ;
+	   emplo.getManagedProduct().add(hotel);
+	    emploMan.edit(emplo);
+	    
+	  /*  System.out.println(prod.createProductFromEmployee(hoteldto, emplodto.getUsername()));
 		hotelInsert=(Hotel) dto.productDTOToEntity(hoteldto);
 		outingdto=new OutingDTO(0,"pippo","io",11,new GregorianCalendar() ,new GregorianCalendar(),"descr","area1",State.SOLD);
 		prod.createProductFromEmployee(outingdto, emplodto.getUsername());
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
 		flightdto=new FlightDTO(0,"pippo","io",11,new GregorianCalendar() ,new GregorianCalendar(),State.RESERVED,"area1","alitalia","areastart","placestart","placeend","info");
 	    prod.createProductFromEmployee(flightdto, emplodto.getUsername());
-		flightInsert=(Flight)dto.productDTOToEntity(flightdto);
+		flightInsert=(Flight)dto.productDTOToEntity(flightdto);*/
 		
 	}
 	public static void afterClass()
@@ -111,10 +115,10 @@ List <Group> groups=new ArrayList <Group>();
 	@org.junit.Test
 	public void test() {
 		
-		Hotel hotel=hot.find(new Long(1));
+	/*	Hotel hotel=hot.find(new Long(1));
 		Outing outing=out.find(new Long(2));
 		Flight flight=fli.find(new Long(3));
-		assertTrue(hotelInsert.equals(hotel)&&flightInsert.equals(flight)&&outingInsert.equals(outing));
+		assertTrue(hotelInsert.equals(hotel)&&flightInsert.equals(flight)&&outingInsert.equals(outing));*/
 		
 		
 	/*	 
@@ -162,6 +166,11 @@ List <Group> groups=new ArrayList <Group>();
 
 	
 	}
-
+	@org.junit.Test
+	public void test2()
+	{
+		 
+		
+	}
 
 }

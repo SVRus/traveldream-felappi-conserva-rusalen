@@ -1,6 +1,7 @@
 package entitymanagement;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -42,6 +43,19 @@ public class OutingEntityManagement extends AbstractEntityManagement implements 
 		else
 		return new ArrayList <Outing> ();
 	}
- 
+	  public <Outing>List<Outing> findALLByStateAndAreaEnd(State state, Calendar time,String area)
+	   {
+		   Query q= em.createQuery("SELECT c from Outing c where c.state =:par and c.area=:area and c.timestart=:time");
+			q.setParameter("par",state);
+			q.setParameter("area",state);
+			q.setParameter("time",time);
+
+			List <Outing> list=q.getResultList();
+			if(list!=null)
+			return new ArrayList <Outing> (list);
+			else
+			return new ArrayList <Outing> ();
+		   
+	   }
 
 }
