@@ -1,5 +1,6 @@
 package webbeans;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -37,7 +38,20 @@ public class StageManagementBean {
 	private StageHelper stageHelper;
 	private List<FlightDTO> flightList;
 	
-	@ManagedProperty(value="#{PackageCommon}")
+	public List<FlightDTO> getFlightList() {
+		return flightList;
+	}
+
+
+
+
+	public void setFlightList(List<FlightDTO> flightList) {
+		this.flightList = flightList;
+	}
+
+
+
+	@ManagedProperty(value="#{packageCommon}")
 	private PackageCommonBean common;
 	
 	@PostConstruct
@@ -47,6 +61,7 @@ public class StageManagementBean {
 		stageHelper= new StageHelper(common.getCurrentStage());	
 	  
 		flightStart= stageHelper.flightStart();
+		flightList = new ArrayList<FlightDTO>();
 		flightList.add(flightStart);
 	  System.out.println("sono in stage management");
 	  

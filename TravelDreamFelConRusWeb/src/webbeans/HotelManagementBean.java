@@ -100,8 +100,8 @@ public class HotelManagementBean implements Serializable{
 	  public void updateHotel(ActionEvent actionEvent){
 			
 				hotels.remove(selectedHotel);
-			   newHotel = new HotelDTO(23, selectedHotel.getName(), selectedHotel.getName(), 23, data1, data1,
-					   selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), State.AVAILABLE);
+			    newHotel = new HotelDTO(23, selectedHotel.getName(), selectedHotel.getName(), 23, data1, data1,
+			    selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), State.AVAILABLE);
 				productCRUD.updateProduct(newHotel);
 				System.out.println("avrei dovuto creare un hotel");
 				hotels.add(newHotel);
