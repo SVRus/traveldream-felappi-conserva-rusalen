@@ -29,7 +29,12 @@ import dto.HotelDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
-  
+ 
+/* Management utile a testare 
+ * le tabelle all'interno dei dialog, nel file
+ * tableNested.xhtml
+ */
+
 @ManagedBean
 @ViewScoped
   

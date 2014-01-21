@@ -52,6 +52,7 @@ public class StageHelper {
 	
 	public FlightDTO flightStart()
 	{
+		
 		for (int i = 0; i < this.getStageSize(); i++) {
 			if(stage.getProducts().get(i) instanceof FlightDTO)
 			{
