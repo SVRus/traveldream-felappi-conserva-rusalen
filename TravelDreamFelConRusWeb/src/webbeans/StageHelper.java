@@ -1,6 +1,7 @@
 package webbeans;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import dto.FlightDTO;
@@ -35,6 +36,7 @@ public class StageHelper {
 	
 	public List<OutingDTO> outings()
 	{
+		
 		List<OutingDTO> temp = new ArrayList<OutingDTO>();
 		for (int i = 0; i < this.getStageSize(); i++) {
 			if(stage.getProducts().get(i) instanceof OutingDTO)
