@@ -1,10 +1,15 @@
 package entitymanagement;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import entities.Flight;
+import entities.Hotel;
 import entities.Outing;
 
 /**
@@ -27,10 +32,16 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 		 return em;
 	}
     
-    public boolean findEnoughFlight()
-    {
-    	
-    	
-    }
+   
+	@Override
+	public  List<Flight> findAllByParameter(Object par) {
+		Query q= em.createQuery("SELECT c from Flight c   where c.state =:par",Flight.class);
+		q.setParameter("par", par);
+		List <Flight> list=q.getResultList();
+		if(list!=null)
+		return new ArrayList <Flight> (list);
+		else
+		return new ArrayList <Flight> ();
+	}
    
 }

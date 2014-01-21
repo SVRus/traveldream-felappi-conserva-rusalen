@@ -1,5 +1,7 @@
 package entitymanagement;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,5 +26,13 @@ public class CodeEntityManagement extends AbstractEntityManagement implements Co
     @Override
 	protected EntityManager getEntityManager() {
 		 return em;
+	}
+
+
+
+	@Override
+	public List findAllByParameter(Object par) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

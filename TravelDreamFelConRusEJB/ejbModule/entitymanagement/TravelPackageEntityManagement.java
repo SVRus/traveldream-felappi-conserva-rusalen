@@ -56,6 +56,14 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
      	    	
   		return (String)(result);
     }
+
+	
+
+	@Override
+	public List findAllByParameter(Object par) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
    
     

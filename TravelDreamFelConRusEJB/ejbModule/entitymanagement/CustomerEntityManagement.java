@@ -1,5 +1,7 @@
 package entitymanagement;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -30,6 +32,17 @@ public class CustomerEntityManagement extends AbstractEntityManagement implement
     public CustomerEntityManagement() {
         super (Customer.class);
     }
+
+
+
+
+	
+
+	@Override
+	public List findAllByParameter(Object par) {
+		// TODO Auto-generated method stub
+		return null;
+	}
        
    
 

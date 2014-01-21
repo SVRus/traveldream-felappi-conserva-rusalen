@@ -1,5 +1,7 @@
 package entitymanagement;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,6 +45,13 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    		
    		
    	}
+	
+	
+	@Override
+	public List findAllByParameter(Object par) {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
 
 }
