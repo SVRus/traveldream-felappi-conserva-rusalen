@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import userManagement.GenericUserManagementBeanLocal;
@@ -19,7 +20,7 @@ import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="auth")
-
+@SessionScoped
 
 
 public class AuthBean {

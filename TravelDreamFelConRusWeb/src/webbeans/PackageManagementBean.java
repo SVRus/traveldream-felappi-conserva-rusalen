@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -34,7 +35,6 @@ import dto.ProductDTO;
 import dto.HotelDTO;
 import dto.StageDTO;
 import dto.TravelPackageDTO;
-
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
@@ -67,6 +67,9 @@ private TravelPackageDataModel packageModel;
 
 private List<TravelPackageDTO> packageList;
 
+@ManagedProperty(value="#{packageCommon}")
+private PackageCommonBean shared;
+
 
 @PostConstruct
 public void update()
@@ -84,6 +87,12 @@ packageList.add(new TravelPackageDTO(new GregorianCalendar(), new GregorianCalen
 packageModel= new TravelPackageDataModel(packageList);
 System.out.println("Ciao ho popolato i pacchetti");
 
+}
+public void updateCurrentPackage()
+{
+	shared.setCurrentPackage(selectedTravelPackage);
+	System.out.println("Ho modificato il pacchetto corrente");
+	
 }
 
 //METODO DI PROVA
@@ -205,6 +214,12 @@ public List<TravelPackageDTO> getTravelPackages() {
 
 public void setTravelPackages(List<TravelPackageDTO> travelPackages) {
 	TravelPackages = travelPackages;
+}
+public PackageCommonBean getShared() {
+	return shared;
+}
+public void setShared(PackageCommonBean shared) {
+	this.shared = shared;
 }
 
 
