@@ -4,14 +4,11 @@ package productManagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-
 import stateenum.State;
 import authentication.LoginBeanLocal;
-import concistencyCheck.ConsistencyCheckBeanLocal;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
@@ -115,7 +112,7 @@ LoginBeanLocal log;
     
     
     public boolean createProductFromEmployee(ProductDTO product)
-    {   System.out.print(log.getPrincipalUsername()+"sono io");
+    {   
 		Employee employee=(Employee)emplo.find(log.getPrincipalUsername());
 		Product prod=dto.productDTOToEntityUpdate(product);
     	List <Product> products=employee.getManagedProduct();
@@ -136,8 +133,7 @@ LoginBeanLocal log;
     	
     	
     }
-    
-   
+ 
     public boolean delete(ProductDTO productdto)
     {
     	boolean ok=false;

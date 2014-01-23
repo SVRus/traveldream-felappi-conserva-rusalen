@@ -58,7 +58,7 @@ public class Employee extends RegisteredUser implements Serializable {
 	public Employee() {
 		super();
 	}
-   @OneToMany()
+   @OneToMany(fetch = FetchType.EAGER)
    @JoinColumn(name="idemployee")
    private List <Product> managedProduct;
    @OneToMany()
