@@ -12,16 +12,17 @@ import javax.faces.bean.ViewScoped;
 
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
+import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
+import dto.TravelPackageDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="auth")
 @SessionScoped
-
 
 public class AuthBean {
 	private String	firstName;
@@ -101,8 +102,8 @@ public class AuthBean {
 		boolean success;
 		if (!checked)
 		{
-		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<String>(),new ArrayList<Long>(),new ArrayList<Long>(),new ArrayList <GiftListDTO>(),new ArrayList<Long>());
-			
+		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<TravelPackageDTO>(),new ArrayList <GiftListDTO>(),new ArrayList<CustomizedTravelPackageDTO>());
+		///da modificare
 		success = generic.customerRegister(customer);
 			
 		if(success)
