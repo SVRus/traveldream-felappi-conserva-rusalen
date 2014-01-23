@@ -159,7 +159,7 @@ private Calendar time_start;
 private String description;
 @Column(unique=true)
 private String name;
-@OneToMany(cascade=CascadeType.ALL)
+@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 @JoinColumn(name="IDTRAVELPACKAGE")
 private List<Stage> stages;
 

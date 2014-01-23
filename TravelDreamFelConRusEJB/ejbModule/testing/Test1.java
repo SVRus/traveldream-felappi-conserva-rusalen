@@ -2,6 +2,11 @@ package testing;
 
 import static org.junit.Assert.*;
 
+import java.util.Properties;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -10,11 +15,16 @@ import org.junit.Test;
 
 import entities.Outing;
 import entities.Product;
+import entitymanagement.HotelEntityManagementLocal;
 
 public class Test1 {
+	
+	private static 	 HotelEntityManagementLocal hot=null;
+
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+	
 	}
 
 	@AfterClass
@@ -31,8 +41,7 @@ public class Test1 {
 
 	@Test
 	public void test() {
-		Outing outing=new Outing();
-		System.out.print(outing instanceof Product);
+		System.out.println(hot.toString());
 	}
 
 }

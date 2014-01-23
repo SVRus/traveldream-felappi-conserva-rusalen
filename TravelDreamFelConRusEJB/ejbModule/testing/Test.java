@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.embeddable.EJBContainer;
@@ -16,12 +14,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import authentication.RegistrationBeanLocal;
-import dto.EmployeeDTO;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
-import dto.PrepackedTravelPackageDTO;
-import dto.ProductDTO;
 import dto_entitiesconversion.DTOFactory;
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
@@ -53,10 +48,13 @@ public class Test {
 	static Hotel hotelInsert;
 	static OutingDTO  outingdto;
 	static FlightDTO flightdto;
+	static FlightDTO flightdto1;
 	static Outing outingInsert;
 	static Flight flightInsert;
 	static EmployeeEntityManagementLocal emploMan=null;
 	static Employee emplo=null;
+	static Employee impiegato=null; 
+	static Flight flightInsert1=null;
 	@BeforeClass
 	public static void beforeClass() throws NamingException
 	{
@@ -71,25 +69,29 @@ public class Test {
 	    		emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
 List <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.EMPLOYEE);
-	    emplo=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername123",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
-	  
-	    EmployeeDTO emplodto=new EmployeeDTO("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername123",new Long (123456789),new ArrayList<ProductDTO>(),new ArrayList <PrepackedTravelPackageDTO>());
-	    reg.employeeRegister(emplodto);
-	    
+	   emplo=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername1234",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
+       emploMan.create(emplo);	    
 	  hoteldto=new HotelDTO(0, "pippo", "io", 11,new GregorianCalendar() ,new GregorianCalendar(), State.AVAILABLE,  "area1",  "place1",  "singola","info");
-	   Hotel hotel=(Hotel)dto.productDTOToEntity(hoteldto) ;
-	   emplo.getManagedProduct().add(hotel);
-	    emploMan.edit(emplo);
-	    
-	  /*  System.out.println(prod.createProductFromEmployee(hoteldto, emplodto.getUsername()));
-		hotelInsert=(Hotel) dto.productDTOToEntity(hoteldto);
+	   hotelInsert=(Hotel)dto.productDTOToEntity(hoteldto) ;
+	   impiegato=emploMan.find(emplo.getUsername());
+	   List <Product> products=impiegato.getManagedProduct();
+   	   products.add(hotelInsert);
+      
 		outingdto=new OutingDTO(0,"pippo","io",11,new GregorianCalendar() ,new GregorianCalendar(),"descr","area1",State.SOLD);
-		prod.createProductFromEmployee(outingdto, emplodto.getUsername());
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
+		long idstage, String employeeCreator, String name,
+		long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+		State state, String area, String flight_company, String area_start,
+		String place_start, String place_end, String more_info
 		flightdto=new FlightDTO(0,"pippo","io",11,new GregorianCalendar() ,new GregorianCalendar(),State.RESERVED,"area1","alitalia","areastart","placestart","placeend","info");
-	    prod.createProductFromEmployee(flightdto, emplodto.getUsername());
-		flightInsert=(Flight)dto.productDTOToEntity(flightdto);*/
-		
+	    flightdto1= new FlightDTO(0,"pippo","io",11,new GregorianCalendar() ,new GregorianCalendar(),State.AVAILABLE,"area2","alitalia","areastart","placestart","placeend","info");
+		flightInsert=(Flight)dto.productDTOToEntity(flightdto);
+		flightInsert1=(Flight)dto.productDTOToEntity(flightdto1);
+		products.add(outingInsert);
+		products.add(flightInsert);
+		products.add(flightInsert1);
+    	impiegato.setManagedProduct(products);
+	    emploMan.edit(impiegato);
 	}
 	public static void afterClass()
 	{
@@ -101,76 +103,57 @@ List <Group> groups=new ArrayList <Group>();
 	public  void before()
 	
 	{
-	 /*=new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-	 HotelDTO  hotel2= new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
-	 HotelDTO  hotel3=new HotelDTO(0, "test", "test",0, 11,new Date() ,new Date(), "area2",  "test",  "test",  "test",State.AVAILABLE);
-*/
-	
-	/* prod.createProduct(hotel1);
-	 prod.createProduct(hotel2);
-	 prod.createProduct(hotel3);*/
-		
-	}
-	
-	@org.junit.Test
-	public void test() {
-		
-	/*	Hotel hotel=hot.find(new Long(1));
-		Outing outing=out.find(new Long(2));
-		Flight flight=fli.find(new Long(3));
-		assertTrue(hotelInsert.equals(hotel)&&flightInsert.equals(flight)&&outingInsert.equals(outing));*/
-		
-		
-	/*	 
-		 List <Product> lista1=new ArrayList <Product> ();
-		List <Product> lista2=new ArrayList <Product> ();
-		lista1.add((Hotel)hot.find(new Long(1)));
-		lista1.add((Hotel)hot.find(new Long(2)));
-		lista2.add((Hotel)hot.find(new Long(3)));
-		lista2.add((Hotel)hot.find(new Long(4)));
-          Stage stage1=new Stage("area1",lista1);
-          Stage stage2=new Stage ("area2",lista2);
-          List <Stage> stages=new ArrayList <Stage> ();
-          stages.add(stage1);
-          stages.add(stage2);
-	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new Date(),new Date(),"","",stages,"0",new Date());
-	    pre.edit(travel);
-	    PrepackedTravelPackage travel2=pre.find(new Long(1));
-	    System.out.println(travel2.toString());
-	   List <Stage> stages1=travel2.getStages();
-	   ArrayList <Stage> stages2=new ArrayList <Stage> (stages1);
-	    System.out.println(stages2.toString());
-	    
-        Iterator <Stage> iter=stages2.iterator();
-        while(iter.hasNext())
-        {
-        	System.out.print(iter.next().getProducts().toString());
-        	
-        }*/
 
-	    
+		
 	}
 	
 	
+	
+	
 	@org.junit.Test
-	public void test1()
+	public void testProductInsert()
 	{
-		List <Hotel> hotelListAvailable=hot.findAllByParameter(State.AVAILABLE);
+		List <Hotel> hotelListAvailable=hot.findAll();
 		Hotel hote=hotelListAvailable.get(0);
 		
 		List <Outing> outingListNull=out.findAllByParameter(State.AVAILABLE);
 
 		List <Flight> flightListReserved=fli.findAllByParameter(State.RESERVED);
+		Flight flight=flightListReserved.get(0);
 		
-		assertTrue(hote!=null && hote.equals(hotelInsert)&&flightListReserved.size()==1&&outingListNull.size()==0);
+		assertTrue(hote!=null && hote.equals(hotelInsert)&&flight.equals(flightInsert)&&flightListReserved.size()==1&&outingListNull.size()==0);
 
 	
 	}
 	@org.junit.Test
-	public void test2()
-	{
-		 
+	public void testPrepackedPackageInsert() {
+	    List <Product> lista1=hot.findAllByParameter(State.AVAILABLE);
+		List <Product> lista2=fli.findAllByParameter(State.AVAILABLE);
 		
+        Stage stage1=new Stage("area1",lista1);
+        Stage stage2=new Stage ("area2",lista2);
+        List <Stage> stages=new ArrayList <Stage> ();
+        stages.add(stage1);
+        stages.add(stage2);
+        impiegato=emploMan.find(impiegato.getUsername());
+	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new GregorianCalendar(),new GregorianCalendar(),"","",stages,"0",new GregorianCalendar());
+	     List <PrepackedTravelPackage> managedPackages=impiegato.getManagedTravelPackage();
+	     managedPackages.add(travel);
+	    impiegato.setManagedTravelPackage(managedPackages);
+	    emploMan.edit(impiegato);
+	    PrepackedTravelPackage travel2=(( Employee)emploMan.find(impiegato.getUsername())).getManagedTravelPackage().get(0);
+	    List <Stage> stages1=travel2.getStages();
+  
+       Stage stage1Test2= stages1.get(0);
+       Hotel hotelTest2=(Hotel)stage1Test2.getProducts().get(0);
+       Stage stage2Test2=stages1.get(1);
+	   Flight flightTest2 =(Flight)stage2Test2.getProducts().get(0);
+	   assertTrue(hotelTest2.equals(hotelInsert)&&flightTest2.equals(flightInsert1));
 	}
+	
+	
+	
+	
+	
 
 }

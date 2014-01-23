@@ -44,16 +44,24 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 		return new ArrayList <Hotel> ();
 	}
 
-public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar time,String area) {
+public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar timeStart,Calendar timeEnd,String area)
+{
 		
-		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state and c.timestart=:timestart and c.area=:area  ");
+		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state and c.timestart>=:timestart and c.area=:area and c.timeend<=:timeend ");
 		q.setParameter("state", state);
-		q.setParameter("timestart",time);
+		q.setParameter("timestart",timeStart);
+		q.setParameter("timeend", timeEnd);
 		q.setParameter("area", area);
 		List <Hotel> list=q.getResultList();
 		if(list!=null)
 		return new ArrayList <Hotel> (list);
 		else
 		return new ArrayList <Hotel> ();
-	}
+}
+
+
+
+
+
+
 }
