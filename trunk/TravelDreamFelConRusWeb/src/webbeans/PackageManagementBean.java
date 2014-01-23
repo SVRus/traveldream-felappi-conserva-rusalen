@@ -72,8 +72,8 @@ private List<TravelPackageDTO> packageList;
 public void update()
 {
 ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), "Africa", "Etiopia", "brutta" , "Bud Spencer",State.AVAILABLE));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 
 StageDTO stage= new StageDTO(prodotti, "Africa");	
 ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
