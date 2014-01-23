@@ -68,6 +68,7 @@
                        <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
                       #{hotel.area}  
                       </p:column> 
+                       
 
                
                <f:facet name="footer">
@@ -87,7 +88,7 @@
           <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
      <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
+           <h:outputLabel for="username" value="Nome:" />  
             <p:inputText value="#{hotelManagement.name}"   
                     id="username" required="true" label="username" />  
               

@@ -7,6 +7,11 @@
    <PROCESS-ITEM-OUTPUT ID="sel::" NAME="output" TARGET="rules:"
     TITLE="sel" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:allPackages.xhtml:1" NAME="item1"
+   PATH="allPackages.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="packageEdit::" NAME="output" TARGET="rules:"
+    TITLE="packageEdit" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

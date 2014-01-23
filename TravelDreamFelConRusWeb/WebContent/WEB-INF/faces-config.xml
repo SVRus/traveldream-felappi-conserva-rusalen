@@ -15,5 +15,16 @@
            </to-view-id>
        </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+       <from-view-id>allPackages.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>packageEdit</from-outcome>
+           <to-view-id>
+           <redirect> 
+           /packageEdit.xhtml
+           </redirect>
+           </to-view-id>
+       </navigation-case>
+    </navigation-rule>
 
 </faces-config>
