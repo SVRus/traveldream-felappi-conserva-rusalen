@@ -138,7 +138,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		else if (product instanceof Outing)
 		{
 			
-			result=new OutingDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState());
+			result=new OutingDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState(),((Outing) product).getPlace());
 			
 		}
 		else if (product instanceof Hotel)
@@ -396,7 +396,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	}
    	else if (product instanceof OutingDTO)
    	{
-   		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
+   		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
    		
    	}
    	return entity;
@@ -575,7 +575,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	}
    	else if (product instanceof OutingDTO)
    	{
-   		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState());
+   		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
    		
    	}
    	return entity;
