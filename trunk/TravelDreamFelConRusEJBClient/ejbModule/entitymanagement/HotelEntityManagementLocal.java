@@ -17,6 +17,6 @@ public interface HotelEntityManagementLocal {
 	public <Hotel> void edit (Hotel hotel);
     public <Hotel>   List<Hotel> findAll(); 	
     public <Hotel> List<Hotel> findAllByParameter(Object par);
-    public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar time,String area) ;
+    public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar timeStart,Calendar timeEnd,String area);
 
 }
