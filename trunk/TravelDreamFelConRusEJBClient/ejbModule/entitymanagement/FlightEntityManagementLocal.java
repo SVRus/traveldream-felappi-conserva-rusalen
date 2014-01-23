@@ -16,8 +16,8 @@ public interface FlightEntityManagementLocal {
 	public <Flight> void edit (Flight flight);
     public <Flight>   List<Flight> findAll(); 	
     public <Flight> List<Flight> findAllByParameter(Object par);
-    public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Calendar time,String area);
-    public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Calendar time,String area);
+    public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Calendar timeStart,Calendar timeEnd,String area);
+    public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Calendar timeStart,Calendar timeEnd,String area);
 
 
 }
