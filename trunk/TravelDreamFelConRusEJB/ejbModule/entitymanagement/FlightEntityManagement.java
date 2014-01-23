@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.FlightDTO;
+import dto.HotelDTO;
 import stateenum.State;
 import entities.Flight;
 import entities.Hotel;
@@ -45,13 +47,28 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 		else
 		return new ArrayList <Flight> ();
 	}
-   public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Calendar time,String area)
+   public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Calendar timeStart,Calendar timeEnd,String area)
    {
-	   Query q= em.createQuery("SELECT c from Flight c where c.state =:par and c.area_start=:area and c.timestart=:time");
-		q.setParameter("par",state);
-		q.setParameter("area",state);
-		q.setParameter("time",time);
 
+		Query q= em.createQuery("SELECT c from Flight c   where c.state =:state  and c.area_start=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
+		q.setParameter("state", state);
+		q.setParameter("timestart",timeStart);
+		q.setParameter("timeend", timeEnd);
+		q.setParameter("area", area);
+		List <Flight> list=q.getResultList();
+		if(list!=null)
+		return new ArrayList <Flight> (list);
+		else
+		return new ArrayList <Flight> ();
+   }
+   public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Calendar timeStart,Calendar timeEnd,String area)
+   {
+
+		Query q= em.createQuery("SELECT c from Flight c   where c.state =:state  and c.area=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
+		q.setParameter("state", state);
+		q.setParameter("timestart",timeStart);
+		q.setParameter("timeend", timeEnd);
+		q.setParameter("area", area);
 		List <Flight> list=q.getResultList();
 		if(list!=null)
 		return new ArrayList <Flight> (list);
@@ -59,19 +76,36 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 		return new ArrayList <Flight> ();
 	   
    }
-   public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Calendar time,String area)
-   {
-	   Query q= em.createQuery("SELECT c from Flight c where c.state =:par and c.area=:area and c.timestart=:time");
-		q.setParameter("par",state);
-		q.setParameter("area",state);
-		q.setParameter("time",time);
+   private <Flight >List<Flight> findHotelEquivalent(FlightDTO flightDTO ,int number)
+   {   State state=State.AVAILABLE;
+   	Query q= em.createQuery("SELECT c from Flight c   where c.name=:name and c.cost=:cost and c.state =:state  and c.area=:area  and c.timeStart=:timestart and c.timeEnd=:timeend and c.room_type=:room_type and c.place=:place");
+   	q.setParameter("state", state);
+   	q.setParameter("timestart",flightDTO.getTimeStart());
+   	q.setParameter("timeend", flightDTO.getTimeEnd());
+   	q.setParameter("areastart", flightDTO.getArea_start());
+   	q.setParameter("areaend", flightDTO.getArea());
+   	q.setParameter("cost", flightDTO.getCost());
+   	q.setParameter("place", flightDTO.getPlace_start());
+   	q.setParameter("place", flightDTO.getPlace_end());
+   	q.setParameter("room_type", flightDTO.getFlight_company());
+   	q.setParameter("more_info", flightDTO.getMore_info());
 
-		List <Flight> list=q.getResultList();
-		if(list!=null)
-		return new ArrayList <Flight> (list);
-		else
-		return new ArrayList <Flight> ();
-	   
+   	List <Flight> list=q.getResultList();
+   	if(list!=null && list.size()>=number)
+   		return new ArrayList <Flight> (list);
+   		else
+   		return new ArrayList <Flight> ();
    }
+   public boolean findBooleanHotelEquivalent(HotelDTO hotelDTO ,int number)
+   {
+   	return findHotelEquivalent(hotelDTO , number).size()>=number;
+   	
+   	
+   }
+   public int findIntegerHotelEquivalent(HotelDTO hotelDTO ,int number)
+   {
+   	return findHotelEquivalent(hotelDTO , number).size();
+   	
+   	}
    
 }

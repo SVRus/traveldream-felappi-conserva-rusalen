@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import dto.HotelDTO;
 import stateenum.State;
 import entities.Hotel;
 import entities.Outing;
@@ -47,7 +48,7 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar timeStart,Calendar timeEnd,String area)
 {
 		
-		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state and c.timestart>=:timestart and c.area=:area and c.timeend<=:timeend ");
+		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state  and c.area=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
 		q.setParameter("state", state);
 		q.setParameter("timestart",timeStart);
 		q.setParameter("timeend", timeEnd);
@@ -58,10 +59,33 @@ public <Hotel>List<Hotel> findAllByStateAndArea(State state,Calendar timeStart,C
 		else
 		return new ArrayList <Hotel> ();
 }
+private <Hotel >List<Hotel> findHotelEquivalent(HotelDTO hotelDTO ,int number)
+{   State state=State.AVAILABLE;
+	Query q= em.createQuery("SELECT c from Hotel c   where c.name=:name and c.cost=:cost and c.state =:state  and c.area=:area  and c.timeStart=:timestart and c.timeEnd=:timeend and c.room_type=:room_type and c.place=:place");
+	q.setParameter("state", state);
+	q.setParameter("timestart",hotelDTO.getTimeStart());
+	q.setParameter("timeend", hotelDTO.getTimeEnd());
+	q.setParameter("area", hotelDTO.getArea());
+	q.setParameter("cost", hotelDTO.getCost());
+	q.setParameter("place", hotelDTO.getPlace());
+	q.setParameter("room_type", hotelDTO.getRoom_type());
 
-
-
-
-
+	List <Hotel> list=q.getResultList();
+	if(list!=null && list.size()>=number)
+		return new ArrayList <Hotel> (list);
+		else
+		return new ArrayList <Hotel> ();
+}
+public boolean findBooleanHotelEquivalent(HotelDTO hotelDTO ,int number)
+{
+	return findHotelEquivalent(hotelDTO , number).size()>=number;
+	
+	
+}
+public int findIntegerHotelEquivalent(HotelDTO hotelDTO ,int number)
+{
+	return findHotelEquivalent(hotelDTO , number).size();
+	
+	}
 
 }
