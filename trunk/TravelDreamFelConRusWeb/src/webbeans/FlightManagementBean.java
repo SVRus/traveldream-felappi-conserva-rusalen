@@ -79,7 +79,7 @@ public class FlightManagementBean {
 		  public void newFlight(ActionEvent actionEvent)
 		  {
 			 		
-				newFlight = new FlightDTO(22, name, name, 22, data1, data1, name, name, name, name, name, name, State.AVAILABLE);
+				newFlight = new FlightDTO(22, name, name, 22, data1, data1, State.AVAILABLE, name, name, name, name, name, name);
 				  
 						
 				productCRUD.createProduct(newFlight);
@@ -98,7 +98,7 @@ public class FlightManagementBean {
 				
 					flights.remove(selectedFlight);
 					  
-					newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), State.AVAILABLE);
+					newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,State.AVAILABLE, selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName());
 					productCRUD.updateProduct(newFlight);
 					System.out.println("avrei dovuto creare un flight");
 					flights.add(newFlight);

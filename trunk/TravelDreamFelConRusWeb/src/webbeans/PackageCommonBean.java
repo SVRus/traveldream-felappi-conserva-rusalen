@@ -45,7 +45,7 @@ public class PackageCommonBean implements Serializable{
 	
 	public PackageCommonBean() {
 		
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(),  new GregorianCalendar(), "ciao", "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", State.AVAILABLE);
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(),  new GregorianCalendar(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		
@@ -55,7 +55,7 @@ public class PackageCommonBean implements Serializable{
 	}
 	public void aggiorna()
 	{
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(), new GregorianCalendar(), "ciao", "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", State.AVAILABLE);
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(), new GregorianCalendar(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");		
