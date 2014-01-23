@@ -8,9 +8,12 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="North unit content." />  
-        </p:layoutUnit>  
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+		</p:layoutUnit>  
       
         <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
             <h:outputText value="South unit content." />  
@@ -22,10 +25,10 @@
       
         <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
             <h:outputText value="Right unit content." />
-            <p:button outcome="temp" value="Gestisci prodotti" icon="ui-icon-star">  
+            <p:button  value="Gestisci prodotti" icon="ui-icon-star">  
             <f:param name="productId" value="10" />  
             </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
+            <p:button  value="Gestisci pacchetti" icon="ui-icon-star">  
             <f:param name="pacId" value="10" />  
             </p:button>  
         </p:layoutUnit>  
@@ -89,7 +92,7 @@
                     id="username" required="true" label="username" />  
               
             <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"   
+                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"  outcome="hotelManagement.xhtml" 
                     actionListener="#{hotelManagement.newHotel}"  
                    oncomplete="dlg3.hide();"/>  
                 
@@ -120,7 +123,7 @@
 						<h:inputText value="#{hotelManagement.selectedHotel.name}"/>
       		<f:facet name="footer">
                      
-                            <p:commandButton value="Update" update=":form:hoteltable"  
+                            <p:commandButton value="Update" update=":form:hoteltable"  outcome="hotelManagement.xhtml"
                             oncomplete="userDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
                     </f:facet>
 			
