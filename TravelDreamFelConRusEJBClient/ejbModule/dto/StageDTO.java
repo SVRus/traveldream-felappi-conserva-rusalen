@@ -36,6 +36,9 @@ public void setIdStage(long idStage) {
 	public void setArea(String area) {
 		Area = area;
 	}
-	
+	public void addProduct(ProductDTO product)
+	{
+		products.add(product);
+	}
 	
 }

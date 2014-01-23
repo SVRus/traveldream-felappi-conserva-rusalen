@@ -157,7 +157,10 @@ public void setStages(List<StageDTO> stages) {
 }
 
 
-
+public void addStage(StageDTO stage)
+{
+	stages.add(stage);	
+}
 
 
 
