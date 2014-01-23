@@ -85,7 +85,7 @@ public class HotelManagementBean implements Serializable{
 	  {
 			newHotel = new HotelDTO(23, name, name, 23, data1, data1,
 					State.AVAILABLE, name, name, name, name);
-			productCRUD.createProduct(newHotel);
+			productCRUD.createProductFromEmployee(newHotel);
 			System.out.println("creato un hotel");
 			hotels=productCRUD.findAllHotels();
 		     hotelModel=new HotelDataModel(hotels);
