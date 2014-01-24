@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import travelstateenum.TravelState;
+
 /**
  * Entity implementation class for Entity: TravelPackage
  *
@@ -39,13 +41,13 @@ public class TravelPackage implements Serializable {
 
 
 
-	public Calendar getPurchaseTime() {
+	public Date getPurchaseTime() {
 		return purchaseTime;
 	}
 
 
 
-	public void setPurchaseTime(Calendar purchaseTime) {
+	public void setPurchaseTime(Date purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
 
@@ -55,9 +57,9 @@ public class TravelPackage implements Serializable {
 
 
 
-	public TravelPackage(long idtravelpackage, Calendar time_end, Calendar time_start,
+	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Calendar purchaseTime) {
+			String friendCode, Date purchaseTime,TravelState travelState) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.time_end = time_end;
@@ -67,6 +69,7 @@ public class TravelPackage implements Serializable {
 		this.stages = stages;
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;
+		this.travelState=travelState;
 	}
 
 
@@ -99,25 +102,25 @@ public void setIdtravelpackage(long idtravelpackage) {
 
 
 
-public Calendar getTime_end() {
+public Date getTime_end() {
 	return time_end;
 }
 
 
 
-public void setTime_end(Calendar time_end) {
+public void setTime_end(Date time_end) {
 	this.time_end = time_end;
 }
 
 
 
-public Calendar getTime_start() {
+public Date getTime_start() {
 	return time_start;
 }
 
 
 
-public void setTime_start(Calendar time_start) {
+public void setTime_start(Date time_start) {
 	this.time_start = time_start;
 }
 
@@ -152,10 +155,10 @@ public void setName(String name) {
 
 
 @Temporal (TemporalType.TIMESTAMP)
-private Calendar time_end;
+private Date time_end;
 @Temporal (TemporalType.TIMESTAMP)
 
-private Calendar time_start;
+private Date time_start;
 private String description;
 @Column(unique=true)
 private String name;
@@ -164,9 +167,21 @@ private String name;
 private List<Stage> stages;
 
 private String friendCode;
+private TravelState travelState;
+public TravelState getTravelState() {
+	return travelState;
+}
+
+
+
+public void setTravelState(TravelState travelState) {
+	this.travelState = travelState;
+}
+
+
 
 @Temporal (TemporalType.TIMESTAMP)
-private Calendar purchaseTime;
+private Date purchaseTime;
 
 
 	public TravelPackage() {
@@ -175,15 +190,15 @@ private Calendar purchaseTime;
 
 
 
-	public TravelPackage(Calendar time_end,Calendar time_start, String description,
-			String name, List<Stage> stages,  String friendCode, Calendar purchaseTime) {
+	public TravelPackage(Date time_end,Date time_start, String description,
+			String name, List<Stage> stages,  String friendCode, Date purchaseTime,TravelState travelState) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;
 		this.description = description;
 		this.name = name;
 		this.stages = stages;
-	
+	    this.travelState=travelState;
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;
 	}

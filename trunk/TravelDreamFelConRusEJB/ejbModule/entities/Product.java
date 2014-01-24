@@ -56,7 +56,8 @@ public State getState() {
  * @param timeStart
  * @param timeEnd
  * @param name
- * @param travel
+ * @param state
+ * @param area
  */
 	public Product(float cost, Date timeStart, Date timeEnd, String name,State state,String area
 			) {

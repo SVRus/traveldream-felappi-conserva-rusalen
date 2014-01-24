@@ -24,7 +24,18 @@ public class Hotel extends Product implements Serializable {
 
 
 
-
+/**
+ * constructor used during th creation phase
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param name
+ * @param state
+ * @param area
+ * @param place
+ * @param room_type
+ * @param more_info
+ */
 public Hotel(float cost, Date timeStart, Date timeEnd, String name,
 			State state, String area, String place, String room_type,
 			String more_info) {
@@ -34,7 +45,19 @@ public Hotel(float cost, Date timeStart, Date timeEnd, String name,
 		this.more_info = more_info;
 		
 	}
-
+/**
+ * constructor
+ * @param idProduct
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param name
+ * @param state
+ * @param area
+ * @param room_type
+ * @param more_info
+ * @param place
+ */
 public Hotel(long idProduct, float cost, Date timeStart,
 			Date timeEnd, String name, State state, String area ,String room_type, String more_info,
 			

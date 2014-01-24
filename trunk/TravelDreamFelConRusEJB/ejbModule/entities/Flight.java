@@ -23,7 +23,20 @@ public class Flight extends Product implements Serializable {
 	
 	
 
-
+/**
+ * constructor used during the creation phase
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param name
+ * @param area
+ * @param flight_company
+ * @param area_start
+ * @param place_start
+ * @param place_end
+ * @param more_info
+ * @param state
+ */
 	public Flight(float cost, Date timeStart, Date timeEnd,
 			String name, String area, String flight_company,
 			String area_start, String place_start, String place_end,
@@ -35,6 +48,21 @@ public class Flight extends Product implements Serializable {
 		this.place_end = place_end;
 		this.more_info = more_info;
 	}
+	/**
+	 * constructor
+	 * @param idProduct
+	 * @param cost
+	 * @param timeStart
+	 * @param timeEnd
+	 * @param name
+	 * @param area
+	 * @param flight_company
+	 * @param area_start
+	 * @param place_start
+	 * @param place_end
+	 * @param more_info
+	 * @param state
+	 */
 	public Flight(long idProduct, float cost, Date timeStart,
 			Date timeEnd, String name, String area,
 			String flight_company, String area_start, String place_start,

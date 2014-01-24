@@ -141,7 +141,7 @@ public class Test {
         stages.add(stage1);
         stages.add(stage2);
         impiegato=emploMan.find(impiegato.getUsername());
-	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new GregorianCalendar(),new GregorianCalendar(),"","",stages,"0",new GregorianCalendar());
+	    PrepackedTravelPackage travel=new PrepackedTravelPackage(new Date(),new GregorianCalendar(),"","",stages,"0",new GregorianCalendar());
 	     List <PrepackedTravelPackage> managedPackages=impiegato.getManagedTravelPackage();
 	     managedPackages.add(travel);
 	    impiegato.setManagedTravelPackage(managedPackages);
