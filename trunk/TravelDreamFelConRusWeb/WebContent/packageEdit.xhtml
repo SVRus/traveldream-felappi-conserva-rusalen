@@ -7,7 +7,7 @@
     <h:head></h:head> 
    
     <body> 
-      #{packageEdit.allowed()}
+      
      
         <p:layout fullPage="true">  
   
@@ -39,11 +39,12 @@
       
       <p:layoutUnit position="center">  
 	  <h:form id="form">
- 
+	  #{packageEdit.currentTravelPackage.name}
+	    <p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" /> 
+                  
+           
          </h:form>   
-         #{packageEdit.currentTravelPackage.name}
-    	
-    
+        
         </p:layoutUnit>  
       
         </p:layout>  
