@@ -386,15 +386,18 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	Product entity=null;
    	if(product instanceof HotelDTO )
    	{
-   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),((HotelDTO)product).getPlace());
+   		 
+   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info());
    	}
    	else if (product instanceof FlightDTO)
    	{
+   		
    		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
    		
    	
    	}
    	else if (product instanceof OutingDTO)
+   		
    	{
    		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
    		

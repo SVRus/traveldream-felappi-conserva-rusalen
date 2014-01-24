@@ -24,7 +24,7 @@ public class Flight extends Product implements Serializable {
 	
 
 
-	public Flight(float cost, Calendar timeStart, Calendar timeEnd,
+	public Flight(float cost, Date timeStart, Date timeEnd,
 			String name, String area, String flight_company,
 			String area_start, String place_start, String place_end,
 			String more_info, State state) {
@@ -35,8 +35,8 @@ public class Flight extends Product implements Serializable {
 		this.place_end = place_end;
 		this.more_info = more_info;
 	}
-	public Flight(long idProduct, float cost, Calendar timeStart,
-			Calendar timeEnd, String name, String area,
+	public Flight(long idProduct, float cost, Date timeStart,
+			Date timeEnd, String name, String area,
 			String flight_company, String area_start, String place_start,
 			String place_end, String more_info,  State state) {
 		super(idProduct, cost, timeStart, timeEnd, name, state, area);

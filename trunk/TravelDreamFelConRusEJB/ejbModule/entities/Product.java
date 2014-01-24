@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.*;
 
@@ -27,7 +28,7 @@ public Product()
 	 * @param travel
 	 * @param state
 	 */
-	public Product(long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
 			String name,State state,String area) {
 		super();
 		this.idproduct = idProduct;
@@ -57,7 +58,7 @@ public State getState() {
  * @param name
  * @param travel
  */
-	public Product(float cost, Calendar timeStart, Calendar timeEnd, String name,State state,String area
+	public Product(float cost, Date timeStart, Date timeEnd, String name,State state,String area
 			) {
 		super();
 		this.cost = cost;
@@ -77,10 +78,10 @@ public State getState() {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long idproduct;
 private float cost;
-@Temporal(TemporalType.TIMESTAMP)
-private Calendar timeStart;
-@Temporal(TemporalType.TIMESTAMP)
-private Calendar timeEnd;
+@Temporal(TemporalType.DATE)
+private Date timeStart;
+@Temporal(TemporalType.DATE)
+private Date timeEnd;
 private String name;
 
 @Enumerated(EnumType.STRING)
@@ -134,22 +135,22 @@ public void setCost(float cost) {
 }
 
 
-public Calendar getTimeStart() {
+public Date getTimeStart() {
 	return timeStart;
 }
 
 
-public void setTimeStart(Calendar timeStart) {
+public void setTimeStart(Date timeStart) {
 	this.timeStart = timeStart;
 }
 
 
-public Calendar getTimeEnd() {
+public Date getTimeEnd() {
 	return timeEnd;
 }
 
 
-public void setTimeEnd(Calendar timeEnd) {
+public void setTimeEnd(Date timeEnd) {
 	this.timeEnd = timeEnd;
 }
 
