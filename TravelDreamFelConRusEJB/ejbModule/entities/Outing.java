@@ -19,7 +19,17 @@ import stateenum.State;
 @DiscriminatorValue("OUTING")
 public class Outing extends Product implements Serializable {
 
-	
+	/**
+	 * constructor used during the creation phase
+	 * @param cost
+	 * @param timeStart
+	 * @param timeEnd
+	 * @param name
+	 * @param description
+	 * @param area
+	 * @param state
+	 * @param place
+	 */
 	public Outing(float cost, Date timeStart, Date timeEnd, String name,
 			 String description, String area,State state,String place) {
 		super(cost, timeStart, timeEnd, name, state,area);
@@ -28,7 +38,18 @@ public class Outing extends Product implements Serializable {
 	}
 
 
-
+/**
+ * constructor
+ * @param idProduct
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param name
+ * @param description
+ * @param area
+ * @param state
+ * @param place
+ */
 	public Outing(long idProduct, float cost, Date timeStart,Date timeEnd,
 			String name,  String description, String area,State state,String place) {
 		super(idProduct, cost, timeStart, timeEnd, name,state,area);
@@ -85,7 +106,7 @@ private String place;
    public boolean equals(Outing outing)
    {
 	   
-   return super.equals(outing)	;   
+   return super.equals(outing)&& outing.getPlace().equalsIgnoreCase(place)	;   
 	   
 	}
    

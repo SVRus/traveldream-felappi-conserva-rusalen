@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import travelstateenum.TravelState;
+
 /**
  * Entity implementation class for Entity: PrepackedTravelPackage
  *
@@ -36,10 +38,10 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
  * @param friendCode
  * @param purchaseTime
  */
-	public PrepackedTravelPackage(Calendar time_end, Calendar time_start,
+	public PrepackedTravelPackage(Date time_end, Date time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Calendar purchaseTime) {
-		super(time_end, time_start, description, name, stages, friendCode, purchaseTime);
+			String friendCode, Date purchaseTime,TravelState travelState) {
+		super(time_end, time_start, description, name, stages, friendCode, purchaseTime, travelState);
 		// TODO Auto-generated constructor stub
 	}
 /**
@@ -53,11 +55,11 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
  * @param friendCode
  * @param purchaseTime
  */
-	public PrepackedTravelPackage(long idtravelpackage, Calendar time_end,
-			Calendar time_start, String description, String name,
-			List<Stage> stages, String friendCode, Calendar purchaseTime) {
+	public PrepackedTravelPackage(long idtravelpackage, Date time_end,
+			Date time_start, String description, String name,
+			List<Stage> stages, String friendCode, Date purchaseTime,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
-				friendCode, purchaseTime);
+				friendCode, purchaseTime,travelState);
 		// TODO Auto-generated constructor stub
 	}
 
