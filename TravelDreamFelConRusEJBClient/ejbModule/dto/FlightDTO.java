@@ -1,6 +1,5 @@
 package dto;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import stateenum.State;
@@ -31,7 +30,7 @@ public class FlightDTO extends ProductDTO {
  */
 	
 	public FlightDTO(long idstage, String employeeCreator, String name,
-			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+			long idProduct, float cost, Date timeStart, Date timeEnd,
 			State state, String area, String flight_company, String area_start,
 			String place_start, String place_end, String more_info) {
 		super(idstage, employeeCreator, name, idProduct, cost, timeStart,
@@ -43,7 +42,7 @@ public class FlightDTO extends ProductDTO {
 		this.more_info = more_info;
 	}
 	public FlightDTO(long idstage, String employeeCreator, String name,
-			float cost, Calendar timeStart, Calendar timeEnd, State state,
+			float cost, Date timeStart, Date timeEnd, State state,
 			String area, String flight_company, String area_start,
 			String place_start, String place_end, String more_info) {
 		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,
