@@ -1,6 +1,6 @@
 package dto;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import stateenum.State;
 
@@ -23,7 +23,7 @@ public class HotelDTO extends ProductDTO {
 	 * @param more_info
 	 */
 	public HotelDTO(long idstage, String employeeCreator, String name,
-			float cost, Calendar timeStart, Calendar timeEnd, State state,
+			float cost, Date timeStart, Date timeEnd, State state,
 			String area, String place, String room_type, String more_info) {
 		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,
 				area);
@@ -49,7 +49,7 @@ public class HotelDTO extends ProductDTO {
  * @param more_info
  */
 	public HotelDTO(long idstage, String employeeCreator, String name,
-			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+			long idProduct, float cost, Date timeStart, Date timeEnd,
 			State state, String area, String place, String room_type,
 			String more_info) {
 		super(idstage, employeeCreator, name, idProduct, cost, timeStart,

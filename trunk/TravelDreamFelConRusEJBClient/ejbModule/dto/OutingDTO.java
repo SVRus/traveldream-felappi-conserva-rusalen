@@ -8,19 +8,21 @@ import stateenum.State;
 public class OutingDTO extends ProductDTO {
 	private String description;
 	private String place;
-	/**
-	 * constructor without the idproduct: used during the creation phase
-	 * @param idstage
-	 * @param employeeCreator
-	 * @param name
-	 * @param cost
-	 * @param timeStart
-	 * @param timeEnd
-	 * @param description
-	 * @param area
-	 */
+/**
+ * 
+ * @param idstage
+ * @param employeeCreator
+ * @param name
+ * @param cost
+ * @param timeStart
+ * @param timeEnd
+ * @param description
+ * @param area
+ * @param state
+ * @param place
+ */
 	public OutingDTO(long idstage, String employeeCreator, String name,
-			float cost, Calendar timeStart, Calendar timeEnd, String description,
+			float cost, Date timeStart, Date timeEnd, String description,
 			String area,State state,String place) {
 		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,area);
 		this.description = description;
@@ -38,7 +40,7 @@ public class OutingDTO extends ProductDTO {
 	
 
 	/**
-	 * constructor with the idproduct: it can't be used during the creation phase
+	 * 
 	 * @param idstage
 	 * @param employeeCreator
 	 * @param name
@@ -48,9 +50,11 @@ public class OutingDTO extends ProductDTO {
 	 * @param timeEnd
 	 * @param description
 	 * @param area
+	 * @param state
+	 * @param place
 	 */
 	public OutingDTO(long idstage, String employeeCreator, String name,
-			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,
+			long idProduct, float cost, Date timeStart, Date timeEnd,
 			String description, String area,State state,String place) {
 		super(idstage, employeeCreator, name, idProduct, cost,
 				timeStart, timeEnd,state,area);

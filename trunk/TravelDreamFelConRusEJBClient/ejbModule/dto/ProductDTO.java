@@ -20,8 +20,8 @@ public class ProductDTO {
     private String name;
 	private long idProduct;
 	private float cost;
-	private Calendar timeStart;
-	private Calendar timeEnd;
+	private Date timeStart;
+	private Date timeEnd;
 	private State state;
 	private String area;
 	
@@ -35,7 +35,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idstage, String employeeCreator, String name,
-			float cost, Calendar timeStart, Calendar timeEnd,State state,String area) {
+			float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
@@ -57,7 +57,7 @@ public class ProductDTO {
 	 * @param timeEnd
 	 */
 	public ProductDTO(long idstage, String employeeCreator, String name,
-			long idProduct, float cost, Calendar timeStart, Calendar timeEnd,State state,String area) {
+			long idProduct, float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
 		this.employeeCreator = employeeCreator;
@@ -106,16 +106,16 @@ public class ProductDTO {
 	public void setCost(float cost) {
 		this.cost = cost;
 	}
-	public Calendar getTimeStart() {
+	public Date getTimeStart() {
 		return timeStart;
 	}
-	public void setTimeStart(Calendar timeStart) {
+	public void setTimeStart(Date timeStart) {
 		this.timeStart = timeStart;
 	}
-	public Calendar getTimeEnd() {
+	public Date getTimeEnd() {
 		return timeEnd;
 	}
-	public void setTimeEnd(Calendar timeEnd) {
+	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}
 
