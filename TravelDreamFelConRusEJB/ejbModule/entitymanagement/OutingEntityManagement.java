@@ -2,6 +2,7 @@ package entitymanagement;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -45,7 +46,7 @@ public class OutingEntityManagement extends AbstractEntityManagement implements 
 		else
 		return new ArrayList <Outing> ();
 	}
-	  public <Outing>List<Outing> findALLByStateAndArea(State state, Calendar timeStart,Calendar timeEnd,String area)
+	  public <Outing>List<Outing> findALLByStateAndArea(State state, Date timeStart,Date timeEnd,String area)
 	   {
 
 			Query q= em.createQuery("SELECT c from Outing c   where c.state =:state  and c.area=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
@@ -70,6 +71,8 @@ public class OutingEntityManagement extends AbstractEntityManagement implements 
 	  	q.setParameter("cost", outingDTO.getCost());
 	  	q.setParameter("place", outingDTO.getPlace());
 	  	q.setParameter("description", outingDTO.getDescription());
+		q.setParameter("name", outingDTO.getName());
+
 	  	List <Outing> list=q.getResultList();
 	  	if(list!=null && list.size()>=number)
 	  		return new ArrayList <Outing> (list);
@@ -78,13 +81,28 @@ public class OutingEntityManagement extends AbstractEntityManagement implements 
 	  }
 	  public boolean findBooleanOutingEquivalent(OutingDTO outingDTO ,int number)
 	  {
-	  	return findOutingEquivalent(outingDTO , number).size()>=number;
+	  	return (findOutingEquivalent(outingDTO , number).size())>=number;
 	  	
 	  	
 	  }
-	  public int findIntegerHotelEquivalent(OutingDTO outingDTO ,int number)
+	  public int findIntegerOutingEquivalent(OutingDTO outingDTO )
 	  {
-	  	return findOutingEquivalent(outingDTO , number).size();
+		  State state=State.AVAILABLE;
+		  	Query q= em.createQuery("SELECT c from Outing c where c.name=:name and c.cost=:cost and c.state =:state  and c.area=:area  and c.timeStart=:timestart and c.timeEnd=:timeend and c.description=:description and c.place=:place");
+		  	q.setParameter("state", state);
+		  	q.setParameter("timestart",outingDTO.getTimeStart());
+		  	q.setParameter("timeend", outingDTO.getTimeEnd());
+		  	q.setParameter("area", outingDTO.getArea());
+		  	q.setParameter("cost", outingDTO.getCost());
+		  	q.setParameter("place", outingDTO.getPlace());
+		  	q.setParameter("description", outingDTO.getDescription());
+			q.setParameter("name", outingDTO.getName());
+
+		  	List <Outing> list=q.getResultList();
+		  	if(list!=null )
+		  		return list.size();
+		  		else
+		  		return 0;
 	  	
 	  	}
 
