@@ -37,15 +37,25 @@ import authentication.RegistrationBeanLocal;
 
 public class PackageCommonBean implements Serializable{
 	private TravelPackageDTO currentPackage;
+	/*diventa il vero travelPackageCorrente solo se 
+	 *non c'è un'altra creazione in corso 
+	 */
+	private TravelPackageDTO tempCurrentPackage;
+	
 	private StageDTO currentStage;
+	private boolean busy;
 	
-	
+	public void updatePackage()
+	{
+		currentPackage = tempCurrentPackage;
+		
+	}
 	
 	
 	
 	public PackageCommonBean() {
 		
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(),  new GregorianCalendar(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(),  new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		
@@ -55,7 +65,7 @@ public class PackageCommonBean implements Serializable{
 	}
 	public void aggiorna()
 	{
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new GregorianCalendar(), new GregorianCalendar(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
+		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(), new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");		
@@ -72,6 +82,18 @@ public class PackageCommonBean implements Serializable{
 	}
 	public void setCurrentStage(StageDTO currentStage) {
 		this.currentStage = currentStage;
+	}
+	public boolean isBusy() {
+		return busy;
+	}
+	public void setBusy(boolean busy) {
+		this.busy = busy;
+	}
+	public TravelPackageDTO getTempCurrentPackage() {
+		return tempCurrentPackage;
+	}
+	public void setTempCurrentPackage(TravelPackageDTO tempCurrentPackage) {
+		this.tempCurrentPackage = tempCurrentPackage;
 	}
 	
 	

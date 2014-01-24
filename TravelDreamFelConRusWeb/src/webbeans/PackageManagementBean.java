@@ -1,10 +1,10 @@
 package webbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -27,6 +27,7 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+import travelstateenum.TravelState;
 import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
@@ -44,9 +45,9 @@ import authentication.RegistrationBeanLocal;
 public class PackageManagementBean implements Serializable{
 
 
-private Calendar time_end;
+private Date time_end;
 
-private Calendar time_start;
+private Date time_start;
 private String description;
 private String name;
 private List<StageDTO> stages;
@@ -61,7 +62,7 @@ private  List<TravelPackageDTO> filteredTravelPackages;
 
 private String friendCode;
 
-private Calendar purchaseTime;
+private Date purchaseTime;
 
 private TravelPackageDataModel packageModel;
 
@@ -75,22 +76,24 @@ private PackageCommonBean shared;
 public void update()
 {
 ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new GregorianCalendar(10,10,10,10,10), new GregorianCalendar(10,10,10,10,10), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
+prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 
 StageDTO stage= new StageDTO(prodotti, "Africa");	
 ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
 
 listaStage.add(stage);
 packageList= new ArrayList<TravelPackageDTO>();
-packageList.add(new TravelPackageDTO(new GregorianCalendar(), new GregorianCalendar(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", "33", new GregorianCalendar()));
+packageList.add(new TravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", "33", new Date(),TravelState.AVAILABLE));
+packageList.add(new TravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", "33", new Date(),TravelState.AVAILABLE));
+
 packageModel= new TravelPackageDataModel(packageList);
 System.out.println("Ciao ho popolato i pacchetti");
 
 }
 public void updateCurrentPackage()
 {
-	shared.setCurrentPackage(selectedTravelPackage);
+	shared.setTempCurrentPackage(selectedTravelPackage);
 	System.out.println("Ho modificato il pacchetto corrente");
 	
 }
@@ -103,19 +106,19 @@ public String selection()
 }
 
 
-public Calendar getTime_end() {
+public Date getTime_end() {
 	return time_end;
 }
 
-public void setTime_end(Calendar time_end) {
+public void setTime_end(Date time_end) {
 	this.time_end = time_end;
 }
 
-public Calendar getTime_start() {
+public Date getTime_start() {
 	return time_start;
 }
 
-public void setTime_start(Calendar time_start) {
+public void setTime_start(Date time_start) {
 	this.time_start = time_start;
 }
 
@@ -151,11 +154,11 @@ public void setFriendCode(String friendCode) {
 	this.friendCode = friendCode;
 }
 
-public Calendar getPurchaseTime() {
+public Date getPurchaseTime() {
 	return purchaseTime;
 }
 
-public void setPurchaseTime(Calendar purchaseTime) {
+public void setPurchaseTime(Date purchaseTime) {
 	this.purchaseTime = purchaseTime;
 }
 
