@@ -55,10 +55,47 @@ public class PackageEditBean {
 		 * la pagina contenente tutti i pacchetti, devo aggiornare
 		 * il pacchetto corrente
 		 */
-		currentTravelPackage = shared.getCurrentPackage();
-			
+			System.out.println("ciao ho eseguito il post construct");
 	}
 	
+	public String allowed()
+	{
+		if (!shared.isBusy())
+		{		
+			shared.setBusy(true);
+			shared.updatePackage();
+			currentTravelPackage = shared.getCurrentPackage();
+			
+			return "notBusy";
+		}
+		
+		else 
+		{	return "errorBusy";
+		}
+	}
+	public String allowedNew()
+	{
+		if (!shared.isBusy())
+		{		
+			shared.setBusy(true);
+			shared.setCurrentPackage(null);
+			currentTravelPackage=null;
+			
+			return "notBusy";
+		}
+		
+		else 
+		{	return "errorBusy";
+		}
+	}
+	public String closeOperation()
+	{
+		shared.setBusy(false);
+		shared.setCurrentPackage(null);
+		currentTravelPackage=null;
+		
+		return "closed";
+	}
 	
 
 	public TravelPackageDTO getCurrentTravelPackage() {
