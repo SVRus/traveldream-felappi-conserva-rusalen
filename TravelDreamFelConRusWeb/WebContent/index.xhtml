@@ -21,25 +21,11 @@
         <h:outputText value="Rusalen Felappi Conserva" />  
     </p:layoutUnit>  
   
-   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
-            <p:menu>  
-               
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
-                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />                    
-           
-            </p:menu>   
-        </p:layoutUnit>  
-       
-  
-    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-        <h:outputText value="Ricerca" />  
-    </p:layoutUnit>  
-  
-    <p:layoutUnit position="center">  
+   <p:layoutUnit position="center" size="600">  
       
-      <p:layout style="min-width:400px;min-height:200px;" id="layout">  
-    <p:layoutUnit position="west"  size="600" >  
-        	<p:outputLabel value= "#{auth.result}"  />
+    
+    
+    <p:outputLabel value= "#{auth.result}"  />
 	
     <p:outputLabel value= "#{auth.description}"  />
          <h:form id="signupForm" styleClass="input-form">
@@ -134,10 +120,21 @@
 
 	</h:form>			
 	 
- 
     </p:layoutUnit>  
   
-    <p:layoutUnit position="center">  
+  
+   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />                    
+           
+            </p:menu>   
+        </p:layoutUnit>  
+       
+  
+    <p:layoutUnit position="east" size="400"  resizable="false" closable="false" collapsible="false" >  
+      
        <h:form id="login"
 			onsubmit="document.getElementById('login').action='j_security_check';"
 			prependId="false">
@@ -160,8 +157,6 @@
 
 	</h:form> 
 	
-      
- 
        <h:form id="gift"
 			action = "todo">
 		<p:panel header="Vuoi fare un regalo?" id="panel">
@@ -183,12 +178,10 @@
 	</h:form> 
        
        
+    
     </p:layoutUnit>  
-	
-	</p:layout>  
-    				
-    </p:layoutUnit>  
-
+  
+   
   
 </p:layout>  		
 			
