@@ -12,47 +12,47 @@
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
       		</style> 
-         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
 		</p:layoutUnit>  
+     
       
-        <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="South unit content." />  
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+           
+            </p:menu>   
         </p:layoutUnit>  
       
-        <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="West unit content." />  
-        </p:layoutUnit>  
-      
-        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-            <h:outputText value="Right unit content." />
-            <p:button  value="Gestisci prodotti" icon="ui-icon-star">  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button  value="Gestisci pacchetti" icon="ui-icon-star">  
-            <f:param name="pacId" value="10" />  
-            </p:button>  
-        </p:layoutUnit>  
+       
       
       <p:layoutUnit position="center">  
 	  <h:form id="form">
  <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
                 selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
                 filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
-                 rowsPerPageTemplate="10,15,50">  
-    
-
+                 rowsPerPageTemplate="10,15,50" >  
+   
   
                 <f:facet name="header">
-                    Lista Hotel
+                    Alberghi
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                    <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
                     
-                    
-                    <p:commandLink value="#{hotel.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                    <p:commandLink value="#{hotel.name}" update=":modForm:display" oncomplete="modDialog.show()"  title="View">
                         <f:setPropertyActionListener value="#{hotel}" target="#{hotelManagement.selectedHotel}" />    
                     </p:commandLink>
+                    
                 	</p:column>
+                	
+                    <p:column  headerText="Creatore" sortBy="#{hotel.employeeCreator}" filterBy="#{hotel.employeeCreator}" id="employeeCreator">
+                      #{hotel.employeeCreator}  
+                      </p:column> 
                       <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
                       #{hotel.area}  
                       </p:column> 
@@ -65,17 +65,31 @@
                        <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
                       #{hotel.timeEnd}  
                       </p:column> 
-                       <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
-                      #{hotel.area}  
+                        <p:column  headerText="Tipo camera" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.room_type}  
                       </p:column> 
+                       <p:column  headerText="Informazioni" sortBy="#{hotel.more_info}" filterBy="#{hotel.more_info}" id="more_info">  
+                      #{hotel.more_info}  
+                      </p:column> 
+                     <p:column  headerText="Costo" sortBy="#{hotel.cost}" filterBy="#{hotel.cost}" id="cost">  
+                      #{hotel.cost}  
+                      </p:column> 
+                      <p:column  headerText="Stato" sortBy="#{hotel.state}" filterBy="#{hotel.state}" id="state">  
+                      #{hotel.state}  
+                      </p:column> 
+                      
+                       
 
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo Hotel" onclick="PF('dlg3').show();" type="button" /> 
-                     <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
-                </f:facet>
-
+                    <p:commandButton  value="Aggiungi nuovo" onclick="PF('dlg3').show();" type="button" icon="ui-icon-star"/> 
+                    
+                    <p:commandButton value="Elimina" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
+                    
+                          
+                </f:facet>          
               </p:dataTable>
+                
          </h:form>   
          
        
@@ -83,16 +97,43 @@
     
         </p:layoutUnit>  
       
-        </p:layout>  
-          <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
+        </p:layout> 
+         
+          <p:dialog header="Inserisci i dati del nuovo albergo" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" resizable="false">  
      <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
-            <p:inputText value="#{hotelManagement.name}"   
-                    id="username" required="true" label="username" />  
-              
+     
+           <h:outputLabel for="newname" value="Nome:" />  
+            <p:inputText value="#{hotelManagement.name}" id="newname" required="true" label="newname" /> 
+                     
+            <h:outputLabel for="newarea" value="Area:" />  
+            <p:inputText value="#{hotelManagement.area}" id="newarea" required="true" label="newarea" />
+            
+            <h:outputLabel for="newplace" value="Luogo:" />  
+            <p:inputText value="#{hotelManagement.place}" id="newplace" required="true" label="newplace" />  
+            
+            <h:outputLabel for="newtimeStart" value="Data inizio:" />  
+        
+            <p:calendar id="newtimeStart" value="#{hotelManagement.timeStart}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true" label="newtimeStart"/>
+            
+            <h:outputLabel for="newtimeEnd" value="Data fine:" />  
+             <p:calendar id="newtimeEnd" value="#{hotelManagement.timeEnd}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true" label="newtimeEnd"/>
+            
+            <h:outputLabel for="newroom_type" value="Tipo camera:" />  
+            <p:inputText value="#{hotelManagement.room_type}" id="newroom_type" required="true" label="newroom_type" />
+            
+            <h:outputLabel for="newmore_info" value="Informazioni:" />  
+            <p:inputText value="#{hotelManagement.more_info}" id="newmore_info" required="true" label="newmore_info" />
+            
+            <h:outputLabel for="newcost" value="Costo:" />  
+            <p:inputText value="#{hotelManagement.cost}" id="newcost" required="true" label="newcost" />
+            
             <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"  outcome="hotelManagement.xhtml" 
+                <p:commandButton id="createButton" value="Crea" update=":form:hoteltable"   
                     actionListener="#{hotelManagement.newHotel}"  
                    oncomplete="dlg3.hide();"/>  
                 
@@ -114,17 +155,60 @@
             $('#loginLink').fadeOut();  
         }  
     }  
-</script>  	    
-             <p:dialog header="Modifica Hotel" widgetVar="userDialog" resizable="false" id="userDlg" > 
-               <h:form id="userDetailForm">
-                <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
-			<h:outputText value="Nome :"></h:outputText>
+</script>  	
+    
+       <p:dialog header="Modifica i dati dell'albergo" widgetVar="modDialog" resizable="false" id="modDlg" > 
+               <h:form id="modForm">
+               <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+                  
+			<h:outputText value="Nome:"></h:outputText>
                         <h:outputText value="#{hotelManagement.selectedHotel.name}" />
-						<h:inputText value="#{hotelManagement.selectedHotel.name}"/>
+            <h:outputText value="Nuovo nome:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.name}"/>			
+						
+			<h:outputText value="Area:"></h:outputText>			
+						<h:outputText value="#{hotelManagement.selectedHotel.area}" />
+			<h:outputText value="Nuova area:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.area}"/>
+						
+            <h:outputText value="Luogo:"></h:outputText>
+						<h:outputText value="#{hotelManagement.selectedHotel.place}" />
+			<h:outputText value="Nuovo luogo:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.place}"/>
+						
+		    <h:outputText value="Data inizio:"></h:outputText>
+                        <h:outputText value="#{hotelManagement.selectedHotel.timeStart}" />
+            <h:outputText value="Nuova data inizio:"></h:outputText>
+						<p:calendar id="modtimeStart" value="#{hotelManagement.selectedHotel.timeStart}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true" label="modtimeStart"/>
+						
+			<h:outputText value="Data fine:"></h:outputText>
+                        <h:outputText value="#{hotelManagement.selectedHotel.timeEnd}" />
+            <h:outputText value="Nuova data fine:"></h:outputText>
+						<p:calendar id="modtimeEnd" value="#{hotelManagement.selectedHotel.timeEnd}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true" label="modtimeEnd"/>
+						
+			<h:outputText value="Tipo camera:"></h:outputText>
+                        <h:outputText value="#{hotelManagement.selectedHotel.room_type}" />
+            <h:outputText value="Nuovo tipo camera:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.room_type}"/>
+						
+			<h:outputText value="Informazioni:"></h:outputText>
+                        <h:outputText value="#{hotelManagement.selectedHotel.more_info}" />
+            <h:outputText value="Nuove informazioni:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.more_info}"/>
+						
+			<h:outputText value="Costo:"></h:outputText>
+                        <h:outputText value="#{hotelManagement.selectedHotel.cost}" />
+            <h:outputText value="Nuovo costo:"></h:outputText>
+						<h:inputText value="#{hotelManagement.selectedHotel.cost}"/>
+						
       		<f:facet name="footer">
                      
-                            <p:commandButton value="Update" update=":form:hoteltable"  outcome="hotelManagement.xhtml"
-                            oncomplete="userDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
+                            <p:commandButton value="Salva modifiche" update=":form:hoteltable"  
+                            oncomplete="modDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
                     </f:facet>
 			
                 </p:panelGrid> 
