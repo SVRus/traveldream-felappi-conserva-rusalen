@@ -6,27 +6,30 @@
       xmlns:p="http://primefaces.org/ui"> 
 <h:head></h:head> 
 <body>  
-
 	
-	<p:layout   fullPage="true">  
+<p:layout   fullPage="true">  
   
     <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
-    <style type="text/css">
+       <style type="text/css">
         .ui-widget{font-size:90% !important;}  
-       
-         </style> 
-         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
-		
-         
+       </style> 
+       <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+  
     </p:layoutUnit>  
   
     <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
         <h:outputText value="Rusalen Felappi Conserva" />  
     </p:layoutUnit>  
   
-    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-        <h:outputText value="LANDMARKS" />  
-    </p:layoutUnit>  
+   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />                    
+           
+            </p:menu>   
+        </p:layoutUnit>  
+       
   
     <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
         <h:outputText value="Ricerca" />  
@@ -185,11 +188,9 @@
 	</p:layout>  
     				
     </p:layoutUnit>  
+
   
 </p:layout>  		
-		
-	
-	
-	
+			
 </body> 
 </html>
