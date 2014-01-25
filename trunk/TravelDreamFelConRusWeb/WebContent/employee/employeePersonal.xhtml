@@ -22,7 +22,7 @@
                
                      <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
                      <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
-                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
            
             </p:menu>   
         </p:layoutUnit>  
@@ -30,12 +30,16 @@
 	  
 	     <p:layoutUnit position="east" size="400" header="Funzioni di gestione" resizable="false" closable="false" collapsible="false" >  
             
-            <p:button outcome="temp" value="Gestisci prodotti" >  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" >  
-            <f:param name="pacId" value="10" />  
-            </p:button>  
+            <p:menu>  
+               
+                     <p:menuitem value="Gestisci alberghi" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/hotelManagement.xhtml" icon="ui-icon-gear"/>  
+                     <p:menuitem value="Gestisci voli" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/flightManagement.xhtml" icon="ui-icon-gear"/>  
+                     <p:menuitem value="Gestisci escursioni" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/outingManagement.xhtml" icon="ui-icon-gear" /> 
+                     <p:menuitem value="Gestisci pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagementl.xhtml" icon="ui-icon-gear"/>   
+           
+            </p:menu>  
+            
+            
         </p:layoutUnit>  
 	  
 	    <p:layoutUnit position="center" size="800">  
