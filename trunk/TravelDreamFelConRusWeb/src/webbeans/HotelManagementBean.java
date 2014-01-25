@@ -95,13 +95,11 @@ public class HotelManagementBean implements Serializable{
 		   }
 	  public void updateHotel(ActionEvent actionEvent){
 			
-			    newHotel = new HotelDTO(23, selectedHotel.getName(), selectedHotel.getName(),selectedHotel.getIdProduct(), 23, data1, data1,
-			    State.AVAILABLE, selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName(), selectedHotel.getName());
-				productCRUD.updateProduct(newHotel);
-				System.out.println("avrei dovuto creare un hotel");
-				hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
+			    newHotel = new HotelDTO(selectedHotel.getIdstage(), selectedHotel.getEmployeeCreator(), name, selectedHotel.getIdProduct(), cost, timeStart, timeEnd, selectedHotel.getState(), area, place, room_type, more_info);	
+			    productCRUD.updateProduct(newHotel);
+			   hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
 				hotelModel=new HotelDataModel(hotels);
-			   
+			   System.out.println("hotel modificato");
 		   }
 	  
 	  public HotelDTO[] getSelectedHotels() {
