@@ -1,6 +1,6 @@
 package webbeans;
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -38,15 +38,11 @@ public class HotelManagementBean implements Serializable{
 	private HotelDTO selectedHotel;
 	private HotelDTO[] selectedHotels;  
 	private HotelDTO newHotel;
-	
-	 public HotelDTO getNewHotel() {
-		return newHotel;
-	}
+	@EJB
+	private LoginBeanLocal login;
 
-	public void setNewHotel(HotelDTO newHotel) {
-		this.newHotel = newHotel;
-	}
-	private long idtravelpackage;
+	
+	 private long idtravelpackage;
 	 private String employeeCreator;
 	 private long idProduct;
 	 private String name;
@@ -65,7 +61,7 @@ public class HotelManagementBean implements Serializable{
 	  
 	  
 	  //valori di prova
-	  static GregorianCalendar data1= new GregorianCalendar();
+	  static Date data1= new Date();
 	  private  List<HotelDTO> hotels;
 	  private  List<HotelDTO> filteredHotels;
 	  
@@ -83,8 +79,7 @@ public class HotelManagementBean implements Serializable{
 	  
 	  public void newHotel(ActionEvent actionEvent)
 	  {
-			newHotel = new HotelDTO(23, name, name, 23, data1, data1,
-					State.AVAILABLE, name, name, name, name);
+			newHotel = new HotelDTO(0, login.getPrincipalUsername(), name, cost, timeStart, timeEnd, State.AVAILABLE, area, place, room_type, more_info);
 			productCRUD.createProductFromEmployee(newHotel);
 			System.out.println("creato un hotel");
 			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
@@ -154,7 +149,13 @@ public class HotelManagementBean implements Serializable{
       return productCRUD.findAllHotels();
    }
 	 
-	  
+   public HotelDTO getNewHotel() {
+		return newHotel;
+	}
+
+	public void setNewHotel(HotelDTO newHotel) {
+		this.newHotel = newHotel;
+	}
 	
 	public HotelDTO getSelectedHotel() {
 		return selectedHotel;
@@ -242,3 +243,5 @@ public class HotelManagementBean implements Serializable{
 
 	
 }
+
+
