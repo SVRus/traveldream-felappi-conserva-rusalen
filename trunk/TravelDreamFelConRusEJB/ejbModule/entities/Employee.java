@@ -61,7 +61,7 @@ public class Employee extends RegisteredUser implements Serializable {
    @OneToMany(fetch = FetchType.EAGER)
    @JoinColumn(name="idemployee")
    private List <Product> managedProduct;
-   @OneToMany(fetch = FetchType.EAGER)
+   @OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.MERGE)
    @JoinColumn(name="idEmployeeCreator")
    private List <PrepackedTravelPackage> managedTravelPackage;//inserire la relazione
   
