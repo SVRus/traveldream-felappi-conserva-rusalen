@@ -26,24 +26,96 @@
             <h:outputText value="West unit content." />  
         </p:layoutUnit>  
       
-        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+        <p:layoutUnit position="east" size="600" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
             <h:outputText value="Right unit content." />
-            <p:button outcome="temp" value="Gestisci prodotti" icon="ui-icon-star">  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
-            <f:param name="pacId" value="10" />  
-               </p:button>  
+             <h:form id="form">
+		  #{packageEdit.currentTravelPackage.name}
+	   		<p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />       
+         
+         <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
+                selection="#{packageEdit.selectedStage}" selectionMode="single" 
+               id="hoteltable"
+                 rowsPerPageTemplate="10,15,50">  
+     <p:ajax event="rowSelect"  listener= "#{packageEdit.updateCurrentStage}"/>  
+  
+
+  
+                <f:facet name="header">
+                    Lista TravelPackage
+                </f:facet>  
+                
+              
+        		<p:column  headerText="Area" sortBy="#{TravelPackage.area}"  id="area">
+                    
+                    
+                 #{stage.area}  
+        		</p:column> 
+        		
+                	
+               
+               <f:facet name="footer">
+                    <p:commandButton id="effectsDialogButton" value="Nuovo Stage" onclick="PF('dlg3').show();" type="button" /> 
+                    <p:commandButton id="naviga" value="Modifica" outcome= "packageEdit" /> 
+       <h:link
+			outcome="packageEdit" value="Modifica (temporaneo)" />
+                </f:facet>
+				
+              </p:dataTable>
+         
+         </h:form> 
+            <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-star" />  
+             
            
         </p:layoutUnit>  
       
       <p:layoutUnit position="center">  
-	  <h:form id="form">
-	  #{packageEdit.currentTravelPackage.name}
-	    <p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" /> 
-                  
-           
-         </h:form>   
+	    	<p:outputLabel value= "Gestione pacchetto"  />
+	
+        <h:form id="packageForm" styleClass="input-form">
+		<p:panel header="Gestione pacchetto" id="panel">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+	<h:panelGrid columns="2">
+	    <p:outputLabel value="Nome" for="name" />
+		<p:inputText id="name" label="name"
+			value="#{packageEdit.name}"
+				required="true" />
+	
+	
+		<p:outputLabel value="Descrizione" for="description" />
+		<p:inputTextarea id="description" label="description"
+			value="#{packageEdit.description}"
+				required="true" 
+				 
+				 maxlength="254"/>  
+				
+		
+		<p:outputLabel value="Data di partenza" for="startDate" />
+		<p:calendar id="startDate" value="#{packageEdit.time_start}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
+			
+		<p:outputLabel value="Data di fine" for="endDate" />
+		<p:calendar id="endDate" value="#{packageEdit.time_end}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
+		
+	<p:commandButton value="Conferma Pacchetto"
+		action="#{packageEdit.editPackage}"
+		style="display:block; margin:0 auto;"
+		ajax="false" />
+
+		
+	</h:panelGrid>
+	
+		</p:panel>
+
+	</h:form>			
+	 
+ 
+        
+	 
+	  
         
         </p:layoutUnit>  
       

@@ -22,17 +22,7 @@
       
         <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
             <h:outputText value="Right unit content." />
-            <p:button outcome="temp" value="Gestisci prodotti" icon="ui-icon-star">  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
-            <f:param name="pacId" value="10" />  
-            </p:button>  
-             <p:button action="#{packageManagement.selection}" value="Naviga" icon="ui-icon-star">  
-             
-            </p:button>  
-             <p:commandButton action="#{packageEdit.allowed}" value="Modifica pacchetto" icon="ui-icon-star" />  
-             
+              
               
         </p:layoutUnit>  
       
@@ -42,7 +32,7 @@
     
  <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.name}" paginator="true" rows="10"  
                 selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
-               id="hoteltable"
+               id="traveltable"
                  rowsPerPageTemplate="10,15,50">  
      <p:ajax event="rowSelect"  listener= "#{packageManagement.updateCurrentPackage}"/>  
   
@@ -71,11 +61,12 @@
                 	
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo TravelPackage" onclick="PF('dlg3').show();" type="button" /> 
-                    <p:commandButton id="naviga" value="Modifica" outcome= "packageEdit" /> 
-       <h:link
-			outcome="packageEdit" value="Modifica (temporaneo)" />
-                </f:facet>
+                     <p:commandButton action="#{packageEdit.allowedNew}" value="Nuovo" icon="ui-icon-star" />  
+               		
+                    <p:commandButton action="#{packageEdit.allowed}" value="Modifica"  />  
+               		 <p:commandButton value="Elimina" actionListener="#{packageManagement.deletePackage}" update="traveltable" icon="ui-icon-trash"/>
+                  
+               </f:facet>
 				
               </p:dataTable>
          </h:form>   
@@ -86,75 +77,14 @@
         </p:layoutUnit>  
       
         </p:layout>  
-          <p:dialog header="Nuovo TravelPackage" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
-     <h:form>
-     <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
-            <p:inputText value="#{packageManagement.name}"   
-                    id="username" required="true" label="username" />  
-              
-            <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"   
-                    actionListener="#{packageManagement.update}"  
-                   oncomplete="dlg3.hide();"/>  
-                
-               
-            </f:facet>  
-        </h:panelGrid>  
-        </h:form>
-        
-        
-        	</p:dialog> 
-        	
-        <script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if( !args.loggedIn) {  
-            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg3').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>  	    
-             <p:dialog header="Modifica TravelPackage" widgetVar="userDialog" resizable="false" id="userDlg" > 
-               <h:form id="userDetailForm">
-                <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
-			<h:outputText value="Nome :"></h:outputText>
-                        <h:outputText value="#{packageManagement.selectedTravelPackage.name}" />
-						<h:inputText value="#{packageManagement.selectedTravelPackage.name}"/>
-      		<f:facet name="footer">
-                     
-                            <p:commandButton value="Update" update=":form:hoteltable"  
-                            oncomplete="userDialog.hide(); " actionListener="#{packageManagement.update}"/>
-                    </f:facet>
-			
-                </p:panelGrid> 
-             </h:form>
-          </p:dialog> 
+    
                          
              
          
       
 <p:growl id="growl" showDetail="true" life="5000" />
          
-<script type="text/javascript">  
-    function handleSubmitRequest(xhr, status, args, dialogName, formName) {  
-            dialog = jQuery('#'+dialogName);
-        if(args.validationFailed) {  
-            dialog.effect("shake", { times:3 }, 100);  
-        } else {
-            clearForm(formName);
-            newUserDialog.hide(); 
-            userDialog.hide(); 
-        }  
-    }
-    function clearForm(formName){
-        jQuery('#'+formName).each(function(){
-	        this.reset();
-	});
-    }
-</script> 
+
  
         
     </body> 

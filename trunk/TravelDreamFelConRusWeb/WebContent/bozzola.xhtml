@@ -8,7 +8,7 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
       		</style> 
@@ -30,8 +30,7 @@
             </p:button>  
             <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
             <f:param name="pacId" value="10" />  
-               </p:button>  
-           
+            </p:button>  
         </p:layoutUnit>  
       
       <p:layoutUnit position="center">  
@@ -54,6 +53,12 @@
                         <f:setPropertyActionListener value="#{hotel}" target="#{hotelManagement.selectedHotel}" />    
                     </p:commandLink>
                 	</p:column>
+                     <p:column  headerText="Creatore" sortBy="#{hotel.employeeCreator}" filterBy="#{hotel.employeeCreator}" id="employeeCreator">
+                      #{hotel.employeeCreator}  
+                      </p:column> 
+                      <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                      #{hotel.name}  
+                      </p:column> 
                       <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
                       #{hotel.area}  
                       </p:column> 
@@ -66,15 +71,24 @@
                        <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
                       #{hotel.timeEnd}  
                       </p:column> 
-                       <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
-                      #{hotel.area}  
+                       <p:column  headerText="Tipo camera" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.room_type}  
                       </p:column> 
-
-               
+                      <p:column  headerText="Informazioni" sortBy="#{hotel.more_info}" filterBy="#{hotel.more_info}" id="more_info">  
+                      #{hotel.more_info}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{hotel.cost}" filterBy="#{hotel.cost}" id="room_type">  
+                      #{hotel.cost}  
+                      </p:column> 
+                      <p:column  headerText="Stato" sortBy="#{hotel.state}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.state}  
+                      </p:column>
+                       
+					  	
+               		  
                <f:facet name="footer">
                     <p:commandButton id="effectsDialogButton" value="Nuovo Hotel" onclick="PF('dlg3').show();" type="button" /> 
                      <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
-                
                 </f:facet>
 
               </p:dataTable>
@@ -89,7 +103,7 @@
           <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
      <h:form>
      <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
+           <h:outputLabel for="username" value="Nome:" />  
             <p:inputText value="#{hotelManagement.name}"   
                     id="username" required="true" label="username" />  
               

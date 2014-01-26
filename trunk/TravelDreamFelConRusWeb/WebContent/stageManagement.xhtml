@@ -33,7 +33,7 @@
     <p:layoutUnit position="west"  size="600" >  
        
 	  <h:form id="form1">
-	   <p:dataTable var="flight" value="#{stageManagement.flightList}">  
+	   <p:dataTable var="flight" value="#{stageManagement.flightStartView}" id="startFl">  
 	     <f:facet name="header">
                     Volo di partenza
                 </f:facet> 
@@ -45,43 +45,43 @@
             <h:outputText value="#{flight.area_start}" />  
         </p:column>  
          <f:facet name="footer">
-                    <p:commandButton value="Inserisci" /> 
-                     <p:commandButton value="Cancella" />
+                     <p:commandButton id="newFlightDialog" value="Inserisci" onclick="PF('startFlightDl').show();" type="button" /> 
+                     <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteFlight}" update=":form1:startFl" />
                 </f:facet>
       </p:dataTable>  
       <p:separator id="separator"/>  
       
-      <p:dataTable var="flight" value="#{stageManagement.flightStart}">
+      <p:dataTable var="flightEnd" value="#{stageManagement.flightEndView}" id = "endFl">
         <f:facet name="header">
                     Volo di ritorno
                 </f:facet>   
         <p:column headerText="Nome">  
-            <h:outputText value="#{flight.name}" />  
+            <h:outputText value="#{flightEnd.name}" />  
         </p:column>  
   
         <p:column headerText="Area di partenza">  
-            <h:outputText value="#{flight.area_start}" />  
+            <h:outputText value="#{flightEnd.area_start}" />  
         </p:column>  
           <f:facet name="footer">
-                      <p:commandButton value="Inserisci" /> 
-                     <p:commandButton value="Cancella" />
+                  <p:commandButton id="newFlightEndDialog" value="Inserisci" onclick="PF('endFlightDl').show();" type="button" /> 
+                          <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteFlightBack}" update=":form1:endFl"  />
                 </f:facet>
       </p:dataTable> 
       <p:separator id="separator1"/>  
-      <p:dataTable var="flight" value="#{stageManagement.flightStart}">  
+      <p:dataTable var="hotel" value="#{stageManagement.hotelView}" id="hot">  
         <f:facet name="header">
                     Hotel
                 </f:facet> 
         <p:column headerText="Nome">  
-            <h:outputText value="#{flight.name}" />  
+            <h:outputText value="#{hotel.name}" />  
         </p:column>  
   
-        <p:column headerText="Area di partenza">  
-            <h:outputText value="#{flight.area_start}" />  
+        <p:column headerText="Area">  
+            <h:outputText value="#{hotel.area}" />  
         </p:column>  
           <f:facet name="footer">
-                      <p:commandButton value="Inserisci" /> 
-                     <p:commandButton value="Cancella" />
+                     <p:commandButton id="newHotelDialog" value="Inserisci" onclick="PF('hotelDl').show();" type="button" /> 
+                     <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteHotel}" update=":form1:hot" />
                 </f:facet>
       </p:dataTable> 
       </h:form>
@@ -90,22 +90,75 @@
   
     <p:layoutUnit position="center">  
 <h:form id="form">
- <p:dataTable var="outing" value="#{outingManagement.outingModel}" rowKey="#{outing.name}" paginator="true" rows="10"  
-                selection="#{outingManagement.selectedOuting}" selectionMode="single" 
-                filteredValue="#{outingManagement.filteredOutings}" id="outingtable"
+ <p:dataTable var="outingView" value="#{stageManagement.outingModelView}" rowKey="#{outingView.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedOutingView}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredOutingsView}" id="out"
                  rowsPerPageTemplate="10,15,50">  
     
 
   
                 <f:facet name="header">
-                    Lista Outing
+                    Lista Escursioni
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{outingView.name}" filterBy="#{outingView.name}" id="name">
+                    
+                    
+                    <p:commandLink value="#{outingView.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{outingView}" target="#{stageManagement.selectedOuting}" />    
+                    </p:commandLink>
+                	</p:column>
+                      <p:column  headerText="Area" sortBy="#{outingView.area}" filterBy="#{outingView.area}" id="area">
+                      #{outingView.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{outingView.place}" filterBy="#{outingView.place}" id="place">  
+                      #{outingView.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{outingView.timeStart}" filterBy="#{outingView.timeStart}" id="timeStart">  
+                      #{outingView.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{outingView.timeEnd}" filterBy="#{outingView.timeEnd}" id="timeEnd">  
+                      #{outingView.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Tipo" sortBy="#{outingView.room_type}" filterBy="#{outingView.room_type}" id="room_type">  
+                      #{outingView.area}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                    <p:commandButton id="effectsDialogButton" value="Nuovo Outing" onclick="PF('outingDl').show();" type="button" /> 
+                     <p:commandButton value="Cancella Outing" actionListener="#{stageManagement.deleteOuting}" update=":form:out" icon="ui-icon-trash"/>
+                </f:facet>
+
+              </p:dataTable>
+               <p:commandButton id="closeOp" value="Termina operazione" action="#{stageManagement.closeOperation}" />       
+      
+         </h:form>   
+         
+     </p:layoutUnit>  
+	
+	</p:layout>  
+    
+ 	    </p:layoutUnit>
+        </p:layout>
+           <p:dialog header="Nuova escursione" widgetVar="outingDl" showEffect="explode" hideEffect="bounce" height="100">  
+	     <h:form>
+     <p:dataTable var="outing" value="#{stageManagement.outingModel}" rowKey="#{outing.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedOuting}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredOutings}" id="outingtable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                    Lista Uscite
                 </f:facet>  
                 
                 <p:column  headerText="Nome" sortBy="#{outing.name}" filterBy="#{outing.name}" id="name">
                     
                     
                     <p:commandLink value="#{outing.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{outing}" target="#{outingManagement.selectedOuting}" />    
+                        <f:setPropertyActionListener value="#{outing}" target="#{stageManagement.selectedOuting}" />    
                     </p:commandLink>
                 	</p:column>
                       <p:column  headerText="Area" sortBy="#{outing.area}" filterBy="#{outing.area}" id="area">
@@ -126,50 +179,170 @@
 
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo Outing" onclick="PF('dlg3').show();" type="button" /> 
-                     <p:commandButton value="Cancella Outing" actionListener="#{outingManagement.deleteOuting}" update="outingtable" icon="ui-icon-trash"/>
-                </f:facet>
+                <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertOuting}" update=":form:out" icon="ui-icon-trash"/>
+                      </f:facet>
 
               </p:dataTable>
-         </h:form>   
-         
-     </p:layoutUnit>  
-	
-	</p:layout>  
-    
- 	    </p:layoutUnit>
-        </p:layout>
-           <p:dialog header="Nuovo Outing" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
-     <h:form>
-     <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
-            <p:inputText value="#{outingManagement.name}"   
-                    id="username" required="true" label="username" />  
-              
-            <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:outingtable"   
-                    actionListener="#{outingManagement.newOuting}"  
-                   oncomplete="dlg3.hide();"/>  
-                
-               
-            </f:facet>  
-        </h:panelGrid>  
         </h:form>
         
         
         	</p:dialog> 
+        	       <p:dialog header="Nuovo Hotel" widgetVar="hotelDl" showEffect="explode" hideEffect="bounce" height="100">  
+     <h:form>
+     			<p:dataTable var="hotel" value="#{stageManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedHotel}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredHotels}" id="hoteltable"
+                 rowsPerPageTemplate="10,15,50" >  
+   
+  
+                <f:facet name="header">
+                    Alberghi
+                </f:facet>  
+                
+                    <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                    
+                    <p:commandLink value="#{hotel.name}" update=":modForm:display" oncomplete="modDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{hotel}" target="#{stageManagement.selectedHotel}" />    
+                    </p:commandLink>
+                    
+                	</p:column>
+                	
+                    <p:column  headerText="Creatore" sortBy="#{hotel.employeeCreator}" filterBy="#{hotel.employeeCreator}" id="employeeCreator">
+                      #{hotel.employeeCreator}  
+                      </p:column> 
+                      <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
+                      #{hotel.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
+                      #{hotel.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{hotel.timeStart}" filterBy="#{hotel.timeStart}" id="timeStart">  
+                      #{hotel.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
+                      #{hotel.timeEnd}  
+                      </p:column> 
+                        <p:column  headerText="Tipo camera" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.room_type}  
+                      </p:column> 
+                       <p:column  headerText="Informazioni" sortBy="#{hotel.more_info}" filterBy="#{hotel.more_info}" id="more_info">  
+                      #{hotel.more_info}  
+                      </p:column> 
+                     <p:column  headerText="Costo" sortBy="#{hotel.cost}" filterBy="#{hotel.cost}" id="cost">  
+                      #{hotel.cost}  
+                      </p:column> 
+                      <p:column  headerText="Stato" sortBy="#{hotel.state}" filterBy="#{hotel.state}" id="state">  
+                      #{hotel.state}  
+                      </p:column> 
+                      
+                       
+
+               
+               <f:facet name="footer">
+                    
+                    <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertHotel}" update=":form1:hot" icon="ui-icon-trash"/>
+                    
+                          
+                </f:facet>          
+              </p:dataTable>
+        </h:form>
+               <p:dialog header="Nuovo Volo di partenza" widgetVar="startFlightDl" showEffect="explode" hideEffect="bounce" height="100">  
+     <h:form>
+     	<p:dataTable var="flight" value="#{stageManagement.flightModel}" rowKey="#{flight.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedFlight}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredFlights}" id="flighttable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                    Lista Voli
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{flight.name}" filterBy="#{flight.name}" id="name">
+                    
+                    
+                    <p:commandLink value="#{flight.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{flight}" target="#{stageManagement.selectedFlight}" />    
+                    </p:commandLink>
+                	</p:column>
+                      <p:column  headerText="Area" sortBy="#{flight.area}" filterBy="#{flight.area}" id="area">
+                      #{flight.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{flight.place}" filterBy="#{flight.place}" id="place">  
+                      #{flight.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{flight.timeStart}" filterBy="#{flight.timeStart}" id="timeStart">  
+                      #{flight.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{flight.timeEnd}" filterBy="#{flight.timeEnd}" id="timeEnd">  
+                      #{flight.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Tipo" sortBy="#{flight.room_type}" filterBy="#{flight.room_type}" id="room_type">  
+                      #{flight.area}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                     <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlight}" update=":form1:startFl" icon="ui-icon-trash"/>
+                </f:facet>
+
+              </p:dataTable>
+        </h:form>
+        
+        
+        	</p:dialog> 
+        	       <p:dialog header="Nuovo Volo di ritorno" widgetVar="EndFlightDl" showEffect="explode" hideEffect="bounce" height="100">  
+     <h:form>
+     <p:dataTable var="flightBack" value="#{stageManagement.flightModelBack}" rowKey="#{flightBack.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedFlightBack}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredFlightsBack}" id="flighttable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                    Lista Voli
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{flightBack.name}" filterBy="#{flightBack.name}" id="name">
+                    
+                    
+                    <p:commandLink value="#{flightBack.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{flightBack}" target="#{stageManagement.selectedFlightBack}" />    
+                    </p:commandLink>
+                	</p:column>
+                      <p:column  headerText="Area" sortBy="#{flightBack.area}" filterBy="#{flightBack.area}" id="area">
+                      #{flightBack.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{flightBack.place}" filterBy="#{flightBack.place}" id="place">  
+                      #{flightBack.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{flightBack.timeStart}" filterBy="#{flightBack.timeStart}" id="timeStart">  
+                      #{flightBack.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{flightBack.timeEnd}" filterBy="#{flightBack.timeEnd}" id="timeEnd">  
+                      #{flightBack.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Tipo" sortBy="#{flightBack.room_type}" filterBy="#{flightBack.room_type}" id="room_type">  
+                      #{flightBack.area}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                      <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlightBack}" update=":form1:endFl" icon="ui-icon-trash"/>
+                </f:facet>
+
+              </p:dataTable>
+        </h:form>
+        
+        
+        	</p:dialog> 
+        
+        
+        	</p:dialog> 
         	
-        <script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if( !args.loggedIn) {  
-            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg3').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>  	    
+         
     </body> 
     
     

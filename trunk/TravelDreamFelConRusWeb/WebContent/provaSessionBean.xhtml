@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head></h:head> 
+<body> 
+
+
+  <h:form id="signupForm" styleClass="input-form">
+		<p:panel header="Registrazione" id="panel">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+	<h:panelGrid columns="2">
+	    <p:outputLabel value="Username" for="username" />
+		<p:inputText id="username" label="Username"
+			value="#{provaSession.username}"
+				required="true" />
+	
+	
+	
+		
+		<p:outputLabel value="Data di nascita" for="birthdate" />
+		<p:calendar id="birthdate" value="#{provaSession.birthdate}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
+		<h:outputText value="" />
+		
+		
+		<p:commandButton value="Registrati"
+		action="#{provaSession.signUp}"
+		style="display:block; margin:0 auto;"
+		ajax="false" />
+	</h:panelGrid>
+	
+		</p:panel>
+
+	</h:form>
+	
+	</body> 
+</html>
