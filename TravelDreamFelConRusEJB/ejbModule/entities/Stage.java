@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Stage
+ *io sono giusto
  *
  */
 @Entity
@@ -29,17 +30,28 @@ public class Stage implements Serializable {
 		this.idStage = idStage;
 	}
 
-	public Stage(String area, List<Product> products) {
+	public Stage(String area, List<Product> products,Long timeStart,Long timeEnd) {
 		super();
-		Area = area;
+		this.Area = area;
 		this.products = products;
+		this.timeStart=timeStart;
+		this.timeEnd=timeEnd;
 	}
-
-	public Stage(long idStage, String area, List<Product> products) {
+/**
+ * 
+ * @param idStage
+ * @param area
+ * @param products
+ * @param timeStart
+ * @param timeEnd
+ */
+	public Stage(long idStage, String area, List<Product> products,Long timeStart,Long timeEnd) {
 		super();
 		this.idStage = idStage;
-		Area = area;
+		this.Area = area;
 		this.products = products;
+		this.timeStart=timeStart;
+		this.timeEnd=timeEnd;
 	}
 
 	public String getArea() {
@@ -61,4 +73,22 @@ public class Stage implements Serializable {
 	@OneToMany()
 	@JoinColumn(name="idStage")
    private List <Product> products;
+	private Long timeStart;
+	private Long timeEnd;
+
+	public Long getTimeStart() {
+		return timeStart;
+	}
+
+	public void setTimeStart(Long timeStart) {
+		this.timeStart = timeStart;
+	}
+
+	public Long getTimeEnd() {
+		return timeEnd;
+	}
+
+	public void setTimeEnd(Long timeEnd) {
+		this.timeEnd = timeEnd;
+	}
 }

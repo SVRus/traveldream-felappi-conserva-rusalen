@@ -4,9 +4,11 @@ package productManagement;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 import stateenum.State;
 import authentication.LoginBeanLocal;
 import dto.FlightDTO;
@@ -402,5 +404,32 @@ LoginBeanLocal log;
     	
     	
     }*/
-  
+	public List<OutingDTO> findALLOutingByStateAndArea(State state, Long  timeStart,Long timeEnd,String area)
+	{
+		List <Outing> outingList=outing.findALLByStateAndArea(state, timeStart, timeEnd, area);
+		List <OutingDTO> outingDTOList=dto.outingListToDTO(outingList);
+		return outingDTOList;
+		
+	}
+	public List<HotelDTO> findALLHotelByStateAndArea(State state, Long  timeStart,Long timeEnd,String area)
+	{
+		List <Hotel> hotelList=hotel.findAllByStateAndArea(state, timeStart, timeEnd, area);
+		List <HotelDTO> hotelDTOList=dto.hotelListToDTO(hotelList);
+		return hotelDTOList;
+		
+	}
+	public List<FlightDTO> findALLFlightByStateAndAreaStart(State state, Long  timeStart,Long timeEnd,String area)
+	{
+		List <Flight> outingList=flight.findALLByStateAndAreaStart(state, timeStart, timeEnd, area);
+		List <FlightDTO> flightDTOList=dto.flightListToDTO(outingList);
+		return flightDTOList;
+		
+	}
+	public List<FlightDTO> findALLByStateAndAreaEnd(State state, Long  timeStart,Long timeEnd,String area)
+	{
+		List <Flight> outingList=flight.findALLByStateAndAreaEnd(state, timeStart, timeEnd, area);
+		List <FlightDTO> flightDTOList=dto.flightListToDTO(outingList);
+		return flightDTOList;
+		
+	}
 }

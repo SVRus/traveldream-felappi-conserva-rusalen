@@ -266,7 +266,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		  	
 		  			
 		  	
-		  	StageDTO stageDTO=new StageDTO(stage.getIdStage(),forStage,stage.getArea());
+		  	StageDTO stageDTO=new StageDTO(stage.getIdStage(),forStage,stage.getArea(),new Date(stage.getTimeStart()),new Date(stage.getTimeEnd()));
 		  	stageDTOList.add(stageDTO);
 			
 		}
@@ -561,7 +561,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
 	   
-	return new Stage(stagedto.getArea(),productDTOListToEntity(stagedto.getProducts()));
+	return new Stage(stagedto.getArea(),productDTOListToEntity(stagedto.getProducts()),stagedto.getTimeStart().getTime(),stagedto.getTimeEnd().getTime());
 	   
 	   
 	   
@@ -570,7 +570,7 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    {
 	   
 	   
-	   return new Stage(stagedto.getIdStage(),stagedto.getArea(),productDTOListToEntityUpdate(stagedto.getProducts()));
+	   return new Stage(stagedto.getIdStage(),stagedto.getArea(),productDTOListToEntityUpdate(stagedto.getProducts()),stagedto.getTimeStart().getTime(),stagedto.getTimeEnd().getTime());
    }
    
    
@@ -610,8 +610,47 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	return productList;
 	   
    }
-   //ciao
-   
+   public ArrayList <OutingDTO> outingListToDTO(List <Outing> outing)
+   {   
+	   ArrayList <OutingDTO> outingDTO=new ArrayList <OutingDTO>();
+	   Iterator <Outing> iter=outing.iterator();
+	   while(iter.hasNext())
+	   {
+		   OutingDTO partial=(OutingDTO)productToDTO(iter.next());
+		   outingDTO.add(partial);
+		   
+	   }
+	   return outingDTO;
+	   
+	   
+   }
+   public ArrayList <FlightDTO> flightListToDTO(List <Flight> flight)
+   {   
+	   ArrayList <FlightDTO> flightDTO=new ArrayList <FlightDTO>();
+	   Iterator <Flight> iter=flight.iterator();
+	   while(iter.hasNext())
+	   {
+		   FlightDTO partial=(FlightDTO)productToDTO(iter.next());
+		   flightDTO.add(partial);
+		   
+	   }
+	   return flightDTO;
+	   
+	   
+   } public ArrayList <HotelDTO> hotelListToDTO(List <Hotel> hotel)
+   {   
+	   ArrayList <HotelDTO> hotelDTO=new ArrayList <HotelDTO>();
+	   Iterator <Hotel> iter=hotel.iterator();
+	   while(iter.hasNext())
+	   {
+		   HotelDTO partial=(HotelDTO)productToDTO(iter.next());
+		   hotelDTO.add(partial);
+		   
+	   }
+	   return hotelDTO;
+	   
+	   
+   }
    public ProductDTO findClonedProduct(ProductDTO toClone)
    {
    	
@@ -619,9 +658,8 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	if(toClone instanceof HotelDTO)
    	{
    		Hotel hotel=(Hotel)hotman.findFirstHotelAvailable((HotelDTO)toClone);
-   		System.out.print("hotel trovato"+hotel);
    		if(hotel!=null)
-   		prodto=productToDTO(hotel);//TODO da rivedere
+   		prodto=productToDTO(hotel);
    		
    	}
    	else if(toClone instanceof OutingDTO)
@@ -633,7 +671,6 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	else if(toClone instanceof FlightDTO)
    		
    	{     Flight flight=(Flight)fliman.findFirstFlightAvailable((FlightDTO)toClone);
-   	      System.out.println(flight+"sono null???"); 
    	
    	if(flight!=null)
    		prodto=productToDTO(flight);
