@@ -10,23 +10,50 @@ public class CustomizedTravelPackageDTO extends TravelPackageDTO {
 
 
 private Long idCustomizer;	
-
+/**
+ * 
+ * @param idtravelpackage
+ * @param time_end
+ * @param time_start
+ * @param description
+ * @param name
+ * @param stages
+ * @param idCustomerBuyer
+ * @param idCustomerFriendOwner
+ * @param friendCode
+ * @param purchaseTime
+ * @param idCustomizer
+ * @param travelState
+ */
 public CustomizedTravelPackageDTO(long idtravelpackage, Date time_end,
 		Date time_start, String description, String name,
 			List<StageDTO> stages, String idCustomerBuyer,
-			String idCustomerFriendOwner, String friendCode, Date purchaseTime,Long idCustomizer,TravelState travelState) {
+			 String friendCode, Date purchaseTime,Long idCustomizer,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name,
-				stages, idCustomerBuyer, idCustomerFriendOwner, friendCode,
+				stages, idCustomerBuyer, friendCode,
 				purchaseTime,travelState);
 		this.idCustomizer=idCustomizer;
 	}
-
+/**
+ * 
+ * @param time_end
+ * @param time_start
+ * @param description
+ * @param name
+ * @param stages
+ * @param idCustomerBuyer
+ * @param idCustomerFriendOwner
+ * @param friendCode
+ * @param purchaseTime
+ * @param idCustomizer
+ * @param travelState
+ */
 public CustomizedTravelPackageDTO(Date time_end, Date time_start,
 		String description, String name, List<StageDTO> stages,
-		String idCustomerBuyer, String idCustomerFriendOwner,
+		String idCustomerBuyer,
 		String friendCode, Date purchaseTime, Long idCustomizer,TravelState travelState) {
 	super(time_end, time_start, description, name, stages, idCustomerBuyer,
-			idCustomerFriendOwner, friendCode, purchaseTime,travelState);
+			friendCode, purchaseTime,travelState);
 	this.idCustomizer = idCustomizer;
 }
 

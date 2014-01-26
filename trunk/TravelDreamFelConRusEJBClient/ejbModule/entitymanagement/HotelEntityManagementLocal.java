@@ -19,8 +19,9 @@ public interface HotelEntityManagementLocal {
 	public <Hotel> void edit (Hotel hotel);
     public <Hotel>   List<Hotel> findAll(); 	
     public <Hotel> List<Hotel> findAllByParameter(Object par);
-    public <Hotel>List<Hotel> findAllByStateAndArea(State state,Date timeStart,Date timeEnd,String area);
+    public <Hotel>List<Hotel> findAllByStateAndArea(State state,Long timeStart,Long timeEnd,String area);
     public boolean findBooleanHotelEquivalent(HotelDTO hotelDTO ,int number);
     public int findIntegerHotelEquivalent(HotelDTO hotelDTO);
+    public <Hotel> Hotel findFirstHotelAvailable(HotelDTO hotelDTO);
 
 }
