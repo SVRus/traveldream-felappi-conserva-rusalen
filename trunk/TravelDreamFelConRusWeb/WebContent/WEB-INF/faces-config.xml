@@ -9,10 +9,11 @@
        <navigation-case>
            <from-outcome>sel</from-outcome>
            <to-view-id>
-           <redirect> 
+            
            /hotelManagement.xhtml
-           </redirect>
+          
            </to-view-id>
+           <redirect/>  
        </navigation-case>
     </navigation-rule>
     <navigation-rule>
@@ -20,11 +21,73 @@
        <navigation-case>
            <from-outcome>packageEdit</from-outcome>
            <to-view-id>
-           <redirect> 
            /packageEdit.xhtml
-           </redirect>
            </to-view-id>
+           <redirect/>  
        </navigation-case>
     </navigation-rule>
+        <navigation-rule>
+       <from-view-id>allPackages.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusy</from-outcome>
+           <to-view-id>
+          /packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>allPackages.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusy</from-outcome>
+           <to-view-id>
+           /packageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /allPackages.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+       <from-view-id>packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusyStage</from-outcome>
+           <to-view-id>
+          /stageManagement.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusyStage</from-outcome>
+           <to-view-id>
+           /stageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    
 
 </faces-config>
