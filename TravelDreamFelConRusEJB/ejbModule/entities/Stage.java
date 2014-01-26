@@ -58,7 +58,7 @@ public class Stage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idStage;
 	private String Area;
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany()
 	@JoinColumn(name="idStage")
    private List <Product> products;
 }

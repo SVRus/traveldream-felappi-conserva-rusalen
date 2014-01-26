@@ -17,7 +17,6 @@ import travelstateenum.TravelState;
  */
 
 @Entity
-@NamedQuery(name = "findeverytravelpackage", query = "SELECT b FROM TravelPackage b ")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="TRAVELPACKAGE_TYPE")
 public class TravelPackage implements Serializable {
@@ -41,13 +40,13 @@ public class TravelPackage implements Serializable {
 
 
 
-	public Date getPurchaseTime() {
+	public Long getPurchaseTime() {
 		return purchaseTime;
 	}
 
 
 
-	public void setPurchaseTime(Date purchaseTime) {
+	public void setPurchaseTime(Long purchaseTime) {
 		this.purchaseTime = purchaseTime;
 	}
 
@@ -57,9 +56,9 @@ public class TravelPackage implements Serializable {
 
 
 
-	public TravelPackage(long idtravelpackage, Date time_end, Date time_start,
+	public TravelPackage(long idtravelpackage, Long time_end, Long time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Date purchaseTime,TravelState travelState) {
+			String friendCode, Long purchaseTime,TravelState travelState) {
 		super();
 		this.idtravelpackage = idtravelpackage;
 		this.time_end = time_end;
@@ -102,25 +101,25 @@ public void setIdtravelpackage(long idtravelpackage) {
 
 
 
-public Date getTime_end() {
+public Long getTime_end() {
 	return time_end;
 }
 
 
 
-public void setTime_end(Date time_end) {
+public void setTime_end(Long time_end) {
 	this.time_end = time_end;
 }
 
 
 
-public Date getTime_start() {
+public Long getTime_start() {
 	return time_start;
 }
 
 
 
-public void setTime_start(Date time_start) {
+public void setTime_start(Long time_start) {
 	this.time_start = time_start;
 }
 
@@ -154,11 +153,9 @@ public void setName(String name) {
 
 
 
-@Temporal (TemporalType.TIMESTAMP)
-private Date time_end;
-@Temporal (TemporalType.TIMESTAMP)
 
-private Date time_start;
+private Long time_end;
+private Long time_start;
 private String description;
 @Column(unique=true)
 private String name;
@@ -167,6 +164,8 @@ private String name;
 private List<Stage> stages;
 
 private String friendCode;
+@Enumerated(EnumType.STRING)
+
 private TravelState travelState;
 public TravelState getTravelState() {
 	return travelState;
@@ -180,8 +179,7 @@ public void setTravelState(TravelState travelState) {
 
 
 
-@Temporal (TemporalType.TIMESTAMP)
-private Date purchaseTime;
+private Long purchaseTime;
 
 
 	public TravelPackage() {
@@ -190,8 +188,8 @@ private Date purchaseTime;
 
 
 
-	public TravelPackage(Date time_end,Date time_start, String description,
-			String name, List<Stage> stages,  String friendCode, Date purchaseTime,TravelState travelState) {
+	public TravelPackage(Long time_end,Long time_start, String description,
+			String name, List<Stage> stages,  String friendCode, Long purchaseTime,TravelState travelState) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;

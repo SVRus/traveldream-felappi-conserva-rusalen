@@ -1,23 +1,38 @@
 package travelPackageManagement;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
+import dto.FlightDTO;
+import dto.HotelDTO;
+import dto.OutingDTO;
 import dto.PrepackedTravelPackageDTO;
+import dto.ProductDTO;
+import dto.StageDTO;
 import dto.TravelPackageDTO;
 import dto_entitiesconversion.DTOFactory;
+import entities.Customer;
 import entities.CustomizedTravelPackage;
 import entities.Employee;
 import entities.PrepackedTravelPackage;
 import entities.Product;
+import entities.Stage;
 import entities.TravelPackage;
+import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
+import entitymanagement.FlightEntityManagementLocal;
+import entitymanagement.HotelEntityManagementLocal;
+import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.TravelPackageEntityManagementLocal;
 
@@ -39,6 +54,17 @@ TravelPackageEntityManagementLocal trav;
 DTOFactory dto;
 @EJB
 LoginBeanLocal log;
+@EJB
+OutingEntityManagementLocal outing;
+@EJB
+HotelEntityManagementLocal hotel;
+@EJB
+FlightEntityManagementLocal flight;
+@EJB
+CustomerEntityManagementLocal custoEntityMan;
+
+
+
     /**
      * Default constructor. 
      */
@@ -117,6 +143,7 @@ LoginBeanLocal log;
 	public List <PrepackedTravelPackageDTO> findAllPrepacked()
 	{
 		List <PrepackedTravelPackage> prelist=preman.findAll();
+		System.out.println("lista "+prelist);
 		List <PrepackedTravelPackageDTO>prelistdto=dto.prepackedTravelPackageToDTO(prelist);
 		return prelistdto;
 	}
@@ -129,6 +156,170 @@ LoginBeanLocal log;
 		
 		
 	}
+	
+public CustomizedTravelPackageDTO cloneTravelPackage(PrepackedTravelPackageDTO preDTO)
+{
+	List <StageDTO> stagesPreDTO=preDTO.getStages();
+	List <StageDTO> stagesCusDTO= new ArrayList <StageDTO>();
+	Iterator <StageDTO> iterStages=stagesPreDTO.iterator();
+	while (iterStages.hasNext())
+	{
+		StageDTO partial=iterStages.next();
+		System.out.println(partial.toString());
+		ArrayList <ProductDTO> productsPreDTO=partial.getProducts();
+		System.out.println(productsPreDTO.toString()+"prodotti parziali");
+		Iterator  <ProductDTO> iterProducts=productsPreDTO.iterator();
+		List <ProductDTO> productsCusDTO=new ArrayList <ProductDTO>();
+		while(iterProducts.hasNext())
+		{
+			ProductDTO prodPartial=dto.findClonedProduct(iterProducts.next());
+			System.out.print("prodotto parziale"+prodPartial);
+			if(prodPartial!=null)
+			productsCusDTO.add(prodPartial);
+					
+			
+		}
+		
+		StageDTO stagePartialCus=new StageDTO(new ArrayList<ProductDTO>(productsCusDTO),partial.getArea());
+		stagesCusDTO.add(stagePartialCus);
+		
+	}
 
+		CustomizedTravelPackageDTO cus=new CustomizedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),stagesCusDTO,null,null,null,null,preDTO.getTravelState());
+	
+	
+	return cus;
+	
+
+}
+
+public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackageDTO custo)
+{
+	String username=log.getPrincipalUsername();
+	Customer customer=custoEntityMan.find(username);
+	CustomizedTravelPackage travel=(CustomizedTravelPackage)dto.travelPackageDTOToEntity(custo, true);
+	
+	List <CustomizedTravelPackage> cusTravList=customer.getCustomizedTravelPackages();
+	cusTravList.add(travel);
+	customer.setCustomizedTravelPackages(cusTravList);
+	try
+	{
+		custoEntityMan.edit(customer);
+		
+		return true;
+	}
+	catch(Exception e)
+	{
+	return false;
+	}
+
+
+}
+
+/**
+ * da testare
+ * @param travel
+ * @return
+ */
+	public int getNumberEquivalentPackage(TravelPackageDTO travel)
+	{
+		List <StageDTO> stages=travel.getStages();
+		Iterator <StageDTO> iterStages=stages.iterator();
+		int result=Integer.MAX_VALUE;
+		while(iterStages.hasNext())
+		{
+			StageDTO partial=iterStages.next();
+			List <ProductDTO> products=partial.getProducts();
+			Iterator <ProductDTO> iterProducts=products.iterator();
+			while(iterProducts.hasNext())
+			{
+				int partialNumber=0;
+				ProductDTO partialProduct=iterProducts.next();
+				if(partialProduct instanceof OutingDTO)
+				{
+					partialNumber=outing.findIntegerOutingEquivalent((OutingDTO)partialProduct);
+					
+				}
+				else if(partialProduct instanceof HotelDTO)
+				{
+					partialNumber=hotel.findIntegerHotelEquivalent((HotelDTO)partialProduct);
+				}
+				else if(partialProduct instanceof FlightDTO)
+				{
+					partialNumber=flight.findIntegerFlightEquivalent((FlightDTO)partialProduct);
+					
+				}
+				if(partialNumber<=result&&partialNumber>0)
+					result=partialNumber;
+				
+			}
+			
+			
+			
+		}
+		
+		if(result==Integer.MAX_VALUE)
+		return 0;
+		else
+		return result;
+			
+	}
+	/**
+	 * da testare
+	 * 
+	 * @param travel
+	 * @return
+	 */
+	public ProductDTO getMinimunAmountProductEquivalentPackage(TravelPackageDTO travel)
+	{
+		List <StageDTO> stages=travel.getStages();
+		Iterator <StageDTO> iterStages=stages.iterator();
+		int result=Integer.MAX_VALUE;
+		ProductDTO product=null;
+		while(iterStages.hasNext())
+		{
+			StageDTO partial=iterStages.next();
+			List <ProductDTO> products=partial.getProducts();
+			Iterator <ProductDTO> iterProducts=products.iterator();
+			while(iterProducts.hasNext())
+			{
+				int partialNumber=0;
+				ProductDTO partialProduct=iterProducts.next();
+				if(partialProduct instanceof OutingDTO)
+				{
+					partialNumber=outing.findIntegerOutingEquivalent((OutingDTO)partialProduct);
+					
+				}
+				else if(partialProduct instanceof HotelDTO)
+				{
+					partialNumber=hotel.findFirstHotelAvailable((HotelDTO)partialProduct);
+				}
+				else if(partialProduct instanceof FlightDTO)
+				{
+					partialNumber=flight.findIntegerFlightEquivalent((FlightDTO)partialProduct);
+					
+				}
+				if(partialNumber<=result)
+				{
+					result=partialNumber;
+				    product=partialProduct;
+				}
+			}
+			
+			
+			
+		}
+		
+		
+		return product;
+			
+	}//prodotti parziali
+	
+	public List <PrepackedTravelPackageDTO> findAllPrepackedTravelPackageByParameter(TravelState state)
+	{
+		List <PrepackedTravelPackage> foundList=preman.findAllByParameter(state);
+		List <PrepackedTravelPackageDTO> preList=dto.prepackedTravelPackageToDTO(foundList);
+		return preList;
+	}
 	
 }

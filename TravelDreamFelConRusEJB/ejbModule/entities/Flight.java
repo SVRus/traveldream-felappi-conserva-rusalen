@@ -37,7 +37,7 @@ public class Flight extends Product implements Serializable {
  * @param more_info
  * @param state
  */
-	public Flight(float cost, Date timeStart, Date timeEnd,
+	public Flight(float cost, Long timeStart, Long timeEnd,
 			String name, String area, String flight_company,
 			String area_start, String place_start, String place_end,
 			String more_info, State state) {
@@ -63,8 +63,8 @@ public class Flight extends Product implements Serializable {
 	 * @param more_info
 	 * @param state
 	 */
-	public Flight(long idProduct, float cost, Date timeStart,
-			Date timeEnd, String name, String area,
+	public Flight(long idProduct, float cost, Long timeStart,
+			Long timeEnd, String name, String area,
 			String flight_company, String area_start, String place_start,
 			String place_end, String more_info,  State state) {
 		super(idProduct, cost, timeStart, timeEnd, name, state, area);
@@ -118,7 +118,7 @@ private String more_info;
 	   {
 		   
 		   
-		   if(! (object instanceof Outing))
+		   if(! (object instanceof Flight))
 		return false;
 		   return equals((Flight)object);
 	   }

@@ -49,7 +49,7 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	
     	
     	Query q = em.createNativeQuery("SELECT IDSTAGE FROM PRODUCT WHERE IDPRODUCT=?");
-    	System.out.print("ciao");
+    	System.out.print("ciao sono io?");
     	q.setParameter(1, idproduct);
     	Object result= q.getSingleResult();
     	if (result==null)

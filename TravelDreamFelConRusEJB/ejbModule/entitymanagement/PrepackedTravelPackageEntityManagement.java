@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 
@@ -35,18 +36,17 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
         return em;
     }
 
-    public Long findIdEmployeeCreator(Long idPrepackedTravelPackage)
+    public String findIdEmployeeCreator(Long idPrepackedTravelPackage)
 	{
 		Query query = em.createNativeQuery("SELECT  idemployeecreator FROM prepackedtravelpackage where idtravelpackage=? ");
    	     query.setParameter(1, idPrepackedTravelPackage);
-   	   Long id;
+   	   
    	    	Object result=  query.getSingleResult();
    	    	if (result==null)
-   	    	id=new Long(0);
+   	    	return null;
    	    	else
-   	    	id=(Long)result;
+   	    	return (String)result;
     	
-		return id;
 		
 		
 		
@@ -58,8 +58,14 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
 
 	@Override
 	public List findAllByParameter(Object par) {
-		// TODO Auto-generated method stub
-		return null;
+
+		Query q= em.createQuery("SELECT c from PrepackedTravelPackage c where c.travelState =:par",PrepackedTravelPackage.class);
+		q.setParameter("par", par);
+		List <PrepackedTravelPackage> list=q.getResultList();
+		if(list!=null)
+		return new ArrayList <PrepackedTravelPackage> (list);
+		else
+		return new ArrayList <PrepackedTravelPackage> ();
 	}
 	
     

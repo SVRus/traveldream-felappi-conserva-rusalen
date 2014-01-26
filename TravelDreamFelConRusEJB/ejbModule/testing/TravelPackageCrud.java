@@ -3,30 +3,29 @@ package testing;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.embeddable.EJBContainer;
-import javax.naming.NamingException;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
+import productManagement.ProductCRUDBeanLocal;
+import stateenum.State;
+import travelPackageManagement.TravelPackageCRUDBeanLocal;
+import travelstateenum.TravelState;
 import authentication.RegistrationBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
-import dto.PrepackedTravelPackageDTO;
 import dto.StageDTO;
 import dto_entitiesconversion.DTOFactory;
-import productManagement.ProductCRUDBeanLocal;
-import stateenum.State;
-import travelPackageManagement.TravelPackageCRUDBeanLocal;
-import travelstateenum.TravelState;
 import entities.Code;
 import entities.Employee;
 import entities.Flight;
@@ -42,7 +41,7 @@ import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import groupenum.Group;
 
-public class Test {
+public class TravelPackageCrud {
 	static EJBContainer container=null;
 	static PrepackedTravelPackageEntityManagementLocal pre=null;
 	static HotelEntityManagementLocal hot=null;
@@ -69,8 +68,8 @@ public class Test {
 	static Long timeAfter=null;
 	static Long dateEnd=null;
 	@BeforeClass
-	public static void beforeClass() throws NamingException
-	{
+	public static void setUpBeforeClass() throws Exception {
+
 		container=EJBContainer.createEJBContainer();
 		travcrud=(TravelPackageCRUDBeanLocal) container.getContext().lookup("java:global/classes/TravelPackageCRUDBean!travelPackageManagement.TravelPackageCRUDBeanLocal");
         pre=(PrepackedTravelPackageEntityManagementLocal) container.getContext().lookup("java:global/classes/PrepackedTravelPackageEntityManagement!entitymanagement.PrepackedTravelPackageEntityManagementLocal");
@@ -94,7 +93,7 @@ public class Test {
 	   List <Product> products=impiegato.getManagedProduct();
    	   products.add(hotelInsert);
       
-		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area1",State.SOLD,"place");
+		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
 	
 		flightdto=new FlightDTO(0,"pippo","io",11,new Date() ,new Date(),State.RESERVED,"area1","alitalia","areastart1","placestart","placeend","info");
@@ -106,116 +105,46 @@ public class Test {
 		products.add(flightInsert1);
     	impiegato.setManagedProduct(products);
 	    emploMan.edit(impiegato);
-	}
-	public static void afterClass()
-	{
-		
-	
-	}
-	
-	@Before
-	public  void before()
-	
-	{
-
-		
-	}
-	
-	
-	
-	
-	@org.junit.Test
-	public void testProductInsert()
-	{
-		List <Hotel> hotelListAvailable=hot.findAll();
-		Hotel hote=hotelListAvailable.get(0);
-		
-		List <Outing> outingListNull=out.findAllByParameter(State.AVAILABLE);
-
-		List <Flight> flightListReserved=fli.findAllByParameter(State.RESERVED);
-		Flight flight=flightListReserved.get(0);
-		
-		assertTrue(hote!=null && hote.equals(hotelInsert)&&flight.equals(flightInsert)&&flightListReserved.size()==1&&outingListNull.size()==0);
-
-	
-	}
-	@org.junit.Test
-	public void testPrepackedPackageInsert() {
-	    List <Product> lista1=hot.findAllByParameter(State.AVAILABLE);
-		List <Product> lista2=fli.findAllByParameter(State.AVAILABLE);
-		
-        Stage stage1=new Stage("area1",lista1);
-        Stage stage2=new Stage ("area2",lista2);
-        List <Stage> stages=new ArrayList <Stage> ();
-        stages.add(stage1);
-        stages.add(stage2);
-        impiegato=emploMan.find(impiegato.getUsername());
-       
-	   travel=new PrepackedTravelPackage((new Date()).getTime(),(new Date()).getTime(),"","",stages,"0",(new Date()).getTime(),TravelState.AVAILABLE);
-	     List <PrepackedTravelPackage> managedPackages=impiegato.getManagedTravelPackage();
-	     managedPackages.add(travel);
-	    impiegato.setManagedTravelPackage(managedPackages);
-	    emploMan.edit(impiegato);
-	    PrepackedTravelPackage travel2=(( Employee)emploMan.find(impiegato.getUsername())).getManagedTravelPackage().get(0);
-	    List <Stage> stages1=travel2.getStages();
-  
-       Stage stage1Test2= stages1.get(0);
-       Hotel hotelTest2=(Hotel)stage1Test2.getProducts().get(0);
-       Stage stage2Test2=stages1.get(1);
-	   Flight flightTest2 =(Flight)stage2Test2.getProducts().get(0);
-	   assertTrue(hotelTest2.equals(hotelInsert)&&flightTest2.equals(flightInsert1));
-	   System.out.println("vengo prima io");
-	}
-	
-	@org.junit.Test
-	public void testFindAreaTime() throws Exception {
-		
-	Thread.sleep(1000);
-	timeAfter=(new Date()).getTime();
-	List <Hotel> hotelsFound=hot.findAllByStateAndArea(State.AVAILABLE, timeNow, timeAfter, hotelInsert.getArea());
-	Hotel foundHotel=hotelsFound.get(0);
-	List <Outing> outingsFound=out.findALLByStateAndArea(outingInsert.getState(), timeNow, timeAfter, outingInsert.getArea());
-	Outing foundOuting=outingsFound.get(0);
-	List <Flight> flightsFound=fli.findALLByStateAndAreaStart(flightInsert.getState(), timeNow, timeAfter,flightInsert.getArea_start());
-	Flight foundFlight=flightsFound.get(0);
-	List <Flight> flightsFound1=fli.findALLByStateAndAreaEnd(flightInsert1.getState(), timeNow, timeAfter, flightInsert1.getArea());
-	Flight foundFlight1=flightsFound1.get(0);
-	assertTrue(foundHotel.equals(hotelInsert)&& foundOuting.equals(outingInsert)&&foundFlight.equals(flightInsert)&&foundFlight1.equals(flightInsert1));
-	
-	
-	}
-	@org.junit.Test
-	public void testTrans() throws Exception {
-	assertTrue(hotelInsert.equals(dto.productDTOToEntity(hoteldto)));
-	}
-	@org.junit.Test
-	public void testTrans1() throws Exception {
-	assertTrue(outingInsert.equals(dto.productDTOToEntity(outingdto)));
-	}
-	@org.junit.Test
-	public void testTrans2() throws Exception {
-	assertTrue(flightInsert.equals(dto.productDTOToEntity(flightdto)));
-	}
-
-	@org.junit.Test
-	public void testFindEqu() throws Exception {
-        assertTrue(hot.findBooleanHotelEquivalent(hoteldto, 1)&&hot.findIntegerHotelEquivalent(hoteldto)==1&&!out.findBooleanOutingEquivalent(outingdto, 1)&&out.findIntegerOutingEquivalent(outingdto)==0&&fli.findIntegerFlightEquivalent(flightdto1)==1&&fli.findBooleanFlightEquivalent(flightdto1, 1));		
-		
+	    impiegato=emploMan.find(impiegato.getUsername());
+	    List <Stage> stages=new ArrayList <Stage> ();
+	    List <Product> products1=hot.findAllByParameter(State.AVAILABLE);
+	   Stage stage1=new Stage("area1",products1);
+	   stages.add(stage1);
+	   List <Product> products2=out.findAllByParameter(State.AVAILABLE);
+       List <Flight> flightList=fli.findAll();
+       products2.addAll(flightList);
+	   Stage stage2= new Stage("area2",products2);
+	   stages.add(stage2);
+	   PrepackedTravelPackage prepacked=new PrepackedTravelPackage((new Date()).getTime(),(new Date()).getTime(),"","",stages,"0",(new Date()).getTime(),TravelState.AVAILABLE);
+	   List <PrepackedTravelPackage> prelist= impiegato.getManagedTravelPackage();
+	   prelist.add(prepacked);
+	   impiegato.setManagedTravelPackage(prelist);
+	   emploMan.edit(impiegato);
 	
 	}
 
-	
-	public void testFindCloned() throws Exception
-	{
+
+
+	@Test
+	public void testClone() {
+		
 		CustomizedTravelPackageDTO cusdto=travcrud.cloneTravelPackage((travcrud.findAllPrepacked().get(0)));
 		List <StageDTO> stages=cusdto.getStages();
-		System.out.println(stages.toString());
+		System.out.println(stages.toString()+"staaaaaaaaaaaaaaaaageeeeeeeeees");
 		Iterator <StageDTO> iter=stages.iterator();
 		while(iter.hasNext())
-		{
-			System.out.print(iter.next().getProducts().get(0).toString());
+		{ 
+			System.out.print(iter.next().getProducts().toString());
 			
 		}
 	}
-
+	@Test
+public void test()
+{
+	int howmuch=travcrud.getNumberEquivalentPackage(travcrud.findAllPrepackedTravelPackageByParameter(TravelState.AVAILABLE).get(0));
+	System.out.print("ee"+howmuch+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+	assertTrue(howmuch==1);	
+		
+}
+		
 }
