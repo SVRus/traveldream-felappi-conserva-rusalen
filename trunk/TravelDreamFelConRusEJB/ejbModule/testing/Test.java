@@ -144,8 +144,8 @@ public class Test {
 	    List <Product> lista1=hot.findAllByParameter(State.AVAILABLE);
 		List <Product> lista2=fli.findAllByParameter(State.AVAILABLE);
 		
-        Stage stage1=new Stage("area1",lista1);
-        Stage stage2=new Stage ("area2",lista2);
+        Stage stage1=new Stage("area1",lista1,(new Date()).getTime(),(new Date()).getTime());
+        Stage stage2=new Stage ("area2",lista2,(new Date()).getTime(),(new Date()).getTime());
         List <Stage> stages=new ArrayList <Stage> ();
         stages.add(stage1);
         stages.add(stage2);

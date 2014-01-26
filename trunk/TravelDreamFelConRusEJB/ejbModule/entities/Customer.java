@@ -88,15 +88,25 @@ public class Customer extends RegisteredUser implements Serializable {
 		return serialVersionUID;
 	}
 
-
+/**
+ * 
+ * @param email
+ * @param name
+ * @param surname
+ * @param telephone
+ * @param password
+ * @param username
+ * @param groups
+ * @param customizedTravelPackages
+ * @param purchasedTravelPackages
+ * @param giftLists
+ */
 
 	public Customer(String email, String name, String surname,
 			String telephone, String password, String username,
 			List<Group> groups,
 			List<CustomizedTravelPackage> customizedTravelPackages,
-			/*List<Customer> friends,*/
 			List<TravelPackage> purchasedTravelPackages,
-			/*List<TravelPackage> preparedForAFriendTravelPackages,*/
 			List<GiftList> giftLists) {
 		super(email, name, surname, telephone, password, username, groups);
 		this.customizedTravelPackages = customizedTravelPackages;

@@ -27,13 +27,18 @@ import dto.OutingDTO;
 import dto.StageDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.Code;
+import entities.Customer;
+import entities.CustomizedTravelPackage;
 import entities.Employee;
 import entities.Flight;
+import entities.GiftList;
 import entities.Hotel;
 import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.Stage;
+import entities.TravelPackage;
+import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
@@ -61,6 +66,7 @@ public class TravelPackageCrud {
 	static Outing outingInsert;
 	static Flight flightInsert;
 	static EmployeeEntityManagementLocal emploMan=null;
+	static CustomerEntityManagementLocal custoMan=null;
 	static Employee emplo=null;
 	static Employee impiegato=null; 
 	static Flight flightInsert1=null;
@@ -79,8 +85,11 @@ public class TravelPackageCrud {
 		prod=(ProductCRUDBeanLocal) container.getContext().lookup("java:global/classes/ProductCRUDBean!productManagement.ProductCRUDBeanLocal");
 	    dto=(DTOFactory)container.getContext().lookup("java:global/classes/DTOFactory!dto_entitiesconversion.DTOFactory");
 	    reg=(RegistrationBeanLocal) container.getContext().lookup("java:global/classes/RegistrationBean!authentication.RegistrationBean");
-	    		emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
-          List <Group> groups=new ArrayList <Group>();
+	    emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
+        custoMan=(CustomerEntityManagementLocal) container.getContext().lookup("java:global/classes/CustomerEntityManagement!entitymanagement.CustomerEntityManagementLocal");
+	    		
+	    		
+	    List <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.EMPLOYEE);
 	    timeNow=(new Date()).getTime();
 	   emplo=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername1234",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
@@ -108,12 +117,12 @@ public class TravelPackageCrud {
 	    impiegato=emploMan.find(impiegato.getUsername());
 	    List <Stage> stages=new ArrayList <Stage> ();
 	    List <Product> products1=hot.findAllByParameter(State.AVAILABLE);
-	   Stage stage1=new Stage("area1",products1);
+	   Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
 	   stages.add(stage1);
 	   List <Product> products2=out.findAllByParameter(State.AVAILABLE);
        List <Flight> flightList=fli.findAll();
        products2.addAll(flightList);
-	   Stage stage2= new Stage("area2",products2);
+	   Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
 	   stages.add(stage2);
 	   PrepackedTravelPackage prepacked=new PrepackedTravelPackage((new Date()).getTime(),(new Date()).getTime(),"","",stages,"0",(new Date()).getTime(),TravelState.AVAILABLE);
 	   List <PrepackedTravelPackage> prelist= impiegato.getManagedTravelPackage();
@@ -139,12 +148,23 @@ public class TravelPackageCrud {
 		}
 	}
 	@Test
-public void test()
+public void testNumberEquivalentPackage()
 {
 	int howmuch=travcrud.getNumberEquivalentPackage(travcrud.findAllPrepackedTravelPackageByParameter(TravelState.AVAILABLE).get(0));
 	System.out.print("ee"+howmuch+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	assertTrue(howmuch==1);	
 		
 }
+	@Test
+	public void testCustomizedTravelPackageCreation()
+	{   ArrayList <Group> groups=new ArrayList <Group>();
+	    groups.add(Group.CUSTOMER);
+		Customer customer=new Customer("io@email.it","marcello","felappi","036486876","iosonocello","cello",groups,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
+		customer=dto.dtoToCustomer(dto.toTDO(customer));
+		custoMan.edit(customer);
+		Stage stage=new Stage();
+		
+	}
+	
 		
 }
