@@ -101,7 +101,8 @@ public class TravelPackageCrud {
 	   impiegato=emploMan.find(emplo.getUsername());
 	   List <Product> products=impiegato.getManagedProduct();
    	   products.add(hotelInsert);
-      
+   	   products.add(hotelInsert);
+
 		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
 	
@@ -110,6 +111,8 @@ public class TravelPackageCrud {
 	    flightInsert=(Flight)dto.productDTOToEntity(flightdto);
 		flightInsert1=(Flight)dto.productDTOToEntity(flightdto1);
 		products.add(outingInsert);
+		products.add(outingInsert);
+
 		products.add(flightInsert);
 		products.add(flightInsert1);
     	impiegato.setManagedProduct(products);
@@ -152,7 +155,7 @@ public void testNumberEquivalentPackage()
 {
 	int howmuch=travcrud.getNumberEquivalentPackage(travcrud.findAllPrepackedTravelPackageByParameter(TravelState.AVAILABLE).get(0));
 	System.out.print("ee"+howmuch+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	assertTrue(howmuch==1);	
+	assertTrue(howmuch==2);	
 		
 }
 	@Test
@@ -162,8 +165,10 @@ public void testNumberEquivalentPackage()
 		Customer customer=new Customer("io@email.it","marcello","felappi","036486876","iosonocello","cello",groups,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
 		customer=dto.dtoToCustomer(dto.toTDO(customer));
 		custoMan.edit(customer);
-		Stage stage=new Stage();
-		
+		ArrayList <Product> products1=
+		   Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
+		   Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
+
 	}
 	
 		

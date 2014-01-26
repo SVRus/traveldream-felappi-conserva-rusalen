@@ -172,14 +172,19 @@ public class Test {
 		
 	Thread.sleep(1000);
 	timeAfter=(new Date()).getTime();
-	List <Hotel> hotelsFound=hot.findAllByStateAndArea(State.AVAILABLE, timeNow, timeAfter, hotelInsert.getArea());
-	Hotel foundHotel=hotelsFound.get(0);
-	List <Outing> outingsFound=out.findALLByStateAndArea(outingInsert.getState(), timeNow, timeAfter, outingInsert.getArea());
-	Outing foundOuting=outingsFound.get(0);
-	List <Flight> flightsFound=fli.findALLByStateAndAreaStart(flightInsert.getState(), timeNow, timeAfter,flightInsert.getArea_start());
-	Flight foundFlight=flightsFound.get(0);
-	List <Flight> flightsFound1=fli.findALLByStateAndAreaEnd(flightInsert1.getState(), timeNow, timeAfter, flightInsert1.getArea());
-	Flight foundFlight1=flightsFound1.get(0);
+	List <HotelDTO> hotelsFound=prod.findALLHotelByStateAndArea(State.AVAILABLE, timeNow, timeAfter, hotelInsert.getArea());
+	HotelDTO foundHotelDTO=hotelsFound.get(0);
+	Hotel foundHotel=(Hotel)dto.productDTOToEntityUpdate(foundHotelDTO);
+	List <OutingDTO> outingsFound=prod.findALLOutingByStateAndArea(outingInsert.getState(), timeNow, timeAfter, outingInsert.getArea());
+	OutingDTO foundOutingDTO=outingsFound.get(0);
+	Outing foundOuting=(Outing)dto.productDTOToEntityUpdate(foundOutingDTO);
+	List <FlightDTO> flightsFound=prod.findALLFlightByStateAndAreaStart(flightInsert.getState(), timeNow, timeAfter,flightInsert.getArea_start());
+	FlightDTO foundFlightDTO=flightsFound.get(0);
+	Flight foundFlight=(Flight)dto.productDTOToEntityUpdate(foundFlightDTO);
+	List <FlightDTO> flightsFound1=prod.findALLByStateAndAreaEnd(flightInsert1.getState(), timeNow, timeAfter, flightInsert1.getArea());
+	FlightDTO foundFlightDTO1=flightsFound1.get(0);
+	Flight foundFlight1=(Flight)dto.productDTOToEntityUpdate(foundFlightDTO1);
+
 	assertTrue(foundHotel.equals(hotelInsert)&& foundOuting.equals(outingInsert)&&foundFlight.equals(flightInsert)&&foundFlight1.equals(flightInsert1));
 	
 	
