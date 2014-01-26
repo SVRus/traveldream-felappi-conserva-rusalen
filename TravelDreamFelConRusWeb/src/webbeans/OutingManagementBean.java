@@ -48,8 +48,9 @@ public class OutingManagementBean {
 	 private Date timeEnd;
 	 private String area;
 	 private String place;
-	 private String room_type;
+	 private String description;
 	 private String more_info;
+	 
 	  private OutingDataModel outingModel;  
 	  public OutingDataModel getOutingModel() {
 		return outingModel;
@@ -59,11 +60,14 @@ public class OutingManagementBean {
 
 	@EJB
 	  private ProductCRUDBeanLocal productCRUD;
+	
+	@EJB
+	private LoginBeanLocal login;
 	  
 	  
 	  //valori di prova
 	  static GregorianCalendar data1= new GregorianCalendar();
-		 private  List<OutingDTO> outings;
+	  private  List<OutingDTO> outings;
 	  private  List<OutingDTO> filteredOutings;
 	  
 	  
@@ -71,8 +75,7 @@ public class OutingManagementBean {
 	  public void update()
 	  {
 		
-	  outings
-	  = productCRUD.findAllOutings();
+	  outings = productCRUD.findAllOutings();
 	  outingModel = new OutingDataModel(outings);  
 
 	  }
@@ -81,10 +84,11 @@ public class OutingManagementBean {
 	  
 	  public void newOuting(ActionEvent actionEvent)
 	  {
-			newOuting = new OutingDTO(23, name, name, 23, data1, data1,
-					name, name, State.AVAILABLE);
+			newOuting = new OutingDTO(0, login.getPrincipalUsername(), name,
+		                cost,  timeStart,  timeEnd,  description, area,
+		                State.AVAILABLE,place);
 			productCRUD.createProduct(newOuting);
-			System.out.println("avrei dovuto creare un outing");
+			System.out.println("Escursione creata.");
 			outings.add(newOuting);
 		
 		  
@@ -98,10 +102,10 @@ public class OutingManagementBean {
 	  public void updateOuting(ActionEvent actionEvent){
 			
 				outings.remove(selectedOuting);
-			   newOuting = new OutingDTO(23, selectedOuting.getName(), selectedOuting.getName(), 23, data1, data1,
-					   selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
+			//   newOuting = new OutingDTO(23, selectedOuting.getName(), selectedOuting.getName(), 23, data1, data1,
+			//		   selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
 				productCRUD.updateProduct(newOuting);
-				System.out.println("avrei dovuto creare un outing");
+				System.out.println("Escursione modificata. Forse.");
 				outings.add(newOuting);
 			   
 		   }
@@ -164,11 +168,11 @@ public class OutingManagementBean {
 	public void setPlace(String place) {
 		this.place = place;
 	}
-	public String getRoom_type() {
-		return room_type;
+	public String getDescription() {
+		return description;
 	}
-	public void setRoom_type(String room_type) {
-		this.room_type = room_type;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getMore_info() {
 		return more_info;
@@ -237,3 +241,4 @@ public class OutingManagementBean {
 
 	 
 }
+
