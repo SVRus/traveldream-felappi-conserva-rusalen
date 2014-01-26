@@ -37,10 +37,12 @@ public void setIdStage(long idStage) {
 private Date timeStart;
 private Date timeEnd;
 	
-	public StageDTO(ArrayList<ProductDTO> products, String area) {
+	public StageDTO(ArrayList<ProductDTO> products, String area, Date timeStart, Date timeEnd) {
 		super();
 		this.products = products;
 		Area = area;
+		this.timeStart=timeStart;
+		this.timeEnd=timeEnd;
 	}
 	public ArrayList<ProductDTO> getProducts() {
 		return products;
