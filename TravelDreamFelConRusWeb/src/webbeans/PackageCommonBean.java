@@ -28,7 +28,7 @@ import dto.GiftListDTO;
 import dto.ProductDTO;
 import dto.HotelDTO;
 import dto.StageDTO;
-import dto.TravelPackageDTO;
+import dto.PrepackedTravelPackageDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
@@ -36,18 +36,31 @@ import authentication.RegistrationBeanLocal;
 @SessionScoped
 
 public class PackageCommonBean implements Serializable{
-	private TravelPackageDTO currentPackage;
+	private PrepackedTravelPackageDTO currentPackage;
 	/*diventa il vero travelPackageCorrente solo se 
 	 *non c'è un'altra creazione in corso 
 	 */
-	private TravelPackageDTO tempCurrentPackage;
+	private PrepackedTravelPackageDTO tempCurrentPackage;
 	
 	private StageDTO currentStage;
+	/*diventa il vero Stage corrente solo se 
+	 *non c'è un'altra creazione in corso 
+	 */
+	
+	private StageDTO tempCurrentStage;
+	
 	private boolean busy;
+	private boolean busyStage;
+	
 	
 	public void updatePackage()
 	{
 		currentPackage = tempCurrentPackage;
+		
+	}
+	public void updateStage()
+	{
+		currentStage = tempCurrentStage;
 		
 	}
 	
@@ -59,7 +72,7 @@ public class PackageCommonBean implements Serializable{
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		
-		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");	
+		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania", new Date(),new Date());	
 		
 		System.out.println("Ho inizializzato");
 	}
@@ -68,14 +81,22 @@ public class PackageCommonBean implements Serializable{
 		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(), new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
-		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania");		
+		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania",new Date(),new Date());		
 		System.out.println("Ho inizializzato");
 	}
-	public TravelPackageDTO getCurrentPackage() {
+	
+	
+	public PrepackedTravelPackageDTO getCurrentPackage() {
 		return currentPackage;
 	}
-	public void setCurrentPackage(TravelPackageDTO currentPackage) {
+	public void setCurrentPackage(PrepackedTravelPackageDTO currentPackage) {
 		this.currentPackage = currentPackage;
+	}
+	public PrepackedTravelPackageDTO getTempCurrentPackage() {
+		return tempCurrentPackage;
+	}
+	public void setTempCurrentPackage(PrepackedTravelPackageDTO tempCurrentPackage) {
+		this.tempCurrentPackage = tempCurrentPackage;
 	}
 	public StageDTO getCurrentStage() {
 		return currentStage;
@@ -83,18 +104,26 @@ public class PackageCommonBean implements Serializable{
 	public void setCurrentStage(StageDTO currentStage) {
 		this.currentStage = currentStage;
 	}
+	public StageDTO getTempCurrentStage() {
+		return tempCurrentStage;
+	}
+	public void setTempCurrentStage(StageDTO tempCurrentStage) {
+		this.tempCurrentStage = tempCurrentStage;
+	}
 	public boolean isBusy() {
 		return busy;
 	}
 	public void setBusy(boolean busy) {
 		this.busy = busy;
 	}
-	public TravelPackageDTO getTempCurrentPackage() {
-		return tempCurrentPackage;
+	public boolean isBusyStage() {
+		return busyStage;
 	}
-	public void setTempCurrentPackage(TravelPackageDTO tempCurrentPackage) {
-		this.tempCurrentPackage = tempCurrentPackage;
+	public void setBusyStage(boolean busyStage) {
+		this.busyStage = busyStage;
 	}
+	
+	
 	
 	
 
