@@ -13,5 +13,7 @@ public interface PrepackedTravelPackageEntityManagementLocal {
 	public <PrepackedTravelPackage>  PrepackedTravelPackage find(Object id);
 	public <PrepackedTravelPackage> void edit (PrepackedTravelPackage p);
     public <PrepackedTravelPackage>   List<PrepackedTravelPackage> findAll();
-    public Long findIdEmployeeCreator(Long idPrepackedTravelPackage);
+    public String findIdEmployeeCreator(Long idPrepackedTravelPackage);
+	public List findAllByParameter(Object par) ;
+
 }

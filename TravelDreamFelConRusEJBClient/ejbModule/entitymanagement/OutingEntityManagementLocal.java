@@ -17,8 +17,9 @@ public interface OutingEntityManagementLocal {
 	public <Outing> void edit (Outing outing);
     public <Outing>   List<Outing> findAll(); 	
 	public <Outing> List<Outing> findAllByParameter(Object par) ;
-	public <Outing>List<Outing> findALLByStateAndArea(State state, Date timeStart,Date timeEnd,String area);
+	public <Outing>List<Outing> findALLByStateAndArea(State state, Long  timeStart,Long timeEnd,String area);
 	public boolean findBooleanOutingEquivalent(OutingDTO outingDTO ,int number);
 	public int findIntegerOutingEquivalent(OutingDTO outingDTO );
+	  public <Outing> Outing findFirstOutingAvailable(OutingDTO outingDTO);
 
 }

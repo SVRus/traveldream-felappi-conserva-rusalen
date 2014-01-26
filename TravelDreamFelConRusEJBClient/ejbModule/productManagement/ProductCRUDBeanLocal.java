@@ -22,6 +22,7 @@ public interface ProductCRUDBeanLocal {
     public List <FlightDTO> findAllFlightsByParameter(State state);
     public List <OutingDTO> findAllOutingsByParameter(State state);
     public List <HotelDTO> findAllHotelsByParameter(State state);
+   // public ProductDTO findClonedProduct(ProductDTO toClone);
 
     
     

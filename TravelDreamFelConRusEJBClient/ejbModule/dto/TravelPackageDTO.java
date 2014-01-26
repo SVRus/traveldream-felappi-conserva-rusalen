@@ -72,14 +72,10 @@ public long getIdtravelpackage() {
 	}
 
 
-	public String getIdCustomerFriendOwner() {
-		return idCustomerFriendOwner;
-	}
 
 
 	public TravelPackageDTO(Date time_end, Date time_start, String description,
-			String name, List<StageDTO> stages, String idCustomerBuyer,
-			String idCustomerFriendOwner, String friendCode, Date purchaseTime,TravelState travelState) {
+			String name, List<StageDTO> stages, String idCustomerBuyer, String friendCode, Date purchaseTime,TravelState travelState) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;
@@ -87,7 +83,6 @@ public long getIdtravelpackage() {
 		this.name = name;
 		this.stages = stages;
 		this.idCustomerBuyer = idCustomerBuyer;
-		this.idCustomerFriendOwner = idCustomerFriendOwner;
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;
 		this.travelState=travelState;
@@ -103,10 +98,6 @@ public long getIdtravelpackage() {
 		this.travelState = travelState;
 	}
 
-
-	public void setIdCustomerFriendOwner(String idCustomerFriendOwner) {
-		this.idCustomerFriendOwner = idCustomerFriendOwner;
-	}
 
 
 	public String getFriendCode() {
@@ -136,14 +127,13 @@ private String description;
 private String name;
 private List<StageDTO> stages;	
 private String idCustomerBuyer;	
-private String idCustomerFriendOwner;
 private String friendCode;
 private Date purchaseTime;
 private TravelState travelState;
 
 public TravelPackageDTO(long idtravelpackage, Date time_end,Date time_start,
 		String description, String name, List<StageDTO> stages,
-		String idCustomerBuyer, String idCustomerFriendOwner, String friendCode,
+		String idCustomerBuyer, String friendCode,
 		Date purchaseTime,TravelState travelState) {
 	super();
 	this.idtravelpackage = idtravelpackage;
@@ -153,7 +143,6 @@ public TravelPackageDTO(long idtravelpackage, Date time_end,Date time_start,
 	this.name = name;
 	this.stages = stages;
 	this.idCustomerBuyer = idCustomerBuyer;
-	this.idCustomerFriendOwner = idCustomerFriendOwner;
 	this.friendCode = friendCode;
 	this.purchaseTime = purchaseTime;
 	this.travelState=travelState;
