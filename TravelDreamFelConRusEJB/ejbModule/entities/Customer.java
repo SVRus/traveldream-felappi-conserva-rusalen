@@ -120,7 +120,7 @@ public class Customer extends RegisteredUser implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-@OneToMany(cascade=CascadeType.ALL)	
+@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)	
 @JoinColumn(name="idcustomer")
 private List <CustomizedTravelPackage> customizedTravelPackages;
 
@@ -129,14 +129,14 @@ private List <CustomizedTravelPackage> customizedTravelPackages;
 /*@ManyToMany(cascade=CascadeType.ALL)
 @JoinTable(name = "friendship", joinColumns = @JoinColumn(name = "friendA"),inverseJoinColumns = @JoinColumn(name = "friendB"))
 private List <Customer> friends;*/
-@OneToMany(cascade=CascadeType.ALL)
+@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
 @JoinColumn(name="idCustomerBuyer")
 private List <TravelPackage> purchasedTravelPackages;
 
 /*@OneToMany(cascade=CascadeType.ALL)
 @JoinColumn(name="idCustomerFriendOwner")
 private List <TravelPackage> preparedForAFriendTravelPackages;*/
-@OneToMany (cascade=CascadeType.ALL)
+@OneToMany (cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 @JoinColumn(name="idCustomer")
 private List <GiftList> giftLists;
 

@@ -70,7 +70,7 @@ public class Stage implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idStage;
 	private String Area;
-	@OneToMany()
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
 	@JoinColumn(name="idStage")
    private List <Product> products;
 	private Long timeStart;

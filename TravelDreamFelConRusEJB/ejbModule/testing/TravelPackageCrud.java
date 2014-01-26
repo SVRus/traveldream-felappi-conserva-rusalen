@@ -181,10 +181,12 @@ public void testNumberEquivalentPackage()
 		custoMan.edit(customer);
 		ArrayList <Product> products1=new ArrayList <Product> ();
 		Hotel cusHotel=hot.findFirstHotelAvailable(hoteldto);
+		cusHotel.setState(State.SOLD);
 		products1.add(cusHotel);
 		Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
 		ArrayList <Product> products2=new ArrayList <Product> ();
         Outing cusOuting=out.findFirstOutingAvailable(outingdto);
+        cusOuting.setState(State.SOLD);
 		products2.add(cusOuting) ;
 		Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
 		List <Stage> stages=new ArrayList <Stage>();
