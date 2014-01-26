@@ -209,6 +209,7 @@ LoginBeanLocal log;
     {
     	
     	List <Hotel> lista=hotel.findAllByParameter(state);
+    	System.out.println("lista parametrica"+lista.toString());
     	List <Product> listaProduct=new ArrayList <Product> ();
     	Iterator <Hotel> iter=lista.iterator();
     	while (iter.hasNext())
@@ -237,8 +238,8 @@ LoginBeanLocal log;
   
     public List <HotelDTO> findAllHotels()
     {
-    	
     	List <Hotel> lista=hotel.findAll();
+    	System.out.println("sono una lista di hotel"+lista.toString());
     	List <Product> listaProduct=new ArrayList <Product> ();
     	Iterator <Hotel> iter=lista.iterator();
     	while (iter.hasNext())
@@ -376,6 +377,30 @@ LoginBeanLocal log;
     	
     }
     
-    
+  /*  public ProductDTO findClonedProduct(ProductDTO toClone)
+    {
+    	
+    	ProductDTO prodto=null;
+    	if(toClone instanceof HotelDTO)
+    	{
+    		
+    		prodto=dto.productToDTO((Hotel)hotel.findFirstHotelAvailable((HotelDTO)toClone));
+    		
+    	}
+    	else if(toClone instanceof OutingDTO)
+    	{
+    		prodto=dto.productToDTO((Outing)outing.findFirstOutingAvailable((OutingDTO)toClone));
+    		
+    	}
+    	else if(toClone instanceof FlightDTO)
+    	{
+    		prodto=dto.productToDTO((Flight)flight.findFirstFlightAvailable((FlightDTO)toClone));
+    	}
+    	
+		return prodto;
+    	
+    	
+    	
+    }*/
   
 }

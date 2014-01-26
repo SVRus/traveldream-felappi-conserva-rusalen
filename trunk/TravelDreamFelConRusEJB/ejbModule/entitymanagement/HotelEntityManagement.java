@@ -46,7 +46,7 @@ public class HotelEntityManagement extends AbstractEntityManagement implements H
 		return new ArrayList <Hotel> ();
 	}
 
-public <Hotel>List<Hotel> findAllByStateAndArea(State state,Date timeStart,Date timeEnd,String area)
+public <Hotel>List<Hotel> findAllByStateAndArea(State state,Long timeStart,Long timeEnd,String area)
 {
 		
 		Query q= em.createQuery("SELECT c from Hotel c   where c.state =:state  and c.area=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
@@ -66,8 +66,8 @@ private <Hotel >List<Hotel> findHotelEquivalent(HotelDTO hotelDTO ,int number)
 	q.setParameter("state", state);
 	q.setParameter("name", hotelDTO.getName());
 
-	q.setParameter("timestart",hotelDTO.getTimeStart());
-	q.setParameter("timeend", hotelDTO.getTimeEnd());
+	q.setParameter("timestart",hotelDTO.getTimeStart().getTime());
+	q.setParameter("timeend", hotelDTO.getTimeEnd().getTime());
 	q.setParameter("area", hotelDTO.getArea());
 	q.setParameter("cost", hotelDTO.getCost());
 	q.setParameter("place", hotelDTO.getPlace());
@@ -93,8 +93,8 @@ public int findIntegerHotelEquivalent(HotelDTO hotelDTO )
 		q.setParameter("area", hotelDTO.getArea());
 		q.setParameter("cost", hotelDTO.getCost());
 		q.setParameter("place", hotelDTO.getPlace());
-		q.setParameter("timestart", hotelDTO.getTimeStart());
-        q.setParameter("timeend",hotelDTO.getTimeEnd());
+		q.setParameter("timestart", hotelDTO.getTimeStart().getTime());
+        q.setParameter("timeend",hotelDTO.getTimeEnd().getTime());
         q.setParameter("room_type",hotelDTO.getRoom_type());
 
 		List <Hotel> list=q.getResultList();
@@ -105,5 +105,24 @@ public int findIntegerHotelEquivalent(HotelDTO hotelDTO )
 		
 	
 	}
+public <Hotel> Hotel findFirstHotelAvailable(HotelDTO hotelDTO)
+{ State state=State.AVAILABLE;
+Query q= em.createQuery("SELECT c from Hotel c   where c.name=:name and c.cost=:cost and c.state =:state  and c.area=:area  and c.timeStart=:timestart and c.timeEnd=:timeend and c.room_type=:room_type and c.place=:place");
+q.setParameter("state", state);
+q.setParameter("name", hotelDTO.getName());
 
+q.setParameter("timestart",hotelDTO.getTimeStart().getTime());
+q.setParameter("timeend", hotelDTO.getTimeEnd().getTime());
+q.setParameter("area", hotelDTO.getArea());
+q.setParameter("cost", hotelDTO.getCost());
+q.setParameter("place", hotelDTO.getPlace());
+q.setParameter("room_type", hotelDTO.getRoom_type());
+
+List <Hotel> list=q.getResultList();
+	if(list==null||list.size()==0)
+		return null;
+		else
+			return list.get(0);
+	
+}
 }

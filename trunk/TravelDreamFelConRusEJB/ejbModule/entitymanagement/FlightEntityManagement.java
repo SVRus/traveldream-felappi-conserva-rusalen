@@ -12,6 +12,7 @@ import javax.persistence.Query;
 
 import dto.FlightDTO;
 import dto.HotelDTO;
+import dto.OutingDTO;
 import stateenum.State;
 import entities.Flight;
 import entities.Hotel;
@@ -48,7 +49,7 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 		else
 		return new ArrayList <Flight> ();
 	}
-   public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Date timeStart,Date timeEnd,String area)
+   public <Flight>List<Flight> findALLByStateAndAreaStart(State state, Long timeStart,Long timeEnd,String area)
    {
 
 		Query q= em.createQuery("SELECT c from Flight c   where c.state =:state  and c.area_start=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
@@ -62,7 +63,7 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 		else
 		return new ArrayList <Flight> ();
    }
-   public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Date timeStart,Date timeEnd,String area)
+   public <Flight>List<Flight> findALLByStateAndAreaEnd(State state, Long timeStart,Long timeEnd,String area)
    {
 
 		Query q= em.createQuery("SELECT c from Flight c   where c.state =:state  and c.area=:area  and c.timeStart>=:timestart and c.timeEnd<=:timeend");
@@ -81,8 +82,8 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
    {   State state=State.AVAILABLE;
    	Query q= em.createQuery("SELECT c from Flight c where c.area_start=:areastart and c.area=:area and c.place_start=:place_start and c.place_end=:place_end and c.name=:name and c.cost=:cost and c.state =:state and c.timeStart=:timestart and c.timeEnd=:timeend and c.flight_company=:flight_company  ");
    	q.setParameter("state", state);
-   	q.setParameter("timestart",flightDTO.getTimeStart());
-   	q.setParameter("timeend", flightDTO.getTimeEnd());
+   	q.setParameter("timestart",flightDTO.getTimeStart().getTime());
+   	q.setParameter("timeend", flightDTO.getTimeEnd().getTime());
    	q.setParameter("areastart", flightDTO.getArea_start());
    	q.setParameter("area", flightDTO.getArea());
    	q.setParameter("cost", flightDTO.getCost());
@@ -108,8 +109,8 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 	   State state=State.AVAILABLE;
 	   	Query q= em.createQuery("SELECT c from Flight c where c.area_start=:areastart and c.area=:area and c.place_start=:place_start and c.place_end=:place_end and c.name=:name and c.cost=:cost and c.state =:state and c.timeStart=:timestart and c.timeEnd=:timeend and c.flight_company=:flight_company  ");
 	   	q.setParameter("state", state);
-	   	q.setParameter("timestart",flightDTO.getTimeStart());
-	   	q.setParameter("timeend", flightDTO.getTimeEnd());
+	   	q.setParameter("timestart",flightDTO.getTimeStart().getTime());
+	   	q.setParameter("timeend", flightDTO.getTimeEnd().getTime());
 	   	q.setParameter("areastart", flightDTO.getArea_start());
 	   	q.setParameter("area", flightDTO.getArea());
 	   	q.setParameter("cost", flightDTO.getCost());
@@ -125,5 +126,28 @@ public class FlightEntityManagement extends AbstractEntityManagement implements 
 	   		return 0;
    	
    	}
-   
+	  public <Flight> Flight findFirstFlightAvailable(FlightDTO flightDTO)
+	  {
+		  State state=State.AVAILABLE;
+		   	Query q= em.createQuery("SELECT c from Flight c where c.area_start=:areastart and c.area=:area and c.place_start=:place_start and c.place_end=:place_end and c.name=:name and c.cost=:cost and c.state =:state and c.timeStart=:timestart and c.timeEnd=:timeend and c.flight_company=:flight_company  ");
+		   	q.setParameter("state", state);
+		   	q.setParameter("timestart",flightDTO.getTimeStart().getTime());
+		   	q.setParameter("timeend", flightDTO.getTimeEnd().getTime());
+		   	q.setParameter("areastart", flightDTO.getArea_start());
+		   	q.setParameter("area", flightDTO.getArea());
+		   	q.setParameter("cost", flightDTO.getCost());
+		   	q.setParameter("place_start", flightDTO.getPlace_start());
+		   	q.setParameter("place_end", flightDTO.getPlace_end());
+		   	q.setParameter("flight_company", flightDTO.getFlight_company());
+			q.setParameter("name", flightDTO.getName());
+
+			List <Flight> list=q.getResultList();
+		  	if(list==null||list.size()==0)
+		  		return null;
+		  		else
+		  			return list.get(0);
+		  
+		  
+		  
+	  }
 }

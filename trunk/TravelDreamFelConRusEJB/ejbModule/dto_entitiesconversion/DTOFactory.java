@@ -2,6 +2,7 @@ package dto_entitiesconversion;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -38,6 +39,9 @@ import entities.TravelPackage;
 import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
+import entitymanagement.FlightEntityManagementLocal;
+import entitymanagement.HotelEntityManagementLocal;
+import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
 import entitymanagement.RegisteredUserEntityManagementLocal;
@@ -58,6 +62,14 @@ private CustomizedTravelPackageEntityManagementLocal custrav;
 private RegisteredUserEntityManagementLocal regman;
 @EJB
 private CustomerEntityManagementLocal cusman;
+@EJB
+private HotelEntityManagementLocal hotman;
+@EJB
+private OutingEntityManagementLocal outman;
+@EJB
+private FlightEntityManagementLocal fliman;
+
+
 
 public Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
 {
@@ -121,10 +133,9 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
  return friends;
 }*/
 
-	 private ProductDTO productToDTO(Product product)
+	 public ProductDTO productToDTO(Product product)
 
 	{ 
-	System.out.println("il prodotto è "+product.toString());
 		ProductDTO result=null;
 	    Long idstage= proman.findStageContainer(product.getIdProduct());
 		
@@ -132,19 +143,19 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	    
 	    if (product instanceof  Flight)
 		{   
-			result=new FlightDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getState(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getArea(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
+			result=new FlightDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),new Date(product.getTimeStart()),new Date(product.getTimeEnd()),product.getState(),((Flight)product).getArea(),((Flight)product).getFlight_company(),((Flight)product).getArea_start(),((Flight)product).getPlace_start(),((Flight)product).getPlace_end(),((Flight)product).getMore_info());
 			
 		}
 		else if (product instanceof Outing)
 		{
 			
-			result=new OutingDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState(),((Outing) product).getPlace());
+			result=new OutingDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),new Date(product.getTimeStart()),new Date(product.getTimeEnd()),((Outing) product).getDescription(),((Outing) product).getArea(),product.getState(),((Outing) product).getPlace());
 			
 		}
 		else if (product instanceof Hotel)
 		{
 			
-			result=new HotelDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getState(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info());
+			result=new HotelDTO(idstage,proman.findEmployeeCreator(product.getIdProduct()),product.getName(),product.getIdProduct(),product.getCost(),new Date(product.getTimeStart()),new Date(product.getTimeEnd()),product.getState(),((Hotel) product).getArea(),((Hotel) product).getPlace(),((Hotel) product).getRoom_type(),((Hotel) product).getMore_info());
 			
 		}
 		return result;
@@ -214,22 +225,22 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	  Long idtravelpackage=pre.getIdtravelpackage();
 	  List <StageDTO> stageList=travelToStageDTO(pre);
 	  String idCustomerBuyer=travman.findIdCustomerBuyer(idtravelpackage);
-	  System.out.println(idCustomerBuyer);
-	  String idCustomerFriendOwner=travman.findIdCustomerFriendOwner(idtravelpackage);
+	  System.out.println(idCustomerBuyer+"customer");
+	/*  String idCustomerFriendOwner=travman.findIdCustomerFriendOwner(idtravelpackage);
 	  System.out.println(idCustomerFriendOwner);
-	  
+	  */
 	  TravelPackageDTO dto=null;
 	  if(pre instanceof PrepackedTravelPackage)
 	  
 	  {
-	  Long idEmployeeCreator=pretrav.findIdEmployeeCreator(idtravelpackage);
-	  System.out.println(idEmployeeCreator);
-	   dto=new PrepackedTravelPackageDTO(idtravelpackage,pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idEmployeeCreator,pre.getTravelState());
+	  String idEmployeeCreator=pretrav.findIdEmployeeCreator(idtravelpackage);
+	  System.out.println(idEmployeeCreator+"employee");
+	   dto=new PrepackedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),new Date(pre.getPurchaseTime()),idEmployeeCreator,pre.getTravelState());
 	  }
 	  else if (pre instanceof CustomizedTravelPackage)
 	  {
 		  Long idCustomizer=custrav.findIdCustomizer(idtravelpackage);
-		  dto=new CustomizedTravelPackageDTO(idtravelpackage,pre.getTime_end(),pre.getTime_start(),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,idCustomerFriendOwner,pre.getFriendCode(),pre.getPurchaseTime(),idCustomizer,pre.getTravelState());
+		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),new Date(pre.getPurchaseTime()),idCustomizer,pre.getTravelState());
 		  
 	  }
 		return dto;
@@ -387,19 +398,19 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	if(product instanceof HotelDTO )
    	{
    		 
-   		entity=new Hotel(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info());
+   		entity=new Hotel(product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getPlace(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info());
    	}
    	else if (product instanceof FlightDTO)
    	{
    		
-   		 entity=new Flight(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		 entity=new Flight(product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
    		
    	
    	}
    	else if (product instanceof OutingDTO)
    		
    	{
-   		entity=new Outing(product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
+   		entity=new Outing(product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
    		
    	}
    	return entity;
@@ -413,13 +424,13 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		  stages=stageListDTOToEntity(travel.getStages());
 		  if(travel instanceof PrepackedTravelPackageDTO)
 		  {
-			  travelpackage=new PrepackedTravelPackage(travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime(),travel.getTravelState());
+			  travelpackage=new PrepackedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
 				
 			  
 		  }
 		  else if(travel instanceof CustomizedTravelPackageDTO)
 		  {
-			  travelpackage=new CustomizedTravelPackage(travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime(),travel.getTravelState());
+			  travelpackage=new CustomizedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
 			  
 		  }
 		  
@@ -435,12 +446,12 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		  stages=stageListDTOToEntityUpdate(travel.getStages());
 		  if(travel instanceof PrepackedTravelPackageDTO)
 		  {
-			  travelpackage=new PrepackedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime(),travel.getTravelState());
+			  travelpackage=new PrepackedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
 		  }
 		  else if(travel instanceof CustomizedTravelPackageDTO)
 		  {
 			  
-			  travelpackage=new CustomizedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end(),travel.getTime_start(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime(),travel.getTravelState());
+			  travelpackage=new CustomizedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
 			  
 		  }
 	  }
@@ -568,17 +579,17 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	Product entity=null;
    	if(product instanceof HotelDTO )
    	{
-   		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),((HotelDTO)product).getPlace());
+   		entity=new Hotel(product.getIdProduct(),product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),product.getState(),((HotelDTO)product).getArea(),((HotelDTO)product).getRoom_type(),((HotelDTO)product).getMore_info(),((HotelDTO)product).getPlace());
    	}
    	else if (product instanceof FlightDTO)
    	{
-   		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
+   		 entity=new Flight(product.getIdProduct(),product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),((FlightDTO)product).getArea(),((FlightDTO)product).getFlight_company(),((FlightDTO)product).getArea_start(),((FlightDTO)product).getPlace_start(),((FlightDTO)product).getPlace_end(),((FlightDTO)product).getMore_info(),product.getState());   		
    		
    	
    	}
    	else if (product instanceof OutingDTO)
    	{
-   		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart(),product.getTimeEnd(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
+   		entity=new Outing(product.getIdProduct(),product.getCost(),product.getTimeStart().getTime(),product.getTimeEnd().getTime(),product.getName(),((OutingDTO)product).getDescription(),((OutingDTO)product).getArea(),product.getState(),((OutingDTO) product).getPlace());
    		
    	}
    	return entity;
@@ -598,6 +609,40 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	return productList;
 	   
+   }
+   //ciao
+   
+   public ProductDTO findClonedProduct(ProductDTO toClone)
+   {
+   	
+   	ProductDTO prodto=null;
+   	if(toClone instanceof HotelDTO)
+   	{
+   		Hotel hotel=(Hotel)hotman.findFirstHotelAvailable((HotelDTO)toClone);
+   		System.out.print("hotel trovato"+hotel);
+   		if(hotel!=null)
+   		prodto=productToDTO(hotel);//TODO da rivedere
+   		
+   	}
+   	else if(toClone instanceof OutingDTO)
+   	{Outing outing=(Outing)outman.findFirstOutingAvailable((OutingDTO)toClone);
+   	if(outing!=null)
+   		prodto=productToDTO(outing);
+   		
+   	}
+   	else if(toClone instanceof FlightDTO)
+   		
+   	{     Flight flight=(Flight)fliman.findFirstFlightAvailable((FlightDTO)toClone);
+   	      System.out.println(flight+"sono null???"); 
+   	
+   	if(flight!=null)
+   		prodto=productToDTO(flight);
+   	}
+   	
+		return prodto;
+   	
+   	
+   	
    }
    
 }

@@ -44,9 +44,9 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
     	
     }
     
-    public String findIdCustomerFriendOwner(Long idTravelPackage)
+/*    public String findIdCustomerFriendOwner(Long idTravelPackage)
     {
-    	Query query = em.createNativeQuery("SELECT  idcustomerfriendowner FROM travelpackage where idtravelpackage=? ");
+    	Query query = em.createNativeQuery("SELECT  idCustomerFriendOwner FROM travelpackage where idtravelpackage=? ");
      	  query.setParameter(1, idTravelPackage);
      	   
      	    	Object result=  query.getSingleResult();
@@ -56,7 +56,7 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
      	    	
   		return (String)(result);
     }
-
+*/
 	
 
 	@Override

@@ -28,7 +28,7 @@ public Product()
 	 * @param travel
 	 * @param state
 	 */
-	public Product(long idProduct, float cost, Date timeStart, Date timeEnd,
+	public Product(long idProduct, float cost, Long timeStart, Long timeEnd,
 			String name,State state,String area) {
 		super();
 		this.idproduct = idProduct;
@@ -59,7 +59,7 @@ public State getState() {
  * @param state
  * @param area
  */
-	public Product(float cost, Date timeStart, Date timeEnd, String name,State state,String area
+	public Product(float cost, Long timeStart, Long timeEnd, String name,State state,String area
 			) {
 		super();
 		this.cost = cost;
@@ -79,10 +79,10 @@ public State getState() {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private long idproduct;
 private float cost;
-@Temporal(TemporalType.DATE)
-private Date timeStart;
-@Temporal(TemporalType.DATE)
-private Date timeEnd;
+
+private Long timeStart;
+
+private Long timeEnd;
 private String name;
 
 @Enumerated(EnumType.STRING)
@@ -136,22 +136,22 @@ public void setCost(float cost) {
 }
 
 
-public Date getTimeStart() {
+public Long getTimeStart() {
 	return timeStart;
 }
 
 
-public void setTimeStart(Date timeStart) {
+public void setTimeStart(Long timeStart) {
 	this.timeStart = timeStart;
 }
 
 
-public Date getTimeEnd() {
+public Long getTimeEnd() {
 	return timeEnd;
 }
 
 
-public void setTimeEnd(Date timeEnd) {
+public void setTimeEnd(Long timeEnd) {
 	this.timeEnd = timeEnd;
 }
 

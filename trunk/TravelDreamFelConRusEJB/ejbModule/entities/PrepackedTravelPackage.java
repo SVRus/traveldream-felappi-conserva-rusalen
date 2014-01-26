@@ -38,9 +38,9 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
  * @param friendCode
  * @param purchaseTime
  */
-	public PrepackedTravelPackage(Date time_end, Date time_start,
+	public PrepackedTravelPackage(Long time_end, Long time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Date purchaseTime,TravelState travelState) {
+			String friendCode, Long purchaseTime,TravelState travelState) {
 		super(time_end, time_start, description, name, stages, friendCode, purchaseTime, travelState);
 		// TODO Auto-generated constructor stub
 	}
@@ -55,9 +55,9 @@ public class PrepackedTravelPackage extends TravelPackage implements Serializabl
  * @param friendCode
  * @param purchaseTime
  */
-	public PrepackedTravelPackage(long idtravelpackage, Date time_end,
-			Date time_start, String description, String name,
-			List<Stage> stages, String friendCode, Date purchaseTime,TravelState travelState) {
+	public PrepackedTravelPackage(long idtravelpackage, Long time_end,
+			Long time_start, String description, String name,
+			List<Stage> stages, String friendCode, Long purchaseTime,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
 				friendCode, purchaseTime,travelState);
 		// TODO Auto-generated constructor stub

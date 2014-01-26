@@ -22,17 +22,38 @@ public class CustomizedTravelPackage extends TravelPackage implements Serializab
 
 	
 
-
-	public CustomizedTravelPackage(Date time_end, Date time_start,
+/**
+ * 
+ * @param time_end
+ * @param time_start
+ * @param description
+ * @param name
+ * @param stages
+ * @param friendCode
+ * @param purchaseTime
+ * @param travelState
+ */
+	public CustomizedTravelPackage(Long time_end, Long time_start,
 			String description, String name, List<Stage> stages,
-			String friendCode, Date purchaseTime,TravelState travelState) {
+			String friendCode, Long purchaseTime,TravelState travelState) {
 		super(time_end, time_start, description, name, stages, friendCode, purchaseTime,travelState);
 		// TODO Auto-generated constructor stub
 	}
-
-	public CustomizedTravelPackage(long idtravelpackage,Date time_end,
-			Date time_start, String description, String name,
-			List<Stage> stages, String friendCode,Date purchaseTime,TravelState travelState) {
+/**
+ * 
+ * @param idtravelpackage
+ * @param time_end
+ * @param time_start
+ * @param description
+ * @param name
+ * @param stages
+ * @param friendCode
+ * @param purchaseTime
+ * @param travelState
+ */
+	public CustomizedTravelPackage(long idtravelpackage,Long time_end,
+			Long time_start, String description, String name,
+			List<Stage> stages, String friendCode,Long purchaseTime,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
 				friendCode, purchaseTime,travelState);
 		// TODO Auto-generated constructor stub
