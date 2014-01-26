@@ -44,8 +44,12 @@ public class FlightManagementBean {
 		 private Date timeStart;
 		 private Date timeEnd;
 		 private String area;
+		 private String area_start;
 		 private String place;
-		 private String room_type;
+		 private String flight_company;
+		 private String place_start;
+		 private String place_end;
+		 
 		 private String more_info;
 		  private FlightDataModel flightModel;  
 		  public FlightDataModel getFlightModel() {
@@ -56,6 +60,8 @@ public class FlightManagementBean {
 
 		@EJB
 		  private ProductCRUDBeanLocal productCRUD;
+		@EJB
+		private LoginBeanLocal login;
 		  
 		  
 		  //valori di prova
@@ -79,9 +85,11 @@ public class FlightManagementBean {
 		  public void newFlight(ActionEvent actionEvent)
 		  {
 			 		
-				newFlight = new FlightDTO(22, name, name, 22, data1, data1, State.AVAILABLE, name, name, name, name, name, name);
-				  
-						
+				newFlight = new FlightDTO(0, login.getPrincipalUsername(), name,
+						 cost, timeStart, timeEnd, State.AVAILABLE, area,  
+						 flight_company, area_start, place_start, place_end,
+						 more_info);
+		
 				productCRUD.createProduct(newFlight);
 				System.out.println("avrei dovuto creare un flight");
 				flights.add(newFlight);
@@ -98,7 +106,7 @@ public class FlightManagementBean {
 				
 					flights.remove(selectedFlight);
 					  
-					newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,State.AVAILABLE, selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName());
+		//			newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), State.AVAILABLE);
 					productCRUD.updateProduct(newFlight);
 					System.out.println("avrei dovuto creare un flight");
 					flights.add(newFlight);
@@ -203,6 +211,54 @@ public class FlightManagementBean {
 
 
 
+		public String getArea_start() {
+			return area_start;
+		}
+
+
+
+		public void setArea_start(String area_start) {
+			this.area_start = area_start;
+		}
+
+
+
+		public String getFlight_company() {
+			return flight_company;
+		}
+
+
+
+		public void setFlight_company(String flight_company) {
+			this.flight_company = flight_company;
+		}
+
+
+
+		public String getPlace_start() {
+			return place_start;
+		}
+
+
+
+		public void setPlace_start(String place_start) {
+			this.place_start = place_start;
+		}
+
+
+
+		public String getPlace_end() {
+			return place_end;
+		}
+
+
+
+		public void setPlace_end(String place_end) {
+			this.place_end = place_end;
+		}
+
+
+
 		public String getPlace() {
 			return place;
 		}
@@ -212,20 +268,6 @@ public class FlightManagementBean {
 		public void setPlace(String place) {
 			this.place = place;
 		}
-
-
-
-		public String getRoom_type() {
-			return room_type;
-		}
-
-
-
-		public void setRoom_type(String room_type) {
-			this.room_type = room_type;
-		}
-
-
 
 		public String getMore_info() {
 			return more_info;
