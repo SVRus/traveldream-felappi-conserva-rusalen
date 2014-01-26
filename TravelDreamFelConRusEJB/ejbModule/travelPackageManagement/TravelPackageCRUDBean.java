@@ -180,7 +180,7 @@ public CustomizedTravelPackageDTO cloneTravelPackage(PrepackedTravelPackageDTO p
 			
 		}
 		
-		StageDTO stagePartialCus=new StageDTO(new ArrayList<ProductDTO>(productsCusDTO),partial.getArea());
+		StageDTO stagePartialCus=new StageDTO(new ArrayList<ProductDTO>(productsCusDTO),partial.getArea(),partial.getTimeStart(),partial.getTimeEnd());
 		stagesCusDTO.add(stagePartialCus);
 		
 	}
