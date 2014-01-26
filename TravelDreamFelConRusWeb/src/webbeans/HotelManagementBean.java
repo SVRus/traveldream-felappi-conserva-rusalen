@@ -38,10 +38,8 @@ public class HotelManagementBean implements Serializable{
 	private HotelDTO selectedHotel;
 	private HotelDTO[] selectedHotels;  
 	private HotelDTO newHotel;
-	@EJB
-	private LoginBeanLocal login;
 
-	
+
 	 private long idtravelpackage;
 	 private String employeeCreator;
 	 private long idProduct;
@@ -56,8 +54,11 @@ public class HotelManagementBean implements Serializable{
 	 
 	    
 	  private HotelDataModel hotelModel;  
+	  
 	  @EJB
 	  private ProductCRUDBeanLocal productCRUD;
+	  @EJB
+		private LoginBeanLocal login;
 	  
 	  
 	  //valori di prova
