@@ -24,7 +24,11 @@ public interface ProductCRUDBeanLocal {
     public List <HotelDTO> findAllHotelsByParameter(State state);
    // public ProductDTO findClonedProduct(ProductDTO toClone);
 
-    
+	public List<FlightDTO> findALLByStateAndAreaEnd(State state, Long  timeStart,Long timeEnd,String area);
+	public List<FlightDTO> findALLFlightByStateAndAreaStart(State state, Long  timeStart,Long timeEnd,String area);
+	public List<HotelDTO> findALLHotelByStateAndArea(State state, Long  timeStart,Long timeEnd,String area);
+	public List<OutingDTO> findALLOutingByStateAndArea(State state, Long  timeStart,Long timeEnd,String area);
+
     
     
 
