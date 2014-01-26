@@ -84,8 +84,8 @@ ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
 
 listaStage.add(stage);
 packageList= new ArrayList<TravelPackageDTO>();
-packageList.add(new TravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", "33", new Date(),TravelState.AVAILABLE));
-packageList.add(new TravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", "33", new Date(),TravelState.AVAILABLE));
+packageList.add(new TravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", new Date(),TravelState.AVAILABLE));
+packageList.add(new TravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", new Date(),TravelState.AVAILABLE));
 
 packageModel= new TravelPackageDataModel(packageList);
 System.out.println("Ciao ho popolato i pacchetti");
