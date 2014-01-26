@@ -73,6 +73,7 @@ public class TravelPackageCrud {
 	static Long timeNow=null;
 	static Long timeAfter=null;
 	static Long dateEnd=null;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
@@ -101,7 +102,7 @@ public class TravelPackageCrud {
 	   impiegato=emploMan.find(emplo.getUsername());
 	   List <Product> products=impiegato.getManagedProduct();
    	   products.add(hotelInsert);
-   	   products.add(hotelInsert);
+   	   products.add((Hotel)dto.productDTOToEntity(hoteldto));
 
 		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
@@ -111,7 +112,7 @@ public class TravelPackageCrud {
 	    flightInsert=(Flight)dto.productDTOToEntity(flightdto);
 		flightInsert1=(Flight)dto.productDTOToEntity(flightdto1);
 		products.add(outingInsert);
-		products.add(outingInsert);
+		products.add((Outing) dto.productDTOToEntity(outingdto));
 
 		products.add(flightInsert);
 		products.add(flightInsert1);
@@ -119,12 +120,24 @@ public class TravelPackageCrud {
 	    emploMan.edit(impiegato);
 	    impiegato=emploMan.find(impiegato.getUsername());
 	    List <Stage> stages=new ArrayList <Stage> ();
-	    List <Product> products1=hot.findAllByParameter(State.AVAILABLE);
+	    List <Hotel> hotelAvailable=hot.findAllByParameter(State.AVAILABLE);
+	    Hotel hotelParziale =hotelAvailable.get(0);
+	    hotelParziale.setState(State.INCLUDED);
+	    List <Product> products1=new ArrayList <Product>();
+	    products1.add(hotelParziale);
 	   Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
 	   stages.add(stage1);
-	   List <Product> products2=out.findAllByParameter(State.AVAILABLE);
-       List <Flight> flightList=fli.findAll();
-       products2.addAll(flightList);
+	   
+	   List <Outing> outingAvailable=out.findAllByParameter(State.AVAILABLE);
+	   Outing outingParziale=outingAvailable.get(0);
+	   outingParziale.setState(State.INCLUDED);
+	   List <Product> products2=new ArrayList  <Product> ();
+	   products2.add(outingParziale);
+	   
+       List <Flight> flightAvailable=fli.findAllByParameter(State.AVAILABLE);
+       Flight flightParziale=flightAvailable.get(0);
+       flightParziale.setState(State.INCLUDED);
+       products2.add(flightParziale);
 	   Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
 	   stages.add(stage2);
 	   PrepackedTravelPackage prepacked=new PrepackedTravelPackage((new Date()).getTime(),(new Date()).getTime(),"","",stages,"0",(new Date()).getTime(),TravelState.AVAILABLE);
@@ -154,21 +167,42 @@ public class TravelPackageCrud {
 public void testNumberEquivalentPackage()
 {
 	int howmuch=travcrud.getNumberEquivalentPackage(travcrud.findAllPrepackedTravelPackageByParameter(TravelState.AVAILABLE).get(0));
-	System.out.print("ee"+howmuch+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-	assertTrue(howmuch==2);	
+	assertTrue(howmuch==1);	
 		
 }
 	@Test
 	public void testCustomizedTravelPackageCreation()
-	{   ArrayList <Group> groups=new ArrayList <Group>();
+	{   
+		
+		ArrayList <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.CUSTOMER);
 		Customer customer=new Customer("io@email.it","marcello","felappi","036486876","iosonocello","cello",groups,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
 		customer=dto.dtoToCustomer(dto.toTDO(customer));
 		custoMan.edit(customer);
-		ArrayList <Product> products1=
-		   Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
-		   Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
-
+		ArrayList <Product> products1=new ArrayList <Product> ();
+		Hotel cusHotel=hot.findFirstHotelAvailable(hoteldto);
+		products1.add(cusHotel);
+		Stage stage1=new Stage("area1",products1,(new Date()).getTime(),(new Date()).getTime());
+		ArrayList <Product> products2=new ArrayList <Product> ();
+        Outing cusOuting=out.findFirstOutingAvailable(outingdto);
+		products2.add(cusOuting) ;
+		Stage stage2= new Stage("area2",products2,(new Date()).getTime(),(new Date()).getTime());
+		List <Stage> stages=new ArrayList <Stage>();
+		stages.add(stage1);
+		stages.add(stage2);
+        CustomizedTravelPackage customized=new CustomizedTravelPackage((new Date()).getTime(), (new Date()).getTime(),
+    			"sono un pacchetto customizzato", "vancanza alle antille",  stages,
+    			null, (new Date()).getTime(),TravelState.SOLD);
+		
+		List <CustomizedTravelPackage> customizedTravels=customer.getCustomizedTravelPackages();
+		customizedTravels.add(customized);
+		customer.setCustomizedTravelPackages(customizedTravels);
+		List <TravelPackage> bought=customer.getPurchasedTravelPackages();
+		bought.add(customized);
+		customer.setPurchasedTravelPackages(bought);
+		custoMan.edit(customer);
+		
+		
 	}
 	
 		
