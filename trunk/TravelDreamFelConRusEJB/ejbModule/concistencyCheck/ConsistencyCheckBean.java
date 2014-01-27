@@ -3,6 +3,9 @@ package concistencyCheck;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import dto.ProductDTO;
+import entities.TravelPackage;
+
 /**
  * Session Bean implementation class ConsistencyCheckBean
  */
@@ -16,5 +19,14 @@ public class ConsistencyCheckBean implements ConsistencyCheckBeanLocal {
     public ConsistencyCheckBean() {
         // TODO Auto-generated constructor stub
     }
-
+//TODO
+   /* public boolean checkConsistency(ProductDTO product)
+    {
+    	TravelPackage travel
+    	
+    	
+    }
+    */
+    
+    
 }

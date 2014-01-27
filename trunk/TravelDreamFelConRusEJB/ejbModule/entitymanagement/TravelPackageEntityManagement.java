@@ -64,8 +64,15 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
 		// TODO Auto-generated method stub
 		return null;
 	}
-    
-    
-    
+    //TODO
+/*    public TravelPackage findTravelPackageByProduct(Long idProduct)
+    {
+//
+    	
+    	
+    }
+    */
 
+	
+	
 }

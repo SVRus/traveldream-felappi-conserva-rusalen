@@ -9,6 +9,10 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import mailSender.MailSenderLocal;
+
+import org.apache.commons.codec.digest.DigestUtils;
+
 import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
@@ -62,7 +66,8 @@ HotelEntityManagementLocal hotel;
 FlightEntityManagementLocal flight;
 @EJB
 CustomerEntityManagementLocal custoEntityMan;
-
+@EJB
+MailSenderLocal mail;
 
 
     /**
@@ -322,4 +327,20 @@ public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackage
 		return preList;
 	}
 	
+	
+	public boolean createCustomizedTravelPackageForFriend( CustomizedTravelPackageDTO customizedTravel)
+		{  
+		String code=DigestUtils.sha256Hex(new Long(customizedTravel.getIdtravelpackage()).toString());
+		customizedTravel.setFriendCode(code);
+	    boolean ok=updateTravelPackage(customizedTravel);
+		String email=log.findLogIn().getEmail();
+	    
+	    return ok=ok&&mail.sendMail(email, "", "");
+	}
+
+
+
+
+
+
 }

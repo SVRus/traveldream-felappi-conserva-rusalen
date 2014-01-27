@@ -20,6 +20,7 @@
 			<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
 			<property name="eclipselink.ddl-generation.output-mode" value="database"/>
+			<property name="eclipselink.jpa.uppercase-column-names" value="true"/>
 		</properties>
 	</persistence-unit>
 </persistence>
