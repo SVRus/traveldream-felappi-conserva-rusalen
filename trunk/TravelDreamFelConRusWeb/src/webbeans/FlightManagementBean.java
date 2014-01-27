@@ -65,7 +65,7 @@ public class FlightManagementBean {
 		  
 		  
 		  //valori di prova
-		  static GregorianCalendar data1= new GregorianCalendar();
+		  static Date data1= new Date();
 			  private  List<FlightDTO> flights;
 		  private  List<FlightDTO> filteredFlights;
 		  
@@ -106,9 +106,14 @@ public class FlightManagementBean {
 				
 					flights.remove(selectedFlight);
 					  
-		//			newFlight = new FlightDTO(23, selectedFlight.getName(), selectedFlight.getName(), 23, data1, data1,selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(), selectedFlight.getName(),selectedFlight.getName(), selectedFlight.getName(), State.AVAILABLE);
+					newFlight = FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(), 
+							    selectedFlight.getName(), selectedFlight.getCost(),
+							    selectedFlight.getTimeStart(), selectedFlight.getTimeEnd(),State.AVAILABLE, 
+							    selectedFlight.getArea(), selectedFlight.getFlight_company(),
+							    selectedFlight.getArea_start(),selectedFlight.getPlace_start(), 
+							    selectedFlight.getPlace_end(), selectedFlight.getMore_info());
 					productCRUD.updateProduct(newFlight);
-					System.out.println("avrei dovuto creare un flight");
+					System.out.println("Lo modifichiamo 'sto volo?");
 					flights.add(newFlight);
 				   
 			   }
@@ -293,13 +298,13 @@ public class FlightManagementBean {
 
 
 
-		public static GregorianCalendar getData1() {
+		public static Date getData1() {
 			return data1;
 		}
 
 
 
-		public static void setData1(GregorianCalendar data1) {
+		public static void setData1(Date data1) {
 			FlightManagementBean.data1 = data1;
 		}
 
