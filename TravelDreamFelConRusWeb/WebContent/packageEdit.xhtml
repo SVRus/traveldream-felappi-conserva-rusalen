@@ -27,11 +27,8 @@
         </p:layoutUnit>  
       
         <p:layoutUnit position="east" size="600" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-            <h:outputText value="Right unit content." />
              <h:form id="form">
-		  #{packageEdit.currentTravelPackage.name}
-	   		<p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />       
-         
+		
          <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
                 selection="#{packageEdit.selectedStage}" selectionMode="single" 
                id="hoteltable"
@@ -41,7 +38,7 @@
 
   
                 <f:facet name="header">
-                    Lista TravelPackage
+                    Lista Tappe
                 </f:facet>  
                 
               
@@ -54,25 +51,53 @@
                 	
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo Stage" onclick="PF('dlg3').show();" type="button" /> 
-                    <p:commandButton id="naviga" value="Modifica" outcome= "packageEdit" /> 
-       <h:link
-			outcome="packageEdit" value="Modifica (temporaneo)" />
-                </f:facet>
+                  <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-star" />  
+             </f:facet>
 				
               </p:dataTable>
          
          </h:form> 
-            <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-star" />  
-             
+          <h:form id="StageForm" styleClass="input-form">
+		<p:panel header="Nuova tappa" id="panel">
+		<p:messages id="mesg" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+	<h:panelGrid columns="2">
+	    <p:outputLabel value="Area" for="area" />
+		<p:inputText id="area" label="area"
+			value="#{stageManagement.areaStage}"
+				required="true" />
+	
+		
+		
+		<p:outputLabel value="Data di partenza" for="startDateS" />
+		<p:calendar id="startDateS" value="#{stageManagement.time_start_stage}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
+			
+		<p:outputLabel value="Data di fine" for="endDateS" />
+		<p:calendar id="endDateS" value="#{stageManagement.time_end_stage}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
+		
+	<p:commandButton value="Crea tappa"
+		action="#{stageManagement.allowedNew}"
+		style="display:block; margin:0 auto;"
+		ajax="false" />
+		
+		</h:panelGrid>
+		</p:panel>
+              </h:form>
+              
            
         </p:layoutUnit>  
       
       <p:layoutUnit position="center">  
-	    	<p:outputLabel value= "Gestione pacchetto"  />
-	
+	    	 
+	   		
         <h:form id="packageForm" styleClass="input-form">
-		<p:panel header="Gestione pacchetto" id="panel">
+		<p:panel header="Gestione pacchetto #{packageEdit.currentTravelPackage.name}" id="panel">
+		<p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />       
+         
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
 	<h:panelGrid columns="2">
