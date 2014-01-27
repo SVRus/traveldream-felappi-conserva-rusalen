@@ -49,6 +49,9 @@
                      <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteFlight}" update=":form1:startFl" />
                 </f:facet>
       </p:dataTable>  
+      </h:form>
+      <h:form id="form12">
+	 
       <p:separator id="separator"/>  
       
       <p:dataTable var="flightEnd" value="#{stageManagement.flightEndView}" id = "endFl">
@@ -64,10 +67,14 @@
         </p:column>  
           <f:facet name="footer">
                   <p:commandButton id="newFlightEndDialog" value="Inserisci" onclick="PF('endFlightDl').show();" type="button" /> 
-                          <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteFlightBack}" update=":form1:endFl"  />
+                          <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteFlightBack}" update=":form12:endFl"  />
                 </f:facet>
       </p:dataTable> 
+      </h:form>
+      
       <p:separator id="separator1"/>  
+      <h:form id="form13">
+	 
       <p:dataTable var="hotel" value="#{stageManagement.hotelView}" id="hot">  
         <f:facet name="header">
                     Hotel
@@ -81,7 +88,7 @@
         </p:column>  
           <f:facet name="footer">
                      <p:commandButton id="newHotelDialog" value="Inserisci" onclick="PF('hotelDl').show();" type="button" /> 
-                     <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteHotel}" update=":form1:hot" />
+                     <p:commandButton value="Cancella" actionListener="#{stageManagement.deleteHotel}" update=":form13:hot" />
                 </f:facet>
       </p:dataTable> 
       </h:form>
@@ -240,12 +247,14 @@
                
                <f:facet name="footer">
                     
-                    <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertHotel}" update=":form1:hot" icon="ui-icon-trash"/>
+                    <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertHotel}" update=":form13:hot" icon="ui-icon-trash"/>
                     
                           
                 </f:facet>          
               </p:dataTable>
         </h:form>
+        </p:dialog>
+        
                <p:dialog header="Nuovo Volo di partenza" widgetVar="startFlightDl" showEffect="explode" hideEffect="bounce" height="100">  
      <h:form>
      	<p:dataTable var="flight" value="#{stageManagement.flightModel}" rowKey="#{flight.name}" paginator="true" rows="10"  
@@ -330,7 +339,7 @@
 
                
                <f:facet name="footer">
-                      <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlightBack}" update=":form1:endFl" icon="ui-icon-trash"/>
+                      <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlightBack}" update=":form12:endFl" icon="ui-icon-trash"/>
                 </f:facet>
 
               </p:dataTable>
@@ -340,7 +349,7 @@
         	</p:dialog> 
         
         
-        	</p:dialog> 
+        	
         	
          
     </body> 
