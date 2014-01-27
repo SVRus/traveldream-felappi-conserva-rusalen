@@ -103,25 +103,25 @@
 	<h:panelGrid columns="2">
 	    <p:outputLabel value="Nome" for="name" />
 		<p:inputText id="name" label="name"
-			value="#{packageEdit.name}"
+			value="#{packageEdit.currentTravelPackage.name}"
 				required="true" />
 	
 	
 		<p:outputLabel value="Descrizione" for="description" />
 		<p:inputTextarea id="description" label="description"
-			value="#{packageEdit.description}"
+			value="#{packageEdit.currentTravelPackage.description}"
 				required="true" 
 				 
 				 maxlength="254"/>  
 				
 		
 		<p:outputLabel value="Data di partenza" for="startDate" />
-		<p:calendar id="startDate" value="#{packageEdit.time_start}" 
+		<p:calendar id="startDate" value="#{packageEdit.currentTravelPackage.time_start}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 			
 		<p:outputLabel value="Data di fine" for="endDate" />
-		<p:calendar id="endDate" value="#{packageEdit.time_end}" 
+		<p:calendar id="endDate" value="#{packageEdit.currentTravelPackage.time_end}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		
