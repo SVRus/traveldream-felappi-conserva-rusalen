@@ -314,26 +314,26 @@
                     Lista Voli
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{flightBack.name}" filterBy="#{flightBack.name}" id="name">
+                <p:column  headerText="Nome" sortBy="#{flightBack.name}" filterBy="#{flightBack.name}" id="nameB">
                     
                     
                     <p:commandLink value="#{flightBack.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
                         <f:setPropertyActionListener value="#{flightBack}" target="#{stageManagement.selectedFlightBack}" />    
                     </p:commandLink>
                 	</p:column>
-                      <p:column  headerText="Area" sortBy="#{flightBack.area}" filterBy="#{flightBack.area}" id="area">
+                      <p:column  headerText="Area" sortBy="#{flightBack.area}" filterBy="#{flightBack.area}" id="areaB">
                       #{flightBack.area}  
                       </p:column> 
-                       <p:column  headerText="Luogo" sortBy="#{flightBack.place}" filterBy="#{flightBack.place}" id="place">  
+                       <p:column  headerText="Luogo" sortBy="#{flightBack.place}" filterBy="#{flightBack.place}" id="placeB">  
                       #{flightBack.place}  
                       </p:column> 
-                       <p:column  headerText="Data Inizio" sortBy="#{flightBack.timeStart}" filterBy="#{flightBack.timeStart}" id="timeStart">  
+                       <p:column  headerText="Data Inizio" sortBy="#{flightBack.timeStart}" filterBy="#{flightBack.timeStart}" id="timeStartB">  
                       #{flightBack.timeStart}  
                       </p:column> 
-                       <p:column  headerText="Data Fine" sortBy="#{flightBack.timeEnd}" filterBy="#{flightBack.timeEnd}" id="timeEnd">  
+                       <p:column  headerText="Data Fine" sortBy="#{flightBack.timeEnd}" filterBy="#{flightBack.timeEnd}" id="timeEndB">  
                       #{flightBack.timeEnd}  
                       </p:column> 
-                       <p:column  headerText="Tipo" sortBy="#{flightBack.room_type}" filterBy="#{flightBack.room_type}" id="room_type">  
+                       <p:column  headerText="Tipo" sortBy="#{flightBack.room_type}" filterBy="#{flightBack.room_type}" id="room_typeB">  
                       #{flightBack.area}  
                       </p:column> 
 
