@@ -41,6 +41,10 @@ public class StageManagementBean {
 	@ManagedProperty(value="#{packageCommon}")
 	private PackageCommonBean shared;
 	
+	@ManagedProperty(value="#{editPackage}")
+	private PackageCommonBean packBean;
+	
+	
 	private StageDTO currentStage;
 	
 	//Lista di hotel
@@ -89,14 +93,26 @@ public class StageManagementBean {
 				
 				private StageHelper stageHelper;
 				private List<FlightDTO> flightList;
-					
+			private Date time_start_stage;
+			private Date time_end_stage;
+			private String areaStage;
+						
 				
 					
 	
 	 @EJB
 	 private ProductCRUDBeanLocal productCRUD;
 	
-	
+	public String addStage()
+	{
+		//Controlli di consistenza
+		
+		packBean.getCurrentPackage().addStage(currentStage);
+		return "addedStage";
+		
+		
+	}
+	 
 	@PostConstruct
 	  public void update()
 	  {
@@ -174,6 +190,29 @@ public class StageManagementBean {
 			shared.setBusyStage(true);
 			shared.setCurrentPackage(null);
 			currentStage=null;
+			//CONTROLLO DI CONSISTENZA
+			
+			hotels
+			  = productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  hotelModel = new HotelDataModel(hotels);  
+			  outings
+			  = productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  outingModel = new OutingDataModel(outings);  
+			  flights
+			  = productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  flightModel = new FlightDataModel(flights);  
+			  flightsBack
+			  = productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  flightModelBack = new FlightDataModel(flightsBack);  
+			 
+			  /*Preparo le liste di prodotti già nello stage da visualizzare
+			   * passo sotto forma di lista anche le entità con un solo
+			   * elemento, per poterle mettere nelle table*/
+			  flightStartView= stageHelper.flightStart();
+			  flightEndView= stageHelper.flightEnd();
+			  hotelView = stageHelper.hotel();
+			  outingsView= stageHelper.outings();
+			  outingModelView = new OutingDataModel(outingsView);  
 			
 			return "notBusyStage";
 		}
@@ -462,6 +501,38 @@ public class StageManagementBean {
 	}
 	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
 		this.productCRUD = productCRUD;
+	}
+
+	public Date getTime_start_stage() {
+		return time_start_stage;
+	}
+
+	public void setTime_start_stage(Date time_start_stage) {
+		this.time_start_stage = time_start_stage;
+	}
+
+	public Date getTime_end_stage() {
+		return time_end_stage;
+	}
+
+	public void setTime_end_stage(Date time_end_stage) {
+		this.time_end_stage = time_end_stage;
+	}
+
+	public String getAreaStage() {
+		return areaStage;
+	}
+
+	public void setAreaStage(String areaStage) {
+		this.areaStage = areaStage;
+	}
+
+	public PackageCommonBean getPackBean() {
+		return packBean;
+	}
+
+	public void setPackBean(PackageCommonBean packBean) {
+		this.packBean = packBean;
 	}
 
 
