@@ -40,6 +40,7 @@ import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.FlightEntityManagementLocal;
+import entitymanagement.GiftListEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
@@ -68,7 +69,8 @@ private HotelEntityManagementLocal hotman;
 private OutingEntityManagementLocal outman;
 @EJB
 private FlightEntityManagementLocal fliman;
-
+@EJB
+private GiftListEntityManagementLocal giftMan;
 
 
 public Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
@@ -94,7 +96,7 @@ private Customer customerDTOToEntityUpdate(CustomerDTO cusdto)
 	return customer;
 }
 
-private ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftListsDTO)
+public ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftListsDTO)
 {
 	ArrayList<GiftList> giftLists=new ArrayList <GiftList> ();
 	Iterator <GiftListDTO> iter=giftListsDTO.iterator();
@@ -106,7 +108,7 @@ private ArrayList <GiftList> giftListDTOToEntity (ArrayList <GiftListDTO> giftLi
 	
 	return giftLists;
 }
-private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
+public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 {
 	Product product= productDTOToEntityUpdate(giftListDTO.getProduct());
 	TravelPackage travel=travman.find(giftListDTO.getTravelPackageid());
@@ -316,13 +318,13 @@ private GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		
 		
 	}
-	private GiftListDTO giftListToDTO(GiftList gift)
-	{
+	public GiftListDTO giftListToDTO(GiftList gift)//TODO to check
+	{   String idCustomer=giftMan.findCustomerCreator(gift.getProduct().getIdProduct());
 		
-		return new GiftListDTO (productToDTO(gift.getProduct()),gift.getIdBuyer(),gift.getMoreInfo(),gift.isBought(),gift.getTravelPackage().getIdtravelpackage());
+		return new GiftListDTO (productToDTO(gift.getProduct()),gift.getIdBuyer(),gift.getMoreInfo(),gift.isBought(),gift.getTravelPackage().getIdtravelpackage(),idCustomer);
 				
 	}
-   private ArrayList <GiftListDTO> giftListCollectionTODTO(List <GiftList> gift)
+   public ArrayList <GiftListDTO> giftListCollectionTODTO(List <GiftList> gift)
    {
 	   ArrayList <GiftListDTO> giftDTO=new  ArrayList <GiftListDTO>();
 	   Iterator <GiftList> iter=gift.iterator();

@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import entities.Customer;
+import entities.CustomizedTravelPackage;
 
 /**
  * Session Bean implementation class CustomizedTravelPackageEntityManagement
@@ -46,6 +47,13 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    		
    	}
 	
+    public CustomizedTravelPackage findCustomizedTravelPackageForFriend(String code)
+    {
+    	Query query = em.createQuery("SELECT  c FROM customizedtravelpackage c where c.friendCode=:code ",CustomizedTravelPackage.class);
+ 	     query.setParameter("code",code);
+ 	    	return   (CustomizedTravelPackage) query.getSingleResult();
+ 	    	
+    }
 	
 	@Override
 	public List findAllByParameter(Object par) {

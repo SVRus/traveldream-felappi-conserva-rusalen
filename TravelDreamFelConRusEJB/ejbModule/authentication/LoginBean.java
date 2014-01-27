@@ -1,6 +1,10 @@
 package authentication;
 
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -11,13 +15,39 @@ import javax.ejb.Stateless;
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import org.apache.commons.codec.digest.DigestUtils;
+
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
+import dto.GiftListDTO;
+import dto.TravelPackageDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.Customer;
+import entities.CustomizedTravelPackage;
 import entities.Employee;
+import entities.GiftList;
+import entities.TravelPackage;
 import entitymanagement.CustomerEntityManagementLocal;
+import entitymanagement.CustomizedTravelPackageEntityManagement;
 import entitymanagement.EmployeeEntityManagementLocal;
+import entitymanagement.GiftListEntityManagementLocal;
+import entitymanagement.TravelPackageEntityManagementLocal;
+import exceptions.FriendNotFoundException;
+import exceptions.GiftListNotFoundException;
 import groupenum.Group;
 
 /**
@@ -36,7 +66,12 @@ CustomerEntityManagementLocal customer;
 EmployeeEntityManagementLocal employee;
 @EJB
 DTOFactory factory;
-
+@EJB
+GiftListEntityManagementLocal gift;
+@EJB
+TravelPackageEntityManagementLocal travelMan;
+@EJB
+CustomizedTravelPackageEntityManagement custoMan;
 @Resource
 EJBContext context;
 
@@ -112,16 +147,56 @@ public boolean updateEmployee(EmployeeDTO emplodto)
 	} catch (Exception e) {
 		return false;
 	}
+}
 
+public boolean checkGift(String giftCode  )
+{  
+	List <Long> codeList=gift.giftListAuthenticationCheck();
+	Iterator <Long> iter=codeList.iterator();
+	boolean ok=false;
+	while(ok||iter.hasNext())
+	{
+		ok=ok ||DigestUtils.sha256Hex(iter.next().toString()).equals(giftCode);
+		
+	}
+	
+	return ok;
+}
 
-
+public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws GiftListNotFoundException
+{
+	
+	List <Long> codeList=gift.giftListAuthenticationCheck();
+	Iterator <Long> iter=codeList.iterator();
+	Long idFound=null;
+	boolean ok=false;
+	while(iter.hasNext()&&!ok)
+	{   idFound =iter.next();
+		ok=ok ||DigestUtils.sha256Hex(idFound.toString()).equals(giftCode);
+		
+	}
+	
+	if(ok)
+	{
+		List <GiftList> giftList=gift.findGiftListForPackage((TravelPackage)travelMan.find(idFound));
+		ArrayList <GiftListDTO> giftListDTO=factory.giftListCollectionTODTO(giftList);
+		return giftListDTO;
+	}
+	else throw new GiftListNotFoundException();
+	
+	
 }
 
 
-
-
-
-
+public TravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException
+{
+	CustomizedTravelPackage customized=custoMan.findCustomizedTravelPackageForFriend(friendCode);
+	if(customized!=null)	{
+    	return factory.simpleTravelPackageToDTO(customized);
+	}
+    else
+    	throw new FriendNotFoundException();
+}
 
 
 
