@@ -66,7 +66,7 @@ public class OutingManagementBean {
 	  
 	  
 	  //valori di prova
-	  static GregorianCalendar data1= new GregorianCalendar();
+	  static Date data1= new Date();
 	  private  List<OutingDTO> outings;
 	  private  List<OutingDTO> filteredOutings;
 	  
@@ -102,8 +102,11 @@ public class OutingManagementBean {
 	  public void updateOuting(ActionEvent actionEvent){
 			
 				outings.remove(selectedOuting);
-			//   newOuting = new OutingDTO(23, selectedOuting.getName(), selectedOuting.getName(), 23, data1, data1,
-			//		   selectedOuting.getName(), selectedOuting.getName(), State.AVAILABLE);
+			    newOuting = new OutingDTO(selectedOuting.getIdstage(), selectedOuting.getEmployeeCreator(),
+			    		                  selectedOuting.getName(), selectedOuting.getCost(),  
+			    		                  selectedOuting.getTimeStart(),  selectedOuting.getTimeEnd(), 
+			    		                  selectedOuting.getDescription(), selectedOuting.getArea(),
+                                          State.AVAILABLE,selectedOuting.getPlace());
 				productCRUD.updateProduct(newOuting);
 				System.out.println("Escursione modificata. Forse.");
 				outings.add(newOuting);
@@ -187,10 +190,10 @@ public class OutingManagementBean {
 	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
 		this.productCRUD = productCRUD;
 	}
-	public static GregorianCalendar getData1() {
+	public static Date getData1() {
 		return data1;
 	}
-	public static void setData1(GregorianCalendar data1) {
+	public static void setData1(Date data1) {
 		OutingManagementBean.data1 = data1;
 	}
 	public List<OutingDTO> getOutings() {
