@@ -33,7 +33,10 @@ public void setIdStage(long idStage) {
 		this.timeEnd = timeEnd;
 	}
 	private ArrayList <ProductDTO> products=new ArrayList <ProductDTO>();
-	String Area;
+	public StageDTO() {
+		super();
+	}
+	private String Area;
 private Date timeStart;
 private Date timeEnd;
 	
