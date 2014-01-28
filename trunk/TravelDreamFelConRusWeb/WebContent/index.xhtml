@@ -165,10 +165,11 @@
 		<h:panelGrid columns="1">
 	
 		<p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
-		<p:inputText id="gift" name="j_username" required="true" />
+		<p:inputText id="gift" name="j_username" required="true" value="#{giftList.code}" />
 		
 		
-		<p:commandButton id="submit" value="Invia codice" ajax="false" />		
+		<p:commandButton id="submit" value="Invia codice" action="#{giftList.checkCode()}" >  
+		 </p:commandButton>		
 		
 		
 		</h:panelGrid>
