@@ -1,5 +1,6 @@
 package webbeans;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -200,7 +201,7 @@ public class ConsistencyChecker {
 	
 	public boolean correctStage(StageDTO stage )
 	{
-		StageDTO stageTemp = new StageDTO(null, stage.getArea(), stage.getTimeStart(), stage.getTimeEnd());
+		StageDTO stageTemp = new StageDTO(new ArrayList<ProductDTO>(), stage.getArea(), stage.getTimeStart(), stage.getTimeEnd());
 		for(int i=0; i<stage.getProducts().size();i++)
 		{
 			if((CorrectProductInsert(stage.getProducts().get(i),stageTemp)))
@@ -222,7 +223,7 @@ public class ConsistencyChecker {
 	
 	public boolean correctPackageWeak(PrepackedTravelPackageDTO pack )
 	{
-		PrepackedTravelPackageDTO packTemp = new PrepackedTravelPackageDTO(pack.getTime_end(),pack.getTime_start(),pack.getDescription(), pack.getName(), null,"0", "0", pack.getPurchaseTime(), "", TravelState.AVAILABLE);
+		PrepackedTravelPackageDTO packTemp = new PrepackedTravelPackageDTO(pack.getTime_end(),pack.getTime_start(),pack.getDescription(), pack.getName(), new ArrayList<StageDTO>(),"0", "0", pack.getPurchaseTime(), "", TravelState.AVAILABLE);
 		for(int i=0; i<pack.getStages().size();i++)
 		{
 			if((CorrectStageInsert(packTemp,pack.getStages().get(i))))
@@ -244,7 +245,7 @@ public class ConsistencyChecker {
 	
 	public boolean correctPackage(PrepackedTravelPackageDTO pack )
 	{
-		PrepackedTravelPackageDTO packTemp = new PrepackedTravelPackageDTO(pack.getTime_end(),pack.getTime_start(),pack.getDescription(), pack.getName(), null,"0", "0", pack.getPurchaseTime(), "", TravelState.AVAILABLE);
+		PrepackedTravelPackageDTO packTemp = new PrepackedTravelPackageDTO(pack.getTime_end(),pack.getTime_start(),pack.getDescription(), pack.getName(), new ArrayList<StageDTO>(),"0", "0", pack.getPurchaseTime(), "", TravelState.AVAILABLE);
 		for(int i=0; i<pack.getStages().size();i++)
 		{
 			if(!correctStage(pack.getStages().get(i)))
