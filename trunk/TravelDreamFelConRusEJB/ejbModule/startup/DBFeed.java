@@ -41,6 +41,7 @@ import javax.ejb.Startup;
 
 
 
+
 import purchase.PurchaseGiftListBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.GiftListDTO;
@@ -63,6 +64,7 @@ import entities.TravelPackage;
 import entitymanagement.CodeEntityManagementLocal;
 import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
+import entitymanagement.GiftListEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import groupenum.Group;
 
@@ -88,6 +90,8 @@ PrepackedTravelPackageEntityManagementLocal preejb;
 DTOFactory factory;
 @EJB
 PurchaseGiftListBeanLocal gift;
+@EJB
+GiftListEntityManagementLocal giftMan;
     /**
      * Default constructor. 
      */
@@ -229,7 +233,6 @@ PurchaseGiftListBeanLocal gift;
         
         
         
-        
      List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12);
      
      
@@ -283,6 +286,9 @@ travels.add(travelPreReserved);
    List <GiftList> giftEntity=factory.giftListDTOToEntity(gifts);
    customer.addGifts(giftEntity);
    custoejb.edit(customer);
+   GiftList single=(GiftList) giftMan.findAll().get(0);
+   single.setBought(true);
+   single.setIdBuyer("compratore");
     }
    
 }
