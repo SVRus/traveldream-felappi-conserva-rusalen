@@ -26,20 +26,17 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
      * Default constructor. 
      */
     public CustomizedTravelPackageEntityManagement() {
-    	super (Customer.class);
+    	super (CustomizedTravelPackage.class);
     }
-    public Long findIdCustomizer(Long idPrepackedTravelPackage)
+    public String findIdCustomizer(Long idPrepackedTravelPackage)
    	{
    		Query query = em.createNativeQuery("SELECT  idcustomer FROM customizedtravelpackage where idtravelpackage=? ");
       	     query.setParameter(1, idPrepackedTravelPackage);
       	   Long id;
       	    	Object result=  query.getSingleResult();
-      	    	if (result==null)
-      	    	id=new Long(0);
-      	    	else
-      	    	id=(Long)result;
+      	    	
        	
-   		return id;
+   		return (String)result;
    		
    		
    		
@@ -49,7 +46,7 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
 	
     public CustomizedTravelPackage findCustomizedTravelPackageForFriend(String code)
     {
-    	Query query = em.createQuery("SELECT  c FROM customizedtravelpackage c where c.friendCode=:code ",CustomizedTravelPackage.class);
+    	Query query = em.createQuery("SELECT  c FROM CustomizedTravelPackage c where c.friendCode=:code ",CustomizedTravelPackage.class);
  	     query.setParameter("code",code);
  	    	return   (CustomizedTravelPackage) query.getSingleResult();
  	    	

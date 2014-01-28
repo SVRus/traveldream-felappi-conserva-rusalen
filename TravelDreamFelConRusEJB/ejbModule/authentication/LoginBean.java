@@ -29,6 +29,8 @@ import javax.ejb.Stateless;
 
 
 
+
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import dto.EmployeeDTO;
@@ -42,7 +44,7 @@ import entities.Employee;
 import entities.GiftList;
 import entities.TravelPackage;
 import entitymanagement.CustomerEntityManagementLocal;
-import entitymanagement.CustomizedTravelPackageEntityManagement;
+import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.GiftListEntityManagementLocal;
 import entitymanagement.TravelPackageEntityManagementLocal;
@@ -61,7 +63,8 @@ public class LoginBean implements LoginBeanLocal {
 
 @EJB
 CustomerEntityManagementLocal customer;
- 
+@EJB
+CustomizedTravelPackageEntityManagementLocal custoMan;
 @EJB
 EmployeeEntityManagementLocal employee;
 @EJB
@@ -70,8 +73,7 @@ DTOFactory factory;
 GiftListEntityManagementLocal gift;
 @EJB
 TravelPackageEntityManagementLocal travelMan;
-@EJB
-CustomizedTravelPackageEntityManagement custoMan;
+
 @Resource
 EJBContext context;
 

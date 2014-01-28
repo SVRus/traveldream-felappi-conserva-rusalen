@@ -15,6 +15,7 @@ import javax.naming.NamingException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.FlightDTO;
@@ -35,6 +36,7 @@ import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.Stage;
+import entitymanagement.CustomizedTravelPackageEntityManagementLocal;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
@@ -68,6 +70,8 @@ public class Test {
 	static Long timeNow=null;
 	static Long timeAfter=null;
 	static Long dateEnd=null;
+	static CustomizedTravelPackageEntityManagementLocal customizedMan=null;
+	static LoginBeanLocal login;
 	@BeforeClass
 	public static void beforeClass() throws NamingException
 	{
@@ -80,7 +84,10 @@ public class Test {
 		prod=(ProductCRUDBeanLocal) container.getContext().lookup("java:global/classes/ProductCRUDBean!productManagement.ProductCRUDBeanLocal");
 	    dto=(DTOFactory)container.getContext().lookup("java:global/classes/DTOFactory!dto_entitiesconversion.DTOFactory");
 	    reg=(RegistrationBeanLocal) container.getContext().lookup("java:global/classes/RegistrationBean!authentication.RegistrationBean");
-	    		emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
+	    login=(LoginBeanLocal) container.getContext().lookup("java:global/classes/LoginBean!authentication.LoginBeanLocal");
+	    customizedMan=(CustomizedTravelPackageEntityManagementLocal) container.getContext().lookup(" java:global/classes/CustomizedTravelPackageEntityManagement!entitymanagement.CustomizedTravelPackageEntityManagementLocal");
+
+	    emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
           List <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.EMPLOYEE);
 	    timeNow=(new Date()).getTime();
