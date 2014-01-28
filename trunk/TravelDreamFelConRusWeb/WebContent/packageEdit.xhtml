@@ -6,27 +6,40 @@
       xmlns:p="http://primefaces.org/ui"> 
     <h:head></h:head> 
    
-    <body> 
+  <body> 
       
      
-        <p:layout fullPage="true">  
-  
-        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+   <p:layout fullPage="true">  
+        
+    <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
       		</style> 
-         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
 		</p:layoutUnit>  
       
-        <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="South unit content." />  
-        </p:layoutUnit>  
+    <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+       <h:form style =" text-align : center;">
+         
+         <p:commandButton value="Conferma pacchetto"  action="#{packageEdit.editPackage}" ajax="false" />
+         <p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />
+
+       </h:form>  
+     </p:layoutUnit>
+        
+    <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>   
+        </p:layoutUnit>   
       
-        <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="West unit content." />  
-        </p:layoutUnit>  
-      
-        <p:layoutUnit position="east" size="600" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
+     <p:layoutUnit position="east" size="550" header="Pacchetto corrente: #{packageEdit.currentTravelPackage.name}" resizable="false" closable="false" collapsible="false" >  
              <h:form id="form">
 		
          <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
@@ -38,27 +51,31 @@
 
   
                 <f:facet name="header">
-                    Lista Tappe
+                    Tappe del viaggio
                 </f:facet>  
                 
               
-        		<p:column  headerText="Area" sortBy="#{stage.area}"  id="area">
-                    
-                    
+        		<p:column  headerText="Area" sortBy="#{stage.area}"  id="stage_area">
                  #{stage.area}  
+        		</p:column> 
+        		<p:column  headerText="Data inizio" sortBy="#{stage.timeStart}"  id="stage_timeStart">
+                 #{stage.timeStart}  
+        		</p:column> 
+        		<p:column  headerText="Data fine" sortBy="#{stage.area}"  id="stage_timeEnd">
+                 #{stage.timeStart}  
         		</p:column> 
         		
                 	
                
                <f:facet name="footer">
-                  <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-star" />  
+                  <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-gear" />  
              </f:facet>
 				
               </p:dataTable>
          
          </h:form> 
           <h:form id="StageForm" styleClass="input-form">
-		<p:panel header="Nuova tappa" id="panel">
+		<p:panel header="Aggiungi tappa" id="panel">
 		<p:messages id="mesg" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
 	<h:panelGrid columns="2">
@@ -67,21 +84,18 @@
 			value="#{stageManagement.areaStage}"
 				required="true" />
 	
-		
-		
-		<p:outputLabel value="Data di partenza" for="startDateS" />
+		<p:outputLabel value="Data inizio" for="startDateS" />
 		<p:calendar id="startDateS" value="#{stageManagement.time_start_stage}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 			
-		<p:outputLabel value="Data di fine" for="endDateS" />
+		<p:outputLabel value="Data fine" for="endDateS" />
 		<p:calendar id="endDateS" value="#{stageManagement.time_end_stage}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		
-	<p:commandButton value="Crea tappa"
+	<p:commandButton value="Inserisci prodotti nella tappa"
 		action="#{stageManagement.allowedNew}"
-		style="display:block; margin:0 auto;"
 		ajax="false" />
 		
 		</h:panelGrid>
@@ -95,42 +109,36 @@
 	    	 
 	   		
         <h:form id="packageForm" styleClass="input-form">
-		<h:inputHidden  value="#{packageEdit.update()}"/>
-		
-		<p:panel header="Gestione pacchetto #{packageEdit.currentTravelPackage.name}" id="panel">
-		<p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />       
+		<p:panel header="Inserisci dati pacchetto" id="panel">
+		       
          
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
 	<h:panelGrid columns="2">
 	    <p:outputLabel value="Nome" for="name" />
 		<p:inputText id="name" label="name"
-			value="#{packageEdit.currentTravelPackage.name}"
+			value="#{packageEdit.name}"
 				required="true" />
 	
 	
 		<p:outputLabel value="Descrizione" for="description" />
 		<p:inputTextarea id="description" label="description"
-			value="#{packageEdit.currentTravelPackage.description}"
+			value="#{packageEdit.description}"
 				required="true" 
 				 
 				 maxlength="254"/>  
 				
 		
 		<p:outputLabel value="Data di partenza" for="startDate" />
-		<p:calendar id="startDate" value="#{packageEdit.currentTravelPackage.time_start}" 
+		<p:calendar id="startDate" value="#{packageEdit.time_start}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 			
 		<p:outputLabel value="Data di fine" for="endDate" />
-		<p:calendar id="endDate" value="#{packageEdit.currentTravelPackage.time_end}" 
+		<p:calendar id="endDate" value="#{packageEdit.time_end}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		
-	<p:commandButton value="Conferma Pacchetto"
-		action="#{packageEdit.editPackage}"
-		style="display:block; margin:0 auto;"
-		ajax="false" />
 
 		
 	</h:panelGrid>
