@@ -64,6 +64,7 @@ public class GiftListBean implements Serializable {
 	  {
 		  selectedGiftList.setBought(true);
 		  selectedGiftList.setIdBuyer(nameBuyer);
+		  
 		  purchase.updateGiftList(selectedGiftList);
 		  checkCode();
 		  
