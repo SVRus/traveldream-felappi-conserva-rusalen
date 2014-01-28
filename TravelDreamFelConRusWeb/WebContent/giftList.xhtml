@@ -57,7 +57,7 @@
                     
               </p:dataTable>
               
-                <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.product.name}" paginator="true" rows="10"  
+                <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.moreInfo}" paginator="true" rows="10"  
                 selection="#{giftList.selectedGiftList}" selectionMode="single" 
                  id="gifttable"
                  rowsPerPageTemplate="10,15,50" >  
@@ -72,7 +72,7 @@
                      #{gift.product.name} 
                       </p:column> 
                        <p:column  headerText="Costo" sortBy="#{gift.product.cost}" >
-                     #{gift.product.name} 
+                     #{gift.product.cost} 
                       </p:column> 
                     
 
