@@ -68,4 +68,18 @@ public class Employee extends RegisteredUser implements Serializable {
    @OneToOne()
    @JoinColumn(name="code")
    private Code code; 
+   public void addProducts(List <Product> productAdded)
+   {
+	  managedProduct.addAll(productAdded);
+	   
+   }
+   
+   public void addPackages(List <PrepackedTravelPackage> packageAdded)
+   {
+	   
+	   managedTravelPackage.addAll(packageAdded);
+	   
+   }
+   
+   
 }

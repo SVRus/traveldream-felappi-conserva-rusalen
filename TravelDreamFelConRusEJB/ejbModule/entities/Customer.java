@@ -145,6 +145,18 @@ private List <GiftList> giftLists;
 	public Customer() {
 		super();
 	}
-   
+public void addCustomized(List <CustomizedTravelPackage> customized)
+{
+customizedTravelPackages.addAll(customized);
+}
+public void addPurchased(List <TravelPackage> purchased)
+{
+purchasedTravelPackages.addAll(purchased);
+}
+public void addGifts(List <GiftList> gifts)
+{
+	giftLists.addAll(gifts);
+
+}
 }
 

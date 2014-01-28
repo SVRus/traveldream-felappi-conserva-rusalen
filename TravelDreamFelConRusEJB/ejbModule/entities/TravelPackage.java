@@ -157,7 +157,6 @@ public void setName(String name) {
 private Long time_end;
 private Long time_start;
 private String description;
-@Column(unique=true)
 private String name;
 @OneToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 @JoinColumn(name="IDTRAVELPACKAGE")
