@@ -289,6 +289,7 @@ travels.add(travelPreReserved);
    GiftList single=(GiftList) giftMan.findAll().get(0);
    single.setBought(true);
    single.setIdBuyer("compratore");
+   giftMan.edit(single);
     }
    
 }
