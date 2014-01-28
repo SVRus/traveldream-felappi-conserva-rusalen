@@ -34,7 +34,7 @@
 	  <h:form id="form">
 	  
  <p:dataTable var="giftB" value="#{giftList.giftListModelBought}" rowKey="#{giftB.name}" paginator="true" rows="10"  
-                selection="#{giftList.selectedGiftList}" selectionMode="single" 
+                  
                  id="giftBtable"
                  rowsPerPageTemplate="10,15,50" >  
    
@@ -53,11 +53,9 @@
                     
 
                
-               <f:facet name="footer">
-                    <p:commandButton  value="Compra" onclick="PF('sold').show();" type="button" icon="ui-icon-star"/> 
-           
-                </f:facet>          
+                    
               </p:dataTable>
+              
                 <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.name}" paginator="true" rows="10"  
                 selection="#{giftList.selectedGiftList}" selectionMode="single" 
                  id="gifttable"
