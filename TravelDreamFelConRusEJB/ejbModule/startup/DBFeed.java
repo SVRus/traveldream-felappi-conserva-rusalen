@@ -42,6 +42,8 @@ import javax.ejb.Startup;
 
 
 
+
+
 import purchase.PurchaseGiftListBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.GiftListDTO;
@@ -57,6 +59,7 @@ import entities.Employee;
 import entities.Flight;
 import entities.GiftList;
 import entities.Hotel;
+import entities.Outing;
 import entities.PrepackedTravelPackage;
 import entities.Product;
 import entities.Stage;
@@ -152,13 +155,43 @@ GiftListEntityManagementLocal giftMan;
 		Date dateHotel4End=null;
 		Date dateFlight7Start=null;
 		Date dateFlight7End=null;
+		Date dateOuting1Start=null;
+		Date dateOuting2Start=null;
+		Date dateOuting3Start=null;
+		Date dateOuting4Start=null;
+		Date dateOuting5Start=null;
+		Date dateOuting6Start=null;
+		Date dateOuting7Start=null;
+		Date dateOuting8Start=null;
+		Date dateOuting1End=null;
+		Date dateOuting2End=null;
+		Date dateOuting3End=null;
+		Date dateOuting4End=null;
+		Date dateOuting5End=null;
+		Date dateOuting6End=null;
+		Date dateOuting7End=null;
+		Date dateOuting8End=null;
+
 		try {
 			dateHotel1Start = (Date)formatter.parse(strDateHotel1Start);  
 			   dateHotel1End=(Date)formatter.parse(strDateHotel1End);
-			  dateHotel2Start = (Date)formatter.parse("2014-03-30 10:00AM");  
-			   dateHotel2End = (Date)formatter.parse("2014-04-10 8:00AM");
 			   
 			   
+			   
+			  
+			    dateOuting1Start=(Date)formatter.parse("2014-03-21 04:00PM");  
+			    dateOuting1End=(Date)formatter.parse("2014-03-21 6:00PM"); 
+			    dateOuting2Start=(Date)formatter.parse("2014-03-23 10:00AM");  
+				
+				 dateOuting2End=(Date)formatter.parse("2014-03-23 03:00PM"); 
+				 
+				
+							 
+				 dateOuting3Start=(Date)formatter.parse("2014-04-01 10:00AM"); 
+				 dateOuting3End=(Date)formatter.parse("2014-04-01 04:00PM"); 
+
+				dateHotel2Start = (Date)formatter.parse("2014-03-30 10:00AM");  
+				   dateHotel2End = (Date)formatter.parse("2014-04-10 8:00AM");
 			   dateFlight1Start = (Date)formatter.parse("2014-03-20 2:00PM");
 			   dateFlight1End = (Date)formatter.parse("2014-03-20 7:00PM");
 			   dateFlight2Start = (Date)formatter.parse("2014-03-30 7:00AM");
@@ -170,7 +203,8 @@ GiftListEntityManagementLocal giftMan;
 			   
 			   dateFlight4Start = (Date)formatter.parse("2014-03-30 7:00AM");
 			   dateFlight4End = (Date)formatter.parse("2014-03-30 9:00AM");
-			  
+			   dateOuting4Start=(Date)formatter.parse("2014-04-04 10:00AM"); 
+			    dateOuting4End=(Date)formatter.parse("2014-04-04 02:00PM"); 
 			   dateHotel3Start = (Date)formatter.parse("2014-03-30 10:00AM");  
 			   dateHotel3End = (Date)formatter.parse("2014-04-30 8:00AM");
 			   dateFlight5Start = (Date)formatter.parse("2014-04-30 7:00AM");
@@ -180,7 +214,9 @@ GiftListEntityManagementLocal giftMan;
 			   dateFlight6Start = (Date)formatter.parse("2012-03-30 7:00AM");
 			   dateFlight6End = (Date)formatter.parse("2012-03-30 9:00AM");
 			  
-			   
+				dateOuting5Start=(Date)formatter.parse("2012-03-31 10:00AM"); 
+				dateOuting5End=(Date)formatter.parse("2012-03-31 12:00AM"); 
+
 			   dateHotel4Start = (Date)formatter.parse("2012-03-30 10:00AM");  
 			   dateHotel4End = (Date)formatter.parse("2012-04-30 8:00AM");
 			 
@@ -230,29 +266,41 @@ GiftListEntityManagementLocal giftMan;
         Flight flight11=new Flight(127,dateFlight4Start.getTime(),dateFlight4End.getTime(),"volo1","Inghilterra","airFrance","francia","Parigi","Londra","eventuali e varie",State.AVAILABLE);
         Flight flight12=new Flight(128,dateFlight5Start.getTime(),dateFlight5End.getTime(),"volo1","francia","airFrance","Inghilterra","Londra","Parigi","eventuali e varie",State.AVAILABLE);
 
+         
+        Outing outing1=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","description","Francia",State.INCLUDED,"Louvre");
+        Outing outing2=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","description","Francia",State.INCLUDED,"Museo");
+        Outing outing3=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","description","Italia",State.INCLUDED,"Musei vaticani");
         
         
         
-     List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12);
+        Outing outing4=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"museo francoforte","description","area",State.RESERVED,"Francoforte");
+        
+        
+        
+        Outing outing5=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","description","Inghilterra",State.EXPIRED,"Londra");
+        
+      
+
+     List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12,outing1,outing2,outing3 ,outing4,outing5);
      
      
     employee.addProducts(products);;
     
    
-    List <Product> stage1apr=Arrays.asList(flight1,flight2,hotel1);
-    List <Product> stage1bpr=Arrays.asList(flight3,hotel2);
+    List <Product> stage1apr=Arrays.asList(flight1,flight2,hotel1,outing1,outing2);
+    List <Product> stage1bpr=Arrays.asList(flight3,hotel2,outing3);
    Stage stage1a=new Stage(hotel1.getArea(),stage1apr,dateFlight1Start.getTime(),dateFlight2End.getTime());
    Stage stage1b=new Stage(hotel2.getArea(),stage1bpr,dateHotel2Start.getTime(),dateFlight3End.getTime());
    List <Stage> stages1=Arrays.asList(stage1a,stage1b);
    PrepackedTravelPackage travelPre=new  PrepackedTravelPackage(stage1b.getTimeEnd(),stage1a.getTimeStart(),"description", "interrail",stages1,"",null,TravelState.AVAILABLE);
   List <PrepackedTravelPackage> travels=employee.getManagedTravelPackage();
   travels.add(travelPre);
-   List <Product> stage2apr=Arrays.asList(flight4,hotel3,flight5);
+   List <Product> stage2apr=Arrays.asList(flight4,hotel3,flight5,outing4);
    Stage stage2a=new Stage (hotel3.getArea(),stage2apr,dateFlight4Start.getTime(),dateFlight5End.getTime());
    List <Stage> stages2=Arrays.asList(stage2a);
    PrepackedTravelPackage travelPreReserved=new  PrepackedTravelPackage(stage2a.getTimeEnd(),stage2a.getTimeStart(),"description", "singlestage",stages2,"",null,TravelState.RESERVED);
 travels.add(travelPreReserved);
-   List <Product> stage3apr=Arrays.asList(flight6,hotel4,flight7);
+   List <Product> stage3apr=Arrays.asList(flight6,hotel4,flight7,outing5);
 
    Stage stage3a=new Stage (hotel4.getArea(),stage3apr,dateFlight6Start.getTime(),dateFlight7End.getTime());
    List <Stage> stages3=Arrays.asList(stage3a);
