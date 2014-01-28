@@ -29,7 +29,6 @@ import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import travelstateenum.TravelState;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -41,7 +40,7 @@ import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="packageManagement")
-@ViewScoped
+@SessionScoped
 
 public class PackageManagementBean implements Serializable{
 
@@ -75,6 +74,8 @@ private TravelPackageCRUDBeanLocal packageCRUD;
 @ManagedProperty(value="#{packageCommon}")
 private PackageCommonBean shared;
 
+@ManagedProperty(value="#{packageEdit}")
+private PackageEditBean packBean;
 
 @PostConstruct
 public void update()
@@ -90,6 +91,7 @@ listaStage.add(stage);
 packageList= new ArrayList<PrepackedTravelPackageDTO>();
 packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
 packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
+packageList.addAll(packageCRUD.findAllPrepacked());
 
 packageModel= new PrepackedTravelPackageDataModel(packageList);
 System.out.println("Ciao ho popolato i pacchetti");
@@ -97,7 +99,7 @@ System.out.println("Ciao ho popolato i pacchetti");
 }
 public void updateCurrentPackage()
 {
-	shared.setTempCurrentPackage(selectedTravelPackage);
+	packBean.setTempCurrentPackage(selectedTravelPackage);
 	System.out.println("Ho modificato il pacchetto corrente");
 	
 }
@@ -202,6 +204,12 @@ public PackageCommonBean getShared() {
 }
 public void setShared(PackageCommonBean shared) {
 	this.shared = shared;
+}
+public PackageEditBean getPackBean() {
+	return packBean;
+}
+public void setPackBean(PackageEditBean packBean) {
+	this.packBean = packBean;
 }
 
 

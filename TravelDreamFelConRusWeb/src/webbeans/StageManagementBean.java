@@ -20,7 +20,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.FlightDTO;
@@ -41,11 +40,11 @@ public class StageManagementBean {
 	@ManagedProperty(value="#{packageCommon}")
 	private PackageCommonBean shared;
 	
-	@ManagedProperty(value="#{editPackage}")
-	private PackageCommonBean packBean;
-	
+
 	
 	private StageDTO currentStage;
+	private StageDTO tempCurrentStage;
+	
 	
 	//Lista di hotel
 	private HotelDTO selectedHotel;
@@ -79,7 +78,7 @@ public class StageManagementBean {
 		private  List<OutingDTO> outings;
 		private  List<OutingDTO> filteredOutings;
 		
-		//Lista di uscite da visualizzare
+		//Lista di prodotti da visualizzare
 				private OutingDTO selectedOutingView;
 				private OutingDTO newOutingView;
 				  
@@ -96,7 +95,9 @@ public class StageManagementBean {
 			private Date time_start_stage;
 			private Date time_end_stage;
 			private String areaStage;
-						
+	
+		ConsistencyChecker consistency;
+	
 				
 					
 	
@@ -105,23 +106,40 @@ public class StageManagementBean {
 	
 	public String addStage()
 	{
-		//Controlli di consistenza
 		
-		packBean.getCurrentPackage().addStage(currentStage);
+		consistency = new ConsistencyChecker();
+		//Controllo di consistenza
+		
+		if(consistency.correctStage(currentStage) && currentStage.getProducts()!=null)
+		{
+		/*Aggiorna lo stage nel bean comune, per permettere
+		 * al packageEdit di aggiornarlo a sua volta. Si è dovuto ricorrere al bean 
+		 * comune perchè non è possibile realizzare un riferimento reciproco tra bean
+		 * Fonti: http://docs.oracle.com/javaee/1.4/tutorial/doc/JSFConfigure3.html
+		 */
+	
+		shared.setCurrentStage(currentStage);
+		shared.setStageUpdated(true);
+
 		return "addedStage";
-		
+		}
+		else
+		{
+			return "inconsistentStage";
+		}
 		
 	}
 	 
-	@PostConstruct
 	  public void update()
-	  {
+	  {	
 		shared.aggiorna();
-		stageHelper= new StageHelper(shared.getCurrentStage());	
+		stageHelper= new StageHelper(tempCurrentStage);	
 	  
 		  System.out.println("sono in stage management");
 	  }
 	
+	  
+	  //METODO INUTILE
 	public void editStage()
 	{
 		shared.setCurrentStage(null);
@@ -147,22 +165,29 @@ public class StageManagementBean {
 	{
 		if (!shared.isBusyStage())
 		{		
+			/*informo il bean condiviso usato da PackageManagement che si tratta
+			 * di un'operazione di modifica
+			 */
+			shared.setNewStage(false);
+			
 			shared.setBusyStage(true);
-			shared.updateStage();
-			currentStage = shared.getCurrentStage();
+			//shared.updateStage();
+			//currentStage = shared.getCurrentStage();
+			currentStage= tempCurrentStage;
 			// setto la lista di hotel
+			update();
 			
 			 hotels
-			  = productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, shared.getCurrentStage().getTimeStart(),  shared.getCurrentStage().getTimeEnd(),  shared.getCurrentStage().getArea());
+			  = productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  = productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, shared.getCurrentStage().getTimeStart(),  shared.getCurrentStage().getTimeEnd(),  shared.getCurrentStage().getArea());
+			  = productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
 			  outingModel = new OutingDataModel(outings);  
 			  flights
-			  = productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, shared.getCurrentStage().getTimeStart(),  shared.getCurrentStage().getTimeEnd(),  shared.getCurrentStage().getArea());
+			  = productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
 			  flightModel = new FlightDataModel(flights);  
 			  flightsBack
-			  = productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, shared.getCurrentStage().getTimeStart(),  shared.getCurrentStage().getTimeEnd(),  shared.getCurrentStage().getArea());
+			  = productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
 			  flightModelBack = new FlightDataModel(flightsBack);  
 			 
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
@@ -187,9 +212,14 @@ public class StageManagementBean {
 	{
 		if (!shared.isBusyStage())
 		{		
+			/*informo il bean condiviso usato da PackageManagement che si tratta
+			 * di un'operazione di inserimento
+			 */
+			shared.setNewStage(true);
+			
 			shared.setBusyStage(true);
-			shared.setCurrentPackage(null);
-			currentStage=null;
+			shared.setCurrentPackage(new PrepackedTravelPackageDTO());
+			currentStage=new StageDTO();
 			//CONTROLLO DI CONSISTENZA
 			
 			hotels
@@ -208,12 +238,7 @@ public class StageManagementBean {
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
 			   * passo sotto forma di lista anche le entità con un solo
 			   * elemento, per poterle mettere nelle table*/
-			  flightStartView= stageHelper.flightStart();
-			  flightEndView= stageHelper.flightEnd();
-			  hotelView = stageHelper.hotel();
-			  outingsView= stageHelper.outings();
-			  outingModelView = new OutingDataModel(outingsView);  
-			
+				
 			return "notBusyStage";
 		}
 		
@@ -225,8 +250,8 @@ public class StageManagementBean {
 	public String closeOperation()
 	{
 		shared.setBusyStage(false);
-		shared.setCurrentStage(null);
-		currentStage=null;
+		shared.setCurrentStage(new StageDTO());
+		currentStage=new StageDTO();
 		
 		return "closed";
 	}
@@ -527,12 +552,14 @@ public class StageManagementBean {
 		this.areaStage = areaStage;
 	}
 
-	public PackageCommonBean getPackBean() {
-		return packBean;
+	
+
+	public StageDTO getTempCurrentStage() {
+		return tempCurrentStage;
 	}
 
-	public void setPackBean(PackageCommonBean packBean) {
-		this.packBean = packBean;
+	public void setTempCurrentStage(StageDTO tempCurrentStage) {
+		this.tempCurrentStage = tempCurrentStage;
 	}
 
 
