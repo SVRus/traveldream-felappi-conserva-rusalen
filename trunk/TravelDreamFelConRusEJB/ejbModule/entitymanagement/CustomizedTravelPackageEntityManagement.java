@@ -33,7 +33,7 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    		Query query = em.createNativeQuery("SELECT  idcustomer FROM customizedtravelpackage where idtravelpackage=? ");
       	     query.setParameter(1, idPrepackedTravelPackage);
       	   Long id;
-      	    	Object result=  query.getSingleResult();
+      	    	Object result=  query.getResultList().get(0);
       	    	
        	
    		return (String)result;

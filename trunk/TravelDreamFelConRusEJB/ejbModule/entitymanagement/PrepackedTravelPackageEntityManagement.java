@@ -41,7 +41,7 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
 		Query query = em.createNativeQuery("SELECT  idemployeecreator FROM prepackedtravelpackage where idtravelpackage=? ");
    	     query.setParameter(1, idPrepackedTravelPackage);
    	   
-   	    	Object result=  query.getSingleResult();
+   	    	Object result=  query.getResultList().get(0);
    	    	if (result==null)
    	    	return null;
    	    	else

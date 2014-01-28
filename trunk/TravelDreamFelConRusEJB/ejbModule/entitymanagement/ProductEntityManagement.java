@@ -38,7 +38,7 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     query.setParameter(1, new Long(idproduct));
     
    
-    	String result=(String) query.getSingleResult();
+    	String result=(String) query.getResultList().get(0);
     	
     	return result;
     	
@@ -51,7 +51,7 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	Query q = em.createNativeQuery("SELECT IDSTAGE FROM PRODUCT WHERE IDPRODUCT=?");
     	System.out.print("ciao sono io?");
     	q.setParameter(1, idproduct);
-    	Object result= q.getSingleResult();
+    	Object result= q.getResultList().get(0);
     	if (result==null)
     		result=new Long(0);
     	
