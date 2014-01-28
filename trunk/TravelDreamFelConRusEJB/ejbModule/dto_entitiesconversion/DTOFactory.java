@@ -241,7 +241,7 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	  }
 	  else if (pre instanceof CustomizedTravelPackage)
 	  {
-		  Long idCustomizer=custrav.findIdCustomizer(idtravelpackage);
+		  String idCustomizer=custrav.findIdCustomizer(idtravelpackage);
 		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),new Date(pre.getPurchaseTime()),idCustomizer,pre.getTravelState());
 		  
 	  }
