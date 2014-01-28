@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -122,10 +123,10 @@ public long getIdtravelpackage() {
 
 private long idtravelpackage;
 private Date time_end;
-private Date time_start;
-private String description;
-private String name;
-private List<StageDTO> stages;	
+private Date time_start=new Date();
+private String description="";
+private String name="";
+private List<StageDTO> stages=new ArrayList <StageDTO>();	
 private String idCustomerBuyer;	
 private String friendCode;
 private Date purchaseTime;

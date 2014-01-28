@@ -32,7 +32,7 @@ public void setIdStage(long idStage) {
 	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}
-	private ArrayList <ProductDTO> products;
+	private ArrayList <ProductDTO> products=new ArrayList <ProductDTO>();
 	String Area;
 private Date timeStart;
 private Date timeEnd;
