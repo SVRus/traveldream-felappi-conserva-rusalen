@@ -19,7 +19,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;

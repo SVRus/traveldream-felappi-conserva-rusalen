@@ -27,8 +27,8 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import travelstateenum.TravelState;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -50,6 +50,8 @@ public class PackageEditBean {
 	private StageManagementBean sharedStage;
 	
 	private PrepackedTravelPackageDTO currentTravelPackage;
+	private PrepackedTravelPackageDTO tempCurrentPackage;
+	
 	private StageDTO selectedStage;
 
 	//non so se sia ridondante rispetto a packageList
@@ -66,9 +68,14 @@ public class PackageEditBean {
 	private Date time_end;
 	private String description;
 	private String name; 
+	@EJB
+	private TravelPackageCRUDBeanLocal packageCRUD;
+	
+	//true se sto lavorando su un nuovo pacchetto, false se sto modificando un pacchetto esistente
+	private boolean newPack;
 	
 	
-	@PostConstruct
+	
 	public void update()
 	{
 	ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
@@ -79,14 +86,48 @@ public class PackageEditBean {
 	ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
 
 	listaStage.add(stage);
-	
-	stageModel= new StageDataModel(listaStage);
+	currentTravelPackage.addStage(stage);
+	//Controllo inutile
+	if(currentTravelPackage!=null)
+	{
+	if(shared.isStageUpdated())
+	{
+		/*
+		 * La modifica si compone di due operazioni: eliminazione dello stage precedente e
+		 * aggiunta del nuovo stage
+		 * 
+		 */
+		//aggiungo il nuovo stage
+		currentTravelPackage.addStage(sharedStage.getCurrentStage());
+		//rimuovo lo stage precedente
+		currentTravelPackage.getStages().remove(shared.getStageToDeleteForModify());
+		
+		shared.setStageUpdated(false);
+	}
+	else
+	{
+		//currentTravelPackage.addStage(sharedStage.getCurrentStage());
+		
+	}
+	stageModel= new StageDataModel(currentTravelPackage.getStages());
+	}
 	System.out.println("Ciao ho popolato gli stage");
 
 	}
+	public void updateState()
+	{
+		stageModel= new StageDataModel(currentTravelPackage.getStages());
+		
+		
+	}
 	public void updateCurrentStage()
 	{
-		shared.setTempCurrentStage(selectedStage);
+		//Setto lo stage selezionato nella pagina di stageManagement
+		sharedStage.setTempCurrentStage(selectedStage);
+		/*Salvo lo stage selezionato nello stage condiviso, per memorizzarlo
+		 * in vista di operazioni di modifica
+		 */
+		shared.setStageToDeleteForModify(selectedStage);
 		System.out.println("Ho modificato lo stage corrente");
 		
 	}
@@ -96,9 +137,10 @@ public class PackageEditBean {
 		if (!shared.isBusy())
 		{		
 			shared.setBusy(true);
-			shared.updatePackage();
-			currentTravelPackage = shared.getCurrentPackage();
-			
+			//shared.updatePackage();
+			currentTravelPackage = tempCurrentPackage;
+			update();
+			newPack = false;
 			return "notBusy";
 		}
 		
@@ -110,9 +152,11 @@ public class PackageEditBean {
 	{
 		if (!shared.isBusy())
 		{		
+			
 			shared.setBusy(true);
-			shared.setCurrentPackage(null);
-			currentTravelPackage=null;
+			//shared.setCurrentPackage(null);
+			currentTravelPackage= new PrepackedTravelPackageDTO();
+			newPack = true;
 			
 			return "notBusy";
 		}
@@ -125,21 +169,33 @@ public class PackageEditBean {
 	public String closeOperation()
 	{
 		shared.setBusy(false);
-		shared.setCurrentPackage(null);
-		currentTravelPackage=null;
+		shared.setCurrentPackage(new PrepackedTravelPackageDTO());
+		currentTravelPackage=new PrepackedTravelPackageDTO();
 		/*quando termino l'operazione su un pacchetto
 		  devo chiuderla automaticamente anche sulla tappa
 		*/
 		shared.setBusyStage(false);
-		shared.setCurrentStage(null);
+		shared.setCurrentStage(new StageDTO());
 		
-		sharedStage.setCurrentStage(null);
+		sharedStage.setCurrentStage(new StageDTO());
 		
 		return "closed";
 	}
 	
+	
 	public void editPackage()
 	{
+		if(newPack)
+		{
+			packageCRUD.createTravelFromEmployee(currentTravelPackage);
+			System.out.println("Ho creato un pacchetto");
+			
+		}
+		else
+		{
+			System.out.println("Ho modificato un pacchetto");
+			
+		}
 		
 	}
 	public PackageCommonBean getShared() {
@@ -210,12 +266,32 @@ public class PackageEditBean {
 		this.description = description;
 	}
 	public String getName() {
+		
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
-	};
-
+	}
+	public PrepackedTravelPackageDTO getTempCurrentPackage() {
+		return tempCurrentPackage;
+	}
+	public void setTempCurrentPackage(PrepackedTravelPackageDTO tempCurrentPackage) {
+		this.tempCurrentPackage = tempCurrentPackage;
+	}
+	public TravelPackageCRUDBeanLocal getPackageCRUD() {
+		return packageCRUD;
+	}
+	public void setPackageCRUD(TravelPackageCRUDBeanLocal packageCRUD) {
+		this.packageCRUD = packageCRUD;
+	}
+	public boolean isNewPack() {
+		return newPack;
+	}
+	public void setNewPack(boolean newPack) {
+		this.newPack = newPack;
+	}
+	
+		
 	
 	
 }

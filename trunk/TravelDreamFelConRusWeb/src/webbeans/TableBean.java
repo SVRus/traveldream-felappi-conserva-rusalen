@@ -15,12 +15,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ActionListener;
 
 import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -31,7 +31,7 @@ import authentication.RegistrationBeanLocal;
 
   
 @ManagedBean
-@ViewScoped
+@SessionScoped
   
 public class TableBean implements Serializable {  
   
@@ -81,7 +81,7 @@ public class TableBean implements Serializable {
   
     private Car[] selectedCars;  
     private Car[] selectedCars2;  
-    
+    private Date time_start;
  
     public Car[] getSelectedCars2() {
 		return selectedCars2;
@@ -115,6 +115,17 @@ public class TableBean implements Serializable {
          System.out.println(cars.get(2).getColor());
    
 	  }
+    
+    public void dateChange(ActionListener ae) {
+    	cars.add(new Car("123321",1999,"Whoooo","Grey"));	
+    	cars2.add(new Car("123321",1999,"Whoooo","Grey"));	
+    	
+    	mediumCarsModel = new CarDataModel(cars); 
+    	mediumCarsModel2 = new CarDataModel(cars2); 
+        
+    
+    }
+    
     public void aggiorna()
     {
     	cars.add(new Car("66666",1999,"Special Model","Grey"));	
@@ -217,6 +228,12 @@ public class TableBean implements Serializable {
 	}
 	public static String[] getManufacturers() {
 		return manufacturers;
+	}
+	public Date getTime_start() {
+		return time_start;
+	}
+	public void setTime_start(Date time_start) {
+		this.time_start = time_start;
 	}  
     
 }  
