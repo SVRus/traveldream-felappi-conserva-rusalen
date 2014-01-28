@@ -42,7 +42,7 @@
                 </f:facet>  
                 
               
-        		<p:column  headerText="Area" sortBy="#{TravelPackage.area}"  id="area">
+        		<p:column  headerText="Area" sortBy="#{stage.area}"  id="area">
                     
                     
                  #{stage.area}  
@@ -95,6 +95,8 @@
 	    	 
 	   		
         <h:form id="packageForm" styleClass="input-form">
+		<h:inputHidden  value="#{packageEdit.update()}"/>
+		
 		<p:panel header="Gestione pacchetto #{packageEdit.currentTravelPackage.name}" id="panel">
 		<p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />       
          
