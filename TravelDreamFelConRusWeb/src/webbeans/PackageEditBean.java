@@ -196,6 +196,8 @@ public class PackageEditBean {
 			System.out.println("Ho modificato un pacchetto");
 			
 		}
+		shared.setBusy(false);
+		
 		
 	}
 	public PackageCommonBean getShared() {
