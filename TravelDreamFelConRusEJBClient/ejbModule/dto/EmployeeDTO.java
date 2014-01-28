@@ -46,5 +46,12 @@ private long code	;
 private ArrayList <ProductDTO> managedproduct;	
 private ArrayList <PrepackedTravelPackageDTO> managedTravelPackage;
 
-	   
+public void addProduct(ArrayList <ProductDTO> products)
+{
+managedproduct.addAll(products);
+}
+public void addPackage(ArrayList <PrepackedTravelPackageDTO> prepackage)
+{
+managedTravelPackage.addAll(prepackage);
+}
 }

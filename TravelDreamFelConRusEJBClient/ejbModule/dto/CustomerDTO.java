@@ -92,10 +92,20 @@ public class CustomerDTO extends GenericUserDTO{
 	}
 	
 	
+	public void addCustomized(ArrayList <CustomizedTravelPackageDTO> customized)
+	{
+      customizedTravelPackage.addAll(customized);
+	}
 	
-	
-	
+	public void addPurchsed(ArrayList <TravelPackageDTO> purchased)
+	{
+		this.purchasedTravelPackage.addAll(purchased);		
+	}
 
+public void addGift(ArrayList <GiftListDTO> gifts)
+{
+	giftlist.addAll(gifts);
 
+}
 	
 }
