@@ -1,5 +1,5 @@
 package travelstateenum;
 
 public enum TravelState {
-AVAILABLE,SOLD,RESERVED
+AVAILABLE,SOLD,RESERVED,EXPIRED
 }
