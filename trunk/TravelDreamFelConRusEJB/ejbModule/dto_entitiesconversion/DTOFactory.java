@@ -226,8 +226,13 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	{ 
 	  Long idtravelpackage=pre.getIdtravelpackage();
 	  List <StageDTO> stageList=travelToStageDTO(pre);
+	  Long purchaseTime=pre.getPurchaseTime();
+	  Date purchase=null;
+	  if(purchaseTime!=null)
+		  purchase=new Date(pre.getPurchaseTime());
+	  else
+		  purchase=null;
 	  String idCustomerBuyer=travman.findIdCustomerBuyer(idtravelpackage);
-	  System.out.println(idCustomerBuyer+"customer");
 	/*  String idCustomerFriendOwner=travman.findIdCustomerFriendOwner(idtravelpackage);
 	  System.out.println(idCustomerFriendOwner);
 	  */
@@ -235,14 +240,14 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	  if(pre instanceof PrepackedTravelPackage)
 	  
 	  {
+		  
 	  String idEmployeeCreator=pretrav.findIdEmployeeCreator(idtravelpackage);
-	  System.out.println(idEmployeeCreator+"employee");
-	   dto=new PrepackedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),new Date(pre.getPurchaseTime()),idEmployeeCreator,pre.getTravelState());
+	   dto=new PrepackedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),purchase,idEmployeeCreator,pre.getTravelState());
 	  }
 	  else if (pre instanceof CustomizedTravelPackage)
 	  {
 		  String idCustomizer=custrav.findIdCustomizer(idtravelpackage);
-		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),new Date(pre.getPurchaseTime()),idCustomizer,pre.getTravelState());
+		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),purchase,idCustomizer,pre.getTravelState());
 		  
 	  }
 		return dto;
@@ -421,18 +426,24 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    {
 	  TravelPackage travelpackage=null;
 	  List <Stage> stages=null;
+	  Date purchaseTime=travel.getPurchaseTime();
+	  Long purchaseTimeLong;
+	  if(purchaseTime==null)
+		  purchaseTimeLong=null;
+	  else
+		  purchaseTimeLong=purchaseTime.getTime();
 	  if(createUpdate)
 	  {
-		  stages=stageListDTOToEntity(travel.getStages());
+		  stages=stageListDTOToEntity((travel.getStages()));//TODO
 		  if(travel instanceof PrepackedTravelPackageDTO)
 		  {
-			  travelpackage=new PrepackedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
+			  travelpackage=new PrepackedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),purchaseTimeLong,travel.getTravelState());
 				
 			  
 		  }
 		  else if(travel instanceof CustomizedTravelPackageDTO)
 		  {
-			  travelpackage=new CustomizedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
+			  travelpackage=new CustomizedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),purchaseTimeLong,travel.getTravelState());
 			  
 		  }
 		  
@@ -448,12 +459,12 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		  stages=stageListDTOToEntityUpdate(travel.getStages());
 		  if(travel instanceof PrepackedTravelPackageDTO)
 		  {
-			  travelpackage=new PrepackedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
+			  travelpackage=new PrepackedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),purchaseTimeLong,travel.getTravelState());
 		  }
 		  else if(travel instanceof CustomizedTravelPackageDTO)
 		  {
 			  
-			  travelpackage=new CustomizedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),travel.getPurchaseTime().getTime(),travel.getTravelState());
+			  travelpackage=new CustomizedTravelPackage(travel.getIdtravelpackage(),travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),purchaseTimeLong,travel.getTravelState());
 			  
 		  }
 	  }
@@ -563,7 +574,7 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
 	   
-	return new Stage(stagedto.getArea(),productDTOListToEntity(stagedto.getProducts()),stagedto.getTimeStart().getTime(),stagedto.getTimeEnd().getTime());
+	return new Stage(stagedto.getArea(),productDTOListToEntityUpdate(stagedto.getProducts()),stagedto.getTimeStart().getTime(),stagedto.getTimeEnd().getTime());
 	   
 	   
 	   
