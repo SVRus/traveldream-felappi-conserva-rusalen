@@ -80,7 +80,8 @@ private PackageEditBean packBean;
 @PostConstruct
 public void update()
 {
-ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
+/*
+	ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
 prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 
@@ -88,9 +89,10 @@ StageDTO stage= new StageDTO(prodotti, "Africa", new Date(), new Date());
 ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
 
 listaStage.add(stage);
+*/
 packageList= new ArrayList<PrepackedTravelPackageDTO>();
-packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
-packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
+//packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
+//packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
 packageList.addAll(packageCRUD.findAllPrepacked());
 
 packageModel= new PrepackedTravelPackageDataModel(packageList);
@@ -104,12 +106,6 @@ public void updateCurrentPackage()
 	
 }
 
-//METODO DI PROVA
-public String selection()
-{
-	System.out.println("sel");
-	return "sel";
-}
 
 public void deletePackage(ActionEvent actionEvent) {
 	
