@@ -120,7 +120,8 @@ public class StageManagementBean {
 	
 		shared.setCurrentStage(currentStage);
 		shared.setStageUpdated(true);
-
+		shared.setBusyStage(false);
+		
 		return "addedStage";
 		}
 		else
