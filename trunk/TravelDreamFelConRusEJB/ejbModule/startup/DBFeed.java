@@ -113,12 +113,14 @@ PurchaseGiftListBeanLocal gift;
     	 codeejb.create(code);
     	 List <Group> groups=new ArrayList <Group>();
  	     groups.add(Group.EMPLOYEE);
-    	 Employee employee=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername1234",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
- 		 emploejb.create(employee);
+    	 Employee employee=new Employee("cello@email.com","cello","cognome","1234567890","04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb","user",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
+ 		 //password user
+    	 emploejb.create(employee);
     	 ArrayList <Group> groupsCustomer=new ArrayList <Group>();
 	     groups.add(Group.CUSTOMER);
-		 Customer customer=new Customer("io@email.it","marcello","felappi","036486876","iosonocello","cello",groupsCustomer,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
-    	 custoejb.create(customer);
+		 Customer customer=new Customer("io@email.it","marcello","felappi","036486876","e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","cello",groupsCustomer,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
+    	//password iosonocello
+		 custoejb.create(customer);
     	 String strDateHotel1Start="2014-03-21 2:00PM";
     	 String strDateHotel1End="2014-03-29 18:00PM";
     	   DateFormat formatter ; 
