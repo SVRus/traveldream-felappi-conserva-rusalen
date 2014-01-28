@@ -130,6 +130,11 @@ private List<StageDTO> stages=new ArrayList <StageDTO>();
 private String idCustomerBuyer;	
 private String friendCode;
 private Date purchaseTime;
+public TravelPackageDTO() {
+	super();
+}
+
+
 private TravelState travelState;
 
 public TravelPackageDTO(long idtravelpackage, Date time_end,Date time_start,

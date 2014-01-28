@@ -9,6 +9,11 @@ public class CustomizedTravelPackageDTO extends TravelPackageDTO {
 
 
 
+public CustomizedTravelPackageDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 private String idCustomizer;	
 /**
  * 

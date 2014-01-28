@@ -8,6 +8,11 @@ import travelstateenum.TravelState;
 
 public class PrepackedTravelPackageDTO extends TravelPackageDTO {
 
+public PrepackedTravelPackageDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 /**
  * 
  * @param idtravelpackage
