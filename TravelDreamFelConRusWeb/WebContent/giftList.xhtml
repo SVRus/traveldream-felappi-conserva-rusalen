@@ -103,7 +103,7 @@
                   <h:outputLabel for="nameBuyer" value="Nome:" />  
             	<p:inputText value="#{giftList.nameBuyer}" id="nameBuyer" required="true" label="nameBuyer" /> 
           
-                <p:commandButton id="buy" value="Ok" update=":form:gifttable"   
+                <p:commandButton id="buy" value="Ok" update=":form"   
                     actionListener="#{giftList.buyProduct}"  
                    oncomplete="sold.hide();"/>  
                    
