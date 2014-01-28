@@ -17,6 +17,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import productManagement.ProductCRUDBeanLocal;
 import purchase.PurchaseGiftListBeanLocal;
@@ -51,7 +53,8 @@ public class GiftListBean implements Serializable {
 	  private GiftListDataModel giftListModel;  
 	  //Lista di gift list acquistate
 	  private GiftListDataModel giftListModelBought;  
-	  
+	  ArrayList<GiftListDTO> giftFree;
+	  ArrayList<GiftListDTO> giftBought;
 	  		
 	  @EJB
 	  private LoginBeanLocal login;
@@ -61,11 +64,10 @@ public class GiftListBean implements Serializable {
 	  
 	  
 	  public void buyProduct(ActionEvent actionEvent)
-	  {
+	  {   checkCode();
 		  selectedGiftList.setBought(true);
 		  selectedGiftList.setIdBuyer(nameBuyer);
-		  
-		  purchase.updateGiftList(selectedGiftList);
+		   purchase.updateGiftList(selectedGiftList);
 		  checkCode();
 		  
 	  }
@@ -88,8 +90,8 @@ public class GiftListBean implements Serializable {
 			
 			 giftLists= login.checkGiftListException(code);			
 			
-			ArrayList<GiftListDTO> giftFree = new ArrayList<GiftListDTO>();
-			ArrayList<GiftListDTO> giftBought = new ArrayList<GiftListDTO>();
+			 giftFree = new ArrayList<GiftListDTO>();
+			 giftBought = new ArrayList<GiftListDTO>();
 			
 			for(int i=0; i<giftLists.size();i++)
 			{
@@ -117,6 +119,18 @@ public class GiftListBean implements Serializable {
 			
 		}
 	  }
+	public ArrayList<GiftListDTO> getGiftFree() {
+		return giftFree;
+	}
+	public void setGiftFree(ArrayList<GiftListDTO> giftFree) {
+		this.giftFree = giftFree;
+	}
+	public ArrayList<GiftListDTO> getGiftBought() {
+		return giftBought;
+	}
+	public void setGiftBought(ArrayList<GiftListDTO> giftBought) {
+		this.giftBought = giftBought;
+	}
 	public GiftListDTO getSelectedGiftList() {
 		return selectedGiftList;
 	}
@@ -183,7 +197,18 @@ public class GiftListBean implements Serializable {
 	public void setPurchase(PurchaseGiftListBeanLocal purchase) {
 		this.purchase = purchase;
 	}
-
+	  public void onRowSelect(SelectEvent event) {  
+	        FacesMessage msg = new FacesMessage("Car Selected", "ciao");  
+	  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);
+	        System.out.println(selectedGiftList);
+	    }  
+	  
+	    public void onRowUnselect(UnselectEvent event) {  
+	        FacesMessage msg = new FacesMessage("Car Unselected", "");  
+	  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+	    }  
 	  
 	  /*
 	  public void newHotel(ActionEvent actionEvent)

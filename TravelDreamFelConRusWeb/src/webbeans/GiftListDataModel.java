@@ -29,7 +29,7 @@ public class GiftListDataModel extends ListDataModel<GiftListDTO> implements Sel
         List<GiftListDTO> giftLists = (List<GiftListDTO>) getWrappedData();  
           
         for(GiftListDTO giftList : giftLists) {  
-            if(giftList.getProduct().getName().equals(rowKey))  
+            if(giftList.getProduct().getIdProduct().equals(rowKey))  
                 return giftList;  
         }  
           
@@ -38,6 +38,6 @@ public class GiftListDataModel extends ListDataModel<GiftListDTO> implements Sel
   
     @Override  
     public Object getRowKey(GiftListDTO giftList) {  
-        return giftList.getProduct().getName();  
+        return giftList.getProduct().getIdProduct();  
     }  
 }  
