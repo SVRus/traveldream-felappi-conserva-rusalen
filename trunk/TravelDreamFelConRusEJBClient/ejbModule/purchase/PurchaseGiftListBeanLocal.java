@@ -11,6 +11,7 @@ import dto.TravelPackageDTO;
 public interface PurchaseGiftListBeanLocal {
 	   public ArrayList <GiftListDTO> giftListCreation(TravelPackageDTO travel);
 	   public boolean persistGiftList(TravelPackageDTO travel);
+	   public boolean updateGiftList(GiftListDTO giftList);
 
 
 }

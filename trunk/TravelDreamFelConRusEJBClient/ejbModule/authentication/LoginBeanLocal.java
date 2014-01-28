@@ -9,9 +9,12 @@ import javax.ejb.Local;
 
 
 
+
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
 import dto.GiftListDTO;
+import dto.TravelPackageDTO;
+import exceptions.FriendNotFoundException;
 import exceptions.GiftListNotFoundException;
 
 @Local
@@ -22,5 +25,6 @@ public interface LoginBeanLocal {
 	public boolean updateEmployee(EmployeeDTO emplodto);
 	public boolean checkGift(String giftCode);
 	public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws GiftListNotFoundException;
+	public TravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException;
 
 }
