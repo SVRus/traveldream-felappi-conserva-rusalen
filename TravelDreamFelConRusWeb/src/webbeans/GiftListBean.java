@@ -31,7 +31,7 @@ import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="giftList")
-@ViewScoped
+@SessionScoped
 public class GiftListBean implements Serializable {
 	
 	
@@ -52,7 +52,7 @@ public class GiftListBean implements Serializable {
 	  //Lista di gift list acquistate
 	  private GiftListDataModel giftListModelBought;  
 	  
-	 
+	  		
 	  @EJB
 	  private LoginBeanLocal login;
 	  
@@ -65,6 +65,7 @@ public class GiftListBean implements Serializable {
 		  selectedGiftList.setBought(true);
 		  selectedGiftList.setIdBuyer(nameBuyer);
 		  purchase.updateGiftList(selectedGiftList);
+		  checkCode();
 		  
 	  }
 	  
