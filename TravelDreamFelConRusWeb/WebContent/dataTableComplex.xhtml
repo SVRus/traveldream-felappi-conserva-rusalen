@@ -60,6 +60,15 @@
     </p:dialog>  
   
 </h:form>  
+<h:form id="formData">
+	<p:outputLabel value="Data " for="startDate" />
+		<p:calendar id="startDate" value="#{tableBean.time_start}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"
+			selectListener= "#{tableBean.dateChange}" onSelectUpdate=":form:carsTable">
+		</p:calendar>
+
+</h:form>
           </body> 
     
     

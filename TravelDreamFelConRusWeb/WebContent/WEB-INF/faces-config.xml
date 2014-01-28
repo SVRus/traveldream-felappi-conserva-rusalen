@@ -88,6 +88,48 @@
        </navigation-case>
     </navigation-rule>
     
+     <navigation-rule>
+       <from-view-id>stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>addedStage</from-outcome>
+           <to-view-id>
+           /packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <from-view-id>stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentStage</from-outcome>
+           <to-view-id>
+           /stageErrorInconsistent.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>viewGift</from-outcome>
+           <to-view-id>
+           /giftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>codeError</from-outcome>
+           <to-view-id>
+           /giftListErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    
     
 
 </faces-config>
