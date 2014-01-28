@@ -33,7 +33,7 @@
       <p:layoutUnit position="center">  
 	  <h:form id="form">
 	  
- <p:dataTable var="giftB" value="#{giftList.giftListModelBought}" rowKey="#{giftB.name}" paginator="true" rows="10"  
+ <p:dataTable var="giftB" value="#{giftList.giftListModelBought}" rowKey="#{giftB.product.name}" paginator="true" rows="10"  
                   
                  id="giftBtable"
                  rowsPerPageTemplate="10,15,50" >  
@@ -47,16 +47,17 @@
                     <p:column  headerText="Prodotto" sortBy="#{giftB.product.name}" >
                      #{giftB.product.name} 
                       </p:column> 
-                       <p:column  headerText="Costo" sortBy="#{giftB.product.cost}" >
-                     #{giftB.product.name} 
+                       <p:column  headerText="Acquistato da" sortBy="#{giftB.idBuyer}" >
+                     #{giftB.idBuyer} 
                       </p:column> 
+                    
                     
 
                
                     
               </p:dataTable>
               
-                <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.name}" paginator="true" rows="10"  
+                <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.product.name}" paginator="true" rows="10"  
                 selection="#{giftList.selectedGiftList}" selectionMode="single" 
                  id="gifttable"
                  rowsPerPageTemplate="10,15,50" >  
