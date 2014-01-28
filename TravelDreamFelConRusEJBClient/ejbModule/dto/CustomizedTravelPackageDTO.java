@@ -9,7 +9,7 @@ public class CustomizedTravelPackageDTO extends TravelPackageDTO {
 
 
 
-private Long idCustomizer;	
+private String idCustomizer;	
 /**
  * 
  * @param idtravelpackage
@@ -28,7 +28,7 @@ private Long idCustomizer;
 public CustomizedTravelPackageDTO(long idtravelpackage, Date time_end,
 		Date time_start, String description, String name,
 			List<StageDTO> stages, String idCustomerBuyer,
-			 String friendCode, Date purchaseTime,Long idCustomizer,TravelState travelState) {
+			 String friendCode, Date purchaseTime,String idCustomizer,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name,
 				stages, idCustomerBuyer, friendCode,
 				purchaseTime,travelState);
@@ -51,17 +51,17 @@ public CustomizedTravelPackageDTO(long idtravelpackage, Date time_end,
 public CustomizedTravelPackageDTO(Date time_end, Date time_start,
 		String description, String name, List<StageDTO> stages,
 		String idCustomerBuyer,
-		String friendCode, Date purchaseTime, Long idCustomizer,TravelState travelState) {
+		String friendCode, Date purchaseTime, String idCustomizer,TravelState travelState) {
 	super(time_end, time_start, description, name, stages, idCustomerBuyer,
 			friendCode, purchaseTime,travelState);
 	this.idCustomizer = idCustomizer;
 }
 
-public Long getIdCustomizer() {
+public String getIdCustomizer() {
 	return idCustomizer;
 }
 
-public void setIdCustomizer(Long idCustomizer) {
+public void setIdCustomizer(String idCustomizer) {
 	this.idCustomizer = idCustomizer;
 }
 
