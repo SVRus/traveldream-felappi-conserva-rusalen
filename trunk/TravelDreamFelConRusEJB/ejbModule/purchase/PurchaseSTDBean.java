@@ -91,17 +91,15 @@ DTOFactory dto;
 		boolean ok=false;
 		float cost=getCost(traveldto);
 		
-		if(traveldto instanceof PrepackedTravelPackageDTO)
-		{
-			ok=dbpurchasePrepacked((PrepackedTravelPackageDTO)traveldto);
+		if (enoughMoney(cost)) {
+			if (traveldto instanceof PrepackedTravelPackageDTO) {
+				ok = dbpurchasePrepacked((PrepackedTravelPackageDTO) traveldto);
+			} else if (traveldto instanceof CustomizedTravelPackageDTO) {
+
+				ok = dbpurchaseCustomized((CustomizedTravelPackageDTO) traveldto);
+
+			}
 		}
-		else if(traveldto instanceof CustomizedTravelPackageDTO)
-		{
-			
-			ok=dbpurchaseCustomized((CustomizedTravelPackageDTO)traveldto);
-			
-		}
-		
 		return ok;
 		
 	}
@@ -149,5 +147,10 @@ DTOFactory dto;
 		
 		
 	}
+private boolean enoughMoney(float cost)
+{
+	
+return true;
 
+}
 }
