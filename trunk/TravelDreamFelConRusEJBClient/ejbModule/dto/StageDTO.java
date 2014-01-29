@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class StageDTO {
-private long idStage;
-	public long getIdStage() {
+private Long idStage;
+	public Long getIdStage() {
 	return idStage;
 }
-public void setIdStage(long idStage) {
+public void setIdStage(Long idStage) {
 	this.idStage = idStage;
 }
 
-	public StageDTO(long idStage, ArrayList<ProductDTO> products, String area, Date timeStart, Date timeEnd) {
+	public StageDTO(Long idStage, ArrayList<ProductDTO> products, String area, Date timeStart, Date timeEnd) {
 	super();
 	this.idStage = idStage;
 	this.products = products;
