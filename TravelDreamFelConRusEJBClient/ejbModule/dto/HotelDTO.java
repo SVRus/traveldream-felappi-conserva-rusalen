@@ -22,7 +22,7 @@ public class HotelDTO extends ProductDTO {
 	 * @param room_type
 	 * @param more_info
 	 */
-	public HotelDTO(long idstage, String employeeCreator, String name,
+	public HotelDTO(Long idstage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, State state,
 			String area, String place, String room_type, String more_info) {
 		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,
@@ -48,7 +48,7 @@ public class HotelDTO extends ProductDTO {
  * @param room_type
  * @param more_info
  */
-	public HotelDTO(long idstage, String employeeCreator, String name,
+	public HotelDTO(Long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			State state, String area, String place, String room_type,
 			String more_info) {

@@ -30,7 +30,7 @@ private String idCustomizer;
  * @param idCustomizer
  * @param travelState
  */
-public CustomizedTravelPackageDTO(long idtravelpackage, Date time_end,
+public CustomizedTravelPackageDTO(Long idtravelpackage, Date time_end,
 		Date time_start, String description, String name,
 			List<StageDTO> stages, String idCustomerBuyer,
 			 String friendCode, Date purchaseTime,String idCustomizer,TravelState travelState) {

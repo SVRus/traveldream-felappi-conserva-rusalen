@@ -170,6 +170,10 @@ public void addStage(StageDTO stage)
 	stages.add(stage);	
 }
 
+public void removeStage(StageDTO stage)
+{
+	stages.remove(stage);
 
+}
 
 }

@@ -21,7 +21,7 @@ public class OutingDTO extends ProductDTO {
  * @param state
  * @param place
  */
-	public OutingDTO(long idstage, String employeeCreator, String name,
+	public OutingDTO(Long idstage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, String description,
 			String area,State state,String place) {
 		super(idstage, employeeCreator, name, cost, timeStart, timeEnd, state,area);
@@ -53,7 +53,7 @@ public class OutingDTO extends ProductDTO {
 	 * @param state
 	 * @param place
 	 */
-	public OutingDTO(long idstage, String employeeCreator, String name,
+	public OutingDTO(Long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			String description, String area,State state,String place) {
 		super(idstage, employeeCreator, name, idProduct, cost,

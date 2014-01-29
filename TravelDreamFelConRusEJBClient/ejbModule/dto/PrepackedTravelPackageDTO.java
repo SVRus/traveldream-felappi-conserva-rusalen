@@ -27,7 +27,7 @@ public PrepackedTravelPackageDTO() {
  * @param purchaseTime
  * @param idEmployeeCreator
  */
-	public PrepackedTravelPackageDTO(long idtravelpackage, Date time_end,
+	public PrepackedTravelPackageDTO(Long idtravelpackage, Date time_end,
 			Date time_start, String description, String name,
 			List<StageDTO> stages, String idCustomerBuyer,
 			 String friendCode, Date purchaseTime,
