@@ -88,15 +88,7 @@ public class PackageEditBean {
 	
 	public void update()
 	{
-	ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-	//prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
-	//prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
-
-	StageDTO stage= new StageDTO(prodotti, "Africa",new Date(),new Date());	
-	ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
-
-	listaStage.add(stage);
-	currentTravelPackage.addStage(stage);
+	
 	//Controllo inutile
 	if(currentTravelPackage!=null)
 		
