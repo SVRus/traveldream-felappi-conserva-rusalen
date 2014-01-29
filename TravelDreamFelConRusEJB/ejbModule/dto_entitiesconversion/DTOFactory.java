@@ -287,12 +287,12 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	  {
 		  
 	  String idEmployeeCreator=pretrav.findIdEmployeeCreator(idtravelpackage);
-	   dto=new PrepackedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),purchase,idEmployeeCreator,pre.getTravelState());
+	   dto=new PrepackedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),new ArrayList(stageList),idCustomerBuyer,pre.getFriendCode(),purchase,idEmployeeCreator,pre.getTravelState());
 	  }
 	  else if (pre instanceof CustomizedTravelPackage)
 	  {
 		  String idCustomizer=custrav.findIdCustomizer(idtravelpackage);
-		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),stageList,idCustomerBuyer,pre.getFriendCode(),purchase,idCustomizer,pre.getTravelState());
+		  dto=new CustomizedTravelPackageDTO(idtravelpackage,new Date(pre.getTime_end()),new Date(pre.getTime_start()),pre.getDescription(),pre.getName(),new ArrayList(stageList),idCustomerBuyer,pre.getFriendCode(),purchase,idCustomizer,pre.getTravelState());
 		  
 	  }
 		return dto;
