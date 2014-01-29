@@ -46,7 +46,6 @@ public class PackageManagementBean implements Serializable{
 
 
 private Date time_end;
-
 private Date time_start;
 private String description;
 private String name;
@@ -71,8 +70,6 @@ private List<PrepackedTravelPackageDTO> packageList;
 private TravelPackageCRUDBeanLocal packageCRUD;
 
 
-@ManagedProperty(value="#{packageCommon}")
-private PackageCommonBean shared;
 
 @ManagedProperty(value="#{packageEdit}")
 private PackageEditBean packBean;
@@ -195,12 +192,7 @@ public TravelPackageCRUDBeanLocal getPackageCRUD() {
 public void setPackageCRUD(TravelPackageCRUDBeanLocal packageCRUD) {
 	this.packageCRUD = packageCRUD;
 }
-public PackageCommonBean getShared() {
-	return shared;
-}
-public void setShared(PackageCommonBean shared) {
-	this.shared = shared;
-}
+
 public PackageEditBean getPackBean() {
 	return packBean;
 }
