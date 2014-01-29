@@ -9,6 +9,9 @@ import javax.ejb.Stateless;
 
 import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
+import dto.FlightDTO;
+import dto.HotelDTO;
+import dto.OutingDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.StageDTO;
@@ -114,12 +117,37 @@ DTOFactory dto;
 			Iterator <ProductDTO> iterProduct=products.iterator();
 			while(iterProduct.hasNext())
 			{
-				cost=cost+ iterProduct.next().getCost();
+				cost=cost+ getCost(iterProduct.next());
 				
 				
 			}
 		}
 		return cost;
+	}
+	private float getCost(ProductDTO product)
+	{
+		float cost=0;
+		
+		if(product instanceof HotelDTO)
+		{
+			int days=Math.round((product.getTimeEnd().getTime()-product.getTimeStart().getTime())/(1000*60*60*24));
+			cost=product.getCost()*days;
+		}
+		else if(product instanceof OutingDTO)
+		{
+			cost=product.getCost();
+			
+		}
+		else if(product instanceof FlightDTO)
+		{
+			cost=product.getCost();
+			
+		}
+		
+		return cost;
+		
+		
+		
 	}
 
 }
