@@ -50,7 +50,10 @@ public class PackageEditBean {
 	@ManagedProperty(value="#{stageManagement}")
 	private StageManagementBean sharedStage;
 	
+	//Package riferito all'operazione in corso. Il suo valore viene prelevato da tempCurrentPackage
+	//se l'operazione è stata permessa
 	private PrepackedTravelPackageDTO currentTravelPackage;
+	//Package che viene modificato quando si seleziona un package nella pagina con tutti i package
 	private PrepackedTravelPackageDTO tempCurrentPackage;
 	
 	private StageDTO selectedStage;
@@ -60,7 +63,7 @@ public class PackageEditBean {
 
 	private  List<StageDTO> filteredStages;
 
-
+	//I suoi valori verranno aggiornati prendendoli dal currentTravelPackage
 	private StageDataModel stageModel;
 
 	private List<StageDTO> stageList;
@@ -79,6 +82,7 @@ public class PackageEditBean {
 	
 	//true se sto lavorando su un nuovo pacchetto, false se sto modificando un pacchetto esistente
 	private boolean newPack;
+	
 	
 	
 	
@@ -142,12 +146,17 @@ public class PackageEditBean {
 		
 	}
 	
+	/**
+	 * metodo che controlla che non ci sia un'operazione in corso su un pacchetto, e in tal caso
+	 * abilita la modifica sul pacchetto selezionato settando i parametri necessari
+	 * @return
+	 */
 	public String allowed()
 	{
 		if (!shared.isBusy())
 		{		
 			shared.setBusy(true);
-			//shared.updatePackage();
+			
 			currentTravelPackage = tempCurrentPackage;
 			update();
 			newPack = false;
@@ -163,6 +172,11 @@ public class PackageEditBean {
 		{	return "errorBusy";
 		}
 	}
+	/**
+	 * metodo che controlla che non ci sia un'operazione in corso su un pacchetto, e in tal caso
+	 * abilita la creazione di un nuovo pacchetto settando i parametri necessari
+	 * @return
+	 */
 	public String allowedNew()
 	{
 		if (!shared.isBusy())
@@ -203,12 +217,13 @@ public class PackageEditBean {
 	{
 		if(newPack)
 		{
+			
 			currentTravelPackage.setName(name);
 			currentTravelPackage.setDescription(description);
 			currentTravelPackage.setTime_start(time_start);
 			currentTravelPackage.setTime_end(time_end);
-			currentTravelPackage.setStages(stages);
 			packageCRUD.createTravelFromEmployee(currentTravelPackage);
+			
 			System.out.println("Ho creato un pacchetto");
 			
 		}
@@ -219,8 +234,6 @@ public class PackageEditBean {
 			currentTravelPackage.setDescription(description);
 			currentTravelPackage.setTime_start(time_start);
 			currentTravelPackage.setTime_end(time_end);
-			currentTravelPackage.setStages(stages);
-			
 			packageCRUD.updateTravelPackage(currentTravelPackage);
 		
 			System.out.println("Ho modificato un pacchetto");
