@@ -17,7 +17,7 @@ public class MailSender implements MailSenderLocal {
         // TODO Auto-generated constructor stub
     }
 
-    public boolean sendMail (String mailAddress,String object,String text)
+    public boolean simpleSendMail (String mailAddress,String object,String text)
     {
     	
     	return true;
