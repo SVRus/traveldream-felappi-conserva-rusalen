@@ -19,7 +19,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -85,7 +84,7 @@ public class FlightManagementBean {
 		  public void newFlight(ActionEvent actionEvent)
 		  {
 			 		
-				newFlight = new FlightDTO(0, login.getPrincipalUsername(), name,
+				newFlight = new FlightDTO((long) 0, login.getPrincipalUsername(), name,
 						 cost, timeStart, timeEnd, State.AVAILABLE, area,  
 						 flight_company, area_start, place_start, place_end,
 						 more_info);
@@ -106,7 +105,7 @@ public class FlightManagementBean {
 				
 					flights.remove(selectedFlight);
 					  
-					newFlight = FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(), 
+					newFlight = new FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(), 
 							    selectedFlight.getName(), selectedFlight.getCost(),
 							    selectedFlight.getTimeStart(), selectedFlight.getTimeEnd(),State.AVAILABLE, 
 							    selectedFlight.getArea(), selectedFlight.getFlight_company(),
