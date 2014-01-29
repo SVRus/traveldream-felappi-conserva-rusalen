@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,7 @@ private String idCustomizer;
  */
 public CustomizedTravelPackageDTO(Long idtravelpackage, Date time_end,
 		Date time_start, String description, String name,
-			List<StageDTO> stages, String idCustomerBuyer,
+		ArrayList<StageDTO> stages, String idCustomerBuyer,
 			 String friendCode, Date purchaseTime,String idCustomizer,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name,
 				stages, idCustomerBuyer, friendCode,
@@ -54,7 +55,7 @@ public CustomizedTravelPackageDTO(Long idtravelpackage, Date time_end,
  * @param travelState
  */
 public CustomizedTravelPackageDTO(Date time_end, Date time_start,
-		String description, String name, List<StageDTO> stages,
+		String description, String name, ArrayList<StageDTO> stages,
 		String idCustomerBuyer,
 		String friendCode, Date purchaseTime, String idCustomizer,TravelState travelState) {
 	super(time_end, time_start, description, name, stages, idCustomerBuyer,

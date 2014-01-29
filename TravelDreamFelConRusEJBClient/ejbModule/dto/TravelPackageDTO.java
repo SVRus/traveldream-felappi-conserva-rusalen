@@ -76,7 +76,7 @@ public Long getIdtravelpackage() {
 
 
 	public TravelPackageDTO(Date time_end, Date time_start, String description,
-			String name, List<StageDTO> stages, String idCustomerBuyer, String friendCode, Date purchaseTime,TravelState travelState) {
+			String name, ArrayList<StageDTO> stages, String idCustomerBuyer, String friendCode, Date purchaseTime,TravelState travelState) {
 		super();
 		this.time_end = time_end;
 		this.time_start = time_start;
@@ -126,7 +126,7 @@ private Date time_end;
 private Date time_start=new Date();
 private String description="";
 private String name="";
-private List<StageDTO> stages=new ArrayList <StageDTO>();	
+private ArrayList<StageDTO> stages=new ArrayList <StageDTO>();	
 private String idCustomerBuyer;	
 private String friendCode;
 private Date purchaseTime;
@@ -138,7 +138,7 @@ public TravelPackageDTO() {
 private TravelState travelState;
 
 public TravelPackageDTO(Long idtravelpackage, Date time_end,Date time_start,
-		String description, String name, List<StageDTO> stages,
+		String description, String name, ArrayList<StageDTO> stages,
 		String idCustomerBuyer, String friendCode,
 		Date purchaseTime,TravelState travelState) {
 	super();
@@ -155,12 +155,12 @@ public TravelPackageDTO(Long idtravelpackage, Date time_end,Date time_start,
 }
 
 
-public List<StageDTO> getStages() {
+public ArrayList<StageDTO> getStages() {
 	return stages;
 }
 
 
-public void setStages(List<StageDTO> stages) {
+public void setStages(ArrayList<StageDTO> stages) {
 	this.stages = stages;
 }
 
@@ -173,7 +173,7 @@ public void addStage(StageDTO stage)
 public void removeStage(StageDTO stage)
 {
 	stages.remove(stage);
-
+    stages.trimToSize();
 }
 
 }
