@@ -51,7 +51,7 @@ public class Test1 {
 		
 		impiegato=new Employee("cello@email.com","cello","cognome","1234567890","questoèuntest","miousername1234",groups,new ArrayList<Product>(),new ArrayList <PrepackedTravelPackage>(),new Code(new Long (123456789)));
 	
-		  hoteldto=new HotelDTO(0, "pippo", "io", 11,new Date() ,new Date(), State.AVAILABLE,  "area1",  "place1",  "singola","info");
+		  hoteldto=new HotelDTO((long) 0, "pippo", "io", 11,new Date() ,new Date(), State.AVAILABLE,  "area1",  "place1",  "singola","info");
 		   List <Product> products=impiegato.getManagedProduct();
            products.add(dto.productDTOToEntity(hoteldto));
            impiegato.setManagedProduct(products);

@@ -230,9 +230,7 @@ GiftListEntityManagementLocal giftMan;
     	   
     	
     	
-    	/*   public Hotel(float cost, Long timeStart, Long timeEnd, String name,
-    				State state, String area, String place, String room_type,
-    				String more_info)*/
+    	 
     	   Flight flight1=new Flight(120,dateFlight2Start.getTime(),dateFlight2End.getTime(),"volo1","italia","alitalia","francia","Parigi","Roma","eventuali e varie",State.INCLUDED);
     	    //francia-italia
     	    Flight flight2=new Flight(125,dateFlight1Start.getTime(),dateFlight1End.getTime(),"volo2","Francia","air","usa","new york","Parigi","eventuali e varie",State.INCLUDED);

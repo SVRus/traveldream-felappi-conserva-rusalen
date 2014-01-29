@@ -88,7 +88,7 @@ public class TravelPackageCrud {
 	    reg=(RegistrationBeanLocal) container.getContext().lookup("java:global/classes/RegistrationBean!authentication.RegistrationBean");
 	    emploMan=(EmployeeEntityManagementLocal)container.getContext().lookup("java:global/classes/EmployeeEntityManagement!entitymanagement.EmployeeEntityManagementLocal");
         custoMan=(CustomerEntityManagementLocal) container.getContext().lookup("java:global/classes/CustomerEntityManagement!entitymanagement.CustomerEntityManagementLocal");
-	    		
+	    		travman=(PrepackedTravelPackageEntityManagementLocal) container.getContext().lookup("java:global/classes/PrepackedTravelPackageEntityManagement!entitymanagement.PrepackedTravelPackageEntityManagementLocal");
 	    		
 	    List <Group> groups=new ArrayList <Group>();
 	    groups.add(Group.EMPLOYEE);
@@ -97,29 +97,30 @@ public class TravelPackageCrud {
        emploMan.create(emplo);	    
        Long dateStart=(new Date()).getTime();
         dateEnd=(new Date()).getTime();
-	  hoteldto=new HotelDTO(0, "pippo", "io", 11,new Date(dateStart) ,new Date(dateEnd), State.AVAILABLE,  "area1",  "place1",  "singola","info");
-	   hotelInsert=(Hotel)dto.productDTOToEntity(hoteldto) ;
+	  hoteldto=new HotelDTO((long) 0, "pippo", "io", 11,new Date(dateStart) ,new Date(dateEnd), State.AVAILABLE,  "area1",  "place1",  "singola","info");
+	  // hotelInsert=(Hotel)dto.productDTOToEntity(hoteldto) ;
 	   impiegato=emploMan.find(emplo.getUsername());
 	   List <Product> products=impiegato.getManagedProduct();
    	   products.add(hotelInsert);
    	   products.add((Hotel)dto.productDTOToEntity(hoteldto));
 
-		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
+		outingdto=new OutingDTO((long) 0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
 	
-		flightdto=new FlightDTO(0,"pippo","io",11,new Date() ,new Date(),State.RESERVED,"area1","alitalia","areastart1","placestart","placeend","info");
-	    flightdto1= new FlightDTO(0,"pippo","io",11,new Date() ,new Date(),State.AVAILABLE,"area2","alitalia","areastart2","placestart","placeend","info");
+		flightdto=new FlightDTO((long) 0,"pippo","io",11,new Date() ,new Date(),State.RESERVED,"area1","alitalia","areastart1","placestart","placeend","info");
+	    flightdto1= new FlightDTO((long) 0,"pippo","io",11,new Date() ,new Date(),State.AVAILABLE,"area2","alitalia","areastart2","placestart","placeend","info");
 	    flightInsert=(Flight)dto.productDTOToEntity(flightdto);
 		flightInsert1=(Flight)dto.productDTOToEntity(flightdto1);
 		products.add(outingInsert);
-		products.add((Outing) dto.productDTOToEntity(outingdto));
+		//products.add((Outing) dto.productDTOToEntity(outingdto));
 
-		products.add(flightInsert);
 		products.add(flightInsert1);
+		//products.add(flightInsert1);
     	impiegato.setManagedProduct(products);
 	    emploMan.edit(impiegato);
 	    impiegato=emploMan.find(impiegato.getUsername());
 	    List <Stage> stages=new ArrayList <Stage> ();
+	    
 	    List <Hotel> hotelAvailable=hot.findAllByParameter(State.AVAILABLE);
 	    Hotel hotelParziale =hotelAvailable.get(0);
 	    hotelParziale.setState(State.INCLUDED);
@@ -145,12 +146,25 @@ public class TravelPackageCrud {
 	   prelist.add(prepacked);
 	   impiegato.setManagedTravelPackage(prelist);
 	   emploMan.edit(impiegato);
-	
+/*	PrepackedTravelPackage toUpdate=(PrepackedTravelPackage) travman.findAll().get(0);
+	List <Stage> stagesToUpdate=toUpdate.getStages();
+	Stage updatable=stagesToUpdate.get(0);
+	List <Product> productsToChange=updatable.getProducts();
+	Hotel prod=(Hotel)productsToChange.get(0);
+	productsToChange.remove(prod);
+	stagesToUpdate.remove(updatable);
+	updatable.setProducts(productsToChange);
+	stagesToUpdate.add(updatable);
+	toUpdate.setStages(stagesToUpdate);
+	travman.edit(toUpdate);*/
 	}
 
-
-
-	@Test
+@Test
+public void test()
+{
+	
+}
+	
 	public void testClone() {
 		
 		CustomizedTravelPackageDTO cusdto=travcrud.cloneTravelPackage((travcrud.findAllPrepacked().get(0)));
