@@ -21,6 +21,7 @@ public interface TravelPackageCRUDBeanLocal
     public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackageDTO custo);
 	public int getNumberEquivalentPackage(TravelPackageDTO travel);
 	public List <PrepackedTravelPackageDTO> findAllPrepackedTravelPackageByParameter(TravelState state);
+	public PrepackedTravelPackageDTO cloneTravelPackageToPrepacked(PrepackedTravelPackageDTO preDTO);
 
 
 	
