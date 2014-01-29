@@ -15,7 +15,7 @@ public class ProductDTO {
 	public void setState(State state) {
 		this.state = state;
 	}
-	private long idstage;
+	private Long idstage;
 	private String employeeCreator;
     private String name;
 	private Long idProduct;
@@ -34,7 +34,7 @@ public class ProductDTO {
 	 * @param timeStart
 	 * @param timeEnd
 	 */
-	public ProductDTO(long idstage, String employeeCreator, String name,
+	public ProductDTO(Long idstage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
@@ -56,7 +56,7 @@ public class ProductDTO {
 	 * @param timeStart
 	 * @param timeEnd
 	 */
-	public ProductDTO(long idstage, String employeeCreator, String name,
+	public ProductDTO(Long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,State state,String area) {
 		super();
 		this.idstage = idstage;
@@ -76,10 +76,10 @@ public class ProductDTO {
 		this.area = area;
 	}
 	
-	public long getIdstage() {
+	public Long getIdstage() {
 		return idstage;
 	}
-	public void setIdstage(long idstage) {
+	public void setIdstage(Long idstage) {
 		this.idstage = idstage;
 	}
 	public String getEmployeeCreator() {
