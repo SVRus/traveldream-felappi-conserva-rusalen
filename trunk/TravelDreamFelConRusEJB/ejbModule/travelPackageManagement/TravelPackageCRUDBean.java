@@ -193,7 +193,7 @@ public CustomizedTravelPackageDTO cloneTravelPackage(PrepackedTravelPackageDTO p
 		
 	}
 
-		CustomizedTravelPackageDTO cus=new CustomizedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),stagesCusDTO,null,null,null,null,preDTO.getTravelState());
+		CustomizedTravelPackageDTO cus=new CustomizedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),new ArrayList<StageDTO>(stagesCusDTO),null,null,null,null,preDTO.getTravelState());
 	
 	
 	return cus;
