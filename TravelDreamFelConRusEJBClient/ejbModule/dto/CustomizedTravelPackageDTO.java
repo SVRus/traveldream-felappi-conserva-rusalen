@@ -63,6 +63,14 @@ public CustomizedTravelPackageDTO(Date time_end, Date time_start,
 	this.idCustomizer = idCustomizer;
 }
 
+public CustomizedTravelPackageDTO(PrepackedTravelPackageDTO prepacked)
+{
+	
+super(prepacked.getTime_end(),prepacked.getTime_start(),prepacked.getDescription(),prepacked.getName(),prepacked.getStages(),prepacked.getIdCustomerBuyer(),prepacked.getFriendCode(),prepacked.getPurchaseTime(),prepacked.getTravelState());
+this.idCustomizer=null;
+
+}
+
 public String getIdCustomizer() {
 	return idCustomizer;
 }
