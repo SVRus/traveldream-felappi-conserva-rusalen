@@ -77,7 +77,7 @@ private PackageCommonBean shared;
 @ManagedProperty(value="#{packageEdit}")
 private PackageEditBean packBean;
 
-@PostConstruct
+
 public void update()
 {
 /*
