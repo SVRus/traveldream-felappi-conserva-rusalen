@@ -94,7 +94,7 @@ private String place;
 	public Outing() {
 		super();
 	}
-   public boolean equals(Object object)
+  /* public boolean equals(Object object)
    {
 	   
 	   
@@ -108,6 +108,6 @@ private String place;
 	   
    return super.equals(outing)&& outing.getPlace().equalsIgnoreCase(place)	;   
 	   
-	}
+	}*/
    
 }

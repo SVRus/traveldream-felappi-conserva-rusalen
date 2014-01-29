@@ -114,7 +114,7 @@ private String more_info;
 	public Flight() {
 		super();
 	}
-	  public boolean equals(Object object)
+	 /* public boolean equals(Object object)
 	   {
 		   
 		   
@@ -127,5 +127,5 @@ private String more_info;
 		   
 	   return super.equals(flight)&&flight_company.equalsIgnoreCase(flight.getFlight_company())&&area_start.equalsIgnoreCase(flight.getArea_start())&&place_start.equalsIgnoreCase(flight.getPlace_start())&&place_end.equalsIgnoreCase(flight.getPlace_end());
 		   
-		}
+		}*/
 }

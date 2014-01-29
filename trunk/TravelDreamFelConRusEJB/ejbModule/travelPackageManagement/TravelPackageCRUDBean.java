@@ -107,6 +107,7 @@ MailSenderLocal mail;
 			try {
 				preman.edit((PrepackedTravelPackage)travel);
 				ok=true;
+				System.out.print("ho aggiornato");
 			} catch (Exception e) {
 				e.printStackTrace();
 				ok=false;

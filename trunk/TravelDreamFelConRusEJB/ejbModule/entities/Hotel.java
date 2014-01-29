@@ -103,7 +103,7 @@ public void setMore_info(String more_info) {
 	public Hotel() {
 		super();
 	}
-	   public boolean equals(Object object)
+	   /*public boolean equals(Object object)
 	   {
 		   
 		   
@@ -117,5 +117,5 @@ public void setMore_info(String more_info) {
 		   
 	   return super.equals(hotel)&&place.equalsIgnoreCase(hotel.getPlace())&&room_type.equalsIgnoreCase(hotel.getRoom_type());
 		   
-		}
+		}*/
 }

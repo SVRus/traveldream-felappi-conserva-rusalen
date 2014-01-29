@@ -101,18 +101,18 @@ public class FriendPackageCreationAndRecall {
        emploMan.create(emplo);	    
        Long dateStart=(new Date()).getTime();
         dateEnd=(new Date()).getTime();
-	  hoteldto=new HotelDTO(0, "pippo", "io", 11,new Date(dateStart) ,new Date(dateEnd), State.AVAILABLE,  "area1",  "place1",  "singola","info");
+	  hoteldto=new HotelDTO((long) 0, "pippo", "io", 11,new Date(dateStart) ,new Date(dateEnd), State.AVAILABLE,  "area1",  "place1",  "singola","info");
 	   hotelInsert=(Hotel)dto.productDTOToEntity(hoteldto) ;
 	   impiegato=emploMan.find(emplo.getUsername());
 	   List <Product> products=impiegato.getManagedProduct();
    	   products.add(hotelInsert);
    	   products.add((Hotel)dto.productDTOToEntity(hoteldto));
 
-		outingdto=new OutingDTO(0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
+		outingdto=new OutingDTO((long) 0,"pippo","io",11,new Date() ,new Date(),"descr","area2",State.AVAILABLE,"place");
 		outingInsert=(Outing) dto.productDTOToEntity(outingdto);
 	
-		flightdto=new FlightDTO(0,"pippo","io",11,new Date() ,new Date(),State.RESERVED,"area1","alitalia","areastart1","placestart","placeend","info");
-	    flightdto1= new FlightDTO(0,"pippo","io",11,new Date() ,new Date(),State.AVAILABLE,"area2","alitalia","areastart2","placestart","placeend","info");
+		flightdto=new FlightDTO((long) 0,"pippo","io",11,new Date() ,new Date(),State.RESERVED,"area1","alitalia","areastart1","placestart","placeend","info");
+	    flightdto1= new FlightDTO((long) 0,"pippo","io",11,new Date() ,new Date(),State.AVAILABLE,"area2","alitalia","areastart2","placestart","placeend","info");
 	    flightInsert=(Flight)dto.productDTOToEntity(flightdto);
 		flightInsert1=(Flight)dto.productDTOToEntity(flightdto1);
 		products.add(outingInsert);
