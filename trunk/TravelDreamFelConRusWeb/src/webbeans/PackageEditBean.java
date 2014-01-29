@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.jboss.weld.event.CurrentEventMetadata;
 import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
@@ -89,6 +90,7 @@ public class PackageEditBean {
 	currentTravelPackage.addStage(stage);
 	//Controllo inutile
 	if(currentTravelPackage!=null)
+		
 	{
 	if(shared.isStageUpdated())
 	{
@@ -187,6 +189,10 @@ public class PackageEditBean {
 	{
 		if(newPack)
 		{
+			currentTravelPackage.setName(name);
+			currentTravelPackage.setDescription(description);
+			currentTravelPackage.setTime_start(time_start);
+			currentTravelPackage.setTime_end(time_end);
 			packageCRUD.createTravelFromEmployee(currentTravelPackage);
 			System.out.println("Ho creato un pacchetto");
 			
