@@ -103,7 +103,7 @@ public class PackageEditBean {
 		//aggiungo il nuovo stage
 		currentTravelPackage.addStage(sharedStage.getCurrentStage());
 		//rimuovo lo stage precedente
-		currentTravelPackage.getStages().remove(shared.getStageToDeleteForModify());
+		currentTravelPackage.removeStage(shared.getStageToDeleteForModify());
 		
 		shared.setStageUpdated(false);
 	}
