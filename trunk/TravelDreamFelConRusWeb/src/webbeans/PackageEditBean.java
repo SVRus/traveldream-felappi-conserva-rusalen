@@ -69,6 +69,11 @@ public class PackageEditBean {
 	private Date time_end;
 	private String description;
 	private String name; 
+	
+	//per popolare i campi la prima volta in caso di modifica
+	private boolean modifyForField;
+	//per svuotere i campi la prima volta in caso di nuovo pacchetto
+	private boolean newForField;
 	@EJB
 	private TravelPackageCRUDBeanLocal packageCRUD;
 	
@@ -80,8 +85,8 @@ public class PackageEditBean {
 	public void update()
 	{
 	ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-	prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
-	prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
+	//prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
+	//prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 
 	StageDTO stage= new StageDTO(prodotti, "Africa",new Date(),new Date());	
 	ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
@@ -114,7 +119,10 @@ public class PackageEditBean {
 	stageModel= new StageDataModel(currentTravelPackage.getStages());
 	}
 	System.out.println("Ciao ho popolato gli stage");
-
+	
+	modifyForField=false;
+	newForField=false;
+	
 	}
 	public void updateState()
 	{
@@ -143,7 +151,12 @@ public class PackageEditBean {
 			currentTravelPackage = tempCurrentPackage;
 			update();
 			newPack = false;
+			//permette di mantenere i campi del pacchetto selezionato. Usato nei getter
+			modifyForField=true;
+			
 			return "notBusy";
+			
+			
 		}
 		
 		else 
@@ -159,7 +172,8 @@ public class PackageEditBean {
 			//shared.setCurrentPackage(null);
 			currentTravelPackage= new PrepackedTravelPackageDTO();
 			newPack = true;
-			
+			//permette di svuotare i campi. Usato nei getter
+			newForField=true;
 			return "notBusy";
 		}
 		
@@ -193,12 +207,22 @@ public class PackageEditBean {
 			currentTravelPackage.setDescription(description);
 			currentTravelPackage.setTime_start(time_start);
 			currentTravelPackage.setTime_end(time_end);
+			currentTravelPackage.setStages(stages);
 			packageCRUD.createTravelFromEmployee(currentTravelPackage);
 			System.out.println("Ho creato un pacchetto");
 			
 		}
 		else
 		{
+
+			currentTravelPackage.setName(name);
+			currentTravelPackage.setDescription(description);
+			currentTravelPackage.setTime_start(time_start);
+			currentTravelPackage.setTime_end(time_end);
+			currentTravelPackage.setStages(stages);
+			
+			packageCRUD.updateTravelPackage(currentTravelPackage);
+		
 			System.out.println("Ho modificato un pacchetto");
 			
 		}
@@ -256,18 +280,30 @@ public class PackageEditBean {
 		this.stageList = stageList;
 	}
 	public Date getTime_start() {
+		if(modifyForField)
+			return currentTravelPackage.getTime_start();
+		if(newForField)
+			return null;
 		return time_start;
 	}
 	public void setTime_start(Date time_start) {
 		this.time_start = time_start;
 	}
 	public Date getTime_end() {
+		if(modifyForField)
+			return currentTravelPackage.getTime_end();
+		if(newForField)
+			return null;
 		return time_end;
 	}
 	public void setTime_end(Date time_end) {
 		this.time_end = time_end;
 	}
 	public String getDescription() {
+		if(modifyForField)
+			return currentTravelPackage.getDescription();
+		if(newForField)
+			return "";
 		return description;
 	}
 	public void setDescription(String description) {
@@ -275,6 +311,10 @@ public class PackageEditBean {
 	}
 	public String getName() {
 		
+		if(modifyForField)
+			return currentTravelPackage.getName();
+		if(newForField)
+			return "";
 		return name;
 	}
 	public void setName(String name) {
@@ -298,6 +338,19 @@ public class PackageEditBean {
 	public void setNewPack(boolean newPack) {
 		this.newPack = newPack;
 	}
+	public boolean isModifyForField() {
+		return modifyForField;
+	}
+	public void setModifyForField(boolean modifyForField) {
+		this.modifyForField = modifyForField;
+	}
+	public boolean isNewForField() {
+		return newForField;
+	}
+	public void setNewForField(boolean newForField) {
+		this.newForField = newForField;
+	}
+	
 	
 		
 	
