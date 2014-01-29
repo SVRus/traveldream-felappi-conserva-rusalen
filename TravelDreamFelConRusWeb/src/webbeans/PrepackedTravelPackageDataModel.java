@@ -29,7 +29,7 @@ public class PrepackedTravelPackageDataModel extends ListDataModel<PrepackedTrav
         List<PrepackedTravelPackageDTO> travelPackages = (List<PrepackedTravelPackageDTO>) getWrappedData();  
           
         for(PrepackedTravelPackageDTO travelPackage : travelPackages) {  
-            if(travelPackage.getName().equals(rowKey))  
+            if(travelPackage.getIdtravelpackage().equals(rowKey))  
                 return travelPackage;  
         }  
           
@@ -38,6 +38,6 @@ public class PrepackedTravelPackageDataModel extends ListDataModel<PrepackedTrav
   
     @Override  
     public Object getRowKey(PrepackedTravelPackageDTO travelPackage) {  
-        return travelPackage.getName();  
+        return travelPackage.getIdtravelpackage();  
     }  
 }  

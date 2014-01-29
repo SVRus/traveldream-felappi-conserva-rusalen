@@ -23,8 +23,8 @@ public class GiftListDataModel extends ListDataModel<GiftListDTO> implements Sel
         super(data);  
     }  
       
-    @Override  
-    public GiftListDTO getRowData(String rowKey) {  
+   @Override  
+   public GiftListDTO getRowData(String rowKey) {  
            
         List<GiftListDTO> giftLists = (List<GiftListDTO>) getWrappedData();  
           
@@ -39,5 +39,7 @@ public class GiftListDataModel extends ListDataModel<GiftListDTO> implements Sel
     @Override  
     public Object getRowKey(GiftListDTO giftList) {  
         return giftList.getProduct().getIdProduct();  
-    }  
+   
+    }
+   
 }  

@@ -87,22 +87,24 @@ public class PackageCommonBean implements Serializable{
 	
 	public PackageCommonBean() {
 		
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(),  new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
+		/*FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(),  new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		
 		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania", new Date(),new Date());	
 		
 		System.out.println("Ho inizializzato");
+	*/
 	}
 	
 	public void aggiorna()
 	{
-		FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(), new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
+		/*FlightDTO volo = new FlightDTO(11, null, "volo strano", 11, new Date(), new Date(), State.AVAILABLE, "Germania", "Francia", "Berlino", "Parigi", "scemo chi legge", "ciao");
 		List<ProductDTO> lista = new ArrayList<ProductDTO>();
 		lista.add(volo);
 		currentStage = new StageDTO( (ArrayList<ProductDTO>) lista, "Germania",new Date(),new Date());		
 		System.out.println("Ho inizializzato lo stage");
+		*/
 	}
 	
 	
