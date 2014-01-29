@@ -39,7 +39,6 @@ DTOFactory dto;
         // TODO Auto-generated constructor stub
     }
 
-	@Override
 	public boolean dbpurchaseCustomized(CustomizedTravelPackageDTO travelPackagedto) 
 	{
 		String username=log.getPrincipalUsername();
@@ -86,16 +85,24 @@ DTOFactory dto;
 	
 	public boolean fullPurchase(TravelPackageDTO traveldto)
 	{
-		boolean ok;
+		boolean ok=false;
 		float cost=getCost(traveldto);
 		
-		if()
+		if(traveldto instanceof PrepackedTravelPackageDTO)
+		{
+			ok=dbpurchasePrepacked((PrepackedTravelPackageDTO)traveldto);
+		}
+		else if(traveldto instanceof CustomizedTravelPackageDTO)
+		{
+			
+			ok=dbpurchaseCustomized((CustomizedTravelPackageDTO)traveldto);
+			
+		}
 		
-		
-		
+		return ok;
 		
 	}
-	private float getCost(TravelPackageDTO travel)
+	private float getCost(TravelPackageDTO travel)//TODO
 	{
 		float cost=0;
 		List <StageDTO> stages=travel.getStages();
