@@ -19,7 +19,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -80,7 +79,7 @@ public class HotelManagementBean implements Serializable{
 	  
 	  public void newHotel(ActionEvent actionEvent)
 	  {
-			newHotel = new HotelDTO(0, login.getPrincipalUsername(), name, cost, timeStart, timeEnd, State.AVAILABLE, area, place, room_type, more_info);
+			newHotel = new HotelDTO((long) 0, login.getPrincipalUsername(), name, cost, timeStart, timeEnd, State.AVAILABLE, area, place, room_type, more_info);
 			productCRUD.createProductFromEmployee(newHotel);
 			System.out.println("creato un hotel");
 			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);

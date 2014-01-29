@@ -19,7 +19,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-import userManagement.GenericUserManagementBeanLocal;
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -84,7 +83,7 @@ public class OutingManagementBean {
 	  
 	  public void newOuting(ActionEvent actionEvent)
 	  {
-			newOuting = new OutingDTO(0, login.getPrincipalUsername(), name,
+			newOuting = new OutingDTO((long) 0, login.getPrincipalUsername(), name,
 		                cost,  timeStart,  timeEnd,  description, area,
 		                State.AVAILABLE,place);
 			productCRUD.createProduct(newOuting);
