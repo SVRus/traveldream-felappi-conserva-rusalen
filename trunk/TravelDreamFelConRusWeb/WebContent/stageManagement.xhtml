@@ -22,8 +22,9 @@
       
         <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
          <h:form style =" text-align : center;">
-           <p:commandButton id="confirmStage" value="Conferma Tappa" action="#{stageManagement.addStage}" />       
            <p:commandButton id="closeOp" value="Termina operazione" action="#{stageManagement.closeOperation}" /> 
+         <p:commandButton id="confirmStage" value="Conferma Tappa" action="#{stageManagement.addStage}" />       
+      
          </h:form>  
         </p:layoutUnit>  
       
@@ -174,13 +175,7 @@
                     Escursioni
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{outingView.name}" filterBy="#{outingView.name}" id="name">
-                    
-                    
-                    <p:commandLink value="#{outingView.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{outingView}" target="#{stageManagement.selectedOuting}" />    
-                    </p:commandLink>
-                	</p:column>
+              
                       
                        <p:column  headerText="Luogo" sortBy="#{outingView.place}" filterBy="#{outingView.place}" id="place">  
                       #{outingView.place}  
@@ -229,13 +224,7 @@
                     Escursioni
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{outing.name}" filterBy="#{outing.name}" id="name">
-                    
-                    
-                    <p:commandLink value="#{outing.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{outing}" target="#{stageManagement.selectedOuting}" />    
-                    </p:commandLink>
-                	</p:column>
+               
                       
                        <p:column  headerText="Luogo" sortBy="#{outing.place}" filterBy="#{outing.place}" id="place">  
                       #{outing.place}  
@@ -277,13 +266,7 @@
                     Alberghi
                 </f:facet>  
                 
-                    <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
-                    
-                    <p:commandLink value="#{hotel.name}" update=":modForm:display" oncomplete="modDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{hotel}" target="#{stageManagement.selectedHotel}" />    
-                    </p:commandLink>
-                    
-                	</p:column>
+                  
                 	
                        <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
                       #{hotel.place}  
@@ -326,13 +309,10 @@
                     Voli di partenza
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{flight.name}" filterBy="#{flight.name}" id="name">
+                
                     
                     
-                    <p:commandLink value="#{flight.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{flight}" target="#{stageManagement.selectedFlight}" />    
-                    </p:commandLink>
-                	</p:column>
+                    
             
                       <p:column  headerText="Luogo di partenza" sortBy="#{flight.place_start}" filterBy="#{flight.place_start}" id="place_start">  
                       #{flight.place_start}  
@@ -378,13 +358,10 @@
                     Voli di ritorno
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{flightBack.name}" filterBy="#{flightBack.name}" id="nameB">
+                
                     
                     
-                    <p:commandLink value="#{flightBack.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{flightBack}" target="#{stageManagement.selectedFlightBack}" />    
-                    </p:commandLink>
-                	</p:column>
+                  
                  
                         <p:column  headerText="Luogo di partenza" sortBy="#{flightBack.place_start}" filterBy="#{flightBack.place_start}" id="place_startBack">  
                       #{flightBack.place_start}  
