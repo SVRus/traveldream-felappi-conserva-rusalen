@@ -106,7 +106,7 @@ public void updateCurrentPackage()
 
 public void deletePackage(ActionEvent actionEvent) {
 	
-    packageCRUD.delete(selectedTravelPackage);
+   System.out.print( packageCRUD.delete(selectedTravelPackage)+"ho eliminato il pacchetto");
 	TravelPackages= packageCRUD.findAllPrepacked();
 	packageModel=new PrepackedTravelPackageDataModel(TravelPackages);
    
