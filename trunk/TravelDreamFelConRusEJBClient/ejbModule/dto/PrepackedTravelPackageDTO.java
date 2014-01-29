@@ -1,5 +1,6 @@
 package dto;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public PrepackedTravelPackageDTO() {
  */
 	public PrepackedTravelPackageDTO(Long idtravelpackage, Date time_end,
 			Date time_start, String description, String name,
-			List<StageDTO> stages, String idCustomerBuyer,
+			ArrayList<StageDTO> stages, String idCustomerBuyer,
 			 String friendCode, Date purchaseTime,
 			String idEmployeeCreator,TravelState travelState) {
 		super(idtravelpackage, time_end, time_start, description, name, stages,
@@ -39,7 +40,7 @@ public PrepackedTravelPackageDTO() {
 	}
 
 	public PrepackedTravelPackageDTO(Date time_end, Date time_start,
-		String description, String name, List<StageDTO> stages,
+		String description, String name, ArrayList<StageDTO> stages,
 		String idCustomerBuyer,
 		String friendCode, Date purchaseTime, String idEmployeeCreator,TravelState travelState) {
 	super(time_end, time_start, description, name, stages, idCustomerBuyer,
