@@ -108,6 +108,7 @@ MailSenderLocal mail;
 				preman.edit((PrepackedTravelPackage)travel);
 				ok=true;
 			} catch (Exception e) {
+				e.printStackTrace();
 				ok=false;
 			}
 			
@@ -118,6 +119,7 @@ MailSenderLocal mail;
 				cusman.edit((CustomizedTravelPackage)travel);
 				ok=true;
 			} catch (Exception e) {
+				e.printStackTrace();
 				ok=false;
 			}
 			
@@ -132,12 +134,12 @@ MailSenderLocal mail;
 	    	boolean ok=false;
 			try 
 			{
-					Product product=trav.find(traveldto.getIdtravelpackage());
+					TravelPackage product=trav.find(traveldto.getIdtravelpackage());
 					trav.remove(product);
 					ok=true;
 			}
 	    	catch (Exception e)
-			{
+			{ e.printStackTrace();
 	    		ok=false;
 	    		
 			}
@@ -335,7 +337,7 @@ public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackage
 	    boolean ok=updateTravelPackage(customizedTravel);
 		String email=log.findLogIn().getEmail();
 	    
-	    return ok=ok&&mail.sendMail(email, "", "");
+	    return ok=ok&&mail.simpleSendMail(email, "", "");
 	}
 
 
