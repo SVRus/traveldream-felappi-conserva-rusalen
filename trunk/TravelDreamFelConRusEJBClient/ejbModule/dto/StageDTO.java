@@ -63,5 +63,9 @@ private Date timeEnd;
 	{
 		products.add(product);
 	}
-	
+	public void removeProduct(ProductDTO product)
+	{
+		
+		products.remove(product);
+	}
 }

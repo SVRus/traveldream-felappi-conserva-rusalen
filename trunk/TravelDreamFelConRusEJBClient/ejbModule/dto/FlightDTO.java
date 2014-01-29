@@ -29,7 +29,7 @@ public class FlightDTO extends ProductDTO {
  * @param more_info
  */
 	
-	public FlightDTO(long idstage, String employeeCreator, String name,
+	public FlightDTO(Long idstage, String employeeCreator, String name,
 			long idProduct, float cost, Date timeStart, Date timeEnd,
 			State state, String area, String flight_company, String area_start,
 			String place_start, String place_end, String more_info) {
@@ -41,7 +41,7 @@ public class FlightDTO extends ProductDTO {
 		this.place_end = place_end;
 		this.more_info = more_info;
 	}
-	public FlightDTO(long idstage, String employeeCreator, String name,
+	public FlightDTO(Long idstage, String employeeCreator, String name,
 			float cost, Date timeStart, Date timeEnd, State state,
 			String area, String flight_company, String area_start,
 			String place_start, String place_end, String more_info) {
