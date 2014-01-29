@@ -27,8 +27,10 @@
         </p:layoutUnit>  
       
       <p:layoutUnit position="center">  
+       <h:inputHidden  value="#{packageManagement.update()}"/>
+		
 	  <h:form id="form">
-	   
+	  
     
  <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.name}" paginator="true" rows="10"  
                 selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
