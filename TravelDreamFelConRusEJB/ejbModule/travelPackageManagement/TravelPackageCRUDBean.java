@@ -193,11 +193,51 @@ public CustomizedTravelPackageDTO cloneTravelPackage(PrepackedTravelPackageDTO p
 		
 	}
 
-		CustomizedTravelPackageDTO cus=new CustomizedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),new ArrayList<StageDTO>(stagesCusDTO),null,null,null,null,preDTO.getTravelState());
+		CustomizedTravelPackageDTO cus=new CustomizedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),new ArrayList<StageDTO>(stagesCusDTO),null,null,null,null,TravelState.AVAILABLE);
 	
 	
 	return cus;
 	
+
+}
+
+public PrepackedTravelPackageDTO cloneTravelPackageToPrepacked(PrepackedTravelPackageDTO preDTO)
+{
+	List <StageDTO> stagesPreDTO=preDTO.getStages();
+	List <StageDTO> stagesPreOutDTO= new ArrayList <StageDTO>();
+	Iterator <StageDTO> iterStages=stagesPreDTO.iterator();
+	while (iterStages.hasNext())
+	{
+		StageDTO partial=iterStages.next();
+		System.out.println(partial.toString());
+		ArrayList <ProductDTO> productsPreDTO=partial.getProducts();
+		System.out.println(productsPreDTO.toString()+"prodotti parziali");
+		Iterator  <ProductDTO> iterProducts=productsPreDTO.iterator();
+		List <ProductDTO> productsPreOutDTO=new ArrayList <ProductDTO>();
+		while(iterProducts.hasNext())
+		{
+			ProductDTO prodPartial=dto.findClonedProduct(iterProducts.next());
+			System.out.print("prodotto parziale"+prodPartial);
+			if(prodPartial!=null)
+			productsPreOutDTO.add(prodPartial);
+					
+			
+		}
+		
+		StageDTO stagePartialPreOut=new StageDTO(new ArrayList<ProductDTO>(productsPreOutDTO),partial.getArea(),partial.getTimeStart(),partial.getTimeEnd());
+		stagesPreOutDTO.add(stagePartialPreOut);
+		
+	}
+	
+
+		PrepackedTravelPackageDTO pre=new PrepackedTravelPackageDTO(preDTO.getTime_end(),preDTO.getTime_start(),preDTO.getDescription(),preDTO.getName(),new ArrayList<StageDTO>(stagesPreOutDTO),null,null,null,null,TravelState.AVAILABLE);
+	
+	
+	return pre;
+
+
+
+
 
 }
 
