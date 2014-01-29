@@ -18,7 +18,7 @@ public class ProductDTO {
 	private long idstage;
 	private String employeeCreator;
     private String name;
-	private long idProduct;
+	private Long idProduct;
 	private float cost;
 	private Date timeStart;
 	private Date timeEnd;
@@ -94,10 +94,10 @@ public class ProductDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public long getIdProduct() {
+	public Long getIdProduct() {
 		return idProduct;
 	}
-	public void setIdProduct(long idProduct) {
+	public void setIdProduct(Long idProduct) {
 		this.idProduct = idProduct;
 	}
 	public float getCost() {
