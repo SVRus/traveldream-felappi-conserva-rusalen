@@ -24,6 +24,9 @@ public class ConsistencyChecker {
 	 */
 	public boolean CorrectProductInsert(ProductDTO product, StageDTO stage)
 	{
+	if(product==null)
+		return true;
+	
 	//Controllo che la data del prodotto sia compresa tra quelle della tappa
 	if((product.getTimeStart().before(stage.getTimeStart()) || (product.getTimeEnd().after(stage.getTimeEnd()))))
 		return false;
