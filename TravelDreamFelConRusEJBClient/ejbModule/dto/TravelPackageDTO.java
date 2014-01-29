@@ -11,12 +11,12 @@ public class TravelPackageDTO
 {
 
 
-public long getIdtravelpackage() {
+public Long getIdtravelpackage() {
 		return idtravelpackage;
 	}
 
 
-	public void setIdtravelpackage(long idtravelpackage) {
+	public void setIdtravelpackage(Long idtravelpackage) {
 		this.idtravelpackage = idtravelpackage;
 	}
 
@@ -121,7 +121,7 @@ public long getIdtravelpackage() {
 	}
 
 
-private long idtravelpackage;
+private Long idtravelpackage;
 private Date time_end;
 private Date time_start=new Date();
 private String description="";
@@ -137,7 +137,7 @@ public TravelPackageDTO() {
 
 private TravelState travelState;
 
-public TravelPackageDTO(long idtravelpackage, Date time_end,Date time_start,
+public TravelPackageDTO(Long idtravelpackage, Date time_end,Date time_start,
 		String description, String name, List<StageDTO> stages,
 		String idCustomerBuyer, String friendCode,
 		Date purchaseTime,TravelState travelState) {
