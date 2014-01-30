@@ -119,6 +119,19 @@ public class ProductDTO {
 		this.timeEnd = timeEnd;
 	}
 
+  @Override
+	public boolean equals(Object object)
+	{
+		if(object instanceof ProductDTO)
+			return(equals((ProductDTO)object));
+		else return false;
+		
+	}
   
-	
+  private boolean equals (ProductDTO product)
+  {
+	  return this.idProduct.equals(product.getIdProduct());
+	  
+	  
+  }
 }

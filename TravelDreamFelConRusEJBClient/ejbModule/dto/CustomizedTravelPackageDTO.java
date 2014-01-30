@@ -62,7 +62,10 @@ public CustomizedTravelPackageDTO(Date time_end, Date time_start,
 			friendCode, purchaseTime,travelState);
 	this.idCustomizer = idCustomizer;
 }
-
+/**
+ * constructor that convert a prepackedTravelPackage in a customizedTravelPackage
+ * @param prepacked
+ */
 public CustomizedTravelPackageDTO(PrepackedTravelPackageDTO prepacked)
 {
 	
