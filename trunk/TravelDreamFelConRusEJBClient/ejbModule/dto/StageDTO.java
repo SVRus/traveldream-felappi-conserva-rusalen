@@ -2,6 +2,9 @@ package dto;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+
+import stateenum.State;
 
 public class StageDTO {
 private Long idStage;
@@ -67,5 +70,17 @@ private Date timeEnd;
 	{
 		
 		products.remove(product);
+	}
+	
+	public void setRecoursiveProductState(State state)
+	{
+		Iterator <ProductDTO> iter=products.iterator();
+		while(iter.hasNext())
+		{
+			iter.next().setState(state);
+			
+		}
+		
+		
 	}
 }

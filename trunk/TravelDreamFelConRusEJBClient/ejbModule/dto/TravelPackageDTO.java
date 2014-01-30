@@ -2,8 +2,10 @@ package dto;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import stateenum.State;
 import travelstateenum.TravelState;
 
 
@@ -175,5 +177,13 @@ public void removeStage(StageDTO stage)
 	stages.remove(stage);
     stages.trimToSize();
 }
-
+public void setRecoursiveTravelProductState(TravelState travelState,State state)
+{   this.travelState=travelState;
+	Iterator <StageDTO> iter= stages.iterator();
+	while(iter.hasNext())
+	{
+		iter.next().setRecoursiveProductState( state);
+		
+	}
+}
 }
