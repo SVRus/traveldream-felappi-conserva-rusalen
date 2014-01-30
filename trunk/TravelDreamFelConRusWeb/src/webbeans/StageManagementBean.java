@@ -325,6 +325,8 @@ public class StageManagementBean {
 	}
 	public void insertOuting ()
 	{
+		if(outingsView==null)
+			outingsView= new ArrayList<OutingDTO>();
 		outingsView.add(selectedOuting);
 		outingModelView = new OutingDataModel(outingsView);
 		
