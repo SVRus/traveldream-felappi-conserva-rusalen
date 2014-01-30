@@ -57,7 +57,7 @@
                     
               </p:dataTable>
               </h:form>   
-              <h:form>
+              <h:form id= "formAvailable">
                 <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.product.idProduct}" paginator="true" rows="10"  
                 selection="#{giftList.selectedGiftList}" selectionMode="single" 
                  id="gifttable"
@@ -105,7 +105,7 @@
                   <h:outputLabel for="nameBuyer" value="Nome:" />  
             	<p:inputText value="#{giftList.nameBuyer}" id="nameBuyer" required="true" label="nameBuyer" /> 
           
-                <p:commandButton id="buy" value="Ok" update=":form"   
+                <p:commandButton id="buy" value="Ok" update=":form :formAvailable"   
                     actionListener="#{giftList.buyProduct}"  
                    oncomplete="sold.hide();"/>  
                    
