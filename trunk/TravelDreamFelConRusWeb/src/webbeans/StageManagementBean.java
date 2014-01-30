@@ -200,16 +200,16 @@ public class StageManagementBean {
 			update();
 			
 			 hotels
-			  = new ArrayList( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  = new ArrayList<HotelDTO>( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  =new ArrayList( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  =new ArrayList<OutingDTO>( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  outingModel = new OutingDataModel(outings);  
 			  flights
-			  = new ArrayList(productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  = new ArrayList<FlightDTO>(productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  flightModel = new FlightDataModel(flights);  
 			  flightsBack
-			  = new ArrayList(productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  = new ArrayList<FlightDTO>(productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  flightModelBack = new FlightDataModel(flightsBack);  
 			 
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
@@ -253,16 +253,16 @@ public class StageManagementBean {
 			//CONTROLLO DI CONSISTENZA
 			
 			hotels
-			  = new ArrayList( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
+			  = new ArrayList<HotelDTO>( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  = new ArrayList( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
+			  = new ArrayList<OutingDTO>( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  outingModel = new OutingDataModel(outings);  
 			  flights
-			  = new ArrayList( productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
+			  = new ArrayList<FlightDTO>( productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  flightModel = new FlightDataModel(flights);  
 			  flightsBack
-			  = new ArrayList( productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
+			  = new ArrayList<FlightDTO>( productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  flightModelBack = new FlightDataModel(flightsBack);  
 			 
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
@@ -291,45 +291,80 @@ public class StageManagementBean {
 	
 	public void deleteFlight()
 	{
+		flights.add(flightStartView);
+		flightModel = new FlightDataModel(flights);
 		flightStartView= null;
 		
 	}
 	public void deleteFlightBack()
 	{
+		flightsBack.add(flightEndView);
+		flightModelBack = new FlightDataModel(flightsBack);
+		
 		flightEndView= null;
 		
 	}
 	public void deleteHotel ()
 	{
+		hotels.add(hotelView);
+		hotelModel = new HotelDataModel(hotels);
+		
 		hotelView= null;
 		
 	}
 	public void deleteOuting ()
 	{
 		outingsView.remove(selectedOutingView);
+		outingsView.trimToSize();
 		outingModelView = new OutingDataModel(outingsView);
-		
+		outings.add(selectedOuting);
+		outingModel= new OutingDataModel(outings);
 	}
 
 	public void insertFlight()
 	{
+		if(flightStartView==selectedFlight)
+			return;
+		
 		flightStartView= selectedFlight;
+		flights.remove(selectedFlight);
+		flights.trimToSize();
+		flightModel = new FlightDataModel(flights);
+		
 	}
 	public void insertFlightBack()
 	{
-		flightEndView=selectedFlightBack;
+		if(flightEndView==selectedFlightBack)
+			return;
+		
+		flightEndView= selectedFlightBack;
+		flightsBack.remove(selectedFlightBack);
+		flightsBack.trimToSize();
+		flightModelBack = new FlightDataModel(flightsBack);
 	}
 	public void insertHotel ()
 	{
-		hotelView=selectedHotel;
+		if(hotelView==selectedHotel)
+			return;
+		
+		hotelView= selectedHotel;
+		hotels.remove(selectedHotel);
+		hotels.trimToSize();
+		hotelModel = new HotelDataModel(hotels);
+		
 	}
 	public void insertOuting ()
 	{
 		if(outingsView==null)
 			outingsView= new ArrayList<OutingDTO>();
+		
+		
 		outingsView.add(selectedOuting);
 		outingModelView = new OutingDataModel(outingsView);
-		
+		outings.remove(selectedOuting);
+		outings.trimToSize();
+		outingModel= new OutingDataModel(outings);
+
 	}
 
 	public FlightDTO getFlightStart() {
