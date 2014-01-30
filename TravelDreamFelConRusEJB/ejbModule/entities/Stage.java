@@ -2,9 +2,12 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.*;
+
+import stateenum.State;
 
 /**
  * Entity implementation class for Entity: Stage
@@ -90,5 +93,15 @@ public class Stage implements Serializable {
 
 	public void setTimeEnd(Long timeEnd) {
 		this.timeEnd = timeEnd;
+	}
+	public boolean isAllSold()
+	{   boolean sold=true;
+		Iterator <Product> iter=products.iterator();
+		while(iter.hasNext() && !sold)
+		{
+			sold=sold && iter.next().getState()==State.SOLD;
+			
+		}
+		return sold;
 	}
 }

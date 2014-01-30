@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -199,5 +200,17 @@ private Long purchaseTime;
 		this.friendCode = friendCode;
 		this.purchaseTime = purchaseTime;
 	}
-   
+   public boolean isAllSold()
+   {
+	   Iterator <Stage> iter=stages.iterator();
+	   boolean sold=true;
+	   while(iter.hasNext()&& !sold)
+	   {
+		   
+		   sold=sold&&iter.next().isAllSold();
+		   
+	   }
+	   
+	   return sold;
+   }
 }

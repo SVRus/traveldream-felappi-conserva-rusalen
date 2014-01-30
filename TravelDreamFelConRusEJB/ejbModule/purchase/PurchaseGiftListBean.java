@@ -21,8 +21,10 @@ import dto_entitiesconversion.DTOFactory;
 import entities.Customer;
 import entities.GiftList;
 import entities.Stage;
+import entities.TravelPackage;
 import entitymanagement.CustomerEntityManagementLocal;
 import entitymanagement.GiftListEntityManagementLocal;
+import entitymanagement.TravelPackageEntityManagementLocal;
 
 /**
  * Session Bean implementation class PurchaseGiftListBean
@@ -38,6 +40,8 @@ CustomerEntityManagementLocal custoMan;
 GiftListEntityManagementLocal giftMan;
 @EJB
 DTOFactory dto;
+@EJB
+TravelPackageEntityManagementLocal travMan;
     /**
      * Default constructor. 
      */
@@ -110,6 +114,27 @@ public boolean updateGiftList(GiftListDTO giftList)
 
 }
 
+public boolean simpleBuyGiftList(GiftListDTO giftlist)
+{
+	giftlist.setProductReserved();
+	giftlist.setBought(true);
+	GiftList gift=dto.simpleGiftListDTOToEntity(giftlist);
+	TravelPackage travel=gift.getTravelPackage();
+	if (travel.isAllSold())
+		travel.setTravelState(TravelState.SOLD);
+	gift.setTravelPackage(travel);
+    try{
+    	giftMan.edit(gift);
+    	return true;
+    }
+   catch(Exception e)
+   { 
+	   return false;
+   }
 
+
+
+
+}
     
 }
