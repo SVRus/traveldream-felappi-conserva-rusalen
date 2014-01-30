@@ -29,7 +29,7 @@ public class StageDataModel extends ListDataModel<StageDTO> implements Selectabl
         List<StageDTO> stages = (List<StageDTO>) getWrappedData();  
           
         for(StageDTO stage : stages) {  
-            if(stage.getArea().equals(rowKey))  
+            if(stage.getIdStage().equals(rowKey))  
                 return stage;  
         }  
           
@@ -38,6 +38,6 @@ public class StageDataModel extends ListDataModel<StageDTO> implements Selectabl
   
     @Override  
     public Object getRowKey(StageDTO stage) {  
-        return stage.getArea();  
+        return stage.getIdStage();  
     }  
 }  
