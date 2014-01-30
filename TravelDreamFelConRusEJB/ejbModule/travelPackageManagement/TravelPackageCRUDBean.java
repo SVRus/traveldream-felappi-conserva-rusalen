@@ -14,6 +14,7 @@ import mailSender.MailSenderLocal;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import stateenum.State;
 import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
@@ -83,6 +84,7 @@ MailSenderLocal mail;
 	public boolean createTravelFromEmployee(TravelPackageDTO prepacked) {
 		String username=log.getPrincipalUsername();
 		Employee employee=emplo.find(username);
+		prepacked.setRecoursiveTravelProductState( TravelState.AVAILABLE, State.INCLUDED);
 		TravelPackage travel=dto.travelPackageDTOToEntity(prepacked, true);
 		List <PrepackedTravelPackage> travelList=Arrays.asList((PrepackedTravelPackage)travel);
     	employee.addPackages(travelList);
@@ -244,7 +246,7 @@ public PrepackedTravelPackageDTO cloneTravelPackageToPrepacked(PrepackedTravelPa
 }
 
 public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackageDTO custo)
-{
+{   custo.setRecoursiveTravelProductState(TravelState.SOLD, State.SOLD);
 	String username=log.getPrincipalUsername();
 	Customer customer=custoEntityMan.find(username);
 	CustomizedTravelPackage travel=(CustomizedTravelPackage)dto.travelPackageDTOToEntity(custo, true);
