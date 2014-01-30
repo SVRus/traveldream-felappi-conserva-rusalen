@@ -71,7 +71,11 @@ public class OutingDTO extends ProductDTO {
 	}
 
 
-  
+  public boolean equals(Object object)
+  {
+	  return super.equals(object);
+	  
+  }
 
 
 

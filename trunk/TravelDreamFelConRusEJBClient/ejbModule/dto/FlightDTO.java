@@ -84,7 +84,11 @@ public class FlightDTO extends ProductDTO {
 	public void setMore_info(String more_info) {
 		this.more_info = more_info;
 	}
-	
+	 public boolean equals(Object object)
+	  {
+		  return super.equals(object);
+		  
+	  }
 	
 	
 	
