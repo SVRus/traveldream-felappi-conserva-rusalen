@@ -51,47 +51,47 @@ public class StageManagementBean {
 	private HotelDTO newHotel;
 	  
 	private HotelDataModel hotelModel;  
-	private  List<HotelDTO> hotels;
-	private  List<HotelDTO> filteredHotels;
+	private  ArrayList<HotelDTO> hotels;
+	private  ArrayList<HotelDTO> filteredHotels;
 	
 	//Lista di Voli di partenza
 		private FlightDTO selectedFlight;
 		private FlightDTO newFlight;
 		  
 		private FlightDataModel flightModel;  
-		private  List<FlightDTO> flights;
-		private  List<FlightDTO> filteredFlights;
+		private  ArrayList<FlightDTO> flights;
+		private  ArrayList<FlightDTO> filteredFlights;
 		
 		//Lista di Voli di ritorno
 		private FlightDTO selectedFlightBack;
 		private FlightDTO newFlightBack;
 				  
 		private FlightDataModel flightModelBack;  
-		private  List<FlightDTO> flightsBack;
-		private  List<FlightDTO> filteredFlightsBack;
+		private  ArrayList<FlightDTO> flightsBack;
+		private  ArrayList<FlightDTO> filteredFlightsBack;
 		
 		//Lista di uscite
 		private OutingDTO selectedOuting;
 		private OutingDTO newOuting;
 		  
 		private OutingDataModel outingModel;  
-		private  List<OutingDTO> outings;
-		private  List<OutingDTO> filteredOutings;
+		private  ArrayList<OutingDTO> outings;
+		private  ArrayList<OutingDTO> filteredOutings;
 		
 		//Lista di prodotti da visualizzare
 				private OutingDTO selectedOutingView;
 				private OutingDTO newOutingView;
 				  
 				private OutingDataModel outingModelView;  
-				private  List<OutingDTO> outingsView;
-				private  List<OutingDTO> filteredOutingsView;
+				private  ArrayList<OutingDTO> outingsView;
+				private  ArrayList<OutingDTO> filteredOutingsView;
 				
 				private FlightDTO flightStartView;
 				private FlightDTO flightEndView;
 				private HotelDTO hotelView;
 				
 				private StageHelper stageHelper;
-				private List<FlightDTO> flightList;
+				private ArrayList<FlightDTO> flightList;
 			private Date time_start_stage;
 			private Date time_end_stage;
 			private String areaStage;
@@ -129,7 +129,7 @@ public class StageManagementBean {
 		}
 		
 		
-		if(consistency.correctStage(currentStage) && (currentStage.getProducts()!=null))
+		//if(consistency.correctStage(currentStage) && (currentStage.getProducts()!=null))
 		{
 		/*Aggiorna lo stage nel bean comune, per permettere
 		 * al packageEdit di aggiornarlo a sua volta. Si è dovuto ricorrere al bean 
@@ -143,10 +143,10 @@ public class StageManagementBean {
 		
 		return "addedStage";
 		}
-		else
+		/*else
 		{
 			return "inconsistentStage";
-		}
+		}*/
 		
 	}
 	 
@@ -200,16 +200,16 @@ public class StageManagementBean {
 			update();
 			
 			 hotels
-			  = productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
+			  = new ArrayList( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  = productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
+			  =new ArrayList( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  outingModel = new OutingDataModel(outings);  
 			  flights
-			  = productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
+			  = new ArrayList(productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  flightModel = new FlightDataModel(flights);  
 			  flightsBack
-			  = productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea());
+			  = new ArrayList(productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  flightModelBack = new FlightDataModel(flightsBack);  
 			 
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
@@ -245,24 +245,24 @@ public class StageManagementBean {
 			//Uso uno Stage ausiliario per il controllo di consistenza, che riceve in ingresso uno Stage
 			StageDTO stageCheck= new StageDTO(new ArrayList<ProductDTO>(), areaStage, time_start_stage, time_end_stage);
 			consistency = new ConsistencyChecker();
-			if(!consistency.CorrectStageInsert(shared.getCurrentPackage(), stageCheck))
-				return "inconsistentDateStage";
+			//if(!consistency.CorrectStageInsert(shared.getCurrentPackage(), stageCheck))
+			//	return "inconsistentDateStage";
 			
 			
 			currentStage=new StageDTO();
 			//CONTROLLO DI CONSISTENZA
 			
 			hotels
-			  = productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  = new ArrayList( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  = productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  = new ArrayList( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  outingModel = new OutingDataModel(outings);  
 			  flights
-			  = productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  = new ArrayList( productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  flightModel = new FlightDataModel(flights);  
 			  flightsBack
-			  = productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage);
+			  = new ArrayList( productCRUD.findALLFlightByStateAndAreaStart(State.AVAILABLE, time_start_stage,  time_end_stage,  areaStage));
 			  flightModelBack = new FlightDataModel(flightsBack);  
 			 
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
@@ -376,7 +376,7 @@ public class StageManagementBean {
 
 
 
-	public void setFlightList(List<FlightDTO> flightList) {
+	public void setFlightList(ArrayList<FlightDTO> flightList) {
 		this.flightList = flightList;
 	}
 	public StageDTO getCurrentStage() {
@@ -403,16 +403,16 @@ public class StageManagementBean {
 	public void setHotelModel(HotelDataModel hotelModel) {
 		this.hotelModel = hotelModel;
 	}
-	public List<HotelDTO> getHotels() {
+	public ArrayList<HotelDTO> getHotels() {
 		return hotels;
 	}
-	public void setHotels(List<HotelDTO> hotels) {
+	public void setHotels(ArrayList<HotelDTO> hotels) {
 		this.hotels = hotels;
 	}
-	public List<HotelDTO> getFilteredHotels() {
+	public ArrayList<HotelDTO> getFilteredHotels() {
 		return filteredHotels;
 	}
-	public void setFilteredHotels(List<HotelDTO> filteredHotels) {
+	public void setFilteredHotels(ArrayList<HotelDTO> filteredHotels) {
 		this.filteredHotels = filteredHotels;
 	}
 	public FlightDTO getSelectedFlight() {
@@ -433,16 +433,16 @@ public class StageManagementBean {
 	public void setFlightModel(FlightDataModel flightModel) {
 		this.flightModel = flightModel;
 	}
-	public List<FlightDTO> getFlights() {
+	public ArrayList<FlightDTO> getFlights() {
 		return flights;
 	}
-	public void setFlights(List<FlightDTO> flights) {
+	public void setFlights(ArrayList<FlightDTO> flights) {
 		this.flights = flights;
 	}
-	public List<FlightDTO> getFilteredFlights() {
+	public ArrayList<FlightDTO> getFilteredFlights() {
 		return filteredFlights;
 	}
-	public void setFilteredFlights(List<FlightDTO> filteredFlights) {
+	public void setFilteredFlights(ArrayList<FlightDTO> filteredFlights) {
 		this.filteredFlights = filteredFlights;
 	}
 	public FlightDTO getSelectedFlightBack() {
@@ -463,16 +463,16 @@ public class StageManagementBean {
 	public void setFlightModelBack(FlightDataModel flightModelBack) {
 		this.flightModelBack = flightModelBack;
 	}
-	public List<FlightDTO> getFlightsBack() {
+	public ArrayList<FlightDTO> getFlightsBack() {
 		return flightsBack;
 	}
-	public void setFlightsBack(List<FlightDTO> flightsBack) {
+	public void setFlightsBack(ArrayList<FlightDTO> flightsBack) {
 		this.flightsBack = flightsBack;
 	}
-	public List<FlightDTO> getFilteredFlightsBack() {
+	public ArrayList<FlightDTO> getFilteredFlightsBack() {
 		return filteredFlightsBack;
 	}
-	public void setFilteredFlightsBack(List<FlightDTO> filteredFlightsBack) {
+	public void setFilteredFlightsBack(ArrayList<FlightDTO> filteredFlightsBack) {
 		this.filteredFlightsBack = filteredFlightsBack;
 	}
 	public OutingDTO getSelectedOuting() {
@@ -493,16 +493,16 @@ public class StageManagementBean {
 	public void setOutingModel(OutingDataModel outingModel) {
 		this.outingModel = outingModel;
 	}
-	public List<OutingDTO> getOutings() {
+	public ArrayList<OutingDTO> getOutings() {
 		return outings;
 	}
-	public void setOutings(List<OutingDTO> outings) {
+	public void setOutings(ArrayList<OutingDTO> outings) {
 		this.outings = outings;
 	}
-	public List<OutingDTO> getFilteredOutings() {
+	public ArrayList<OutingDTO> getFilteredOutings() {
 		return filteredOutings;
 	}
-	public void setFilteredOutings(List<OutingDTO> filteredOutings) {
+	public void setFilteredOutings(ArrayList<OutingDTO> filteredOutings) {
 		this.filteredOutings = filteredOutings;
 	}
 	public OutingDTO getSelectedOutingView() {
@@ -523,16 +523,16 @@ public class StageManagementBean {
 	public void setOutingModelView(OutingDataModel outingModelView) {
 		this.outingModelView = outingModelView;
 	}
-	public List<OutingDTO> getOutingsView() {
+	public ArrayList<OutingDTO> getOutingsView() {
 		return outingsView;
 	}
-	public void setOutingsView(List<OutingDTO> outingsView) {
+	public void setOutingsView(ArrayList<OutingDTO> outingsView) {
 		this.outingsView = outingsView;
 	}
-	public List<OutingDTO> getFilteredOutingsView() {
+	public ArrayList<OutingDTO> getFilteredOutingsView() {
 		return filteredOutingsView;
 	}
-	public void setFilteredOutingsView(List<OutingDTO> filteredOutingsView) {
+	public void setFilteredOutingsView(ArrayList<OutingDTO> filteredOutingsView) {
 		this.filteredOutingsView = filteredOutingsView;
 	}
 	public FlightDTO getFlightStartView() {
