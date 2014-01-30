@@ -349,13 +349,20 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		return result;
 		
 	}
+	
+	
+	/**
+	 * method that converts a CustomerDTO in a customer Entity 
+	 * @param customer --> entity customer
+	 * @return the dto representation of a customer entity
+	 */
 	public CustomerDTO toTDO(Customer customer)
 	{   
 		//ArrayList <String> friends=customerListToString(customer.getFriends());
 		ArrayList <TravelPackageDTO> purchasedTravelPackage = travelPackageToDTO(customer.getPurchasedTravelPackages());
 		//ArrayList <TravelPackageDTO> preparedForAFriendTravelPackage=travelPackageToDTO(customer.getPreparedForAFriendTravelPackages());
 	    ArrayList <GiftListDTO> giftList =giftListCollectionTODTO(customer.getGiftLists());
-	    ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage=this.customizedTravelPackageToDTO(customer.getCustomizedTravelPackages());
+	    ArrayList <CustomizedTravelPackageDTO> customizedTravelPackage=customizedTravelPackageToDTO(customer.getCustomizedTravelPackages());
 	   	CustomerDTO cust=new CustomerDTO(customer.getEmail(),customer.getName(), customer.getSurname(),customer.getTelephone(), customer.getPassword(),customer.getUsername()/*,friends*/,purchasedTravelPackage/*,preparedForAFriendTravelPackage*/,giftList,customizedTravelPackage);
 
 		return cust;
@@ -363,6 +370,12 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		
 	}
 	
+	
+	/**
+	 * method that converts a Employee entity in a employeeDTO  
+	 * @param employee --> entity employee
+	 * @return the dto representation of a employee entity
+	 */
 	public  EmployeeDTO toTDO(Employee employee)
 	{
 		ArrayList<ProductDTO> managedproduct=productListToDTO(employee.getManagedProduct());
@@ -372,12 +385,25 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		
 		
 	}
-	public GiftListDTO giftListToDTO(GiftList gift)//TODO to check
+	
+	/**
+	 * method that converts a GiftList entity in a GiftListDTO
+	 * @param gift --> the entity GiftList
+	 * @return the dto representation of the GiftList
+	 */
+	public GiftListDTO giftListToDTO(GiftList gift)
 	{   String idCustomer=giftMan.findCustomerCreator(gift.getProduct().getIdProduct());
 		
 		return new GiftListDTO (productToDTO(gift.getProduct()),gift.getIdBuyer(),gift.getMoreInfo(),gift.isBought(),gift.getTravelPackage().getIdtravelpackage(),idCustomer);
 				
 	}
+	
+	
+	/**
+	 * method that converts a GiftList entity list in a giftListDTO list
+	 * @param gift --> the GiftList entity List
+	 * @return the dto representation of the giftList entity list
+	 */
    public ArrayList <GiftListDTO> giftListCollectionTODTO(List <GiftList> gift)
    {
 	   ArrayList <GiftListDTO> giftDTO=new  ArrayList <GiftListDTO>();
