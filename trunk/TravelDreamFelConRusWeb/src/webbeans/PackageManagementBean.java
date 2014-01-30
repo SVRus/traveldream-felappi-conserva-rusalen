@@ -50,12 +50,13 @@ private Date time_start;
 private String description;
 private String name;
 private List<StageDTO> stages;
+
 private PrepackedTravelPackageDTO selectedTravelPackage;
 
-//non so se sia ridondante rispetto a packageList
-private List<PrepackedTravelPackageDTO> TravelPackages;
-
 private  List<PrepackedTravelPackageDTO> filteredTravelPackages;
+
+
+private List<PrepackedTravelPackageDTO> packageList;
 
 
 
@@ -65,7 +66,8 @@ private Date purchaseTime;
 
 private PrepackedTravelPackageDataModel packageModel;
 
-private List<PrepackedTravelPackageDTO> packageList;
+
+
 @EJB
 private TravelPackageCRUDBeanLocal packageCRUD;
 
@@ -77,23 +79,11 @@ private PackageEditBean packBean;
 
 public void update()
 {
-/*
-	ArrayList<ProductDTO> prodotti = new ArrayList<ProductDTO>();
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
-prodotti.add(new HotelDTO(11, "Gianni", "Marina", 33,new Date(), new Date(), State.AVAILABLE, "Etiopia", "brutta" , "Bud Spencer","Africa"));
 
-StageDTO stage= new StageDTO(prodotti, "Africa", new Date(), new Date());	
-ArrayList<StageDTO> listaStage = new ArrayList<StageDTO>();
-
-listaStage.add(stage);
-*/
 packageList= new ArrayList<PrepackedTravelPackageDTO>();
-//packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Io sto con gli ippopotami", "Ippo", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
-//packageList.add(new PrepackedTravelPackageDTO(new Date(), new Date(), "Viaggio su marte", "Mission to mars", listaStage, "11", "22", new Date(),"ciao", TravelState.AVAILABLE));
 packageList.addAll(packageCRUD.findAllPrepacked());
 
 packageModel= new PrepackedTravelPackageDataModel(packageList);
-System.out.println("Ciao ho popolato i pacchetti");
 
 }
 public void updateCurrentPackage()
@@ -106,9 +96,9 @@ public void updateCurrentPackage()
 
 public void deletePackage(ActionEvent actionEvent) {
 	
-   System.out.print( packageCRUD.delete(selectedTravelPackage)+"ho eliminato il pacchetto");
-	TravelPackages= packageCRUD.findAllPrepacked();
-	packageModel=new PrepackedTravelPackageDataModel(TravelPackages);
+    packageCRUD.delete(selectedTravelPackage);
+    packageList= packageCRUD.findAllPrepacked();
+	packageModel=new PrepackedTravelPackageDataModel(packageList);
    
    }
 
@@ -149,12 +139,7 @@ public void setSelectedTravelPackage(
 		PrepackedTravelPackageDTO selectedTravelPackage) {
 	this.selectedTravelPackage = selectedTravelPackage;
 }
-public List<PrepackedTravelPackageDTO> getTravelPackages() {
-	return TravelPackages;
-}
-public void setTravelPackages(List<PrepackedTravelPackageDTO> travelPackages) {
-	TravelPackages = travelPackages;
-}
+
 public List<PrepackedTravelPackageDTO> getFilteredTravelPackages() {
 	return filteredTravelPackages;
 }
