@@ -111,6 +111,9 @@ public class StageManagementBean {
 		//Controllo di consistenza
 		
 		//Svuota la tappa corrente e vi inserisce i prodotti selezionati dall'utente nella pagina
+		if(currentStage==null)
+			currentStage=new StageDTO();
+		
 		currentStage.setProducts(new ArrayList<ProductDTO>());
 		if(flightStartView!=null)
 		currentStage.addProduct(flightStartView);
@@ -125,7 +128,8 @@ public class StageManagementBean {
 		currentStage.addProduct(outingsViewTrim.get(i));
 		}
 		
-		if(/*consistency.correctStage(currentStage) &&*/ (currentStage.getProducts()!=null))
+		
+		if(consistency.correctStage(currentStage) && (currentStage.getProducts()!=null))
 		{
 		/*Aggiorna lo stage nel bean comune, per permettere
 		 * al packageEdit di aggiornarlo a sua volta. Si è dovuto ricorrere al bean 
@@ -151,7 +155,7 @@ public class StageManagementBean {
 		shared.aggiorna();
 		stageHelper= new StageHelper(tempCurrentStage);	
 	  
-		  System.out.println("sono in stage management");
+		 System.out.println("sono in stage management");
 	  }
 	
 	  
@@ -174,6 +178,7 @@ public class StageManagementBean {
 		for(int i=0; i<outingsView.size();i++)
 		{
 			if (outingsView.get(i)!=null)
+				
 			shared.getCurrentStage().addProduct(outingsView.get(i));
 		}
 	}
@@ -240,8 +245,8 @@ public class StageManagementBean {
 			//Uso uno Stage ausiliario per il controllo di consistenza, che riceve in ingresso uno Stage
 			StageDTO stageCheck= new StageDTO(new ArrayList<ProductDTO>(), areaStage, time_start_stage, time_end_stage);
 			consistency = new ConsistencyChecker();
-			/*if(!consistency.CorrectStageInsert(shared.getCurrentPackage(), stageCheck))
-				return "inconsistentDateStage";*/
+			if(!consistency.CorrectStageInsert(shared.getCurrentPackage(), stageCheck))
+				return "inconsistentDateStage";
 			
 			
 			currentStage=new StageDTO();
