@@ -32,7 +32,7 @@
 	  <h:form id="form">
 	  
     
- <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.name}" paginator="true" rows="10"  
+ <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
                 selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
                id="traveltable"
                  rowsPerPageTemplate="10,15,50">  
@@ -60,7 +60,7 @@
                  <p:column  headerText="Data Fine" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
                  #{travelPackage.time_end}  
                  </p:column> 
-                	
+                 	
                
                <f:facet name="footer">
                      <p:commandButton action="#{packageEdit.allowedNew}" value="Nuovo" icon="ui-icon-star" />  

@@ -8,75 +8,73 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
-    		<style type="text/css">
-        	.ui-widget{font-size:90% !important;}  
-      		</style> 
-         <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
-		</p:layoutUnit>  
-      
-        <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="South unit content." />  
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+        <style type="text/css">
+          .ui-widget{font-size:90% !important;}  
+          </style> 
+          <a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
         </p:layoutUnit>  
       
-        <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="West unit content." />  
-        </p:layoutUnit>  
+        
       
-        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-            <h:outputText value="Right unit content." />
-            <p:button outcome="temp" value="Gestisci prodotti" icon="ui-icon-star">  
-            <f:param name="productId" value="10" />  
-            </p:button>  
-            <p:button outcome="temp" value="Gestisci pacchetti" icon="ui-icon-star">  
-            <f:param name="pacId" value="10" />  
-               </p:button>  
+       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
            
+            </p:menu>   
         </p:layoutUnit>  
+      
+    
       
       <p:layoutUnit position="center">  
+       <h:inputHidden  value="#{packageManagement.update()}"/>
+		
 	  <h:form id="form">
- <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
-                selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
-                filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
-                 rowsPerPageTemplate="10,15,50">  
+	  
     
+ <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+                selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
+               id="traveltable"
+                 rowsPerPageTemplate="10,15,50">  
+     <p:ajax event="rowSelect"  listener= "#{packageManagement.updateCurrentPackage}"/>  
+  
 
   
                 <f:facet name="header">
-                    Lista Hotel
+                    Pacchetti
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{hotel.name}" filterBy="#{hotel.name}" id="name">
+                <p:column  headerText="Nome" sortBy="#{travelPackage.name}"  id="name">
                     
                     
-                    <p:commandLink value="#{hotel.name}" update=":userDetailForm:display" oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{hotel}" target="#{hotelManagement.selectedHotel}" />    
-                    </p:commandLink>
-                	</p:column>
-                      <p:column  headerText="Area" sortBy="#{hotel.area}" filterBy="#{hotel.area}" id="area">
-                      #{hotel.area}  
-                      </p:column> 
-                       <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
-                      #{hotel.place}  
-                      </p:column> 
-                       <p:column  headerText="Data Inizio" sortBy="#{hotel.timeStart}" filterBy="#{hotel.timeStart}" id="timeStart">  
-                      #{hotel.timeStart}  
-                      </p:column> 
-                       <p:column  headerText="Data Fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
-                      #{hotel.timeEnd}  
-                      </p:column> 
-                       <p:column  headerText="Tipo" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
-                      #{hotel.area}  
-                      </p:column> 
-
+                 #{travelPackage.name}  
+        		</p:column>  
+        		<p:column  headerText="Descrizione" sortBy="#{travelPackage.description}"  id="description">
+                    
+                    
+                 #{travelPackage.description}  
+        		</p:column> 
+        		 <p:column  headerText="Data Inizio" sortBy="#{travelPackage.time_start}"  id="timeStart">  
+                 #{travelPackage.time_start}  
+                 </p:column> 
+                 <p:column  headerText="Data Fine" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
+                 #{travelPackage.time_end}  
+                 </p:column> 
+                 	
                
                <f:facet name="footer">
-                    <p:commandButton id="effectsDialogButton" value="Nuovo Hotel" onclick="PF('dlg3').show();" type="button" /> 
-                     <p:commandButton value="Cancella Hotel" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
-                
-                </f:facet>
-
+                     <p:commandButton action="#{packageEdit.allowedNew}" value="Nuovo" icon="ui-icon-star" />  
+               		
+                    <p:commandButton action="#{packageEdit.allowed}" value="Modifica"  />  
+               		<p:commandButton value="Elimina" actionListener="#{packageManagement.deletePackage}" update="traveltable" icon="ui-icon-trash"/>
+                  	
+               </f:facet>
+				
               </p:dataTable>
          </h:form>   
          
@@ -86,75 +84,14 @@
         </p:layoutUnit>  
       
         </p:layout>  
-          <p:dialog header="Nuovo Hotel" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="100">  
-     <h:form>
-     <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Nome:" />  
-            <p:inputText value="#{hotelManagement.name}"   
-                    id="username" required="true" label="username" />  
-              
-            <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Crea" update=":form:hoteltable"   
-                    actionListener="#{hotelManagement.newHotel}"  
-                   oncomplete="dlg3.hide();"/>  
-                
-               
-            </f:facet>  
-        </h:panelGrid>  
-        </h:form>
-        
-        
-        	</p:dialog> 
-        	
-        <script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if( !args.loggedIn) {  
-            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
-        }   
-        else {  
-            PF('dlg3').hide();  
-            $('#loginLink').fadeOut();  
-        }  
-    }  
-</script>  	    
-             <p:dialog header="Modifica Hotel" widgetVar="userDialog" resizable="false" id="userDlg" > 
-               <h:form id="userDetailForm">
-                <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">   
-			<h:outputText value="Nome :"></h:outputText>
-                        <h:outputText value="#{hotelManagement.selectedHotel.name}" />
-						<h:inputText value="#{hotelManagement.selectedHotel.name}"/>
-      		<f:facet name="footer">
-                     
-                            <p:commandButton value="Update" update=":form:hoteltable"  
-                            oncomplete="userDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
-                    </f:facet>
-			
-                </p:panelGrid> 
-             </h:form>
-          </p:dialog> 
+    
                          
              
          
       
 <p:growl id="growl" showDetail="true" life="5000" />
          
-<script type="text/javascript">  
-    function handleSubmitRequest(xhr, status, args, dialogName, formName) {  
-            dialog = jQuery('#'+dialogName);
-        if(args.validationFailed) {  
-            dialog.effect("shake", { times:3 }, 100);  
-        } else {
-            clearForm(formName);
-            newUserDialog.hide(); 
-            userDialog.hide(); 
-        }  
-    }
-    function clearForm(formName){
-        jQuery('#'+formName).each(function(){
-	        this.reset();
-	});
-    }
-</script> 
+
  
         
     </body> 
