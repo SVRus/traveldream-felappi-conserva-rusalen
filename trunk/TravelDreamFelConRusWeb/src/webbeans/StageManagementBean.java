@@ -199,7 +199,7 @@ public class StageManagementBean {
 			// setto la lista di hotel
 			update();
 			
-			 hotels
+			hotels
 			  = new ArrayList<HotelDTO>( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
