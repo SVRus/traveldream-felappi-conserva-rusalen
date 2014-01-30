@@ -1,6 +1,7 @@
 package travelPackageManagement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -83,7 +84,8 @@ MailSenderLocal mail;
 		String username=log.getPrincipalUsername();
 		Employee employee=emplo.find(username);
 		TravelPackage travel=dto.travelPackageDTOToEntity(prepacked, true);
-    	employee.getManagedTravelPackage().add((PrepackedTravelPackage)travel);
+		List <PrepackedTravelPackage> travelList=Arrays.asList((PrepackedTravelPackage)travel);
+    	employee.addPackages(travelList);
     	try
     	{
     		emplo.edit(employee);
