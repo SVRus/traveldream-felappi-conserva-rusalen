@@ -9,6 +9,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import stateenum.State;
+import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomerDTO;
 import dto.GiftListDTO;
@@ -44,7 +46,7 @@ DTOFactory dto;
     }
 
    public ArrayList <GiftListDTO> giftListCreation(TravelPackageDTO travel)
-    {
+    {   travel.setRecoursiveTravelProductState(TravelState.RESERVED,State.RESERVED);
     	List <StageDTO> stages=travel.getStages();
     	Iterator <StageDTO> iter=stages.iterator();
     	ArrayList<GiftListDTO> gifts= new ArrayList <GiftListDTO>();
