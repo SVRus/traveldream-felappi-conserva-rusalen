@@ -6,6 +6,7 @@ import java.util.List;
 
 import dto.FlightDTO;
 import dto.HotelDTO;
+import dto.ProductDTO;
 import dto.StageDTO;
 import dto.OutingDTO;
 
@@ -34,10 +35,10 @@ public class StageHelper {
 		
 	}
 	
-	public List<OutingDTO> outings()
+	public ArrayList<OutingDTO> outings()
 	{
 		
-		List<OutingDTO> temp = new ArrayList<OutingDTO>();
+		ArrayList<OutingDTO> temp = new ArrayList<OutingDTO>();
 		for (int i = 0; i < this.getStageSize(); i++) {
 			if(stage.getProducts().get(i) instanceof OutingDTO)
 			{
