@@ -36,11 +36,11 @@
            
             </p:menu>   
         </p:layoutUnit>   
-      
+     	
      <p:layoutUnit position="east" size="550" header="Pacchetto corrente: #{packageEdit.currentTravelPackage.name}" resizable="false" closable="false" collapsible="false" >  
              <h:form id="form">
 		
-         <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
+         <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.idStage}" paginator="true" rows="10"  
                 selection="#{packageEdit.selectedStage}" selectionMode="single" 
                id="hoteltable"
                  rowsPerPageTemplate="10,15,50">  
@@ -67,7 +67,8 @@
                 	
                
                <f:facet name="footer">
-                  <p:commandButton action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-gear" />  
+                  <p:commandButton actionListener="#{packageEdit.setFields}"
+                  action="#{stageManagement.allowed}" value="Modifica Tappa" icon="ui-icon-gear" />  
              </f:facet>
 				
               </p:dataTable>
@@ -93,9 +94,9 @@
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		
-	<p:commandButton value="Inserisci prodotti nella tappa"
-		action="#{stageManagement.allowedNew}"
-		ajax="false" />
+	<p:commandButton value="Inserisci prodotti nella tappa" actionListener="#{packageEdit.setFields}"
+		action="#{stageManagement.allowedNew()}"
+		 />
 		
 		</h:panelGrid>
 		</p:panel>
@@ -156,7 +157,9 @@
         </p:layoutUnit>  
       
         </p:layout>  
-         
+        
+        <h:inputHidden  value="#{packageEdit.update()}"/>
+		
         
     </body> 
     
