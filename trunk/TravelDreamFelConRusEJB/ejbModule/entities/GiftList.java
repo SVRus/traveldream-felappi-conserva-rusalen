@@ -58,13 +58,13 @@ public class GiftList implements Serializable {
 		super();
 	}
 @Id
-@OneToOne()
+@OneToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
 @JoinColumn(name="idProduct")
 private Product product;
 private String idBuyer;
 private String moreInfo;
 private boolean bought;
-@ManyToOne()
+@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.MERGE)
 @JoinColumn(name="travelPackageFK")
 private TravelPackage travelPackage;
 
