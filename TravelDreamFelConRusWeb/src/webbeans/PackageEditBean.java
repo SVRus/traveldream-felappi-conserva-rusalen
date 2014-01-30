@@ -89,6 +89,8 @@ public class PackageEditBean {
 	//true se sto lavorando su un nuovo pacchetto, false se sto modificando un pacchetto esistente
 	private boolean newPack;
 	
+	ConsistencyChecker consistency;
+	
 	
 	
 	/**
@@ -238,8 +240,9 @@ public class PackageEditBean {
 	}
 	
 	
-	public void editPackage()
+	public String editPackage()
 	{
+		consistency = new ConsistencyChecker();
 		if(newPack)
 		{
 			
@@ -247,9 +250,11 @@ public class PackageEditBean {
 			currentTravelPackage.setDescription(description);
 			currentTravelPackage.setTime_start(time_start);
 			currentTravelPackage.setTime_end(time_end);
+			if(!consistency.correctPackageWeak(currentTravelPackage))
+				return "inconsistentPackage";
 			packageCRUD.createTravelFromEmployee(currentTravelPackage);
-			
-			System.out.println("Ho creato un pacchetto");
+			shared.setBusy(false);
+			return "insertSuccess";
 			
 		}
 		else
@@ -259,12 +264,15 @@ public class PackageEditBean {
 			currentTravelPackage.setDescription(description);
 			currentTravelPackage.setTime_start(time_start);
 			currentTravelPackage.setTime_end(time_end);
+			if(!consistency.correctPackageWeak(currentTravelPackage))
+				return "inconsistentPackage";
+			
 			packageCRUD.updateTravelPackage(currentTravelPackage);
-		
-			System.out.println("Ho modificato un pacchetto");
+			shared.setBusy(false);
+			return "modifySuccess";
 			
 		}
-		shared.setBusy(false);
+		
 		
 		
 	}
