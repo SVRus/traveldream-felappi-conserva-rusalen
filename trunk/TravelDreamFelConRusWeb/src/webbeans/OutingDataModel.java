@@ -29,7 +29,7 @@ public class OutingDataModel extends ListDataModel<OutingDTO> implements Selecta
         List<OutingDTO> outings = (List<OutingDTO>) getWrappedData();  
           
         for(OutingDTO outing : outings) {  
-            if(outing.getName().equals(rowKey))  
+            if(outing.getIdProduct().equals(Long.parseLong(rowKey)))  
                 return outing;  
         }  
           
@@ -38,6 +38,6 @@ public class OutingDataModel extends ListDataModel<OutingDTO> implements Selecta
   
     @Override  
     public Object getRowKey(OutingDTO outing) {  
-        return outing.getName();  
+        return outing.getIdProduct();  
     }  
 }  

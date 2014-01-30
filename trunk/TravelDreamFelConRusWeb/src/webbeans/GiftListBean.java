@@ -68,6 +68,7 @@ public class GiftListBean implements Serializable {
 		  selectedGiftList.setBought(true);
 		  selectedGiftList.setIdBuyer(nameBuyer);
 		   purchase.updateGiftList(selectedGiftList);
+		  
 		  checkCode();
 		  
 	  }
@@ -103,7 +104,7 @@ public class GiftListBean implements Serializable {
 				else
 				{
 					giftFree.add(giftLists.get(i));
-					
+
 				}
 				
 			}

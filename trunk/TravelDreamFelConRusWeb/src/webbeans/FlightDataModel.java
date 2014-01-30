@@ -29,7 +29,7 @@ public class FlightDataModel extends ListDataModel<FlightDTO> implements Selecta
         List<FlightDTO> flights = (List<FlightDTO>) getWrappedData();  
           
         for(FlightDTO flight : flights) {  
-            if(flight.getName().equals(rowKey))  
+            if(flight.getIdProduct().equals(Long.parseLong(rowKey)))  
                 return flight;  
         }  
           
@@ -38,6 +38,6 @@ public class FlightDataModel extends ListDataModel<FlightDTO> implements Selecta
   
     @Override  
     public Object getRowKey(FlightDTO flight) {  
-        return flight.getName();  
+        return flight.getIdProduct();  
     }  
 }  
