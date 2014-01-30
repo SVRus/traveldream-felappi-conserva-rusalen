@@ -1,5 +1,7 @@
 package dto;
 
+import stateenum.State;
+
 
 
 public class GiftListDTO {
@@ -84,5 +86,12 @@ public class GiftListDTO {
 	}
 	public void setTravelPackageid(long travelPackageid) {
 		this.travelPackageid = travelPackageid;
+	}
+	
+	public void setProductReserved()
+	{
+		product.setState(State.SOLD);
+		
+		
 	}
 }
