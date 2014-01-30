@@ -163,7 +163,7 @@ public class PackageEditBean {
 			newPack = false;
 			//permette di mantenere i campi del pacchetto selezionato. Usato nei getter
 			modifyForField=true;
-			
+			setFields();
 			//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
 			//di modifica del pacchetto
 			return "notBusy";
@@ -177,6 +177,23 @@ public class PackageEditBean {
 			
 			return "errorBusy";
 		}
+	}
+	//Usato per memorizzare i campi in packageEdit.xhtml in seguito a flussi di navigazione che avvengono tramite Bean diversi
+	public void setFields(ActionEvent e)
+	{
+		this.setTime_start(time_start);
+		this.setTime_end(time_start);
+		this.setDescription(this.getDescription());
+		this.setName(name);
+		
+	}
+	public void setFields()
+	{
+		this.setTime_start(time_start);
+		this.setTime_end(time_start);
+		this.setDescription(this.getDescription());
+		this.setName(name);
+		
 	}
 	/**
 	 * metodo che controlla che non ci sia un'operazione in corso su un pacchetto, e in tal caso
@@ -195,6 +212,7 @@ public class PackageEditBean {
 			newPack = true;
 			//permette di svuotare i campi. Usato nei getter
 			newForField=true;
+			setFields();
 			return "notBusy";
 		}
 		
@@ -297,6 +315,11 @@ public class PackageEditBean {
 		return time_start;
 	}
 	public void setTime_start(Date time_start) {
+		if(modifyForField)
+			this.time_start= currentTravelPackage.getTime_start();
+		else if(newForField)
+			this.time_start=null;
+		else
 		this.time_start = time_start;
 	}
 	public Date getTime_end() {
@@ -307,6 +330,11 @@ public class PackageEditBean {
 		return time_end;
 	}
 	public void setTime_end(Date time_end) {
+		if(modifyForField)
+			this.time_end= currentTravelPackage.getTime_end();
+		else if(newForField)
+			this.time_end=null;
+		else
 		this.time_end = time_end;
 	}
 	public String getDescription() {
@@ -317,17 +345,24 @@ public class PackageEditBean {
 		return description;
 	}
 	public void setDescription(String description) {
+		if(modifyForField)
+			this.description= currentTravelPackage.getDescription();
+		else if(newForField)
+			this.description=null;
+		else
 		this.description = description;
 	}
 	public String getName() {
 		
-		if(modifyForField)
-			return currentTravelPackage.getName();
-		if(newForField)
-			return "";
+		
 		return name;
 	}
 	public void setName(String name) {
+		if(modifyForField)
+			this.name= currentTravelPackage.getName();
+		else if(newForField)
+			this.name=null;
+		else
 		this.name = name;
 	}
 	public PrepackedTravelPackageDTO getTempCurrentPackage() {
