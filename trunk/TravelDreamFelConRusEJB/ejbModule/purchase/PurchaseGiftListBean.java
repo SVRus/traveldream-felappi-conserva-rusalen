@@ -116,25 +116,31 @@ public boolean updateGiftList(GiftListDTO giftList)
 
 public boolean simpleBuyGiftList(GiftListDTO giftlist)
 {
-	giftlist.setProductReserved();
-	giftlist.setBought(true);
-	GiftList gift=dto.simpleGiftListDTOToEntity(giftlist);
-	TravelPackage travel=gift.getTravelPackage();
-	if (travel.isAllSold())
-		travel.setTravelState(TravelState.SOLD);
-	gift.setTravelPackage(travel);
-    try{
-    	giftMan.edit(gift);
-    	return true;
-    }
-   catch(Exception e)
-   { 
-	   return false;
-   }
-
+	if (isEnoughMoney(giftlist.getProduct().getCost())) {
+		giftlist.setProductReserved();
+		giftlist.setBought(true);
+		GiftList gift = dto.simpleGiftListDTOToEntity(giftlist);
+		TravelPackage travel = gift.getTravelPackage();
+		if (travel.isAllSold())
+			travel.setTravelState(TravelState.SOLD);
+		gift.setTravelPackage(travel);
+		try {
+			giftMan.edit(gift);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	else return false;
 
 
 
 }
-    
+    private boolean isEnoughMoney(float cost)
+    {
+		return true;
+    	
+    	
+    	
+    }
 }
