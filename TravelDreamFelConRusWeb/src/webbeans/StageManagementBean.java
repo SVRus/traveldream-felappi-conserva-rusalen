@@ -129,7 +129,7 @@ public class StageManagementBean {
 		}
 		
 		
-		//if(consistency.correctStage(currentStage) && (currentStage.getProducts()!=null))
+		if(consistency.correctStage(currentStage) && (currentStage.getProducts()!=null))
 		{
 		/*Aggiorna lo stage nel bean comune, per permettere
 		 * al packageEdit di aggiornarlo a sua volta. Si è dovuto ricorrere al bean 
@@ -143,10 +143,10 @@ public class StageManagementBean {
 		
 		return "addedStage";
 		}
-		/*else
+		else
 		{
 			return "inconsistentStage";
-		}*/
+		}
 		
 	}
 	 
@@ -326,9 +326,11 @@ public class StageManagementBean {
 		if(flightStartView==selectedFlight)
 			return;
 		
+		flights.add(flightStartView);
 		flightStartView= selectedFlight;
 		flights.remove(selectedFlight);
 		flights.trimToSize();
+		
 		flightModel = new FlightDataModel(flights);
 		
 	}
@@ -336,7 +338,7 @@ public class StageManagementBean {
 	{
 		if(flightEndView==selectedFlightBack)
 			return;
-		
+		flightsBack.add(flightEndView);
 		flightEndView= selectedFlightBack;
 		flightsBack.remove(selectedFlightBack);
 		flightsBack.trimToSize();
@@ -346,7 +348,7 @@ public class StageManagementBean {
 	{
 		if(hotelView==selectedHotel)
 			return;
-		
+		hotels.add(hotelView);
 		hotelView= selectedHotel;
 		hotels.remove(selectedHotel);
 		hotels.trimToSize();
