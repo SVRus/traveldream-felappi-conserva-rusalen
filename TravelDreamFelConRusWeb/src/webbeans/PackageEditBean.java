@@ -45,38 +45,44 @@ import authentication.RegistrationBeanLocal;
 
 public class PackageEditBean {
 
+	/**Contiene i valori booleani necessari a consentire o meno le operazioni
+	 * di creazione o modifica. Serve a tenere traccia della corrispondenza tra un pacchetto e le sue tappe
+	 * e eventuali modifiche. 
+	 */
 	@ManagedProperty(value="#{packageCommon}")
 	private PackageCommonBean shared;
+
+	
 	@ManagedProperty(value="#{stageManagement}")
 	private StageManagementBean sharedStage;
 	
+	//Package selezionato correntemente nella pagina con tutti i package
+	private PrepackedTravelPackageDTO tempCurrentPackage;
+		
 	//Package riferito all'operazione in corso. Il suo valore viene prelevato da tempCurrentPackage
 	//se l'operazione è stata permessa
 	private PrepackedTravelPackageDTO currentTravelPackage;
-	//Package che viene modificato quando si seleziona un package nella pagina con tutti i package
-	private PrepackedTravelPackageDTO tempCurrentPackage;
 	
 	private StageDTO selectedStage;
 
-	//non so se sia ridondante rispetto a packageList
-	private List<StageDTO> stages;
-
+	
 	private  List<StageDTO> filteredStages;
 
 	//I suoi valori verranno aggiornati prendendoli dal currentTravelPackage
 	private StageDataModel stageModel;
 
-	private List<StageDTO> stageList;
 	
+	//Campi del pacchetto
 	private Date time_start;
 	private Date time_end;
 	private String description;
 	private String name; 
 	
-	//per popolare i campi la prima volta in caso di modifica
+	//per popolare i campi la prima volta in caso di modifica. Utilizzati nei getter
 	private boolean modifyForField;
-	//per svuotere i campi la prima volta in caso di nuovo pacchetto
+	//per svuotare i campi la prima volta in caso di nuovo pacchetto
 	private boolean newForField;
+	
 	@EJB
 	private TravelPackageCRUDBeanLocal packageCRUD;
 	
@@ -85,14 +91,19 @@ public class PackageEditBean {
 	
 	
 	
+	/**
+	 * Metodo che viene lanciato ad ogni aggiornamento della pagina.
+	 */
 	
 	public void update()
 	{
 	
-	//Controllo inutile
+	
+	//Se si accede alla pagina dalla barra degli indirizzi
 	if(currentTravelPackage!=null)
 		
 	{
+	//Controllo se è stato aggiunto uno stage al pacchetto, e in tal caso aggiorno il pacchetto.	
 	if(shared.isStageUpdated())
 	{
 		/*
@@ -104,28 +115,26 @@ public class PackageEditBean {
 		currentTravelPackage.addStage(sharedStage.getCurrentStage());
 		//rimuovo lo stage precedente
 		currentTravelPackage.removeStage(shared.getStageToDeleteForModify());
-		
+				
 		shared.setStageUpdated(false);
 	}
-	else
-	{
-		//currentTravelPackage.addStage(sharedStage.getCurrentStage());
-		
-	}
+	//Aggiorno la struttura dati per la tabella con la lista aggiornata
 	stageModel= new StageDataModel(currentTravelPackage.getStages());
 	}
-	System.out.println("Ciao ho popolato gli stage");
-	
+	//Dopo il primo accesso alla pagina vengono conservate le modifiche dell'utente.
 	modifyForField=false;
 	newForField=false;
 	
 	}
+	
+	/*
 	public void updateState()
 	{
 		stageModel= new StageDataModel(currentTravelPackage.getStages());
 		
 		
-	}
+	}*/
+	
 	public void updateCurrentStage()
 	{
 		//Setto lo stage selezionato nella pagina di stageManagement
@@ -134,7 +143,6 @@ public class PackageEditBean {
 		 * in vista di operazioni di modifica
 		 */
 		shared.setStageToDeleteForModify(selectedStage);
-		System.out.println("Ho modificato lo stage corrente");
 		
 	}
 	
@@ -151,17 +159,23 @@ public class PackageEditBean {
 			
 			currentTravelPackage = tempCurrentPackage;
 			update();
+			//false indica che sto modificando un pacchetto esistente
 			newPack = false;
 			//permette di mantenere i campi del pacchetto selezionato. Usato nei getter
 			modifyForField=true;
 			
+			//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
+			//di modifica del pacchetto
 			return "notBusy";
 			
 			
 		}
 		
 		else 
-		{	return "errorBusy";
+		{	//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
+			//di errore
+			
+			return "errorBusy";
 		}
 	}
 	/**
@@ -177,6 +191,7 @@ public class PackageEditBean {
 			shared.setBusy(true);
 			//shared.setCurrentPackage(null);
 			currentTravelPackage= new PrepackedTravelPackageDTO();
+			//indica che sto lavorando su un nuovo pacchetto
 			newPack = true;
 			//permette di svuotare i campi. Usato nei getter
 			newForField=true;
@@ -260,12 +275,7 @@ public class PackageEditBean {
 	public void setSelectedStage(StageDTO selectedStage) {
 		this.selectedStage = selectedStage;
 	}
-	public List<StageDTO> getStages() {
-		return stages;
-	}
-	public void setStages(List<StageDTO> stages) {
-		this.stages = stages;
-	}
+	
 	public List<StageDTO> getFilteredStages() {
 		return filteredStages;
 	}
@@ -278,12 +288,7 @@ public class PackageEditBean {
 	public void setStageModel(StageDataModel stageModel) {
 		this.stageModel = stageModel;
 	}
-	public List<StageDTO> getStageList() {
-		return stageList;
-	}
-	public void setStageList(List<StageDTO> stageList) {
-		this.stageList = stageList;
-	}
+	
 	public Date getTime_start() {
 		if(modifyForField)
 			return currentTravelPackage.getTime_start();
