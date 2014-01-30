@@ -168,9 +168,7 @@ GiftListEntityManagementLocal giftMan;
 		Date dateOuting3End=null;
 		Date dateOuting4End=null;
 		Date dateOuting5End=null;
-		Date dateOuting6End=null;
-		Date dateOuting7End=null;
-		Date dateOuting8End=null;
+		
 
 		try {
 			dateHotel1Start = (Date)formatter.parse(strDateHotel1Start);  
@@ -277,9 +275,19 @@ GiftListEntityManagementLocal giftMan;
         
         Outing outing5=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","description","Inghilterra",State.EXPIRED,"Londra");
         
-      
+        Outing outing6=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","description","Francia",State.AVAILABLE,"Louvre");
+        Outing outing7=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","description","Francia",State.AVAILABLE,"Museo");
+        Outing outing8=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","description","Italia",State.AVAILABLE,"Musei vaticani");
+        
+        
+        
+        Outing outing9=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"museo francoforte","description","area",State.AVAILABLE,"Francoforte");
+        
+        
+        
+        Outing outing10=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","description","Inghilterra",State.AVAILABLE,"Londra");
 
-     List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12,outing1,outing2,outing3 ,outing4,outing5);
+     List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12,outing1,outing2,outing3 ,outing4,outing5,outing6,outing7,outing8,outing9,outing10);
      
      
     employee.addProducts(products);;
