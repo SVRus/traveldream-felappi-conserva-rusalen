@@ -29,7 +29,7 @@ public class TravelPackageDataModel extends ListDataModel<TravelPackageDTO> impl
         List<TravelPackageDTO> travelPackages = (List<TravelPackageDTO>) getWrappedData();  
           
         for(TravelPackageDTO travelPackage : travelPackages) {  
-            if(travelPackage.getName().equals(rowKey))  
+            if(travelPackage.getIdtravelpackage().equals(Long.parseLong(rowKey)))  
                 return travelPackage;  
         }  
           
@@ -38,6 +38,6 @@ public class TravelPackageDataModel extends ListDataModel<TravelPackageDTO> impl
   
     @Override  
     public Object getRowKey(TravelPackageDTO travelPackage) {  
-        return travelPackage.getName();  
+        return travelPackage.getIdtravelpackage();  
     }  
 }  

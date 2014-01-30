@@ -29,7 +29,7 @@ public class HotelDataModel extends ListDataModel<HotelDTO> implements Selectabl
         List<HotelDTO> hotels = (List<HotelDTO>) getWrappedData();  
           
         for(HotelDTO hotel : hotels) {  
-            if(hotel.getName().equals(rowKey))  
+            if(hotel.getIdProduct().equals(Long.parseLong(rowKey)))  
                 return hotel;  
         }  
           
@@ -38,6 +38,6 @@ public class HotelDataModel extends ListDataModel<HotelDTO> implements Selectabl
   
     @Override  
     public Object getRowKey(HotelDTO hotel) {  
-        return hotel.getName();  
+        return hotel.getIdProduct();  
     }  
 }  
