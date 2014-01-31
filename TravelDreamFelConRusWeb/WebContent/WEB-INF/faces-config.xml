@@ -150,7 +150,7 @@
        <navigation-case>
            <from-outcome>modifySuccess</from-outcome>
            <to-view-id>
-           /packageModifiedPackageEmployee.xhtml
+           /packageModifiedSuccessPackageEmployee.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
