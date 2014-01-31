@@ -107,7 +107,9 @@ public class HotelManagementBean implements Serializable{
 		    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;
 		    if(selectedHotel.getState()==State.SOLD)
 		    	messageDelete="Il prodotto eliminato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
-		    
+		    if(selectedHotel.getState()==State.RESERVED)
+		    	messageDelete="Il prodotto eliminato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		   
 		    productCRUD.delete(selectedHotel);
 			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
 			hotelModel=new HotelDataModel(hotels);
@@ -131,7 +133,9 @@ public class HotelManagementBean implements Serializable{
 		    	messageModify="Il prodotto è stato modificato. E'stato eliminato il pacchetto ad esso associato." ;
 		    if(selectedHotel.getState()==State.SOLD)
 		    	messageModify="Il prodotto modificato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
-		   
+		    if(selectedHotel.getState()==State.RESERVED)
+		    	messageModify="Il prodotto modificato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		  
 		  hotels.remove(selectedHotel);
 		  newHotel = new HotelDTO(selectedHotel.getIdstage(), selectedHotel.getEmployeeCreator(),selectedHotel.getName(), 
 				   selectedHotel.getIdProduct(), selectedHotel.getCost(),

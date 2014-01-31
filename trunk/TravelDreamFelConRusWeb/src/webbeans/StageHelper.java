@@ -60,7 +60,7 @@ public class StageHelper {
 			if(stage.getProducts().get(i) instanceof FlightDTO)
 			{
 				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
-				if( !flightTemp.getArea_start().equals(this.stage.getArea()))
+				if( !flightTemp.getArea_start().equalsIgnoreCase(this.stage.getArea()))
 				return flightTemp;
 			}
 		}
@@ -74,7 +74,7 @@ public class StageHelper {
 			if(stage.getProducts().get(i) instanceof FlightDTO)
 			{
 				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
-				if( flightTemp.getArea_start().equals(this.stage.getArea()))
+				if( flightTemp.getArea_start().equalsIgnoreCase(this.stage.getArea()))
 				return flightTemp;
 			}
 		}

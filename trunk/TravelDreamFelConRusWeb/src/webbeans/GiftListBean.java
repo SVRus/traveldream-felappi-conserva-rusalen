@@ -3,34 +3,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
-import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
-import productManagement.ProductCRUDBeanLocal;
 import purchase.PurchaseGiftListBeanLocal;
-import stateenum.State;
-import dto.CustomerDTO;
-import dto.EmployeeDTO;
+import authentication.LoginBeanLocal;
 import dto.GiftListDTO;
-import dto.ProductDTO;
 import dto.HotelDTO;
 import exceptions.GiftListNotFoundException;
-import authentication.LoginBeanLocal;
-import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="giftList")
 @SessionScoped

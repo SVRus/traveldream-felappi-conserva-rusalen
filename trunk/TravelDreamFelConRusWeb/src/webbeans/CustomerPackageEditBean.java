@@ -2,30 +2,29 @@ package webbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
-import dto.StageDTO;
 import dto.PrepackedTravelPackageDTO;
+import dto.StageDTO;
 
 
-@ManagedBean(name="packageEdit")
+@ManagedBean(name="customerPackageEdit")
 @SessionScoped
 
-public class PackageEditBean implements Serializable{
+public class CustomerPackageEditBean implements Serializable{
 
 	/**Contiene i valori booleani necessari a consentire o meno le operazioni
 	 * di creazione o modifica. Serve a tenere traccia della corrispondenza tra un pacchetto e le sue tappe
 	 * e eventuali modifiche. 
 	 */
-	@ManagedProperty(value="#{packageCommon}")
-	private PackageCommonBean shared;
+	@ManagedProperty(value="#{CustomerPackageCommon}")
+	private CustomerPackageCommonBean shared;
 
 	
 	@ManagedProperty(value="#{stageManagement}")
@@ -69,8 +68,7 @@ public class PackageEditBean implements Serializable{
 	
 	
 	/**
-	 * Metodo che viene lanciato ad ogni aggiornamento della pagina di pacchetto.
-	 * Verifica se sono state fatte modifiche sulla tappa corrente e in tal caso le salva nel pacchetto.
+	 * Metodo che viene lanciato ad ogni aggiornamento della pagina.
 	 */
 	
 	public void update()
@@ -121,17 +119,6 @@ public class PackageEditBean implements Serializable{
 		 * in vista di operazioni di modifica
 		 */
 		shared.setStageToDeleteForModify(selectedStage);
-		
-	}
-	
-	/**
-	 * metodo che setta le strutture dati che consentono la visualizzazione
-	 */
-	public String show()
-	{
-		currentTravelPackage = tempCurrentPackage;
-		setFields();
-		return "showPackage";
 		
 	}
 	
@@ -226,10 +213,7 @@ public class PackageEditBean implements Serializable{
 		return "closed";
 	}
 	
-	/**
-	 * Metodo che rende persistenti le operazioni di modifica o inserimento pacchetto
-	 * @return
-	 */
+	
 	public String editPackage()
 	{
 		consistency = new ConsistencyChecker();
@@ -266,22 +250,10 @@ public class PackageEditBean implements Serializable{
 		
 		
 	}
-	
-	/**
-	 * Metodo che rende persistente la creazione del pacchetto personalizzato
-	 * @return
-	 */
-	public String purchasePersonalized()
-	{
-		
-		return "";
-		
-	}
-	
-	public PackageCommonBean getShared() {
+	public CustomerPackageCommonBean getShared() {
 		return shared;
 	}
-	public void setShared(PackageCommonBean shared) {
+	public void setShared(CustomerPackageCommonBean shared) {
 		this.shared = shared;
 	}
 	public StageManagementBean getSharedStage() {
@@ -411,3 +383,4 @@ public class PackageEditBean implements Serializable{
 	
 	
 }
+
