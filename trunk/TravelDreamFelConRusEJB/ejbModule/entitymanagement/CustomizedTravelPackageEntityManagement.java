@@ -28,6 +28,9 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
     public CustomizedTravelPackageEntityManagement() {
     	super (CustomizedTravelPackage.class);
     }
+    /**
+     * method that find the customizer of the given travelPackage
+     */
     public String findIdCustomizer(Long idPrepackedTravelPackage)
    	{
    		Query query = em.createNativeQuery("SELECT  idcustomer FROM customizedtravelpackage where idtravelpackage=? ");
@@ -44,11 +47,15 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    		
    	}
 	
+    
+    /**
+     * method that
+     */
     public CustomizedTravelPackage findCustomizedTravelPackageForFriend(String code)
     {
     	Query query = em.createQuery("SELECT  c FROM CustomizedTravelPackage c where c.friendCode=:code ",CustomizedTravelPackage.class);
  	     query.setParameter("code",code);
- 	    	return   (CustomizedTravelPackage) query.getSingleResult();
+ 	    	return   (CustomizedTravelPackage) query.getResultList().get(0);
  	    	
     }
 	
