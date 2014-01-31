@@ -19,6 +19,7 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -37,7 +38,9 @@ public class HotelManagementBean implements Serializable{
 	private HotelDTO selectedHotel;
 	private HotelDTO[] selectedHotels;  
 	private HotelDTO newHotel;
-
+	private String messageDelete;
+	 private String messageModify;
+	  
 
 	 private long idtravelpackage;
 	 private String employeeCreator;
@@ -69,8 +72,7 @@ public class HotelManagementBean implements Serializable{
 	  public void update()
 	  {
 		
-	  hotels
-	  = productCRUD.findAllHotels();
+	  hotels = productCRUD.findAllHotels();
 	  hotelModel = new HotelDataModel(hotels);  
 
 	  }
@@ -79,31 +81,69 @@ public class HotelManagementBean implements Serializable{
 	  
 	  public void newHotel(ActionEvent actionEvent)
 	  {
-			newHotel = new HotelDTO((long) 0, login.getPrincipalUsername(), name, cost, timeStart, timeEnd, State.AVAILABLE, area, place, room_type, more_info);
+		  if (	    name != null && !name.isEmpty() &&
+					Float.toString(cost) != null && 
+					timeStart != null && !timeStart.toString().isEmpty() &&
+					timeEnd != null && !timeEnd.toString().isEmpty() &&
+					area != null && !area.isEmpty() &&
+					place != null && !place.isEmpty() &&
+					room_type != null && ! room_type.isEmpty() &&
+			        more_info != null && ! more_info.isEmpty()
+					)
+		  {
+			newHotel = new HotelDTO((long) 0, login.getPrincipalUsername(), name, cost, timeStart, timeEnd, State.AVAILABLE, 
+					   area, place, room_type, more_info);
 			productCRUD.createProductFromEmployee(newHotel);
 			System.out.println("creato un hotel");
-			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
+			hotels= productCRUD.findAllHotels();
 			hotelModel=new HotelDataModel(hotels);
+		  }
 		  
 	  }
 	  public void deleteHotel(ActionEvent actionEvent) {
-			
+			 if(selectedHotel.getState()==State.AVAILABLE)
+		    	messageDelete="Prodotto eliminato correttamente";
+		    if(selectedHotel.getState()==State.INCLUDED)
+		    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;
+		    if(selectedHotel.getState()==State.SOLD)
+		    	messageDelete="Il prodotto eliminato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		    
 		    productCRUD.delete(selectedHotel);
 			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
 			hotelModel=new HotelDataModel(hotels);
 		   
 		   }
 	  public void updateHotel(ActionEvent actionEvent){
-			
+		  
+		  if (	    selectedHotel.getName() != null && !selectedHotel.getName().isEmpty() &&
+					Float.toString(selectedHotel.getCost()) != null && 
+					selectedHotel.getTimeStart() != null && !selectedHotel.getTimeStart().toString().isEmpty() &&
+					selectedHotel.getTimeEnd() != null && !selectedHotel.getTimeEnd().toString().isEmpty() &&
+					selectedHotel.getArea() != null && !selectedHotel.getArea().isEmpty() &&
+					selectedHotel.getPlace()  != null && !selectedHotel.getPlace().isEmpty() && 
+				    selectedHotel.getRoom_type() != null && !selectedHotel.getRoom_type().isEmpty() &&
+					selectedHotel.getMore_info() != null && !selectedHotel.getMore_info().isEmpty()
+					)
+		  {
+			 if(selectedHotel.getState()==State.AVAILABLE)
+		    	messageModify="Prodotto modificato correttamente";
+		    if(selectedHotel.getState()==State.INCLUDED)
+		    	messageModify="Il prodotto è stato modificato. E'stato eliminato il pacchetto ad esso associato." ;
+		    if(selectedHotel.getState()==State.SOLD)
+		    	messageModify="Il prodotto modificato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		   
+		  hotels.remove(selectedHotel);
 		  newHotel = new HotelDTO(selectedHotel.getIdstage(), selectedHotel.getEmployeeCreator(),selectedHotel.getName(), 
-				   selectedHotel.getCost(),
+				   selectedHotel.getIdProduct(), selectedHotel.getCost(),
 				  selectedHotel.getTimeStart(), selectedHotel.getTimeEnd(),
 				  selectedHotel.getState(), selectedHotel.getArea(), 
 				  selectedHotel.getPlace(), selectedHotel.getRoom_type(),
 				  selectedHotel.getMore_info());  productCRUD.updateProduct(newHotel);
-			   hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
-				hotelModel=new HotelDataModel(hotels);
-			   System.out.println("hotel modificato");
+		  hotels= productCRUD.findAllHotels();
+	      hotelModel=new HotelDataModel(hotels);
+   	      System.out.println("hotel modificato");
+   	      
+		  }
 		   }
 	  
 	  public HotelDTO[] getSelectedHotels() {
@@ -238,6 +278,72 @@ public class HotelManagementBean implements Serializable{
 		this.more_info = more_info;
 	}
 
+
+
+	public String getMessageDelete() {
+		return messageDelete;
+	}
+
+
+
+	public void setMessageDelete(String messageDelete) {
+		this.messageDelete = messageDelete;
+	}
+
+
+
+	public String getMessageModify() {
+		return messageModify;
+	}
+
+
+
+	public void setMessageModify(String messageModify) {
+		this.messageModify = messageModify;
+	}
+
+
+
+	public ProductCRUDBeanLocal getProductCRUD() {
+		return productCRUD;
+	}
+
+
+
+	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
+		this.productCRUD = productCRUD;
+	}
+
+
+
+	public LoginBeanLocal getLogin() {
+		return login;
+	}
+
+
+
+	public void setLogin(LoginBeanLocal login) {
+		this.login = login;
+	}
+
+
+
+	public static Date getData1() {
+		return data1;
+	}
+
+
+
+	public static void setData1(Date data1) {
+		HotelManagementBean.data1 = data1;
+	}
+
+
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	
 	 
 	 
@@ -245,5 +351,8 @@ public class HotelManagementBean implements Serializable{
 
 	
 }
+
+
+
 
 
