@@ -41,19 +41,22 @@ public class ConsistencyChecker {
 		FlightDTO flightTemp = (FlightDTO) product;
 	
 		//volo di andata
-		if( !flightTemp.getArea_start().equals(stage.getArea()))
+		if( !flightTemp.getArea_start().equalsIgnoreCase(stage.getArea()))
 		{
 			for(int i=0; i<stage.getProducts().size();i++)
 			{
 				if(! (stage.getProducts().get(i) instanceof HotelDTO))
+				{
 				if(flightTemp.getTimeEnd().after(stage.getProducts().get(i).getTimeStart()) )
 					return false;
+				}
 				else
 				// se è un hotel faccio il controllo solo sul giorno
 				{
 				if(getDayOfMonth(flightTemp.getTimeEnd())> getDayOfMonth(stage.getProducts().get(i).getTimeStart())) 
 						return false;
 				}
+				
 					
 			}
 		}
@@ -65,8 +68,10 @@ public class ConsistencyChecker {
 			for(int i=0; i<stage.getProducts().size();i++)
 			{
 				if(! (stage.getProducts().get(i) instanceof HotelDTO))
+				{	
 				if(flightTemp.getTimeStart().before(stage.getProducts().get(i).getTimeEnd()) )
 					return false;
+				}
 				else
 				// se è un hotel faccio il controllo solo sul giorno
 				{
@@ -88,7 +93,7 @@ public class ConsistencyChecker {
 				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
 				
 				//se c'è un volo di andata
-				if( !flightTemp.getArea_start().equals(stage.getArea()))
+				if( !flightTemp.getArea_start().equalsIgnoreCase(stage.getArea()))
 				{
 					if(flightTemp.getTimeEnd().after(product.getTimeStart()))
 						return false;
@@ -124,6 +129,45 @@ public class ConsistencyChecker {
 				}
 				
 			}
+			
+				
+		}
+		
+		
+	}
+	/* Nel caso di Hotel il confronto va fatto solo con i voli, perchè l'hotel può
+	 * sovrapporsi alle uscite
+	 */
+	
+	if((product instanceof HotelDTO) )
+	{
+		
+		for(int i=0; i<stage.getProducts().size();i++)
+		{
+			
+			
+			if((stage.getProducts().get(i) instanceof FlightDTO))
+			{
+				
+				
+				FlightDTO flightTemp = (FlightDTO) stage.getProducts().get(i);
+				
+				//se c'è un volo di andata
+				if( !flightTemp.getArea_start().equalsIgnoreCase(stage.getArea()))
+				{
+					if(getDayOfMonth(flightTemp.getTimeEnd())> getDayOfMonth((product.getTimeStart())))
+						return false;
+				}
+				else
+				//se c'è un volo di ritorno
+				{
+					if(getDayOfMonth(flightTemp.getTimeStart())< getDayOfMonth((product.getTimeEnd())))
+						return false;
+					
+				}	
+				
+			}
+			
 			
 				
 		}
