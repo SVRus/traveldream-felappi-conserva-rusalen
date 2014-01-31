@@ -111,7 +111,9 @@ RegistrationBeanLocal reg;
  
      @PostConstruct
     public void feed() 
-    {     
+    {     Employee toCheck=this.emploejb.find("user");
+         if(toCheck!=null)
+         {
     	 Code code=new Code(123456789);
     	 codeejb.create(code);
     	 code=new Code(12);
@@ -382,6 +384,7 @@ travels.add(travelPreReserved);
    single.setBought(true);
    single.setIdBuyer("compratore");
    giftMan.edit(single);
+         }
     }
    
 }
