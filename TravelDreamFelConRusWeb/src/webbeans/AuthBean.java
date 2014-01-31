@@ -8,8 +8,9 @@ import java.util.Date;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
+import authentication.LoginBeanLocal;
+import authentication.RegistrationBeanLocal;
 import dto.CustomerDTO;
 import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
@@ -17,8 +18,6 @@ import dto.GiftListDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.TravelPackageDTO;
-import authentication.LoginBeanLocal;
-import authentication.RegistrationBeanLocal;
 
 @ManagedBean(name="auth")
 @SessionScoped

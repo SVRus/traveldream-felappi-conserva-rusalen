@@ -77,7 +77,7 @@ public PersonalBean() {
 @PostConstruct
 public void update()
 {
-
+/*
 HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
 HotelDTO  hotel1=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
 HotelDTO  hotel2= new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
@@ -89,7 +89,7 @@ procrud.createProductFromEmployee(hotel2, login.getPrincipalUsername());
 procrud.createProductFromEmployee(hotel3, login.getPrincipalUsername());
 
 generic=(EmployeeDTO)login.findLogIn();
-
+*/
 
 
 

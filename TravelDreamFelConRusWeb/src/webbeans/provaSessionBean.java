@@ -47,7 +47,9 @@ public class provaSessionBean {
 	}
 
 	public String getUsername() {
+		if(true)
 		return username;
+		else return "";
 	}
 
 	public void setUsername(String username) {

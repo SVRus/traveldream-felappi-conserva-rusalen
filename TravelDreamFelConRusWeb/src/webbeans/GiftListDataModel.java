@@ -1,11 +1,11 @@
 package webbeans;
 
 import java.io.Serializable;
-import java.util.List;  
+import java.util.List;
 
-import javax.faces.model.ListDataModel;  
+import javax.faces.model.ListDataModel;
 
-import org.primefaces.model.SelectableDataModel;  
+import org.primefaces.model.SelectableDataModel;
 
 import dto.GiftListDTO;
   

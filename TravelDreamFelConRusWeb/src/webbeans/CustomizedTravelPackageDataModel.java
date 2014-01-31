@@ -1,11 +1,11 @@
 package webbeans;
 
 import java.io.Serializable;
-import java.util.List;  
+import java.util.List;
 
-import javax.faces.model.ListDataModel;  
+import javax.faces.model.ListDataModel;
 
-import org.primefaces.model.SelectableDataModel;  
+import org.primefaces.model.SelectableDataModel;
 
 import dto.CustomizedTravelPackageDTO;
   
@@ -29,7 +29,7 @@ public class CustomizedTravelPackageDataModel extends ListDataModel<CustomizedTr
         List<CustomizedTravelPackageDTO> travelPackages = (List<CustomizedTravelPackageDTO>) getWrappedData();  
           
         for(CustomizedTravelPackageDTO travelPackage : travelPackages) {  
-            if(travelPackage.getName().equals(rowKey))  
+            if(travelPackage.getIdtravelpackage().equals(Long.parseLong(rowKey)))  
                 return travelPackage;  
         }  
           
@@ -38,6 +38,6 @@ public class CustomizedTravelPackageDataModel extends ListDataModel<CustomizedTr
   
     @Override  
     public Object getRowKey(CustomizedTravelPackageDTO travelPackage) {  
-        return travelPackage.getName();  
+        return travelPackage.getIdCustomerBuyer();  
     }  
 }  
