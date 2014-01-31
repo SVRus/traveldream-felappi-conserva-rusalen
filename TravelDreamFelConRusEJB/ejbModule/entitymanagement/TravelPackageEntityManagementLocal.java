@@ -14,7 +14,7 @@ public interface TravelPackageEntityManagementLocal {
 /*    public String findIdCustomerFriendOwner(Long idTravelPackage);
 */    public <TravelPackage>  TravelPackage find(Object id);
 	 public <TravelPackage> void remove (TravelPackage travel);
-		
+		public <TravelPackage> void edit(TravelPackage travel);
 
 
 }
