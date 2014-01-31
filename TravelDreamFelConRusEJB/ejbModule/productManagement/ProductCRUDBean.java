@@ -22,11 +22,16 @@ import entities.Flight;
 import entities.Hotel;
 import entities.Outing;
 import entities.Product;
+import entities.TravelPackage;
 import entitymanagement.EmployeeEntityManagementLocal;
 import entitymanagement.FlightEntityManagementLocal;
 import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
+import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
+import entitymanagement.StageEntityManagementBeanLocal;
+import entitymanagement.StageEntityManagementLocal;
+import entitymanagement.TravelPackageEntityManagementLocal;
 
 /**
  * Session Bean implementation class ProductCreateBean
@@ -48,6 +53,10 @@ DTOFactory dto;
 EmployeeEntityManagementLocal emplo;
 @EJB
 LoginBeanLocal log;
+@EJB
+StageEntityManagementLocal stageman;
+@EJB
+TravelPackageEntityManagementLocal travman;
 
 
     /**
@@ -141,13 +150,17 @@ LoginBeanLocal log;
     {
     	boolean ok=false;
 		try 
-		{
-				Product product=prod.find(productdto.getIdProduct());
-				prod.remove(product);
-				
-				
-				
-				
+		{  
+				if (productdto.getState()!=State.INCLUDED) {
+					Product product = prod.find(productdto.getIdProduct());
+					prod.remove(product);
+				}
+				else
+				{
+					Long idStage=productdto.getIdstage();
+					TravelPackage travel=travman.find(stageman.findIdTravelPackageContainer(idStage));
+					travman.remove(travel);
+				}
 				ok=true;
 		}
     	catch (Exception e)
