@@ -144,6 +144,10 @@ LoginBeanLocal log;
 		{
 				Product product=prod.find(productdto.getIdProduct());
 				prod.remove(product);
+				
+				
+				
+				
 				ok=true;
 		}
     	catch (Exception e)
