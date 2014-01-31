@@ -317,7 +317,7 @@ public class StageManagementBean {
 		outingsView.remove(selectedOutingView);
 		outingsView.trimToSize();
 		outingModelView = new OutingDataModel(outingsView);
-		outings.add(selectedOuting);
+		outings.add(selectedOutingView);
 		outingModel= new OutingDataModel(outings);
 	}
 
