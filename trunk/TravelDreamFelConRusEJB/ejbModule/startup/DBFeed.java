@@ -125,8 +125,8 @@ GiftListEntityManagementLocal giftMan;
     	 emploejb.create(employee);
     	 ArrayList <Group> groupsCustomer=new ArrayList <Group>();
 	     groups.add(Group.CUSTOMER);
-		 Customer customer=new Customer("io@email.it","marcello","felappi","036486876","e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855","cello",groupsCustomer,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
-    	//password iosonocello
+		 Customer customer=new Customer("io@email.it","marcello","felappi","036486876","b6c45863875e34487ca3c155ed145efe12a74581e27befec5aa661b8ee8ca6dd","customer",groupsCustomer,new ArrayList <CustomizedTravelPackage>(),new ArrayList<TravelPackage>(),new ArrayList <GiftList>());
+    	//password customer
 		 custoejb.create(customer);
     	 String strDateHotel1Start="2014-03-21 2:00PM";
     	 String strDateHotel1End="2014-03-29 18:00PM";
