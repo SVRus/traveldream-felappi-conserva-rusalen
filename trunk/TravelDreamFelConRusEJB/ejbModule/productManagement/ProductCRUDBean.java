@@ -11,11 +11,13 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import stateenum.State;
+import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
 import dto.ProductDTO;
+import dto.TravelPackageDTO;
 import dto_entitiesconversion.DTOFactory;
 import entities.Employee;
 import entities.Flight;
@@ -29,7 +31,6 @@ import entitymanagement.HotelEntityManagementLocal;
 import entitymanagement.OutingEntityManagementLocal;
 import entitymanagement.PrepackedTravelPackageEntityManagementLocal;
 import entitymanagement.ProductEntityManagementLocal;
-import entitymanagement.StageEntityManagementBeanLocal;
 import entitymanagement.StageEntityManagementLocal;
 import entitymanagement.TravelPackageEntityManagementLocal;
 
@@ -159,6 +160,10 @@ TravelPackageEntityManagementLocal travman;
 				{
 					Long idStage=productdto.getIdstage();
 					TravelPackage travel=travman.find(stageman.findIdTravelPackageContainer(idStage));
+					TravelPackageDTO tradto=dto.simpleTravelPackageToDTO(travel);
+					tradto.setRecoursiveTravelProductState(TravelState.AVAILABLE, State.AVAILABLE);
+					travel=dto.travelPackageDTOToEntity(tradto, false);
+					travman.edit(travel);
 					travman.remove(travel);
 				}
 				ok=true;
