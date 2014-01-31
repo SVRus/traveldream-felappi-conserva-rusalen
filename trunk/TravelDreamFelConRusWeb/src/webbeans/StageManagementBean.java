@@ -182,7 +182,19 @@ public class StageManagementBean {
 			shared.getCurrentStage().addProduct(outingsView.get(i));
 		}
 	}
-	
+	public String show()
+	{
+		currentStage= tempCurrentStage;
+		update();
+		 flightStartView= stageHelper.flightStart();
+		  flightEndView= stageHelper.flightEnd();
+		  hotelView = stageHelper.hotel();
+		  outingsView= stageHelper.outings();
+		  outingModelView = new OutingDataModel(outingsView);  
+		  return "showStage";
+		  
+		
+	}
 	public String allowed()
 	{
 		if (!shared.isBusyStage())
