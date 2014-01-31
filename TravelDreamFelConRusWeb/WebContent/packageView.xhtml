@@ -60,7 +60,7 @@
                 	
                
                <f:facet name="footer">
-                  <p:commandButton  action="stageView" value="Visualizza tappa" icon="ui-icon-zoomin" />  
+                  <p:commandButton  action="#{stageManagement.show()}" value="Visualizza tappa" icon="ui-icon-zoomin" />  
              </f:facet>
 				
               </p:dataTable>
@@ -84,17 +84,17 @@
 	
 		<p:outputLabel value="Descrizione:" for="description" />
 		<h:outputText id="description" label="description"
-			value="#{customerPackageEdit.description}"/>  
+			value="#{packageEdit.currentTravelPackage.description}"/>  
 				
 		
 		<p:outputLabel value="Data di partenza:" for="startDate" />
-		<h:outputText id="startDate" value="#{customerPackageEdit.time_start}" 
+		<h:outputText id="startDate" value="#{packageEdit.currentTravelPackage.time_start}" 
 			/>
 			
 		<p:outputLabel value="Data di fine:" for="endDate" />
-		<h:outputText id="endDate" value="#{customerPackageEdit.time_end}" />
+		<h:outputText id="endDate" value="#{packageEdit.currentTravelPackage.time_end}" />
 			
-		 <p:commandButton  action="allPackages" value="Riorna all'elenco" icon="ui-icon-arrowrefresh-1-w" />  
+		 <p:commandButton  action="allPackages" value="Ritorna all'elenco" icon="ui-icon-arrowrefresh-1-w" />  
 		
 	</h:panelGrid>
 	
