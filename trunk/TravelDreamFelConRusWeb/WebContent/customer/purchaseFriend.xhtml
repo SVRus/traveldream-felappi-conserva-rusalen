@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+	  
+	   <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  
+        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+		
+       <p:layoutUnit position="center" header = "Acquisto">  
+	       <h:form id="purchase" style =" text-align : center;">
+	       
+            <p:outputLabel value="Autenticazione effettuata. É possibile proseguire con l'acquisto." ></p:outputLabel><br/>
+            <p:commandButton onclick="PF('dlg3').show();" value="Procedi al pagamento"  icon="ui-icon-cart" /> 
+           
+			
+	      </h:form>
+	  </p:layoutUnit>
+	
+	</p:layout>
+	
+	 <p:dialog header="Pagamento effettuato" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50">      
+            <p:outputLabel value="Grazie per aver scelto di viaggiare con noi! "  />
+         </p:dialog>
+      
+    
+	</body>
+</html>

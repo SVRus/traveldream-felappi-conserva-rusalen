@@ -8,23 +8,28 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="North unit content." />  
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+        <style type="text/css">
+          .ui-widget{font-size:90% !important;}  
+          </style> 
+          <a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
         </p:layoutUnit>  
       
-        <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="South unit content." />  
+        
+      
+       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>   
         </p:layoutUnit>  
       
-        <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-            <h:outputText value="West unit content." />  
-        </p:layoutUnit>  
-      
-        <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-            <h:outputText value="Right unit content." />
-              
-              
-        </p:layoutUnit>  
+    
       
       <p:layoutUnit position="center">  
        <h:inputHidden  value="#{packageManagement.update()}"/>
@@ -41,15 +46,15 @@
 
   
                 <f:facet name="header">
-                    Lista TravelPackage
+                    Pacchetti
                 </f:facet>  
                 
-                <p:column  headerText="Nome" sortBy="#{TravelPackage.name}"  id="name">
+                <p:column  headerText="Nome" sortBy="#{travelPackage.name}"  id="name">
                     
                     
                  #{travelPackage.name}  
         		</p:column>  
-        		<p:column  headerText="Descrizione" sortBy="#{TravelPackage.description}"  id="description">
+        		<p:column  headerText="Descrizione" sortBy="#{travelPackage.description}"  id="description">
                     
                     
                  #{travelPackage.description}  
@@ -66,8 +71,8 @@
                      <p:commandButton action="#{packageEdit.allowedNew}" value="Nuovo" icon="ui-icon-star" />  
                		
                     <p:commandButton action="#{packageEdit.allowed}" value="Modifica"  />  
-               		 <p:commandButton value="Elimina" actionListener="#{packageManagement.deletePackage}" update="traveltable" icon="ui-icon-trash"/>
-                  
+               		<p:commandButton value="Elimina" actionListener="#{packageManagement.deletePackage}" update="traveltable" icon="ui-icon-trash"/>
+                  	
                </f:facet>
 				
               </p:dataTable>

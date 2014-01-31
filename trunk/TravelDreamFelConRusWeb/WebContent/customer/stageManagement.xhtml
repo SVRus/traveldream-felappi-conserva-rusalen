@@ -256,7 +256,7 @@
         	
            <p:dialog header="Aggiungi albergo" widgetVar="hotelDl" showEffect="explode" hideEffect="bounce" height="300" width="700">  
               <h:form id="formHotel">
-     			<p:dataTable var="hotel" value="#{stageManagement.hotelModel}" rowKey="#{hotel}" paginator="true" rows="10"  
+     			<p:dataTable var="hotel" value="#{stageManagement.hotelModel}" rowKey="#{hotel.idProduct}" paginator="true" rows="10"  
                 selection="#{stageManagement.selectedHotel}" selectionMode="single" 
                 filteredValue="#{stageManagement.filteredHotels}" id="hoteltable"
                  rowsPerPageTemplate="10,15,50" >  
