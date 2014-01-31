@@ -15,15 +15,20 @@
       		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
          <p:graphicImage  value="logo.jpg" style=" height:100px;" />
          </a>
-		</p:layoutUnit>  
-     
+		</p:layoutUnit> 
+		 
+      <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+         <h:form style =" text-align : center;">
+           <p:button outcome="/employee/employeePersonal.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
+         </h:form>  
+        </p:layoutUnit>  
       
         <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
             <p:menu>  
                
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
                      <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
-                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
            
             </p:menu>   
                        
@@ -32,7 +37,7 @@
       
       <p:layoutUnit position="center">  
 	  <h:form id="form">
- <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.name}" paginator="true" rows="10"  
+ <p:dataTable var="hotel" value="#{hotelManagement.hotelModel}" rowKey="#{hotel.idProduct}" paginator="true" rows="10"  
                 selection="#{hotelManagement.selectedHotel}" selectionMode="single" 
                 filteredValue="#{hotelManagement.filteredHotels}" id="hoteltable"
                  rowsPerPageTemplate="10,15,50" >  
@@ -84,7 +89,7 @@
                <f:facet name="footer">
                     <p:commandButton  value="Aggiungi nuovo" onclick="PF('dlg3').show();" type="button" icon="ui-icon-star"/> 
                     
-                    <p:commandButton value="Elimina" actionListener="#{hotelManagement.deleteHotel}" update="hoteltable" icon="ui-icon-trash"/>
+                    <p:commandButton value="Elimina" actionListener="#{hotelManagement.deleteHotel}" oncomplete="PF('delMess').show();" update="hoteltable" icon="ui-icon-trash"/>
                     
                           
                 </f:facet>          
@@ -92,13 +97,19 @@
                 
          </h:form>   
          
-         
-         <h:form style =" text-align : center;">
-          <p:button outcome="/index.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
-        </h:form> 
+   
     
     
         </p:layoutUnit>  
+         <p:dialog header="Eliminazione" widgetVar="delMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50" dynamic="true">      
+             #{hotelManagement.messageDelete}
+         </p:dialog>
+         
+        <p:dialog header="Modifica" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50" dynamic="true">      
+            #{hotelManagement.messageModify}
+         </p:dialog>
       
         </p:layout> 
          
@@ -211,7 +222,7 @@
       		<f:facet name="footer">
                      
                             <p:commandButton value="Salva modifiche" update=":form:hoteltable"  
-                            oncomplete="modDialog.hide(); " actionListener="#{hotelManagement.updateHotel}"/>
+                            oncomplete="modDialog.hide(); PF('modMess').show();" actionListener="#{hotelManagement.updateHotel}"/>
                     </f:facet>
 			
                 </p:panelGrid> 

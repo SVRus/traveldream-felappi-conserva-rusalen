@@ -23,9 +23,9 @@
   <PROCESS-ITEM ID="rules:packageEdit.xhtml:3" NAME="item3"
    PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="modifySuccess::#packageModifiedPackageEmployee.xhtml"
-    NAME="output" PATH="/packageModifiedPackageEmployee.xhtml"
-    TARGET="rules:#packageModifiedPackageEmployee.xhtml"
+    ID="modifySuccess::#packageModifiedSuccessPackageEmployee.xhtml"
+    NAME="output" PATH="/packageModifiedSuccessPackageEmployee.xhtml"
+    TARGET="rules:#packageModifiedSuccessPackageEmployee.xhtml"
     TITLE="modifySuccess" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
   <PROCESS-ITEM ID="rules:packageEdit.xhtml:4" NAME="item4"
@@ -141,10 +141,11 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#packageManagement.xhtml"
   PATH="/packageManagement.xhtml" SHAPE="272,577,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageModifiedPackageEmployee.xhtml"
-  PATH="/packageModifiedPackageEmployee.xhtml" SHAPE="304,577,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#packageInsertedSuccesEmployee.xhtml"
   PATH="/packageInsertedSuccesEmployee.xhtml" SHAPE="304,1105,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#packageInconsistent.xhtml"
   PATH="/packageInconsistent.xhtml" SHAPE="304,1537,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#packageModifiedSuccessPackageEmployee.xhtml"
+  PATH="/packageModifiedSuccessPackageEmployee.xhtml"
+  SHAPE="304,577,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
