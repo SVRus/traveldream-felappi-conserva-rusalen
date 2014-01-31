@@ -19,6 +19,7 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -83,32 +84,58 @@ public class OutingManagementBean {
 	  
 	  public void newOuting(ActionEvent actionEvent)
 	  {
-			newOuting = new OutingDTO((long) 0, login.getPrincipalUsername(), name,
-		                cost,  timeStart,  timeEnd,  description, area,
-		                State.AVAILABLE,place);
+		  if (	    name != null && !name.isEmpty() &&
+					Float.toString(cost) != null && 
+					timeStart != null && !timeStart.toString().isEmpty() &&
+					timeEnd != null && !timeEnd.toString().isEmpty() &&
+					area != null && !area.isEmpty() &&
+					place != null && !place.isEmpty() &&
+					description != null && ! description.isEmpty() 
+					)
+		  {
+			newOuting = new OutingDTO((long) 0, login.getPrincipalUsername(), name, cost,  timeStart,  timeEnd,  
+					    description, area, State.AVAILABLE,place);
 			productCRUD.createProduct(newOuting);
 			System.out.println("Escursione creata.");
-			outings.add(newOuting);
+			//outings.add(newOuting);
+			outings= productCRUD.findAllOutings();
+			outingModel=new OutingDataModel(outings);
+		  }
 		
 		  
 	  }
 	  public void deleteOuting(ActionEvent actionEvent) {
 			
 		    productCRUD.delete(selectedOuting);
-		    outings.remove(selectedOuting);
+		   // outings.remove(selectedOuting);
+		    outings= productCRUD.findAllOutings();
+			outingModel=new OutingDataModel(outings);
 		    
 		   }
 	  public void updateOuting(ActionEvent actionEvent){
 			
+		  if (	    selectedOuting.getName() != null && !selectedOuting.getName().isEmpty() &&
+					Float.toString(selectedOuting.getCost()) != null && 
+					selectedOuting.getTimeStart() != null && !selectedOuting.getTimeStart().toString().isEmpty() &&
+					selectedOuting.getTimeEnd() != null && !selectedOuting.getTimeEnd().toString().isEmpty() &&
+					selectedOuting.getArea() != null && !selectedOuting.getArea().isEmpty() &&
+					selectedOuting.getPlace()  != null && !selectedOuting.getPlace().isEmpty() && 
+					selectedOuting.getDescription() != null && !selectedOuting.getDescription().isEmpty()
+					)
+		  {
 				outings.remove(selectedOuting);
 			    newOuting = new OutingDTO(selectedOuting.getIdstage(), selectedOuting.getEmployeeCreator(),
-			    		                  selectedOuting.getName(), selectedOuting.getCost(),  
+			    		                  selectedOuting.getName(), selectedOuting.getIdProduct(),
+			    		                  selectedOuting.getCost(),  
 			    		                  selectedOuting.getTimeStart(),  selectedOuting.getTimeEnd(), 
 			    		                  selectedOuting.getDescription(), selectedOuting.getArea(),
                                           State.AVAILABLE,selectedOuting.getPlace());
 				productCRUD.updateProduct(newOuting);
 				System.out.println("Escursione modificata. Forse.");
-				outings.add(newOuting);
+			//	outings.add(newOuting);
+				outings= productCRUD.findAllOutings();
+				outingModel=new OutingDataModel(outings);
+		  }
 			   
 		   }
 	  
@@ -243,4 +270,5 @@ public class OutingManagementBean {
 
 	 
 }
+
 
