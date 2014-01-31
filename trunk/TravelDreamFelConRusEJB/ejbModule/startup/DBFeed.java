@@ -101,6 +101,8 @@ PurchaseGiftListBeanLocal gift;
 GiftListEntityManagementLocal giftMan;
 @EJB 
 RegistrationBeanLocal reg;
+@EJB
+CodeEntityManagementLocal cod;
     /**
      * Default constructor. 
      */
@@ -113,6 +115,8 @@ RegistrationBeanLocal reg;
     public void feed() 
     {    
     	 Code code=new Code(123456789);
+    	 if(cod.find(new Long(123456789))==null)
+    	 {
     	 codeejb.create(code);
     	 code=new Code(12);
     	 codeejb.create(code);
@@ -384,5 +388,5 @@ travels.add(travelPreReserved);
    giftMan.edit(single);
         
     }
-   
+    }
 }
