@@ -138,7 +138,7 @@ MailSenderLocal mail;
 	    {
 	    	boolean ok=false;
 			try 
-			{
+			{ traveldto.setRecoursiveTravelProductState(TravelState.AVAILABLE, State.AVAILABLE);
 					TravelPackage product=trav.find(traveldto.getIdtravelpackage());
 					trav.remove(product);
 					ok=true;
