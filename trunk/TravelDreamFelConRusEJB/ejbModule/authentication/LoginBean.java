@@ -164,7 +164,9 @@ public boolean checkGift(String giftCode  )
 	
 	return ok;
 }
-
+/**
+ * method that check the correctness of the giftList code launching an exception when wrong
+ */
 public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws GiftListNotFoundException
 {
 	
@@ -189,7 +191,9 @@ public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws Gi
 	
 }
 
-
+/**
+ * method that check the correctness of the friend code launching an exception when wrong
+ */
 public TravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException
 {
 	CustomizedTravelPackage customized=custoMan.findCustomizedTravelPackageForFriend(friendCode);
