@@ -4,107 +4,97 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
-<navigation-rule>
-       <from-view-id>packageManagement.xhtml</from-view-id>
-       <navigation-case>
-           <from-outcome>sel</from-outcome>
-           <to-view-id>
-            
-           /hotelManagement.xhtml
-          
-           </to-view-id>
-           <redirect/>  
-       </navigation-case>
-    </navigation-rule>
+
     <navigation-rule>
-       <from-view-id>packageManagement.xhtml</from-view-id>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>packageEdit</from-outcome>
            <to-view-id>
-           /packageEdit.xhtml
+           employee/packageEdit.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
+    
         <navigation-rule>
-       <from-view-id>packageManagement.xhtml</from-view-id>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>notBusy</from-outcome>
            <to-view-id>
-          /packageEdit.xhtml
+          /employee/packageEdit.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     <navigation-rule>
-       <from-view-id>packageManagement.xhtml</from-view-id>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>errorBusy</from-outcome>
            <to-view-id>
-           /packageErrorBusy.xhtml
+           /employee/packageErrorBusy.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>closed</from-outcome>
            <to-view-id>
-           /packageManagement.xhtml
+           /employee/packageManagement.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     
         <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>notBusyStage</from-outcome>
            <to-view-id>
-          /stageManagement.xhtml
+          /employee/stageManagement.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>errorBusyStage</from-outcome>
            <to-view-id>
-           /stageErrorBusy.xhtml
+           /employee/stageErrorBusy.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     <navigation-rule>
-       <from-view-id>stageManagement.xhtml</from-view-id>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>closed</from-outcome>
            <to-view-id>
-           /packageEdit.xhtml
+           /employee/packageEdit.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     
      <navigation-rule>
-       <from-view-id>stageManagement.xhtml</from-view-id>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>addedStage</from-outcome>
            <to-view-id>
-           /packageEdit.xhtml
+           /employee/packageEdit.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     
      <navigation-rule>
-       <from-view-id>stageManagement.xhtml</from-view-id>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>inconsistentStage</from-outcome>
            <to-view-id>
-           /stageErrorInconsistent.xhtml
+           /employee/stageErrorInconsistent.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
@@ -112,11 +102,11 @@
     
        
      <navigation-rule>
-       <from-view-id>stageManagement.xhtml</from-view-id>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>inconsistentDateStage</from-outcome>
            <to-view-id>
-           /stageErrorDate.xhtml
+           /employee/stageErrorDate.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
@@ -146,32 +136,32 @@
     </navigation-rule>
     
      <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>modifySuccess</from-outcome>
            <to-view-id>
-           /packageModifiedSuccessPackageEmployee.xhtml
+           /employee/packageModifiedSuccessPackageEmployee.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     
      <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>insertSuccess</from-outcome>
            <to-view-id>
-           /packageInsertedSuccesEmployee.xhtml
+           /employee/packageInsertedSuccesEmployee.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
       </navigation-rule> 
         <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>inconsistentPackage</from-outcome>
            <to-view-id>
-           /packageInconsistent.xhtml
+           /employee/packageInconsistent.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
@@ -180,16 +170,26 @@
     
     
      <navigation-rule>
-       <from-view-id>packageEdit.xhtml</from-view-id>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
        <navigation-case>
            <from-outcome>errorBusyStage</from-outcome>
            <to-view-id>
-           /stageErrorBusy.xhtml
+           /employee/stageErrorBusy.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
     </navigation-rule>
     
+       <navigation-rule>
+       <from-view-id>allPackages.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showPackage</from-outcome>
+           <to-view-id>
+           /packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
     
     
 

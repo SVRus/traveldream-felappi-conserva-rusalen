@@ -1,98 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:packageEdit.xhtml" PATH="packageEdit.xhtml"
-  SHAPE="32,449,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:0" NAME="item"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="closed::#packageManagement.xhtml"
-    NAME="output" PATH="/packageManagement.xhtml"
-    TARGET="rules:#packageManagement.xhtml" TITLE="closed" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:1" NAME="item1"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="notBusyStage::#stageManagement.xhtml"
-    NAME="output" PATH="/stageManagement.xhtml"
-    TARGET="rules:#stageManagement.xhtml" TITLE="notBusyStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:2" NAME="item2"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="errorBusyStage::#stageErrorBusy.xhtml"
-    NAME="output" PATH="/stageErrorBusy.xhtml"
-    TARGET="rules:#stageErrorBusy.xhtml" TITLE="errorBusyStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:3" NAME="item3"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="modifySuccess::#packageModifiedSuccessPackageEmployee.xhtml"
-    NAME="output" PATH="/packageModifiedSuccessPackageEmployee.xhtml"
-    TARGET="rules:#packageModifiedSuccessPackageEmployee.xhtml"
-    TITLE="modifySuccess" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:4" NAME="item4"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="insertSuccess::#packageInsertedSuccesEmployee.xhtml"
-    NAME="output" PATH="/packageInsertedSuccesEmployee.xhtml"
-    TARGET="rules:#packageInsertedSuccesEmployee.xhtml"
-    TITLE="insertSuccess" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:5" NAME="item5"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="inconsistentPackage::#packageInconsistent.xhtml" NAME="output"
-    PATH="/packageInconsistent.xhtml"
-    TARGET="rules:#packageInconsistent.xhtml"
-    TITLE="inconsistentPackage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageEdit.xhtml:6" NAME="item6"
-   PATH="packageEdit.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="errorBusyStage::#stageErrorBusy.xhtml"
-    NAME="output" PATH="/stageErrorBusy.xhtml"
-    TARGET="rules:#stageErrorBusy.xhtml" TITLE="errorBusyStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:stageManagement.xhtml"
-  PATH="stageManagement.xhtml" SHAPE="32,225,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:stageManagement.xhtml:0" NAME="item"
-   PATH="stageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="closed::#packageEdit.xhtml" NAME="output"
-    PATH="/packageEdit.xhtml" TARGET="rules:#packageEdit.xhtml"
-    TITLE="closed" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:stageManagement.xhtml:1" NAME="item1"
-   PATH="stageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="addedStage::#packageEdit.xhtml"
-    NAME="output" PATH="/packageEdit.xhtml"
-    TARGET="rules:#packageEdit.xhtml" TITLE="addedStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:stageManagement.xhtml:2" NAME="item2"
-   PATH="stageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="inconsistentStage::#stageErrorInconsistent.xhtml" NAME="output"
-    PATH="/stageErrorInconsistent.xhtml"
-    TARGET="rules:#stageErrorInconsistent.xhtml"
-    TITLE="inconsistentStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:stageManagement.xhtml:3" NAME="item3"
-   PATH="stageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT
-    ID="inconsistentDateStage::#stageErrorDate.xhtml" NAME="output"
-    PATH="/stageErrorDate.xhtml" TARGET="rules:#stageErrorDate.xhtml"
-    TITLE="inconsistentDateStage" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
- </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#stageManagement.xhtml"
-  PATH="/stageManagement.xhtml" SHAPE="272,641,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageEdit.xhtml" PATH="/packageEdit.xhtml"
-  SHAPE="288,232,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#stageErrorBusy.xhtml"
-  PATH="/stageErrorBusy.xhtml" SHAPE="272,753,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageErrorBusy.xhtml"
-  PATH="/packageErrorBusy.xhtml" SHAPE="288,353,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#hotelManagement.xhtml"
-  PATH="/hotelManagement.xhtml" SHAPE="288,33,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#stageErrorInconsistent.xhtml"
-  PATH="/stageErrorInconsistent.xhtml" SHAPE="288,176,50,25" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:index.xhtml" PATH="index.xhtml"
   SHAPE="32,513,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:index.xhtml:0" NAME="item" PATH="index.xhtml" model-entity="JSFProcessItem">
@@ -110,42 +17,146 @@
   SHAPE="288,1041,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#giftListErrorCode.xhtml"
   PATH="/giftListErrorCode.xhtml" SHAPE="256,984,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#stageErrorDate.xhtml"
-  PATH="/stageErrorDate.xhtml" SHAPE="288,280,50,25" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:packageManagement.xhtml"
-  PATH="packageManagement.xhtml" SHAPE="32,961,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:packageManagement.xhtml:0" NAME="item"
-   PATH="packageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="sel::#hotelManagement.xhtml" NAME="output"
-    PATH="/hotelManagement.xhtml" TARGET="rules:#hotelManagement.xhtml"
-    TITLE="sel" model-entity="JSFProcessItemOutput"/>
+ <PROCESS-ITEM NAME="rules:employee#packageManagement.xhtml"
+  PATH="employee/packageManagement.xhtml" SHAPE="32,1169,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:employee#packageManagement.xhtml:0"
+   NAME="item" PATH="employee/packageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="packageEdit::employee#packageEdit.xhtml"
+    NAME="output" PATH="employee/packageEdit.xhtml"
+    TARGET="rules:employee#packageEdit.xhtml" TITLE="packageEdit" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageManagement.xhtml:1" NAME="item1"
-   PATH="packageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="packageEdit::#packageEdit.xhtml"
-    NAME="output" PATH="/packageEdit.xhtml"
-    TARGET="rules:#packageEdit.xhtml" TITLE="packageEdit" model-entity="JSFProcessItemOutput"/>
+  <PROCESS-ITEM ID="rules:employee#packageManagement.xhtml:1"
+   NAME="item1" PATH="employee/packageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="notBusy::#employee#packageEdit.xhtml"
+    NAME="output" PATH="/employee/packageEdit.xhtml"
+    TARGET="rules:#employee#packageEdit.xhtml" TITLE="notBusy" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageManagement.xhtml:2" NAME="item2"
-   PATH="packageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="notBusy::#packageEdit.xhtml" NAME="output"
-    PATH="/packageEdit.xhtml" TARGET="rules:#packageEdit.xhtml"
-    TITLE="notBusy" model-entity="JSFProcessItemOutput"/>
-  </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:packageManagement.xhtml:3" NAME="item3"
-   PATH="packageManagement.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="errorBusy::#packageErrorBusy.xhtml"
-    NAME="output" PATH="/packageErrorBusy.xhtml"
-    TARGET="rules:#packageErrorBusy.xhtml" TITLE="errorBusy" model-entity="JSFProcessItemOutput"/>
+  <PROCESS-ITEM ID="rules:employee#packageManagement.xhtml:2"
+   NAME="item2" PATH="employee/packageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="errorBusy::#employee#packageErrorBusy.xhtml"
+    NAME="output" PATH="/employee/packageErrorBusy.xhtml"
+    TARGET="rules:#employee#packageErrorBusy.xhtml" TITLE="errorBusy" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
- <PROCESS-ITEM NAME="rules:#packageManagement.xhtml"
-  PATH="/packageManagement.xhtml" SHAPE="272,577,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageInsertedSuccesEmployee.xhtml"
-  PATH="/packageInsertedSuccesEmployee.xhtml" SHAPE="304,1105,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageInconsistent.xhtml"
-  PATH="/packageInconsistent.xhtml" SHAPE="304,1537,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#packageModifiedSuccessPackageEmployee.xhtml"
-  PATH="/packageModifiedSuccessPackageEmployee.xhtml"
-  SHAPE="304,577,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:employee#packageEdit.xhtml"
+  PATH="employee/packageEdit.xhtml" SHAPE="288,1185,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:0" NAME="item"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="closed::#employee#packageManagement.xhtml"
+    NAME="output" PATH="/employee/packageManagement.xhtml"
+    TARGET="rules:#employee#packageManagement.xhtml" TITLE="closed" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:1" NAME="item1"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="notBusyStage::#employee#stageManagement.xhtml" NAME="output"
+    PATH="/employee/stageManagement.xhtml"
+    TARGET="rules:#employee#stageManagement.xhtml" TITLE="notBusyStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:2" NAME="item2"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="errorBusyStage::#employee#stageErrorBusy.xhtml" NAME="output"
+    PATH="/employee/stageErrorBusy.xhtml"
+    TARGET="rules:#employee#stageErrorBusy.xhtml" TITLE="errorBusyStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:3" NAME="item3"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="modifySuccess::#employee#packageModifiedSuccessPackageEmployee.xhtml"
+    NAME="output"
+    PATH="/employee/packageModifiedSuccessPackageEmployee.xhtml"
+    TARGET="rules:#employee#packageModifiedSuccessPackageEmployee.xhtml"
+    TITLE="modifySuccess" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:4" NAME="item4"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="insertSuccess::#employee#packageInsertedSuccesEmployee.xhtml"
+    NAME="output" PATH="/employee/packageInsertedSuccesEmployee.xhtml"
+    TARGET="rules:#employee#packageInsertedSuccesEmployee.xhtml"
+    TITLE="insertSuccess" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:5" NAME="item5"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="inconsistentPackage::#employee#packageInconsistent.xhtml"
+    NAME="output" PATH="/employee/packageInconsistent.xhtml"
+    TARGET="rules:#employee#packageInconsistent.xhtml"
+    TITLE="inconsistentPackage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:6" NAME="item6"
+   PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="errorBusyStage::#employee#stageErrorBusy.xhtml" NAME="output"
+    PATH="/employee/stageErrorBusy.xhtml"
+    TARGET="rules:#employee#stageErrorBusy.xhtml" TITLE="errorBusyStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:employee#stageManagement.xhtml"
+  PATH="employee/stageManagement.xhtml" SHAPE="32,1473,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:employee#stageManagement.xhtml:0" NAME="item"
+   PATH="employee/stageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="closed::#employee#packageEdit.xhtml"
+    NAME="output" PATH="/employee/packageEdit.xhtml"
+    TARGET="rules:#employee#packageEdit.xhtml" TITLE="closed" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#stageManagement.xhtml:1" NAME="item1"
+   PATH="employee/stageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="addedStage::#employee#packageEdit.xhtml"
+    NAME="output" PATH="/employee/packageEdit.xhtml"
+    TARGET="rules:#employee#packageEdit.xhtml" TITLE="addedStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#stageManagement.xhtml:2" NAME="item2"
+   PATH="employee/stageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="inconsistentStage::#employee#stageErrorInconsistent.xhtml"
+    NAME="output" PATH="/employee/stageErrorInconsistent.xhtml"
+    TARGET="rules:#employee#stageErrorInconsistent.xhtml"
+    TITLE="inconsistentStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:employee#stageManagement.xhtml:3" NAME="item3"
+   PATH="employee/stageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="inconsistentDateStage::#employee#stageErrorDate.xhtml"
+    NAME="output" PATH="/employee/stageErrorDate.xhtml"
+    TARGET="rules:#employee#stageErrorDate.xhtml"
+    TITLE="inconsistentDateStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#employee#stageErrorBusy.xhtml"
+  PATH="/employee/stageErrorBusy.xhtml" SHAPE="560,1681,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#stageManagement.xhtml"
+  PATH="/employee/stageManagement.xhtml" SHAPE="560,1473,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#employee#packageInsertedSuccesEmployee.xhtml"
+  PATH="/employee/packageInsertedSuccesEmployee.xhtml"
+  SHAPE="560,1905,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#packageEdit.xhtml"
+  PATH="/employee/packageEdit.xhtml" SHAPE="288,1489,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#packageErrorBusy.xhtml"
+  PATH="/employee/packageErrorBusy.xhtml" SHAPE="288,1921,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#packageInconsistent.xhtml"
+  PATH="/employee/packageInconsistent.xhtml" SHAPE="560,2017,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#stageErrorDate.xhtml"
+  PATH="/employee/stageErrorDate.xhtml" SHAPE="288,1809,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#stageErrorInconsistent.xhtml"
+  PATH="/employee/stageErrorInconsistent.xhtml" SHAPE="288,1697,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#packageManagement.xhtml"
+  PATH="/employee/packageManagement.xhtml" SHAPE="560,1169,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#employee#packageModifiedSuccessPackageEmployee.xhtml"
+  PATH="/employee/packageModifiedSuccessPackageEmployee.xhtml"
+  SHAPE="560,1793,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:allPackages.xhtml" PATH="allPackages.xhtml"
+  SHAPE="32,945,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:allPackages.xhtml:0" NAME="item"
+   PATH="allPackages.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="showPackage::#packageView.xhtml"
+    NAME="output" PATH="/packageView.xhtml"
+    TARGET="rules:#packageView.xhtml" TITLE="showPackage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#packageView.xhtml" PATH="/packageView.xhtml"
+  SHAPE="240,2481,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
