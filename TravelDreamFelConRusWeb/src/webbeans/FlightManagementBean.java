@@ -19,10 +19,10 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
-import dto.FlightDTO;
 import dto.FlightDTO;
 import dto.ProductDTO;
 import authentication.LoginBeanLocal;
@@ -73,8 +73,7 @@ public class FlightManagementBean {
 		  public void update()
 		  {
 			
-		  flights
-		  = productCRUD.findAllFlights();
+		  flights = productCRUD.findAllFlights();
 		  flightModel = new FlightDataModel(flights);  
 		  
 		  }
@@ -83,6 +82,18 @@ public class FlightManagementBean {
 		  
 		  public void newFlight(ActionEvent actionEvent)
 		  {
+			  if (	    name != null && !name.isEmpty() &&
+						Float.toString(cost) != null && 
+						timeStart != null && !timeStart.toString().isEmpty() &&
+						timeEnd != null && !timeEnd.toString().isEmpty() &&
+						area != null && !area.isEmpty() &&
+						flight_company != null && !flight_company.isEmpty() &&
+						area_start != null && !area_start.isEmpty() &&
+				        place_start != null && !place_start.isEmpty() && 
+				        place_end != null && ! place_end.isEmpty() &&
+				        more_info != null && ! more_info.isEmpty()
+						)
+			  {
 			 		
 				newFlight = new FlightDTO((long) 0, login.getPrincipalUsername(), name,
 						 cost, timeStart, timeEnd, State.AVAILABLE, area,  
@@ -91,10 +102,13 @@ public class FlightManagementBean {
 		
 				productCRUD.createProduct(newFlight);
 				System.out.println("avrei dovuto creare un flight");
-				flights.add(newFlight);
+				//flights.add(newFlight);
+				flights= productCRUD.findAllFlights();
+				flightModel = new FlightDataModel(flights);
+			  }
 			
-			  
 		  }
+		  
 		  public void deleteFlight(ActionEvent actionEvent) {
 				
 			    productCRUD.delete(selectedFlight);
@@ -102,18 +116,34 @@ public class FlightManagementBean {
 			    
 			   }
 		  public void updateFlight(ActionEvent actionEvent){
+			  
+			  if (	    selectedFlight.getName() != null && !selectedFlight.getName().isEmpty() &&
+						Float.toString(selectedFlight.getCost()) != null && 
+						selectedFlight.getTimeStart() != null && !selectedFlight.getTimeStart().toString().isEmpty() &&
+						selectedFlight.getTimeEnd() != null && !selectedFlight.getTimeEnd().toString().isEmpty() &&
+						selectedFlight.getArea() != null && !selectedFlight.getArea().isEmpty() &&
+						selectedFlight.getFlight_company()!= null && ! selectedFlight.getFlight_company().isEmpty() &&
+						selectedFlight.getArea_start() != null && !selectedFlight.getArea_start().isEmpty() &&
+						selectedFlight.getPlace_start()  != null && !selectedFlight.getPlace_start().isEmpty() && 
+						selectedFlight.getPlace_end() != null && !selectedFlight.getPlace_end().isEmpty() &&
+						selectedFlight.getMore_info() != null && !selectedFlight.getMore_info().isEmpty()
+						)
 				
-					flights.remove(selectedFlight);
+			  {	    flights.remove(selectedFlight);
 					  
-					newFlight = new FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(), 
-							    selectedFlight.getName(), selectedFlight.getCost(),
-							    selectedFlight.getTimeStart(), selectedFlight.getTimeEnd(),State.AVAILABLE, 
-							    selectedFlight.getArea(), selectedFlight.getFlight_company(),
-							    selectedFlight.getArea_start(),selectedFlight.getPlace_start(), 
-							    selectedFlight.getPlace_end(), selectedFlight.getMore_info());
+					newFlight = new FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(),
+							selectedFlight.getName(),selectedFlight.getIdProduct(), 
+							selectedFlight.getCost(),  selectedFlight.getTimeStart(),
+							selectedFlight.getTimeEnd(),State.AVAILABLE, selectedFlight.getArea(),  
+							selectedFlight.getFlight_company(),selectedFlight.getArea_start(),
+							selectedFlight.getPlace_start(),  selectedFlight.getPlace_end(), 
+							selectedFlight.getMore_info());
 					productCRUD.updateProduct(newFlight);
 					System.out.println("Lo modifichiamo 'sto volo?");
-					flights.add(newFlight);
+					//flights.add(newFlight);
+					flights= productCRUD.findAllFlights();
+					flightModel = new FlightDataModel(flights);
+			  }
 				   
 			   }
 
