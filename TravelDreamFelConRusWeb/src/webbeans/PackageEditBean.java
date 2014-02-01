@@ -2,6 +2,7 @@ package webbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -10,7 +11,10 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+
+import purchase.PurchaseGiftListBeanLocal;
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
+import dto.CustomizedTravelPackageDTO;
 import dto.StageDTO;
 import dto.PrepackedTravelPackageDTO;
 
@@ -46,6 +50,7 @@ public class PackageEditBean implements Serializable{
 	//I suoi valori verranno aggiornati prendendoli dal currentTravelPackage
 	private StageDataModel stageModel;
 
+	private PurchaseGiftListBeanLocal purchase;
 	
 	//Campi del pacchetto
 	private Date time_start;
@@ -273,8 +278,19 @@ public class PackageEditBean implements Serializable{
 	 */
 	public String purchasePersonalized()
 	{
+		currentTravelPackage.setName(name);
+		currentTravelPackage.setDescription(description);
+		currentTravelPackage.setTime_start(time_start);
+		currentTravelPackage.setTime_end(time_end);
+		if(!consistency.correctPackageWeak(currentTravelPackage))
+			return "inconsistentPackage";
 		
-		return "";
+		
+		packageCRUD.createCustomizedTravelPackageFromCustomer(new CustomizedTravelPackageDTO(currentTravelPackage));
+		
+		return "createdCustomized";
+		
+		
 		
 	}
 	
@@ -404,6 +420,22 @@ public class PackageEditBean implements Serializable{
 	}
 	public void setNewForField(boolean newForField) {
 		this.newForField = newForField;
+	}
+
+	public PurchaseGiftListBeanLocal getPurchase() {
+		return purchase;
+	}
+
+	public void setPurchase(PurchaseGiftListBeanLocal purchase) {
+		this.purchase = purchase;
+	}
+
+	public ConsistencyChecker getConsistency() {
+		return consistency;
+	}
+
+	public void setConsistency(ConsistencyChecker consistency) {
+		this.consistency = consistency;
 	}
 	
 	
