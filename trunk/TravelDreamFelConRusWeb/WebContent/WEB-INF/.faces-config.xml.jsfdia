@@ -190,6 +190,12 @@
     NAME="output" PATH="/customer/packageErrorBusy.xhtml"
     TARGET="rules:#customer#packageErrorBusy.xhtml" TITLE="errorBusy" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#packageManagement.xhtml:3"
+   NAME="item3" PATH="customer/packageManagement.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="showPackage::#customer#packageView.xhtml"
+    NAME="output" PATH="/customer/packageView.xhtml"
+    TARGET="rules:#customer#packageView.xhtml" TITLE="showPackage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:customer#packageEdit.xhtml"
   PATH="customer/packageEdit.xhtml" SHAPE="240,3953,0,0" model-entity="JSFProcessGroup">
@@ -301,4 +307,6 @@
   SHAPE="560,4481,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#customer#packageInconsistent.xhtml"
   PATH="/customer/packageInconsistent.xhtml" SHAPE="560,4417,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#packageView.xhtml"
+  PATH="/customer/packageView.xhtml" SHAPE="288,3793,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

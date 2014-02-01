@@ -200,6 +200,18 @@
            <redirect/>  
        </navigation-case>
     </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showPackage</from-outcome>
+           <to-view-id>
+           /customer/packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
     <navigation-rule>
        <from-view-id>customer/packageEdit.xhtml</from-view-id>
        <navigation-case>
