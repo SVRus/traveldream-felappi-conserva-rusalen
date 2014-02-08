@@ -46,34 +46,34 @@
     <p:layoutUnit position="west"  size="420" >  
        
 	  <h:form id="form1">
-	   <p:dataTable var="flight" value="#{stageManagement.flightStartView}" id="startFl">  
+	   <p:dataTable var="flightView" value="#{stageManagement.flightStartView}" id="startFl">  
 	     <f:facet name="header">
                     Volo di partenza
                 </f:facet> 
         <p:column headerText="Nome">  
-            <h:outputText value="#{flight.name}" />  
+            <h:outputText value="#{flightView.name}" />  
         </p:column>  
   
         <p:column headerText="Luogo di partenza">  
-            <h:outputText value="#{flight.place_start}" />  
+            <h:outputText value="#{flightView.place_start}" />  
         </p:column>  
         <p:column headerText="Luogo di arrivo">  
-            <h:outputText value="#{flight.place_end}" />  
+            <h:outputText value="#{flightView.place_end}" />  
         </p:column>  
         <p:column headerText="Ora di partenza">  
-            <h:outputText value="#{flight.timeStart}" />  
+            <h:outputText value="#{flightView.timeStart}" />  
         </p:column>  
         <p:column headerText="Ora di arrivo">  
-            <h:outputText value="#{flight.timeEnd}" />  
+            <h:outputText value="#{flightView.timeEnd}" />  
         </p:column>  
         <p:column headerText="Compagnia">  
-            <h:outputText value="#{flight.flight_company}" />  
+            <h:outputText value="#{flightView.flight_company}" />  
         </p:column>  
         <p:column headerText="Informazioni">  
-            <h:outputText value="#{flight.more_info}" />  
+            <h:outputText value="#{flightView.more_info}" />  
         </p:column>  
         <p:column headerText="Costo">  
-            <h:outputText value="#{flight.cost}" />  
+            <h:outputText value="#{flightView.cost}" />  
         </p:column>  
         
         
@@ -88,33 +88,33 @@
 	 
       <p:separator id="separator"/>  
       
-      <p:dataTable var="flightEnd" value="#{stageManagement.flightEndView}" id = "endFl">
+      <p:dataTable var="flightEndView" value="#{stageManagement.flightEndView}" id = "endFl">
         <f:facet name="header">
                     Volo di ritorno
                 </f:facet>   
         <p:column headerText="Nome">  
-            <h:outputText value="#{flightEnd.name}" />  
+            <h:outputText value="#{flightEndView.name}" />  
         </p:column>  
         <p:column headerText="Luogo di partenza">  
-            <h:outputText value="#{flightEnd.place_start}" />  
+            <h:outputText value="#{flightEndView.place_start}" />  
         </p:column>  
         <p:column headerText="Luogo di arrivo">  
-            <h:outputText value="#{flightEnd.place_end}" />  
+            <h:outputText value="#{flightEndView.place_end}" />  
         </p:column>  
         <p:column headerText="Ora di partenza">  
-            <h:outputText value="#{flightEnd.timeStart}" />  
+            <h:outputText value="#{flightEndView.timeStart}" />  
         </p:column>  
         <p:column headerText="Ora di arrivo">  
-            <h:outputText value="#{flightEnd.timeEnd}" />  
+            <h:outputText value="#{flightEndView.timeEnd}" />  
         </p:column>  
         <p:column headerText="Compagnia">  
-            <h:outputText value="#{flightEnd.flight_company}" />  
+            <h:outputText value="#{flightEndView.flight_company}" />  
         </p:column>  
         <p:column headerText="Informazioni">  
-            <h:outputText value="#{flightEnd.more_info}" />  
+            <h:outputText value="#{flightEndView.more_info}" />  
         </p:column>  
         <p:column headerText="Costo">  
-            <h:outputText value="#{flightEnd.cost}" />  
+            <h:outputText value="#{flightEndView.cost}" />  
         </p:column>  
         
           <f:facet name="footer">
@@ -127,31 +127,31 @@
       <p:separator id="separator1"/>  
       <h:form id="form13">
 	 
-      <p:dataTable var="hotel" value="#{stageManagement.hotelView}" id="hot">  
+      <p:dataTable var="hotelView" value="#{stageManagement.hotelView}" id="hot">  
         <f:facet name="header">
                     Albergo
                 </f:facet> 
         <p:column headerText="Nome">  
-            <h:outputText value="#{hotel.name}" />  
+            <h:outputText value="#{hotelView.name}" />  
         </p:column>  
   
         <p:column headerText="Luogo">  
-            <h:outputText value="#{hotel.place}" />  
+            <h:outputText value="#{hotelView.place}" />  
         </p:column>
         <p:column headerText="Data inizio">  
-            <h:outputText value="#{hotel.timeStart}" />  
+            <h:outputText value="#{hotelView.timeStart}" />  
         </p:column>
         <p:column headerText="Data fine">  
-            <h:outputText value="#{hotel.timeEnd}" />  
+            <h:outputText value="#{hotelView.timeEnd}" />  
         </p:column>
         <p:column headerText="Tipo camera">  
-            <h:outputText value="#{hotel.room_type}" />  
+            <h:outputText value="#{hotelView.room_type}" />  
         </p:column>
         <p:column headerText="Informazioni">  
-            <h:outputText value="#{hotel.more_info}" />  
+            <h:outputText value="#{hotelView.more_info}" />  
         </p:column>
          <p:column headerText="Costo">  
-            <h:outputText value="#{hotel.cost}" />  
+            <h:outputText value="#{hotelView.cost}" />  
         </p:column>
           
           <f:facet name="footer">

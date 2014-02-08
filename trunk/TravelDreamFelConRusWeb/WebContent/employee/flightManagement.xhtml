@@ -91,8 +91,8 @@
                <f:facet name="footer">
                     <p:commandButton  value="Aggiungi nuovo" onclick="PF('dlg3').show();" type="button" icon="ui-icon-star"/> 
                     
-                    <p:commandButton value="Elimina" actionListener="#{flightManagement.deleteFlight}" update="flighttable" icon="ui-icon-trash"/> 
-                          
+                    <p:commandButton value="Elimina" actionListener="#{flightManagement.deleteFlight}" oncomplete="PF('delMess').show();" update="flighttable" icon="ui-icon-trash"/> 
+                         
                 </f:facet>          
               </p:dataTable>
                 
@@ -227,12 +227,23 @@
       		<f:facet name="footer">
                      
                             <p:commandButton value="Salva modifiche" update=":form:flighttable"  
-                            oncomplete="modDialog.hide(); " actionListener="#{flightManagement.updateFlight}"/>
+                            oncomplete="modDialog.hide(); PF('modMess').show(); " actionListener="#{flightManagement.updateFlight}"/>
+                            
                     </f:facet>
 			
                 </p:panelGrid> 
              </h:form>
           </p:dialog> 
+          
+          <p:dialog header="Eliminazione" widgetVar="delMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="100" dynamic="true">      
+             #{flightManagement.messageDelete}
+         </p:dialog>
+         
+        <p:dialog header="Modifica" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="100" dynamic="true">      
+            #{flightManagement.messageModify}
+         </p:dialog>
                                  
       
 <p:growl id="growl" showDetail="true" life="5000" />

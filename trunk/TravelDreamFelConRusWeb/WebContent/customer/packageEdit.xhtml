@@ -24,7 +24,7 @@
        <h:form style =" text-align : center;">
          
      
-         <p:commandButton id="closeOp" value="Termina operazione" action="#{packageEdit.closeOperation}" />
+         <p:commandButton id="closeOp" value="Termina operazione" action="#{customerPackageEdit.closeOperation}" />
 
        </h:form>  
      </p:layoutUnit>
@@ -39,14 +39,14 @@
             </p:menu>   
         </p:layoutUnit>   
       
-     <p:layoutUnit position="east" size="550" header="Pacchetto corrente: #{packageEdit.currentTravelPackage.name}" resizable="false" closable="false" collapsible="false" >  
+     <p:layoutUnit position="east" size="550" header="Pacchetto corrente: #{customerPackageEdit.currentTravelPackage.name}" resizable="false" closable="false" collapsible="false" >  
              <h:form id="form">
 		
-         <p:dataTable var="stage" value="#{packageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
-                selection="#{packageEdit.selectedStage}" selectionMode="single" 
+         <p:dataTable var="stage" value="#{customerPackageEdit.stageModel}" rowKey="#{stage.area}" paginator="true" rows="10"  
+                selection="#{customerPackageEdit.selectedStage}" selectionMode="single" 
                id="hoteltable"
                  rowsPerPageTemplate="10,15,50">  
-     <p:ajax event="rowSelect"  listener= "#{packageEdit.updateCurrentStage}"/>  
+     <p:ajax event="rowSelect"  listener= "#{customerPackageEdit.updateCurrentStage}"/>  
   
 
   
@@ -118,7 +118,7 @@
 	 
 		
 		<p:outputLabel value="Data di partenza" for="startDate" />
-		<p:calendar id="startDate" value="#{ustomerPackageEdit.time_start}" 
+		<p:calendar id="startDate" value="#{customerPackageEdit.time_start}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 			
@@ -126,9 +126,9 @@
 		<p:calendar id="endDate" value="#{customerPackageEdit.time_end}" 
 			navigator="true" required="true" yearRange="c-100:c-0"
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
-		
-    <p:commandButton value="Procedi all'acquisto"  action="#{packageEdit.purchasePersonalized()}" icon="ui-icon-check" ajax="false" />
-    
+		<p:button outcome="/customer/purchase.xhtml" value="Procedi all'acquisto"   icon="ui-icon-check" ajax="false" ></p:button>
+       
+   
 		
 	</h:panelGrid>
 	
@@ -144,7 +144,8 @@
         </p:layoutUnit>  
       
         </p:layout>  
-         
+         <h:inputHidden  value="#{customerPackageEdit.update()}"/>
+		
         
     </body> 
     

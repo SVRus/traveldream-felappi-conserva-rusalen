@@ -309,4 +309,17 @@
   PATH="/customer/packageInconsistent.xhtml" SHAPE="560,4417,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#customer#packageView.xhtml"
   PATH="/customer/packageView.xhtml" SHAPE="288,3793,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:customer#purchase.xhtml"
+  PATH="customer/purchase.xhtml" SHAPE="32,5425,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:customer#purchase.xhtml:0" NAME="item"
+   PATH="customer/purchase.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="purchasedPackage::#customer#afterPurchase.xhtml" NAME="output"
+    PATH="/customer/afterPurchase.xhtml"
+    TARGET="rules:#customer#afterPurchase.xhtml"
+    TITLE="purchasedPackage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#customer#afterPurchase.xhtml"
+  PATH="/customer/afterPurchase.xhtml" SHAPE="240,6113,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

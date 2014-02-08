@@ -9,7 +9,7 @@
         <p:layout fullPage="true">  
   
         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
-         <h:inputHidden  value="#{packageManagement.update()}"/>
+         <h:inputHidden  value="#{customerPackageManagement.update()}"/>
 	
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
@@ -36,11 +36,11 @@
 	  <h:form id="form">
 	   
     
- <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
-                selection="#{packageManagement.selectedTravelPackage}" filteredValue="#{packageManagement.filteredTravelPackages}" selectionMode="single" 
+ <p:dataTable var="travelPackage" value="#{customerPackageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+                selection="#{customerPackageManagement.selectedTravelPackage}" filteredValue="#{customerPackageManagement.filteredTravelPackages}" selectionMode="single" 
                id="traveltable"
                  rowsPerPageTemplate="10,15,50">  
-     <p:ajax event="rowSelect"  listener= "#{packageManagement.updateCurrentPackage}"/>  
+     <p:ajax event="rowSelect"  listener= "#{customerPackageManagement.updateCurrentPackage}"/>  
   
 
   
@@ -66,8 +66,9 @@
                  </p:column> 
                
                <f:facet name="footer">
-                    <p:commandButton action="#{packageEdit.show()}" value="Acquista" icon="ui-icon-cart" />  
-               		<p:commandButton action="#{packageEdit.allowed}" value="Modifica"  />  
+                    <p:commandButton action="#{customerPackageEdit.show()}" value="Visualizza" icon="ui-icon-cart" />  
+               		
+               		<p:commandButton action="#{customerPackageEdit.allowed}" value="Personalizza" icon="ui-icon-star"  />  
                	
                     
                   
