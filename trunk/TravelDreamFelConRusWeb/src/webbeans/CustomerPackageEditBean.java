@@ -9,9 +9,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import purchase.PurchaseSTDBeanLocal;
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import dto.PrepackedTravelPackageDTO;
 import dto.StageDTO;
+import dto.TravelPackageDTO;
 
 
 @ManagedBean(name="customerPackageEdit")
@@ -23,7 +25,7 @@ public class CustomerPackageEditBean implements Serializable{
 	 * di creazione o modifica. Serve a tenere traccia della corrispondenza tra un pacchetto e le sue tappe
 	 * e eventuali modifiche. 
 	 */
-	@ManagedProperty(value="#{CustomerPackageCommon}")
+	@ManagedProperty(value="#{customerPackageCommon}")
 	private CustomerPackageCommonBean shared;
 
 	
@@ -39,6 +41,8 @@ public class CustomerPackageEditBean implements Serializable{
 	
 	private StageDTO selectedStage;
 
+	//Istanza di PurchaseSTDBeanLocal che permette l'acquisto
+	private PurchaseSTDBeanLocal purchaseManagement;
 	
 	private  ArrayList<StageDTO> filteredStages;
 
@@ -65,7 +69,42 @@ public class CustomerPackageEditBean implements Serializable{
 	
 	ConsistencyChecker consistency;
 	
-	
+	public String purchase()
+	{
+		
+		purchaseManagement = new PurchaseSTDBeanLocal()
+		{
+			
+			@Override
+			public boolean fullPurchase(TravelPackageDTO traveldto) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+		};
+		if(purchaseManagement.fullPurchase(currentTravelPackage))
+			return "purchasedPackage";
+		
+		
+		
+		return "purchaseError";
+		
+	}
+	public String purchaseGiftList()
+	{
+		
+		return "";
+	}
+	/**
+	 * metodo che setta le strutture dati che consentono la visualizzazione
+	 */
+	public String show()
+	{
+		currentTravelPackage = tempCurrentPackage;
+		setFields();
+		update();
+		return "showPackage";
+		
+	}
 	
 	/**
 	 * Metodo che viene lanciato ad ogni aggiornamento della pagina.
@@ -158,7 +197,7 @@ public class CustomerPackageEditBean implements Serializable{
 	public void setFields(ActionEvent e)
 	{
 		this.setTime_start(time_start);
-		this.setTime_end(time_start);
+		this.setTime_end(time_end);
 		this.setDescription(description);
 		this.setName(name);
 		
@@ -166,7 +205,7 @@ public class CustomerPackageEditBean implements Serializable{
 	public void setFields()
 	{
 		this.setTime_start(time_start);
-		this.setTime_end(time_start);
+		this.setTime_end(time_end);
 		this.setDescription(description);
 		this.setName(name);
 		
