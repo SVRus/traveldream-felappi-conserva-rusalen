@@ -33,9 +33,10 @@
       <p:layoutUnit position="center" header = "Modalità di acquisto">  
       
 	     <h:form id="purchase" style =" text-align : center;">
-	        <p:button outcome="/afterPurchase.xhtml" value="Procedi al pagamento" icon="ui-icon-cart" />  
-	    
-	        <p:commandButton action="#{purchase}" value="Crea una giftlist" icon="ui-icon-heart" />  
+	        <p:commandButton action= "#{customerPackageEdit.purchase}" value="Acquista" icon="ui-icon-cart" />  
+          
+	       
+	        <p:commandButton action="#{customerPackageEdit.purchaseGiftList}" value="Crea una giftlist" icon="ui-icon-heart" />  
    
          </h:form>   
       </p:layoutUnit>  

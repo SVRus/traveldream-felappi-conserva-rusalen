@@ -337,6 +337,17 @@
        </navigation-case>
     </navigation-rule>
     
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedPackage</from-outcome>
+           <to-view-id>
+           /customer/afterPurchase.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
     
     
        <navigation-rule>
