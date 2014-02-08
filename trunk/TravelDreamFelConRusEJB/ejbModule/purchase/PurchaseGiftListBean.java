@@ -50,8 +50,8 @@ TravelPackageEntityManagementLocal travMan;
     }
 
    public ArrayList <GiftListDTO> giftListCreation(TravelPackageDTO travel)
-    {   travel.setRecoursiveTravelProductState(TravelState.RESERVED,State.RESERVED);
-    	travMan.edit(travel);
+    {   
+    	
         List <StageDTO> stages=travel.getStages();
     	Iterator <StageDTO> iter=stages.iterator();
     	ArrayList<GiftListDTO> gifts= new ArrayList <GiftListDTO>();
@@ -81,7 +81,10 @@ TravelPackageEntityManagementLocal travMan;
 public boolean persistGiftList(TravelPackageDTO travel)
 {
 	try
-	{
+	
+	{  
+		travel.setRecoursiveTravelProductState(TravelState.RESERVED,State.RESERVED);
+		travMan.edit(travel);
 		Customer customer=custoMan.find(login.getPrincipalUsername());
 		List <GiftList> giftLists=customer.getGiftLists();
 		giftLists.addAll(dto.giftListDTOToEntity(giftListCreation( travel)));
