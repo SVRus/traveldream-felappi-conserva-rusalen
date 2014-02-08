@@ -51,7 +51,8 @@ TravelPackageEntityManagementLocal travMan;
 
    public ArrayList <GiftListDTO> giftListCreation(TravelPackageDTO travel)
     {   travel.setRecoursiveTravelProductState(TravelState.RESERVED,State.RESERVED);
-    	List <StageDTO> stages=travel.getStages();
+    	travMan.edit(travel);
+        List <StageDTO> stages=travel.getStages();
     	Iterator <StageDTO> iter=stages.iterator();
     	ArrayList<GiftListDTO> gifts= new ArrayList <GiftListDTO>();
     	
