@@ -10,6 +10,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import stateenum.State;
+import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomerDTO;
@@ -40,8 +41,9 @@ CustomerEntityManagementLocal custoMan;
 GiftListEntityManagementLocal giftMan;
 @EJB
 DTOFactory dto;
+
 @EJB
-TravelPackageEntityManagementLocal travMan;
+TravelPackageCRUDBeanLocal travelcrud;
     /**
      * Default constructor. 
      */
@@ -84,7 +86,7 @@ public boolean persistGiftList(TravelPackageDTO travel)
 	
 	{  
 		travel.setRecoursiveTravelProductState(TravelState.RESERVED,State.RESERVED);
-		travMan.edit(travel);
+		travelcrud.updateTravelPackage(travel);
 		Customer customer=custoMan.find(login.getPrincipalUsername());
 		List <GiftList> giftLists=customer.getGiftLists();
 		giftLists.addAll(dto.giftListDTOToEntity(giftListCreation( travel)));
