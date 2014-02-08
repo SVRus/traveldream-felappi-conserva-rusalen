@@ -337,8 +337,11 @@ public class StageManagementBean {
 	{
 		if(flightStartView==selectedFlight)
 			return;
-		
+		//Se c'è, aggiungo ai voli disponibili il precedente volo occupato nella tappa che sto rimuovendo
+		if(flightStartView!=null)
+				
 		flights.add(flightStartView);
+		
 		flightStartView= selectedFlight;
 		flights.remove(selectedFlight);
 		flights.trimToSize();
@@ -350,7 +353,10 @@ public class StageManagementBean {
 	{
 		if(flightEndView==selectedFlightBack)
 			return;
+		//Se c'è, aggiungo ai voli disponibili il precedente volo occupato nella tappa che sto rimuovendo
+		if(flightEndView!=null)
 		flightsBack.add(flightEndView);
+		
 		flightEndView= selectedFlightBack;
 		flightsBack.remove(selectedFlightBack);
 		flightsBack.trimToSize();
@@ -360,7 +366,10 @@ public class StageManagementBean {
 	{
 		if(hotelView==selectedHotel)
 			return;
+		//Se c'è, aggiungo agli hotel disponibili il precedente hotel occupato nella tappa che sto rimuovendo
+		if(hotelView!=null)
 		hotels.add(hotelView);
+		
 		hotelView= selectedHotel;
 		hotels.remove(selectedHotel);
 		hotels.trimToSize();

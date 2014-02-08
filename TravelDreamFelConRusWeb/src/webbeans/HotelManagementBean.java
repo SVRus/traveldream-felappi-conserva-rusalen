@@ -85,6 +85,7 @@ public class HotelManagementBean implements Serializable{
 					Float.toString(cost) != null && 
 					timeStart != null && !timeStart.toString().isEmpty() &&
 					timeEnd != null && !timeEnd.toString().isEmpty() &&
+					timeStart.before(timeEnd) &&
 					area != null && !area.isEmpty() &&
 					place != null && !place.isEmpty() &&
 					room_type != null && ! room_type.isEmpty() &&
@@ -101,7 +102,8 @@ public class HotelManagementBean implements Serializable{
 		  
 	  }
 	  public void deleteHotel(ActionEvent actionEvent) {
-			 if(selectedHotel.getState()==State.AVAILABLE)
+		  
+		    if(selectedHotel.getState()==State.AVAILABLE)
 		    	messageDelete="Prodotto eliminato correttamente";
 		    if(selectedHotel.getState()==State.INCLUDED)
 		    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;
@@ -111,16 +113,18 @@ public class HotelManagementBean implements Serializable{
 		    	messageDelete="Il prodotto eliminato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
 		   
 		    productCRUD.delete(selectedHotel);
-			hotels= productCRUD.findAllHotelsByParameter(State.AVAILABLE);
+			hotels= productCRUD.findAllHotels();
 			hotelModel=new HotelDataModel(hotels);
 		   
 		   }
+	  
 	  public void updateHotel(ActionEvent actionEvent){
 		  
 		  if (	    selectedHotel.getName() != null && !selectedHotel.getName().isEmpty() &&
 					Float.toString(selectedHotel.getCost()) != null && 
 					selectedHotel.getTimeStart() != null && !selectedHotel.getTimeStart().toString().isEmpty() &&
 					selectedHotel.getTimeEnd() != null && !selectedHotel.getTimeEnd().toString().isEmpty() &&
+					selectedHotel.getTimeStart().before(selectedHotel.getTimeEnd()) &&
 					selectedHotel.getArea() != null && !selectedHotel.getArea().isEmpty() &&
 					selectedHotel.getPlace()  != null && !selectedHotel.getPlace().isEmpty() && 
 				    selectedHotel.getRoom_type() != null && !selectedHotel.getRoom_type().isEmpty() &&

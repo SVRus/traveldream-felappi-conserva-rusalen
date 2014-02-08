@@ -19,7 +19,6 @@ import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
-
 import dto.CustomerDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
@@ -48,6 +47,9 @@ public class FlightManagementBean {
 		 private String flight_company;
 		 private String place_start;
 		 private String place_end;
+		 
+		 private String messageDelete;
+		 private String messageModify;
 		 
 		 private String more_info;
 		  private FlightDataModel flightModel;  
@@ -86,6 +88,7 @@ public class FlightManagementBean {
 						Float.toString(cost) != null && 
 						timeStart != null && !timeStart.toString().isEmpty() &&
 						timeEnd != null && !timeEnd.toString().isEmpty() &&
+						timeStart.before(timeEnd) &&
 						area != null && !area.isEmpty() &&
 						flight_company != null && !flight_company.isEmpty() &&
 						area_start != null && !area_start.isEmpty() &&
@@ -110,6 +113,15 @@ public class FlightManagementBean {
 		  }
 		  
 		  public void deleteFlight(ActionEvent actionEvent) {
+			  
+			    if(selectedFlight.getState()==State.AVAILABLE)
+			    	messageDelete="Prodotto eliminato correttamente";
+			    if(selectedFlight.getState()==State.INCLUDED)
+			    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;
+			    if(selectedFlight.getState()==State.SOLD)
+			    	messageDelete="Il prodotto eliminato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+			    if(selectedFlight.getState()==State.RESERVED)
+			    	messageDelete="Il prodotto eliminato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
 				
 			    productCRUD.delete(selectedFlight);
 			    flights.remove(selectedFlight);
@@ -121,6 +133,7 @@ public class FlightManagementBean {
 						Float.toString(selectedFlight.getCost()) != null && 
 						selectedFlight.getTimeStart() != null && !selectedFlight.getTimeStart().toString().isEmpty() &&
 						selectedFlight.getTimeEnd() != null && !selectedFlight.getTimeEnd().toString().isEmpty() &&
+						selectedFlight.getTimeStart().before(selectedFlight.getTimeEnd()) &&
 						selectedFlight.getArea() != null && !selectedFlight.getArea().isEmpty() &&
 						selectedFlight.getFlight_company()!= null && ! selectedFlight.getFlight_company().isEmpty() &&
 						selectedFlight.getArea_start() != null && !selectedFlight.getArea_start().isEmpty() &&
@@ -129,7 +142,20 @@ public class FlightManagementBean {
 						selectedFlight.getMore_info() != null && !selectedFlight.getMore_info().isEmpty()
 						)
 				
-			  {	    flights.remove(selectedFlight);
+			  {	   
+				    if(selectedFlight.getState()==State.AVAILABLE)
+				    	messageModify="Prodotto modificato correttamente.";
+				    if(selectedFlight.getState()==State.INCLUDED)
+				    	messageModify="Il prodotto è stato modificato. E' stato eliminato il pacchetto ad esso associato." ;
+				    if(selectedFlight.getState()==State.SOLD)
+				    	messageModify="Il prodotto modificato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+				    if(selectedFlight.getState()==State.RESERVED)
+				    	messageModify="Il prodotto modificato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+				  
+				  
+				  
+				  
+				    flights.remove(selectedFlight);
 					  
 					newFlight = new FlightDTO(selectedFlight.getIdstage(), selectedFlight.getEmployeeCreator(),
 							selectedFlight.getName(),selectedFlight.getIdProduct(), 
@@ -323,6 +349,30 @@ public class FlightManagementBean {
 
 		public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
 			this.productCRUD = productCRUD;
+		}
+
+
+
+		public String getMessageDelete() {
+			return messageDelete;
+		}
+
+
+
+		public void setMessageDelete(String messageDelete) {
+			this.messageDelete = messageDelete;
+		}
+
+
+
+		public String getMessageModify() {
+			return messageModify;
+		}
+
+
+
+		public void setMessageModify(String messageModify) {
+			this.messageModify = messageModify;
 		}
 
 

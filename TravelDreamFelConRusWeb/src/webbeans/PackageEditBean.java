@@ -81,7 +81,7 @@ public class PackageEditBean implements Serializable{
 	public void update()
 	{
 	
-	
+
 	//Se si accede alla pagina dalla barra degli indirizzi
 	if(currentTravelPackage!=null)
 		
@@ -136,6 +136,7 @@ public class PackageEditBean implements Serializable{
 	{
 		currentTravelPackage = tempCurrentPackage;
 		setFields();
+		update();
 		return "showPackage";
 		
 	}
@@ -176,7 +177,7 @@ public class PackageEditBean implements Serializable{
 	public void setFields(ActionEvent e)
 	{
 		this.setTime_start(time_start);
-		this.setTime_end(time_start);
+		this.setTime_end(time_end);
 		this.setDescription(description);
 		this.setName(name);
 		
@@ -184,7 +185,7 @@ public class PackageEditBean implements Serializable{
 	public void setFields()
 	{
 		this.setTime_start(time_start);
-		this.setTime_end(time_start);
+		this.setTime_end(time_end);
 		this.setDescription(description);
 		this.setName(name);
 		

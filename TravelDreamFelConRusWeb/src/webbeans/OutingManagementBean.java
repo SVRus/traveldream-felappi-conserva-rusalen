@@ -51,6 +51,9 @@ public class OutingManagementBean {
 	 private String description;
 	 private String more_info;
 	 
+	 private String messageDelete;
+	 private String messageModify;
+	 
 	  private OutingDataModel outingModel;  
 	  public OutingDataModel getOutingModel() {
 		return outingModel;
@@ -88,6 +91,7 @@ public class OutingManagementBean {
 					Float.toString(cost) != null && 
 					timeStart != null && !timeStart.toString().isEmpty() &&
 					timeEnd != null && !timeEnd.toString().isEmpty() &&
+					timeStart.before(timeEnd) &&
 					area != null && !area.isEmpty() &&
 					place != null && !place.isEmpty() &&
 					description != null && ! description.isEmpty() 
@@ -105,6 +109,16 @@ public class OutingManagementBean {
 		  
 	  }
 	  public void deleteOuting(ActionEvent actionEvent) {
+		  
+		    if(selectedOuting.getState()==State.AVAILABLE)
+		    	messageDelete="Prodotto eliminato correttamente";
+		    if(selectedOuting.getState()==State.INCLUDED)
+		    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;
+		    if(selectedOuting.getState()==State.SOLD)
+		    	messageDelete="Il prodotto eliminato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		    if(selectedOuting.getState()==State.RESERVED)
+		    	messageDelete="Il prodotto eliminato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+		   
 			
 		    productCRUD.delete(selectedOuting);
 		   // outings.remove(selectedOuting);
@@ -118,12 +132,22 @@ public class OutingManagementBean {
 					Float.toString(selectedOuting.getCost()) != null && 
 					selectedOuting.getTimeStart() != null && !selectedOuting.getTimeStart().toString().isEmpty() &&
 					selectedOuting.getTimeEnd() != null && !selectedOuting.getTimeEnd().toString().isEmpty() &&
+					selectedOuting.getTimeStart().before(selectedOuting.getTimeEnd()) &&
 					selectedOuting.getArea() != null && !selectedOuting.getArea().isEmpty() &&
 					selectedOuting.getPlace()  != null && !selectedOuting.getPlace().isEmpty() && 
 					selectedOuting.getDescription() != null && !selectedOuting.getDescription().isEmpty()
 					)
 		  {
-				outings.remove(selectedOuting);
+			  if(selectedOuting.getState()==State.AVAILABLE)
+			    	messageModify="Prodotto modificato correttamente.";
+			    if(selectedOuting.getState()==State.INCLUDED)
+			    	messageModify="Il prodotto è stato modificato. E' stato eliminato il pacchetto ad esso associato." ;
+			    if(selectedOuting.getState()==State.SOLD)
+			    	messageModify="Il prodotto modificato era venduto. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+			    if(selectedOuting.getState()==State.RESERVED)
+			    	messageModify="Il prodotto modificato era in una gift list. Il prodotto rimarrà nel sistema, ma è stata inviata una notifica al cliente.";
+			  
+	            outings.remove(selectedOuting);
 			    newOuting = new OutingDTO(selectedOuting.getIdstage(), selectedOuting.getEmployeeCreator(),
 			    		                  selectedOuting.getName(), selectedOuting.getIdProduct(),
 			    		                  selectedOuting.getCost(),  
@@ -216,6 +240,30 @@ public class OutingManagementBean {
 	public void setProductCRUD(ProductCRUDBeanLocal productCRUD) {
 		this.productCRUD = productCRUD;
 	}
+	public String getMessageDelete() {
+		return messageDelete;
+	}
+
+
+
+	public void setMessageDelete(String messageDelete) {
+		this.messageDelete = messageDelete;
+	}
+
+
+
+	public String getMessageModify() {
+		return messageModify;
+	}
+
+
+
+	public void setMessageModify(String messageModify) {
+		this.messageModify = messageModify;
+	}
+
+
+
 	public static Date getData1() {
 		return data1;
 	}
