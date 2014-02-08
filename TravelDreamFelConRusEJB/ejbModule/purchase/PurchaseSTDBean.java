@@ -7,6 +7,8 @@ import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
+import stateenum.State;
+import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
 import dto.CustomizedTravelPackageDTO;
 import dto.FlightDTO;
@@ -46,6 +48,7 @@ DTOFactory dto;
 	{
 		String username=log.getPrincipalUsername();
 		Customer customer=custoEntityMan.find(username);
+		travelPackagedto.setRecoursiveTravelProductState(TravelState.SOLD, State.SOLD);
 		CustomizedTravelPackage travel=(CustomizedTravelPackage)dto.travelPackageDTOToEntity(travelPackagedto, true);
 		
 		List <CustomizedTravelPackage> cusTravList=customer.getCustomizedTravelPackages();
@@ -67,7 +70,8 @@ DTOFactory dto;
 		}
 	
 	public boolean dbpurchasePrepacked(PrepackedTravelPackageDTO travelPackagedto)
-	{
+	{		travelPackagedto.setRecoursiveTravelProductState(TravelState.SOLD, State.SOLD);
+
 		String username=log.getPrincipalUsername();
 		Customer customer=custoEntityMan.find(username);
 		PrepackedTravelPackage travel=(PrepackedTravelPackage)dto.travelPackageDTOToEntity(travelPackagedto,false);
