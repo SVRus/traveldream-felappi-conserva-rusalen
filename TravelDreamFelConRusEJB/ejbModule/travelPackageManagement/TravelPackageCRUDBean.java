@@ -79,7 +79,9 @@ MailSenderLocal mail;
         
     }
 
-	
+	/**
+	 * method that let an employee persist a travel package
+	 */
 	@Override
 	public boolean createTravelFromEmployee(TravelPackageDTO prepacked) {
 		String username=log.getPrincipalUsername();
@@ -101,7 +103,9 @@ MailSenderLocal mail;
     	
 		
 	}
-
+/**
+ * method that let update a travelPackage
+ */
 	public boolean updateTravelPackage(TravelPackageDTO traveldto)
 	{
 		TravelPackage travel=dto.travelPackageDTOToEntity(traveldto, false);
@@ -134,6 +138,9 @@ MailSenderLocal mail;
 		
 				
 	}
+	/**
+	 * method that delete a travelPackage
+	 */
 	 public boolean delete(TravelPackageDTO traveldto)
 	    {
 	    	boolean ok=false;
@@ -151,7 +158,9 @@ MailSenderLocal mail;
 	    	return ok;  	
 	    	
 	    }
-	
+	/**
+	 * method that finds all prepackedTravelPackages
+	 */
 	public List <PrepackedTravelPackageDTO> findAllPrepacked()
 	{
 		List <PrepackedTravelPackage> prelist=preman.findAll();
