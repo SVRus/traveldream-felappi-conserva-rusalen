@@ -70,7 +70,7 @@ DTOFactory dto;
 	{
 		String username=log.getPrincipalUsername();
 		Customer customer=custoEntityMan.find(username);
-		PrepackedTravelPackage travel=(PrepackedTravelPackage)dto.travelPackageDTOToEntity(travelPackagedto, true);
+		PrepackedTravelPackage travel=(PrepackedTravelPackage)dto.travelPackageDTOToEntity(travelPackagedto,false);
 		List <TravelPackage> purchaseList=customer.getPurchasedTravelPackages();
 		purchaseList.add(travel);
 		customer.setPurchasedTravelPackages(purchaseList);
