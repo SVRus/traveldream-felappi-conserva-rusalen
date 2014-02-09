@@ -1,6 +1,7 @@
 package purchase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -13,6 +14,7 @@ public interface PurchaseGiftListBeanLocal {
 	   public boolean persistGiftList(TravelPackageDTO travel);
 	   public boolean updateGiftList(GiftListDTO giftList);
 	   public boolean simpleBuyGiftList(GiftListDTO giftlist);
+	    public List <GiftListDTO> findAllGiftListForClient();
 
 
 }
