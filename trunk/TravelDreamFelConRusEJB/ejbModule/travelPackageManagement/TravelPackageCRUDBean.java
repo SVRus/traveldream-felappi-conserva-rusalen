@@ -17,7 +17,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import stateenum.State;
 import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
+import dto.CustomerDTO;
 import dto.CustomizedTravelPackageDTO;
+import dto.EmployeeDTO;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
@@ -396,7 +398,19 @@ public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackage
 
 
 
+public List <PrepackedTravelPackageDTO> findAllPackageForEmployee()
+{
+	EmployeeDTO emplo=(EmployeeDTO)log.findLogIn();
+	List <PrepackedTravelPackageDTO> travel=emplo.getManagedTravelPackage();
+return travel;
 
+}
 
+public List<TravelPackageDTO>  findAllPackageForCustomer()
+{
+	CustomerDTO customer=(CustomerDTO)log.findLogIn();
+	List<TravelPackageDTO> travels=customer.getPurchasedTravelPackage();
+	return travels;
+}
 
 }
