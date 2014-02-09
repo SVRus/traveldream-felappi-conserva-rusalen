@@ -1,5 +1,6 @@
 package travelPackageManagement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Local;
@@ -22,8 +23,8 @@ public interface TravelPackageCRUDBeanLocal
 	public int getNumberEquivalentPackage(TravelPackageDTO travel);
 	public List <PrepackedTravelPackageDTO> findAllPrepackedTravelPackageByParameter(TravelState state);
 	public PrepackedTravelPackageDTO cloneTravelPackageToPrepacked(PrepackedTravelPackageDTO preDTO);
-	public List<TravelPackageDTO>  findAllPackageForCustomer();
-	public List <PrepackedTravelPackageDTO> findAllPackageForEmployee();
+	public ArrayList<TravelPackageDTO>  findAllPackageForCustomer();
+	public ArrayList <PrepackedTravelPackageDTO> findAllPackageForEmployee();
 
 
 	
