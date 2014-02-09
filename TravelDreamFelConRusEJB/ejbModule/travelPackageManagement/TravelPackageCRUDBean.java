@@ -398,18 +398,18 @@ public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackage
 
 
 
-public List <PrepackedTravelPackageDTO> findAllPackageForEmployee()
+public ArrayList <PrepackedTravelPackageDTO> findAllPackageForEmployee()
 {
 	EmployeeDTO emplo=(EmployeeDTO)log.findLogIn();
-	List <PrepackedTravelPackageDTO> travel=emplo.getManagedTravelPackage();
+	ArrayList <PrepackedTravelPackageDTO> travel=emplo.getManagedTravelPackage();
 return travel;
 
 }
 
-public List<TravelPackageDTO>  findAllPackageForCustomer()
+public ArrayList<TravelPackageDTO>  findAllPackageForCustomer()
 {
 	CustomerDTO customer=(CustomerDTO)log.findLogIn();
-	List<TravelPackageDTO> travels=customer.getPurchasedTravelPackage();
+	ArrayList<TravelPackageDTO> travels=customer.getPurchasedTravelPackage();
 	return travels;
 }
 
