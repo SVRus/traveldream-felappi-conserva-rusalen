@@ -149,4 +149,14 @@ public boolean simpleBuyGiftList(GiftListDTO giftlist)
     	
     	
     }
+    
+    
+    public List <GiftListDTO> findAllGiftListForClient()
+    {
+    	CustomerDTO customer=(CustomerDTO)login.findLogIn();
+    	List <GiftListDTO> gift=customer.getGiftlist();
+    	return gift;
+    	
+    	
+    }
 }
