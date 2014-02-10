@@ -62,6 +62,8 @@ public class CustomerPackageEditBean implements Serializable{
 	private Date time_end;
 	private String description;
 	private String name; 
+	private String code;
+	
 	
 	//per popolare i campi la prima volta in caso di modifica. Utilizzati nei getter
 	private boolean modifyForField;
@@ -91,6 +93,7 @@ public class CustomerPackageEditBean implements Serializable{
 		{
 			CustomizedTravelPackageDTO customPackage= new CustomizedTravelPackageDTO(currentTravelPackage);
 			if(purchaseManagement.fullPurchase(customPackage))
+				
 				return "purchasedPackage";
 			
 		}
