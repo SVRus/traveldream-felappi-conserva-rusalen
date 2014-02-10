@@ -103,7 +103,9 @@ public class HotelManagementBean implements Serializable{
 	  }
 	  public void deleteHotel(ActionEvent actionEvent) {
 		  
-		    if(selectedHotel.getState()==State.AVAILABLE)
+		  if(selectedHotel==null)
+			  return;
+		  if(selectedHotel.getState()==State.AVAILABLE)
 		    	messageDelete="Prodotto eliminato correttamente";
 		    if(selectedHotel.getState()==State.INCLUDED)
 		    	messageDelete="Il prodotto è stato eliminato. E'stato eliminato anche il pacchetto ad esso associato." ;

@@ -26,23 +26,33 @@ import javax.persistence.TemporalType;
 import org.primefaces.context.RequestContext;
 
 import productManagement.ProductCRUDBeanLocal;
+import purchase.PurchaseGiftListBeanLocal;
 import stateenum.State;
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import travelstateenum.TravelState;
 import dto.CustomerDTO;
+import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GiftListDTO;
 import dto.ProductDTO;
 import dto.HotelDTO;
 import dto.StageDTO;
 import dto.PrepackedTravelPackageDTO;
+import exceptions.FriendNotFoundException;
+import exceptions.GiftListNotFoundException;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
-
-@ManagedBean(name="packageManagement")
+/**
+ * Classe che gestisce le funzionalità adibite al flusso di navigazione di un invitato,
+ * quali la verifica della disponibilità di un pacchetto e i corretti reindirizzamenti
+ * in caso di utente non loggato.
+ * @author Giovanni 
+ *
+ */
+@ManagedBean(name="friendManagement")
 @SessionScoped
 
-public class PackageManagementBean implements Serializable{
+public class FriendManagementBean implements Serializable{
 
 
 private Date time_end;
@@ -68,6 +78,9 @@ private Date purchaseTime;
 private PrepackedTravelPackageDataModel packageModel;
 private PrepackedTravelPackageDataModel packageModelAvailable;
 
+//Pacchetto che verrà usato come scheletro per l'acquisto di un nuovo pacchetto
+private CustomizedTravelPackageDTO packageClone;
+
 
 
 @EJB
@@ -77,6 +90,65 @@ private TravelPackageCRUDBeanLocal packageCRUD;
 
 @ManagedProperty(value="#{packageEdit}")
 private PackageEditBean packBean;
+
+@EJB
+private LoginBeanLocal login;
+
+
+
+
+
+/**
+ * Metodo che controlla la corrispondenza tra il codice inserito 
+ * e il pacchetto, e che esistano pacchetti clone disponibili.
+ * Viene richiamato quando si inserisce il codice pacchetto dalla pagina di index
+ * 
+ * @return
+ */
+public String checkFriendCode()
+{
+	try { 
+		
+		packageClone = login.checkFriendException(friendCode);
+		if(packageCRUD.getNumberEquivalentPackage(packageClone)==0 )
+			return "friendSoldOut";	 
+		return "friendCodeCorrect";
+		
+	} catch (FriendNotFoundException e) {
+		
+		return "friendCodeError";
+
+	}	
+}
+
+/**
+ * Metodo che controlla la corrispondenza tra il codice inserito 
+ * e il pacchetto, e che esistano pacchetti clone disponibili.
+ * Viene richiamato quando si inserisce il codice pacchetto dalla pagine personale di customer.
+ * 
+ * @return
+ */
+
+public String checkFriendCodeByLogged()
+{
+	try { 
+		
+		packageClone = login.checkFriendException(friendCode);
+		if(packageCRUD.getNumberEquivalentPackage(packageClone)==0 )
+			return "friendSoldOut";
+		
+		
+		return "friendCodeCorrect";
+		
+	} catch (FriendNotFoundException e) {
+		
+		return "friendCodeError";
+
+	}	
+}
+
+
+
 
 
 public void update()
@@ -211,3 +283,4 @@ public void setPackageModelAvailable(
 	
 
 }
+

@@ -110,6 +110,9 @@ public class OutingManagementBean {
 	  }
 	  public void deleteOuting(ActionEvent actionEvent) {
 		  
+		  if(selectedOuting==null)
+			  return;
+		  
 		    if(selectedOuting.getState()==State.AVAILABLE)
 		    	messageDelete="Prodotto eliminato correttamente";
 		    if(selectedOuting.getState()==State.INCLUDED)

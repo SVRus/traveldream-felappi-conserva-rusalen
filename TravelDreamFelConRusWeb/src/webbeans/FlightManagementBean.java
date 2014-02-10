@@ -113,6 +113,9 @@ public class FlightManagementBean {
 		  }
 		  
 		  public void deleteFlight(ActionEvent actionEvent) {
+			  if(selectedFlight==null)
+				  return;
+			  
 			  
 			    if(selectedFlight.getState()==State.AVAILABLE)
 			    	messageDelete="Prodotto eliminato correttamente";
