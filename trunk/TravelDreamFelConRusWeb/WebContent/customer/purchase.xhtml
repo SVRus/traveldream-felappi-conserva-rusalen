@@ -47,10 +47,10 @@
 	     <h:panelGrid columns="2">
 	     
 	    <p:outputLabel value="Codice amico:"  /> 
-		<p:outputLabel value="Qui va il riferimento al codice"  />
+		<p:outputLabel value="#{customerPackageEdit.}"  />
 		
 		<p:outputLabel value="Email:" for="mailFriend" />
-		<p:inputText value="#{hotelManagement.name}" id="mailFriend"  label="mailFriend" /> 
+		<p:inputText value="" id="mailFriend"  label="mailFriend" /> 
 		
 		</h:panelGrid>
 	        <p:commandButton  value="Invia invito" onclick="PF('dlg3').show();" icon="ui-icon-mail-closed" />  
