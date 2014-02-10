@@ -15,6 +15,7 @@
        </style> 
        <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
   
+  
     </p:layoutUnit>  
   
   <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
@@ -31,7 +32,50 @@
          <h:form id="centerImage" styleClass="input-form">
           <p:graphicImage  value="Briatore.jpg" style=" width:310px height:175px;"/>
 		</h:form>
-		
+		 <h:form id="form">
+	   
+    
+ <p:dataTable var="travelPackage" value="#{customerPersonal.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+                selection="#{customerPersonal.selectedTravelPackage}" filteredValue="#{customerPersonal.filteredTravelPackages}" selectionMode="single" 
+               id="traveltable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                   Vuoi invitare un amico? Seleziona un pacchetto e invia la mail
+                </f:facet>  
+                
+                 <p:column  headerText="Nome" filterBy="#{travelPackage.name}" sortBy="#{travelPackage.name}"  id="name">
+                    
+                    
+                 #{travelPackage.name}  
+        		</p:column>  
+        		<p:column  headerText="Descrizione"  filterBy="#{travelPackage.description}" sortBy="#{travelPackage.description}"  id="description">
+                    
+                    
+                 #{travelPackage.description}  
+        		</p:column> 
+        		 <p:column  headerText="Data Inizio"  filterBy="#{travelPackage.time_start}" sortBy="#{travelPackage.time_start}"  id="timeStart">  
+                 #{travelPackage.time_start}  
+                 </p:column> 
+                 <p:column  headerText="Data Fine"  filterBy="#{travelPackage.time_end}" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
+                 #{travelPackage.time_end}  
+                 </p:column> 
+                     <p:column  headerText="Codice"  filterBy="#{travelPackage.friendCode}" sortBy="#{travelPackage.friendCode}"  id="friendCode">  
+                 #{travelPackage.friendCode}  
+                 </p:column> 
+               
+               <f:facet name="footer">
+                    <p:commandButton action="#{customerPackageEdit.show()}" value="Invita amico" icon="ui-icon-cart" />  
+               		
+               		
+                    
+                  
+               </f:facet>
+				
+              </p:dataTable>
+         </h:form>   
     </p:layoutUnit>  
   
   

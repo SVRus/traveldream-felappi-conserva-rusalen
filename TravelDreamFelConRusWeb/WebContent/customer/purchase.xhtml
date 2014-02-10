@@ -41,35 +41,11 @@
          </h:form>   
       </p:layoutUnit>  
             
-           <p:layoutUnit position="east" header = "Invita un amico">  
-      
-	     <h:form id="inviteFriend">
-	     <h:panelGrid columns="2">
-	     
-	    <p:outputLabel value="Codice amico:"  /> 
-		<p:outputLabel value="#{customerPackageEdit.}"  />
-		
-		<p:outputLabel value="Email:" for="mailFriend" />
-		<p:inputText value="" id="mailFriend"  label="mailFriend" /> 
-		
-		</h:panelGrid>
-	        <p:commandButton  value="Invia invito" onclick="PF('dlg3').show();" icon="ui-icon-mail-closed" />  
-	     
-   
-         </h:form>   
-         
-       
-    
-    
-        </p:layoutUnit>  
+           
       
         </p:layout>  
     
-                         
-         <p:dialog header="Invito inviato" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" resizable="false"
-                   width="200" height="50">      
-            <p:outputLabel value="Il tuo invito è stato spedito!"  />
-         </p:dialog>
+       
       
 <p:growl id="growl" showDetail="true" life="5000" />
          
