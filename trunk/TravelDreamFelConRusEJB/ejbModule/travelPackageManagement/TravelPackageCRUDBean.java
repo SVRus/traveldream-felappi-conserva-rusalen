@@ -413,4 +413,13 @@ public ArrayList<TravelPackageDTO>  findAllPackageForCustomer()
 	return travels;
 }
 
+
+public ArrayList <CustomizedTravelPackageDTO> findAllCustomizedForCustomer()
+{
+	CustomerDTO customer=(CustomerDTO)log.findLogIn();
+	ArrayList<CustomizedTravelPackageDTO> travels=customer.getCustomizedTravelPackage();
+	return travels;
+
+}
+
 }
