@@ -66,9 +66,12 @@ public String findCustomerCreator(long idProduct)
 {
 	Query query=em.createNativeQuery("SELECT idCustomer from GiftList where idProduct =?");
 	query.setParameter(1, idProduct);
-	String result=(String) query.getResultList().get(0);
+	List <String> result= query.getResultList();
 	
-	return result;
+	if (result==null|| result.size()==0)
+    	return null;
+    	
+    	return result.get(0);
 	
 
 }

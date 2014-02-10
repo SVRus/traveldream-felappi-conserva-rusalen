@@ -43,10 +43,11 @@ public class StageEntityManagement extends AbstractEntityManagement implements S
 	    query.setParameter(1, idStage);
 	    
 	   
-	    	Long result=(Long) query.getResultList().get(0);
-	    	
-	    	return result ;
-	    	
+	    	List <Long> result= query.getResultList();
+	    	if (result==null|| result.size()==0)
+	        	return null;
+	        	
+	        	return result.get(0);
 		
 		
 		

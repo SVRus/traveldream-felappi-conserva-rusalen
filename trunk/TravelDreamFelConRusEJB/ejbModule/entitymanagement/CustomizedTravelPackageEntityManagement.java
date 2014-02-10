@@ -36,10 +36,13 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    		Query query = em.createNativeQuery("SELECT  idcustomer FROM customizedtravelpackage where idtravelpackage=? ");
       	     query.setParameter(1, idPrepackedTravelPackage);
       	   Long id;
-      	    	Object result=  query.getResultList().get(0);
+      	    	List <String> result= query.getResultList();
       	    	
-       	
-   		return (String)result;
+      	    	if (result==null|| result.size()==0)
+      	      	return null;
+      	      	
+      	      	return result.get(0);
+   		
    		
    		
    		
@@ -48,15 +51,16 @@ public class CustomizedTravelPackageEntityManagement extends AbstractEntityManag
    	}
 	
     
-    /**
-     * method that
-     */
+    
     public CustomizedTravelPackage findCustomizedTravelPackageForFriend(String code)
     {
     	Query query = em.createQuery("SELECT  c FROM CustomizedTravelPackage c where c.friendCode=:code ",CustomizedTravelPackage.class);
  	     query.setParameter("code",code);
- 	    	return   (CustomizedTravelPackage) query.getResultList().get(0);
- 	    	
+ 	    	List   <CustomizedTravelPackage> result=query.getResultList();
+ 	    	if (result==null|| result.size()==0)
+ 	       	return null;
+ 	       	
+ 	       	return result.get(0);
     }
 	
 	@Override

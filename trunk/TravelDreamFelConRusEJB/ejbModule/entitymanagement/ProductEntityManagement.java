@@ -34,13 +34,16 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
 	}
     
     public String findEmployeeCreator(long idproduct)
-    {Query query = em.createNativeQuery("SELECT idemployee FROM product WHERE idProduct =?");
+    {
+    	Query query = em.createNativeQuery("SELECT idemployee FROM product WHERE idProduct =?");
     query.setParameter(1, new Long(idproduct));
     
    
-    	String result=(String) query.getResultList().get(0);
+    	List <String> result= query.getResultList();
+    	if (result==null|| result.size()==0)
+    	return null;
     	
-    	return result;
+    	return result.get(0);
     	
     }
     public Long findStageContainer(long idproduct)
@@ -51,13 +54,13 @@ public class ProductEntityManagement extends AbstractEntityManagement implements
     	Query q = em.createNativeQuery("SELECT IDSTAGE FROM PRODUCT WHERE IDPRODUCT=?");
     	System.out.print("ciao sono io?");
     	q.setParameter(1, idproduct);
-    	Object result= q.getResultList().get(0);
-    	if (result==null)
-    		result=new Long(0);
+    	List <Long> result= q.getResultList();
+    	if (result==null|| result.size()==0)
+    		return new Long(0);
     	
     		
     	
-    	return (Long)result;
+    	return (Long)result.get(0);
     	
     	
     }
