@@ -386,14 +386,15 @@ public boolean createCustomizedTravelPackageFromCustomer(CustomizedTravelPackage
 	}
 	
 	
-	public boolean createCustomizedTravelPackageForFriend( CustomizedTravelPackageDTO customizedTravel)
+	public String createCustomizedTravelPackageForFriend( CustomizedTravelPackageDTO customizedTravel)
 		{  
 		String code=DigestUtils.sha256Hex(new Long(customizedTravel.getIdtravelpackage()).toString());
 		customizedTravel.setFriendCode(code);
 	    boolean ok=updateTravelPackage(customizedTravel);
 		String email=log.findLogIn().getEmail();
 	    
-	    return ok=ok&&mail.simpleSendMail(email, "", "");
+	    mail.simpleSendMail(email, "", "");
+	    return code;
 	}
 
 
