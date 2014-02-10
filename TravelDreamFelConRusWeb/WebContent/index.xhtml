@@ -4,8 +4,10 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
-<h:head></h:head> 
-<body>  
+<h:head>
+
+</h:head> 
+<body onload="redirect();">  
 	
 <p:layout   fullPage="true">  
   
@@ -13,24 +15,53 @@
        <style type="text/css">
         .ui-widget{font-size:90% !important;}  
        </style> 
-       <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+       <p:graphicImage id="logo" value="logo.jpg" style=" height:100px;"/>
   
     </p:layoutUnit>  
   
      <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
        <h:form style =" text-align : center;">
-        <h:outputText  value="Marcello Felappi, Selenia Vincenza Rusalen, Giovanni Battista Conserva" />  
+        <h:outputText id="owner" value="Marcello Felappi, Selenia Vincenza Rusalen, Giovanni Battista Conserva" />  
         </h:form>
     </p:layoutUnit>  
   
    <p:layoutUnit position="center" size="600">  
       
+     <script type="text/javascript">
+    function redirect() {
+		
+		if(document.getElementById("employeeCheck").value=="true")
+      	window.location = "http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml";
+		if(document.getElementById("customerCheck").value=="true")
+	     window.location = "http://localhost:8080/TravelDreamFelConRusWeb/customer/customerhome.xhtml";
+	      	
+    }
+  </script>
+  
+    <h:inputHidden  id="employeeCheck" 
+                  value="#{auth.userEmployee}"/>
+       <h:inputHidden  id="customerCheck" 
+                  value="#{auth.userCustomer}"/>
     
+   	 <h:form id="welcomeEmployee" style =" text-align : center;" rendered="#{auth.userEmployee}">
+	       
+            <p:outputLabel value="Benvenuto, impiegato" ></p:outputLabel><br/>
+             <p:outputLabel value="Vai alla tua area personale" ></p:outputLabel><br/>
+            <p:button outcome="employee/employeehome" value="Pagina Personale"  icon="ui-icon-arrowrefresh-1-w" ></p:button> 
+            <p:commandButton action="#{logoutBean.logout}" value="Logout" />
     
-    <p:outputLabel value= "#{auth.result}"  />
-	
-    <p:outputLabel value= "#{auth.description}"  />
-         <h:form id="signupForm" styleClass="input-form">
+			
+	      </h:form>
+	       <h:form id="welcomeCustomer" style =" text-align : center;" rendered="#{auth.userCustomer}">
+	       
+            <p:outputLabel value="Benvenuto, cliente" ></p:outputLabel><br/>
+             <p:outputLabel value="Vai alla tua area personale" ></p:outputLabel><br/>
+            <p:button outcome="customer/customerhome" value="Pagina Personale"  icon="ui-icon-arrowrefresh-1-w" ></p:button> 
+            <p:commandButton action="#{logoutBean.logout}" value="Logout" />
+    		
+	      </h:form>
+    
+         <h:form id="signupForm" styleClass="input-form" rendered="#{auth.userNone}">
 		<p:panel header="Registrazione" id="panel">
 		<p:messages id="messages" showDetail="true" showSummary="false"
 			autoUpdate="true"/>
@@ -106,12 +137,16 @@
 		<p:selectBooleanCheckbox required="true" id="terms"
 			label="Accept terms and conditions"
 			value="#{auth.acceptedTerms}"
-			widgetVar="termsCheckbox" />
+			widgetVar="termsCheckbox" 
+			  />
+      
 		<p:outputLabel value="Accetto i termini e le condizioni d'uso."
 			onclick="termsCheckbox.toggle()" for="terms" />
 	</h:panelGroup>
       
   
+	
+	
 		<p:commandButton value="Registrati"
 		action="#{auth.signUp}"
 		style="display:block; margin:0 auto;"
@@ -128,14 +163,14 @@
    <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
             <p:menu>  
                
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/allPackages.xhtml" />  
                      <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />                    
           
             </p:menu>   
         </p:layoutUnit>  
        
   
-    <p:layoutUnit position="east" size="400"  resizable="false" closable="false" collapsible="false" >  
+    <p:layoutUnit position="east" size="400"  resizable="false" closable="false" collapsible="false" rendered="#{auth.userNone}">  
       
        <h:form id="login"
 			onsubmit="document.getElementById('login').action='j_security_check';"
@@ -187,6 +222,7 @@
    
   
 </p:layout>  		
-			
+	
+
 </body> 
 </html>

@@ -36,7 +36,7 @@
 	  <h:form id="form">
 	  
     
- <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+ <p:dataTable var="travelPackage" value="#{packageManagement.packageModelAvailable}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
                 selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
                 filteredValue="#{packageManagement.filteredTravelPackages}" 
                id="traveltable"

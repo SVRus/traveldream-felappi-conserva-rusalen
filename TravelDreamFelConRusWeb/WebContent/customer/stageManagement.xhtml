@@ -80,7 +80,7 @@
         
          <f:facet name="footer">
                      <p:commandButton id="newFlightDialog" value="Inserisci" onclick="PF('startFlightDl').show();" type="button" icon="ui-icon-star" /> 
-                     <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteFlight}" update=":form1:startFl :formFlight:flighttable" icon="ui-icon-trash"/>
+                     <p:commandButton  value="Rimuovi" actionListener="#{stageManagement.deleteFlight}" update=":form1:startFl :formFlight:flighttable" icon="ui-icon-trash"/>
                 </f:facet>
       </p:dataTable>  
       </h:form>
@@ -196,7 +196,7 @@
                
                <f:facet name="footer">
                     <p:commandButton id="effectsDialogButton" value="Inserisci" onclick="PF('outingDl').show();" type="button" icon="ui-icon-star"/> 
-                     <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteOuting}" update=":form:out :formOuting:outingtable" icon="ui-icon-trash"/>
+                     <p:commandButton value="Rimuovi"  actionListener="#{stageManagement.deleteOuting}" update=":form:out :formOuting:outingtable" icon="ui-icon-trash"/>
                 </f:facet>
 
               </p:dataTable>

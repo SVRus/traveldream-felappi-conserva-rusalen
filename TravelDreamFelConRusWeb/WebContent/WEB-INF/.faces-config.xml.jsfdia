@@ -12,6 +12,18 @@
     NAME="output" PATH="/giftListErrorCode.xhtml"
     TARGET="rules:#giftListErrorCode.xhtml" TITLE="codeError" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:index.xhtml:2" NAME="item2" PATH="index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="redirectEmployee::#employee#employeehome.xhtml" NAME="output"
+    PATH="/employee/employeehome.xhtml"
+    TARGET="rules:#employee#employeehome.xhtml" TITLE="redirectEmployee" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:index.xhtml:3" NAME="item3" PATH="index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="redirectCustomer::#customer#customerhome.xhtml" NAME="output"
+    PATH="/customer/customerhome.xhtml"
+    TARGET="rules:#customer#customerhome.xhtml" TITLE="redirectCustomer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#giftList.xhtml" PATH="/giftList.xhtml"
   SHAPE="288,1041,0,0" model-entity="JSFProcessGroup"/>
@@ -72,9 +84,9 @@
   <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:4" NAME="item4"
    PATH="employee/packageEdit.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
-    ID="insertSuccess::#employee#packageInsertedSuccesEmployee.xhtml"
-    NAME="output" PATH="/employee/packageInsertedSuccesEmployee.xhtml"
-    TARGET="rules:#employee#packageInsertedSuccesEmployee.xhtml"
+    ID="insertSuccess::#employee#packageInsertedSuccessEmployee.xhtml"
+    NAME="output" PATH="/employee/packageInsertedSuccessEmployee.xhtml"
+    TARGET="rules:#employee#packageInsertedSuccessEmployee.xhtml"
     TITLE="insertSuccess" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
   <PROCESS-ITEM ID="rules:employee#packageEdit.xhtml:5" NAME="item5"
@@ -128,10 +140,6 @@
   PATH="/employee/stageErrorBusy.xhtml" SHAPE="560,1681,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#employee#stageManagement.xhtml"
   PATH="/employee/stageManagement.xhtml" SHAPE="560,1473,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM
-  NAME="rules:#employee#packageInsertedSuccesEmployee.xhtml"
-  PATH="/employee/packageInsertedSuccesEmployee.xhtml"
-  SHAPE="560,1905,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#employee#packageEdit.xhtml"
   PATH="/employee/packageEdit.xhtml" SHAPE="288,1489,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#employee#packageErrorBusy.xhtml"
@@ -319,7 +327,41 @@
     TARGET="rules:#customer#afterPurchase.xhtml"
     TITLE="purchasedPackage" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#purchase.xhtml:1" NAME="item1"
+   PATH="customer/purchase.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="purchasedGift::#customer#personalGiftList.xhtml" NAME="output"
+    PATH="/customer/personalGiftList.xhtml"
+    TARGET="rules:#customer#personalGiftList.xhtml"
+    TITLE="purchasedGift" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#customer#afterPurchase.xhtml"
   PATH="/customer/afterPurchase.xhtml" SHAPE="240,6113,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#employee#employeehome.xhtml"
+  PATH="/employee/employeehome.xhtml" SHAPE="288,481,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,673,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="redirectEmployee::#employee#employeehome.xhtml" NAME="output"
+    PATH="/employee/employeehome.xhtml"
+    TARGET="rules:#employee#employeehome.xhtml" TITLE="redirectEmployee" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules::1" SHAPE="32,785,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::1" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="redirectCustomer::#customer#customerhome.xhtml" NAME="output"
+    PATH="/customer/customerhome.xhtml"
+    TARGET="rules:#customer#customerhome.xhtml" TITLE="redirectCustomer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#customer#customerhome.xhtml"
+  PATH="/customer/customerhome.xhtml" SHAPE="288,689,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#personalGiftList.xhtml"
+  PATH="/customer/personalGiftList.xhtml" SHAPE="256,6177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#employee#packageInsertedSuccessEmployee.xhtml"
+  PATH="/employee/packageInsertedSuccessEmployee.xhtml"
+  SHAPE="560,1537,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>
