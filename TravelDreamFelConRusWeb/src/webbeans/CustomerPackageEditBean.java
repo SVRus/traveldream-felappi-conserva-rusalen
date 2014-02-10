@@ -96,7 +96,8 @@ public class CustomerPackageEditBean implements Serializable{
 			CustomizedTravelPackageDTO customPackage= new CustomizedTravelPackageDTO(currentTravelPackage);
 			if(purchaseManagement.fullPurchase(customPackage))
 			{	
-				friendCode=customPackage.getFriendCode();
+				
+				//friendCode=customPackage.getFriendCode();
 				return "purchasedPackage";
 			}
 			
@@ -202,7 +203,7 @@ public class CustomerPackageEditBean implements Serializable{
 			modifyForField=true;
 			setFields();
 			//indica che il pacchetto corrente è personalizzato
-			personalized = false;
+			personalized = true;
 			//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
 			//di modifica del pacchetto
 			return "notBusy";
