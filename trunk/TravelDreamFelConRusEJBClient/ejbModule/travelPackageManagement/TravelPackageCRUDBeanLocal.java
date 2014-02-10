@@ -25,7 +25,8 @@ public interface TravelPackageCRUDBeanLocal
 	public PrepackedTravelPackageDTO cloneTravelPackageToPrepacked(PrepackedTravelPackageDTO preDTO);
 	public ArrayList<TravelPackageDTO>  findAllPackageForCustomer();
 	public ArrayList <PrepackedTravelPackageDTO> findAllPackageForEmployee();
-	public boolean createCustomizedTravelPackageForFriend( CustomizedTravelPackageDTO customizedTravel);
+	public boolean createCustomizedTravelPackageForFriend(CustomizedTravelPackageDTO customizedTravel);
+	public ArrayList <CustomizedTravelPackageDTO> findAllCustomizedForCustomer();
 
 	
 	
