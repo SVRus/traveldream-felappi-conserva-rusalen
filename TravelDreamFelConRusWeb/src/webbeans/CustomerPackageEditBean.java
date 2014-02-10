@@ -63,6 +63,8 @@ public class CustomerPackageEditBean implements Serializable{
 	private String description;
 	private String name; 
 	private String code;
+	private String friendCode;
+	
 	
 	
 	//per popolare i campi la prima volta in caso di modifica. Utilizzati nei getter
@@ -93,8 +95,10 @@ public class CustomerPackageEditBean implements Serializable{
 		{
 			CustomizedTravelPackageDTO customPackage= new CustomizedTravelPackageDTO(currentTravelPackage);
 			if(purchaseManagement.fullPurchase(customPackage))
-				
+			{	
+				friendCode=customPackage.getFriendCode();
 				return "purchasedPackage";
+			}
 			
 		}
 		
@@ -453,6 +457,24 @@ public class CustomerPackageEditBean implements Serializable{
 	}
 	public void setConsistency(ConsistencyChecker consistency) {
 		this.consistency = consistency;
+	}
+	public PurchaseGiftListBeanLocal getPurchaseGiftList() {
+		return purchaseGiftList;
+	}
+	public void setPurchaseGiftList(PurchaseGiftListBeanLocal purchaseGiftList) {
+		this.purchaseGiftList = purchaseGiftList;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public String getFriendCode() {
+		return friendCode;
+	}
+	public void setFriendCode(String friendCode) {
+		this.friendCode = friendCode;
 	}
 	
 	
