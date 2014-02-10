@@ -5,9 +5,12 @@ package webbeans;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionListener;
 
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
@@ -20,7 +23,7 @@ import dto.ProductDTO;
 import dto.TravelPackageDTO;
 
 @ManagedBean(name="auth")
-@SessionScoped
+@ViewScoped
 
 public class AuthBean {
 	private String	firstName;
@@ -37,6 +40,10 @@ public class AuthBean {
 	private String description;
 	private Long code;
 	private boolean checked;
+	private boolean userEmployee;
+	private boolean userNone;
+	private boolean userCustomer;
+	
 	
 	
 		public boolean isChecked() {
@@ -81,6 +88,57 @@ public class AuthBean {
 		
 	}
 	
+	/**
+	 * Metodo che verifica se un utente è loggato e lo indirizza nella sua home personale
+	 * @return
+	 */
+	@PostConstruct
+	public void redirect()
+	{
+		if(login.isLogged())
+		{
+			
+		if(login.findLogIn() instanceof EmployeeDTO)
+		{
+			userEmployee=true;
+			userCustomer=false;
+			userNone=false;
+			
+			return;
+		}
+			//return "/employee/employeehome?faces-redirect=true";  
+			//return "redirectEmployee";
+		if(login.findLogIn() instanceof CustomerDTO)
+		{
+			userEmployee=false;
+			userCustomer=true;
+			userNone=false;
+			return;
+		}
+		}
+		userEmployee=false;
+		userCustomer=false;
+		userNone=true;
+			//return "redirectCustomer";
+			return;
+			
+		//return "";
+		
+	}
+	public String redirect(ActionListener a)
+	{
+		if(login.isLogged())
+		{
+			
+		if(login.findLogIn() instanceof EmployeeDTO)
+			return "redirectEmployee";
+		if(login.findLogIn() instanceof CustomerDTO)
+			return "redirectCustomer";
+		
+		}	
+		return "";
+		
+	}
 	
 	public String getDescription() {
 		if (login.isLogged())
@@ -194,6 +252,56 @@ public class AuthBean {
 	}
 	public void setPasswordIn(String passwordIn) {
 		this.passwordIn = passwordIn;
+	}
+
+
+	public boolean isUserEmployee() {
+		return userEmployee;
+	}
+
+
+	public void setUserEmployee(boolean userEmployee) {
+		this.userEmployee = userEmployee;
+	}
+
+
+	public boolean isUserNone() {
+		return userNone;
+	}
+
+
+	public void setUserNone(boolean userNone) {
+		this.userNone = userNone;
+	}
+
+
+	public boolean isUserCustomer() {
+		return userCustomer;
+	}
+
+
+	public void setUserCustomer(boolean userCustomer) {
+		this.userCustomer = userCustomer;
+	}
+
+
+	public RegistrationBeanLocal getGeneric() {
+		return generic;
+	}
+
+
+	public void setGeneric(RegistrationBeanLocal generic) {
+		this.generic = generic;
+	}
+
+
+	public LoginBeanLocal getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(LoginBeanLocal login) {
+		this.login = login;
 	}
 	
 

@@ -9,9 +9,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
 
+import purchase.PurchaseGiftListBeanLocal;
 import purchase.PurchaseSTDBeanLocal;
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import dto.PrepackedTravelPackageDTO;
+import dto.CustomizedTravelPackageDTO;
 import dto.StageDTO;
 import dto.TravelPackageDTO;
 
@@ -40,9 +42,14 @@ public class CustomerPackageEditBean implements Serializable{
 	private PrepackedTravelPackageDTO currentTravelPackage;
 	
 	private StageDTO selectedStage;
-
+	
+	
 	//Istanza di PurchaseSTDBeanLocal che permette l'acquisto
+	@EJB
 	private PurchaseSTDBeanLocal purchaseManagement;
+	//Istanza di PurchaseGiftListBeanLocal che permette la creazione di una gift List
+	@EJB
+	private PurchaseGiftListBeanLocal purchaseGiftList;
 	
 	private  ArrayList<StageDTO> filteredStages;
 
@@ -67,22 +74,26 @@ public class CustomerPackageEditBean implements Serializable{
 	//true se sto lavorando su un nuovo pacchetto, false se sto modificando un pacchetto esistente
 	private boolean newPack;
 	
+	//indica se il pacchetto che si sta comprando è personalizzato
+	private boolean personalized;
+	
 	ConsistencyChecker consistency;
 	
 	public String purchase()
 	{
-		
-		purchaseManagement = new PurchaseSTDBeanLocal()
-		{
+		if(!personalized){
 			
-			@Override
-			public boolean fullPurchase(TravelPackageDTO traveldto) {
-				// TODO Auto-generated method stub
-				return false;
-			}
-		};
-		if(purchaseManagement.fullPurchase(currentTravelPackage))
-			return "purchasedPackage";
+			if(purchaseManagement.fullPurchase(currentTravelPackage))
+				return "purchasedPackage";
+				
+		}
+		else
+		{
+			CustomizedTravelPackageDTO customPackage= new CustomizedTravelPackageDTO(currentTravelPackage);
+			if(purchaseManagement.fullPurchase(customPackage))
+				return "purchasedPackage";
+			
+		}
 		
 		
 		
@@ -91,8 +102,11 @@ public class CustomerPackageEditBean implements Serializable{
 	}
 	public String purchaseGiftList()
 	{
+		if(purchaseGiftList.persistGiftList(currentTravelPackage))
+			return "purchasedGift";
 		
 		return "";
+
 	}
 	/**
 	 * metodo che setta le strutture dati che consentono la visualizzazione
@@ -102,6 +116,7 @@ public class CustomerPackageEditBean implements Serializable{
 		currentTravelPackage = tempCurrentPackage;
 		setFields();
 		update();
+		personalized = false;
 		return "showPackage";
 		
 	}
@@ -172,13 +187,15 @@ public class CustomerPackageEditBean implements Serializable{
 		{		
 			shared.setBusy(true);
 			
-			currentTravelPackage = tempCurrentPackage;
+			currentTravelPackage = packageCRUD.cloneTravelPackageToPrepacked(tempCurrentPackage);
 			update();
 			//false indica che sto modificando un pacchetto esistente
 			newPack = false;
 			//permette di mantenere i campi del pacchetto selezionato. Usato nei getter
 			modifyForField=true;
 			setFields();
+			//indica che il pacchetto corrente è personalizzato
+			personalized = false;
 			//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
 			//di modifica del pacchetto
 			return "notBusy";
@@ -415,6 +432,24 @@ public class CustomerPackageEditBean implements Serializable{
 	}
 	public void setNewForField(boolean newForField) {
 		this.newForField = newForField;
+	}
+	public PurchaseSTDBeanLocal getPurchaseManagement() {
+		return purchaseManagement;
+	}
+	public void setPurchaseManagement(PurchaseSTDBeanLocal purchaseManagement) {
+		this.purchaseManagement = purchaseManagement;
+	}
+	public boolean isPersonalized() {
+		return personalized;
+	}
+	public void setPersonalized(boolean personalized) {
+		this.personalized = personalized;
+	}
+	public ConsistencyChecker getConsistency() {
+		return consistency;
+	}
+	public void setConsistency(ConsistencyChecker consistency) {
+		this.consistency = consistency;
 	}
 	
 	

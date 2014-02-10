@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -21,9 +22,9 @@ import dto.GiftListDTO;
 import dto.HotelDTO;
 import exceptions.GiftListNotFoundException;
 
-@ManagedBean(name="giftList")
-@SessionScoped
-public class GiftListBean implements Serializable {
+@ManagedBean(name="giftListCustomer")
+@ViewScoped
+public class GiftListCustomerBean implements Serializable {
 	
 	
 	private GiftListDTO selectedGiftList;
@@ -31,7 +32,7 @@ public class GiftListBean implements Serializable {
 	private GiftListDTO newGiftList;
 	
 	 //Lista di gift list non ancora acquistate  
-	private  List<GiftListDTO> giftLists;
+	private  ArrayList<GiftListDTO> giftLists;
 	 
 
 	 private String code;
@@ -45,20 +46,23 @@ public class GiftListBean implements Serializable {
 	  ArrayList<GiftListDTO> giftFree;
 	  ArrayList<GiftListDTO> giftBought;
 	  		
-	  @EJB
-	  private LoginBeanLocal login;
 	  
 	  @EJB
 	  private PurchaseGiftListBeanLocal purchase;
 	  
+	  @EJB
+	  private LoginBeanLocal login;
+	  
+	  
 	  
 	  public void buyProduct(ActionEvent actionEvent)
-	  {   checkCode();
-		  selectedGiftList.setBought(true);
-		  selectedGiftList.setIdBuyer(nameBuyer);
-		   purchase.updateGiftList(selectedGiftList);
+	  {   
 		  
-		  checkCode();
+		  selectedGiftList.setBought(true);
+		  selectedGiftList.setIdBuyer(login.getPrincipalUsername());
+		   purchase.updateGiftList(selectedGiftList);
+		  update();
+		  
 		  
 	  }
 	  
@@ -69,20 +73,12 @@ public class GiftListBean implements Serializable {
 	  @PostConstruct
 	  public void update()
 	  {
-		System.out.println("Gift bean inizializzato");
-	  
-	 
-	  }
-	  
-	 
-	  public String checkCode()
-	  {
-		  try {
-			  System.out.println("codice" + code);
-			
-			 giftLists= login.checkGiftListException(code);			
-			
-			 giftFree = new ArrayList<GiftListDTO>();
+		
+		  System.out.println("Gift bean inizializzato");
+		  
+		  giftLists= purchase.findAllGiftListForClient();
+		  
+		  giftFree = new ArrayList<GiftListDTO>();
 			 giftBought = new ArrayList<GiftListDTO>();
 			
 			for(int i=0; i<giftLists.size();i++)
@@ -102,19 +98,9 @@ public class GiftListBean implements Serializable {
 			giftListModel = new GiftListDataModel(giftFree);
 			giftListModelBought= new GiftListDataModel(giftBought);
 			
-			return "viewGift";
-
-		} catch (GiftListNotFoundException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-			return "codeError";
-			
-		}
+	 
 	  }
-	  
-	  
-	  
-	  
+	
 	public ArrayList<GiftListDTO> getGiftFree() {
 		return giftFree;
 	}
@@ -142,7 +128,7 @@ public class GiftListBean implements Serializable {
 	public List<GiftListDTO> getGiftLists() {
 		return giftLists;
 	}
-	public void setGiftLists(List<GiftListDTO> giftLists) {
+	public void setGiftLists(ArrayList<GiftListDTO> giftLists) {
 		this.giftLists = giftLists;
 	}
 	public String getCode() {

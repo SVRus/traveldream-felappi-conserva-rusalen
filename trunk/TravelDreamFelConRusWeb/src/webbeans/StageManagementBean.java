@@ -262,6 +262,9 @@ public class StageManagementBean {
 			
 			
 			currentStage=new StageDTO();
+			currentStage.setArea(areaStage);
+			currentStage.setTimeStart(time_start_stage);
+			currentStage.setTimeEnd(time_end_stage);
 			//CONTROLLO DI CONSISTENZA
 			
 			hotels
@@ -291,6 +294,7 @@ public class StageManagementBean {
 	
 	public String closeOperation()
 	{
+		
 		shared.setBusyStage(false);
 		shared.setCurrentStage(new StageDTO());
 		currentStage=new StageDTO();
@@ -303,6 +307,9 @@ public class StageManagementBean {
 	
 	public void deleteFlight()
 	{
+		if(flightStartView==null)
+			return;
+		
 		flights.add(flightStartView);
 		flightModel = new FlightDataModel(flights);
 		flightStartView= null;
@@ -310,6 +317,9 @@ public class StageManagementBean {
 	}
 	public void deleteFlightBack()
 	{
+		if(flightEndView==null)
+			return;
+		
 		flightsBack.add(flightEndView);
 		flightModelBack = new FlightDataModel(flightsBack);
 		
@@ -318,6 +328,8 @@ public class StageManagementBean {
 	}
 	public void deleteHotel ()
 	{
+		if(hotelView==null)
+			return;
 		hotels.add(hotelView);
 		hotelModel = new HotelDataModel(hotels);
 		
@@ -326,6 +338,8 @@ public class StageManagementBean {
 	}
 	public void deleteOuting ()
 	{
+		if(selectedOutingView==null)
+			return;
 		outingsView.remove(selectedOutingView);
 		outingsView.trimToSize();
 		outingModelView = new OutingDataModel(outingsView);
