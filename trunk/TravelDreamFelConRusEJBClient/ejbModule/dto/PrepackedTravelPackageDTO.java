@@ -13,7 +13,11 @@ public PrepackedTravelPackageDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+public PrepackedTravelPackageDTO(CustomizedTravelPackageDTO custo) {
+	super(custo.getIdtravelpackage(), custo.getTime_end(), custo.getTime_start(), custo.getDescription(), custo.getName(), custo.getStages(),
+			custo.getIdCustomerBuyer(), custo.getFriendCode(),
+			custo.getPurchaseTime(),custo.getTravelState());
+}
 /**
  * 
  * @param idtravelpackage
