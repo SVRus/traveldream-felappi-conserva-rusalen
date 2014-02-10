@@ -35,11 +35,11 @@ public class TravelPackageEntityManagement extends AbstractEntityManagement impl
     	Query query = em.createNativeQuery("SELECT  idcustomerbuyer FROM travelpackage where idtravelpackage=? ");
    	  query.setParameter(1, idTravelPackage);
    	  
-   	    	Object result=  query.getResultList().get(0);
-   	    	if (result==null)
-   	    	return null;
-   	    	else
-   	    	return (String)result;
+   	    	List <String> result=  query.getResultList();
+   	    	if (result==null|| result.size()==0)
+   	     	return null;
+   	     	
+   	     	return result.get(0);
    	    	
     	
     }

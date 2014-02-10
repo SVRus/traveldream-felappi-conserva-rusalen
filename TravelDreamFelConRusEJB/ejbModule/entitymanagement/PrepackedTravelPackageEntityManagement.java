@@ -41,11 +41,12 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
 		Query query = em.createNativeQuery("SELECT  idemployeecreator FROM prepackedtravelpackage where idtravelpackage=? ");
    	     query.setParameter(1, idPrepackedTravelPackage);
    	   
-   	    	Object result=  query.getResultList().get(0);
-   	    	if (result==null)
-   	    	return null;
-   	    	else
-   	    	return (String)result;
+   	    	List <String> result=query.getResultList();
+   	    	
+   	    	if (result==null || result.size()==0)
+   	     	return null;
+   	     	
+   	     	return result.get(0);
     	
 		
 		
@@ -57,7 +58,7 @@ public class PrepackedTravelPackageEntityManagement extends AbstractEntityManage
 	
 
 	@Override
-	public List findAllByParameter(Object par) {
+	public List <PrepackedTravelPackage> findAllByParameter(Object par) {
 
 		Query q= em.createQuery("SELECT c from PrepackedTravelPackage c where c.travelState =:par",PrepackedTravelPackage.class);
 		q.setParameter("par", par);
