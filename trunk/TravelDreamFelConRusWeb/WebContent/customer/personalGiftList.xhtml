@@ -4,39 +4,132 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"> 
-	<h:head></h:head> 
-	<body> 
-		<p:layout fullPage="true">  
+    <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
   
-	    <p:layoutUnit position="north" size="100" header="Top" resizable="true" closable="true" collapsible="true">  
-	        <h:outputText value="North unit content." />  
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="south" size="100" header="Bottom" resizable="true" closable="true" collapsible="true">  
-	        <h:outputText value="South unit content." />  
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-	        <h:outputText value="West unit content." />  
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="east" size="200" header="Right" resizable="true" closable="true" collapsible="true" effect="drop">  
-	        <h:outputText value="Right unit content." />
-	      
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="center">  
-	     <p:layout style="min-width:400px;min-height:200px;" id="layout">  
-    		<p:layoutUnit position="west"  size="600" >  
+        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+         <h:inputHidden  value="#{customerPackageManagement.update()}"/>
+	
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
       
-	       	</p:layoutUnit> 
-			<p:layoutUnit position="center">  
-    		 </p:layoutUnit> 
-			</p:layout> 
-	    </p:layoutUnit>  
+    
+       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPackageList.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerhome.xhtml" />  
+           			 
+            </p:menu>   
+        </p:layoutUnit>  
+      
+       
+      
+      <p:layoutUnit position="center">  
+	    <h:form id="form">
 	  
-		</p:layout>  
-	</body> 
-	
-	
+ <p:dataTable var="giftB" value="#{giftListCustomer.giftListModelBought}" rowKey="#{giftB.product.idProduct}" paginator="true" rows="10"  
+                  
+                 id="giftBtable"
+                 rowsPerPageTemplate="10,15,50" >  
+   
+  
+                <f:facet name="header">
+                    Elenco prodotti Acquistati
+                </f:facet>  
+                
+                  
+                    <p:column  headerText="Prodotto" sortBy="#{giftB.product.name}" >
+                     #{giftB.product.name} 
+                      </p:column> 
+                       <p:column  headerText="Acquistato da" sortBy="#{giftB.idBuyer}" >
+                     #{giftB.idBuyer} 
+                      </p:column> 
+                    
+                    
+
+               
+                    
+              </p:dataTable>
+              </h:form>   
+              <h:form id= "formAvailable">
+                <p:dataTable var="gift" value="#{giftListCustomer.giftListModel}" rowKey="#{gift.product.idProduct}" paginator="true" rows="10"  
+                selection="#{giftListCustomer.selectedGiftList}" selectionMode="single" 
+                 id="gifttable"
+                 rowsPerPageTemplate="10,15,50" >  
+                   <p:ajax event="rowSelect" listener="#{giftListCustomer.onRowSelect}"      /> 
+  
+                <f:facet name="header">
+                    Elenco prodotti Disponibili
+                </f:facet>  
+                
+                  
+                    <p:column  headerText="Prodotto" sortBy="#{gift.product.name}" >
+                     #{gift.product.name} 
+                      </p:column> 
+                       <p:column  headerText="Costo" sortBy="#{gift.product.cost}" >
+                     #{gift.product.cost} 
+                      </p:column> 
+                    
+
+               
+               <f:facet name="footer">
+                    <p:commandButton  value="Compra" onclick="PF('sold').show();" type="button" icon="ui-icon-star"/> 
+           
+                </f:facet>          
+              </p:dataTable>
+         </h:form>   
+         
+         
+         <h:form style =" text-align : center;">
+          <p:button outcome="/customer/customerhome.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
+        </h:form> 
+    
+    
+        </p:layoutUnit>  
+      
+        </p:layout> 
+         
+          <p:dialog header="Vuoi acquistare il prodotto?" widgetVar="sold" showEffect="explode" hideEffect="bounce" resizable="false">  
+     <h:form>
+     <h:panelGrid columns="2" cellpadding="5">  
+     
+          
+            <f:facet name="footer">  
+                
+               
+                <p:commandButton id="buy" value="Ok" update=":form :formAvailable"   
+                    actionListener="#{giftListCustomer.buyProduct}"  
+                   oncomplete="sold.hide();"/>  
+                   
+                <p:commandButton id="exit" value="Annulla" 
+                   oncomplete="sold.hide();"/>  
+                
+               
+            </f:facet>  
+        </h:panelGrid>  
+        </h:form>
+        
+        
+        	</p:dialog> 
+        	
+      
+                         
+             
+         
+      
+<p:growl id="growl" showDetail="true" life="5000" />
+         
+ 
+        
+    </body> 
+    
+    
 </html>

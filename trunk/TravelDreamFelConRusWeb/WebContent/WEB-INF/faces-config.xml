@@ -132,7 +132,7 @@
        <navigation-case>
            <from-outcome>insertSuccess</from-outcome>
            <to-view-id>
-           /employee/packageInsertedSuccesEmployee.xhtml
+           /employee/packageInsertedSuccessEmployee.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>
@@ -348,6 +348,17 @@
        </navigation-case>
     </navigation-rule>
     
+     <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedGift</from-outcome>
+           <to-view-id>
+           /customer/personalGiftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
     
     
        <navigation-rule>
@@ -393,5 +404,50 @@
            <redirect/>  
        </navigation-case>
     </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>redirectEmployee</from-outcome>
+           <to-view-id>
+           /employee/employeehome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>redirectCustomer</from-outcome>
+           <to-view-id>
+           /customer/customerhome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id></from-view-id>
+       <navigation-case>
+           <from-outcome>redirectEmployee</from-outcome>
+           <to-view-id>
+           /employee/employeehome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id></from-view-id>
+       <navigation-case>
+           <from-outcome>redirectCustomer</from-outcome>
+           <to-view-id>
+           /customer/customerhome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
 
 </faces-config>
