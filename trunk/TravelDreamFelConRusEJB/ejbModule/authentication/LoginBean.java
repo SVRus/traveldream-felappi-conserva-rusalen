@@ -31,8 +31,10 @@ import javax.ejb.Stateless;
 
 
 
+
 import org.apache.commons.codec.digest.DigestUtils;
 
+import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
 import dto.GiftListDTO;
@@ -194,11 +196,11 @@ public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws Gi
 /**
  * method that check the correctness of the friend code launching an exception when wrong
  */
-public TravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException
+public CustomizedTravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException
 {
 	CustomizedTravelPackage customized=custoMan.findCustomizedTravelPackageForFriend(friendCode);
 	if(customized!=null)	{
-    	return factory.simpleTravelPackageToDTO(customized);
+    	return (CustomizedTravelPackageDTO)factory.simpleTravelPackageToDTO(customized);
 	}
     else
     	throw new FriendNotFoundException();
