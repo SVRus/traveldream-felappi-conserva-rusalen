@@ -66,10 +66,21 @@
 				  	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 			 
 					</p:inputText>				
-					<p:commandButton value="Salva le modifiche"
-					action="#{personal.modify}"
+					<h:commandButton value="Salva le modifiche"
+					actionListener="#{personal.modify}"
+					
 					style="display:block; margin:0 auto;"
-					ajax="false" />
+					oncomplete="PF('modMess').show();" update="clientModify"/>
+					   
+					<h:commandButton value="Salva le modifiche"
+					action="#{personal.modify}"
+					
+					style="display:block; margin:0 auto;"
+					oncomplete="PF('modMess').show();" update="clientModify"/>
+					
+				 
+ 
+					
 				</h:panelGrid>
 			
 				</p:panel>
@@ -81,6 +92,11 @@
 		
 	  
 		</p:layout>  
+		<p:dialog header="Eliminazione" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50" dynamic="true">      
+             #{personal.message}
+            
+         </p:dialog>
 	</body> 
 	
 	
