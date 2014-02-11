@@ -202,12 +202,8 @@
 		<h:panelGrid columns="1">
 	
 		<p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
-		<p:inputText id="gift" name="j_username" required="true" value="#{giftList.code}" />
-		
-		
-		<p:commandButton id="submit" value="Invia codice" action="#{giftList.checkCode()}" >  
-		 </p:commandButton>		
-		
+		<p:inputText id="gift" name="j_username" required="true" value="#{giftList.code}" />	
+		<p:commandButton id="submit" value="Invia codice" action="#{giftList.checkCode()}" />
 		
 		</h:panelGrid>
 	
@@ -215,7 +211,21 @@
 
 	</h:form> 
        
-       
+         <h:form id="join"
+			action = "todo">
+		<p:panel header="Vuoi viaggiare con un amico?" id="panelFriend">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+		<h:panelGrid columns="1">
+	
+		  <p:outputLabel for="friend"   value="Inserisci qui il tuo codice amico"   />
+		  <p:inputText id="friend" name="j_username" required="true" value="#{friendManagement.friendCode}"/>
+			
+		  <p:commandButton id="submitFriendCode" action="#{friendManagement.checkFriendCode}" value="Invia codice" ajax="false" />		
+		
+		</h:panelGrid>
+		</p:panel>
+	</h:form> 
     
     </p:layoutUnit>  
   

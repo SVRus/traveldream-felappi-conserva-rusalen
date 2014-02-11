@@ -8,34 +8,32 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
-         <h:inputHidden  value="#{customerPackageManagement.update()}"/>
-	
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
       		</style> 
-      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerhome.xhtml">
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
          <p:graphicImage  value="logo.jpg" style=" height:100px;" />
          </a>
 		</p:layoutUnit>  
+     
       
-    
-       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
             <p:menu>  
                
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
-                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
-                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
-           			 
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/packageManagement.xhtml" />  
+           
             </p:menu>   
+                       
         </p:layoutUnit>  
-      
        
       
       <p:layoutUnit position="center">  
-	    <h:form id="form">
+	  <h:form id="form">
 	  
- <p:dataTable var="giftB" value="#{giftListCustomer.giftListModelBought}" rowKey="#{giftB.product.idProduct}" paginator="true" rows="10"  
+ <p:dataTable var="giftB" value="#{giftList.giftListModelBought}" rowKey="#{giftB.product.idProduct}" paginator="true" rows="10"  
                   
                  id="giftBtable"
                  rowsPerPageTemplate="10,15,50" >  
@@ -60,11 +58,11 @@
               </p:dataTable>
               </h:form>   
               <h:form id= "formAvailable">
-                <p:dataTable var="gift" value="#{giftListCustomer.giftListModel}" rowKey="#{gift.product.idProduct}" paginator="true" rows="10"  
-                selection="#{giftListCustomer.selectedGiftList}" selectionMode="single" 
+                <p:dataTable var="gift" value="#{giftList.giftListModel}" rowKey="#{gift.product.idProduct}" paginator="true" rows="10"  
+                selection="#{giftList.selectedGiftList}" selectionMode="single" 
                  id="gifttable"
                  rowsPerPageTemplate="10,15,50" >  
-                   <p:ajax event="rowSelect" listener="#{giftListCustomer.onRowSelect}"      /> 
+                   <p:ajax event="rowSelect" listener="#{giftList.onRowSelect}"      /> 
   
                 <f:facet name="header">
                     Elenco prodotti Disponibili
@@ -89,7 +87,7 @@
          
          
          <h:form style =" text-align : center;">
-          <p:button outcome="/customer/customerhome.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
+          <p:button outcome="/index.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
         </h:form> 
     
     
@@ -104,9 +102,11 @@
           
             <f:facet name="footer">  
                 
-               
+                  <h:outputLabel for="nameBuyer" value="Nome:" />  
+            	<p:inputText value="#{giftList.nameBuyer}" id="nameBuyer" required="true" label="nameBuyer" /> 
+          
                 <p:commandButton id="buy" value="Ok" update=":form :formAvailable"   
-                    actionListener="#{giftListCustomer.buyProduct}"  
+                    actionListener="#{giftList.buyProduct}"  
                    oncomplete="sold.hide();"/>  
                    
                 <p:commandButton id="exit" value="Annulla" 
@@ -127,6 +127,7 @@
       
 <p:growl id="growl" showDetail="true" life="5000" />
          
+
  
         
     </body> 

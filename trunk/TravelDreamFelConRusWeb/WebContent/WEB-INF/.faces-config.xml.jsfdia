@@ -13,12 +13,27 @@
     TARGET="rules:#giftListErrorCode.xhtml" TITLE="codeError" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
   <PROCESS-ITEM ID="rules:index.xhtml:2" NAME="item2" PATH="index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="friendCodeCorrect::#friendPackageView.xhtml"
+    NAME="output" PATH="/friendPackageView.xhtml"
+    TARGET="rules:#friendPackageView.xhtml" TITLE="friendCodeCorrect" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:index.xhtml:3" NAME="item3" PATH="index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="friendSoldOut::#friendErrorSoldout.xhtml"
+    NAME="output" PATH="/friendErrorSoldout.xhtml"
+    TARGET="rules:#friendErrorSoldout.xhtml" TITLE="friendSoldOut" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:index.xhtml:4" NAME="item4" PATH="index.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="friendCodeError::#friendErrorCode.xhtml"
+    NAME="output" PATH="/friendErrorCode.xhtml"
+    TARGET="rules:#friendErrorCode.xhtml" TITLE="friendCodeError" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:index.xhtml:5" NAME="item5" PATH="index.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="redirectEmployee::#employee#employeehome.xhtml" NAME="output"
     PATH="/employee/employeehome.xhtml"
     TARGET="rules:#employee#employeehome.xhtml" TITLE="redirectEmployee" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
-  <PROCESS-ITEM ID="rules:index.xhtml:3" NAME="item3" PATH="index.xhtml" model-entity="JSFProcessItem">
+  <PROCESS-ITEM ID="rules:index.xhtml:6" NAME="item6" PATH="index.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
     ID="redirectCustomer::#customer#customerhome.xhtml" NAME="output"
     PATH="/customer/customerhome.xhtml"
@@ -330,10 +345,25 @@
   <PROCESS-ITEM ID="rules:customer#purchase.xhtml:1" NAME="item1"
    PATH="customer/purchase.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT
+    ID="purchasedError::#customer#purchaseError.xhtml" NAME="output"
+    PATH="/customer/purchaseError.xhtml"
+    TARGET="rules:#customer#purchaseError.xhtml" TITLE="purchasedError" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#purchase.xhtml:2" NAME="item2"
+   PATH="customer/purchase.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
     ID="purchasedGift::#customer#personalGiftList.xhtml" NAME="output"
     PATH="/customer/personalGiftList.xhtml"
     TARGET="rules:#customer#personalGiftList.xhtml"
     TITLE="purchasedGift" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#purchase.xhtml:3" NAME="item3"
+   PATH="customer/purchase.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="giftPurchasedError::#customer#purchaseError.xhtml" NAME="output"
+    PATH="/customer/purchaseError.xhtml"
+    TARGET="rules:#customer#purchaseError.xhtml"
+    TITLE="giftPurchasedError" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#customer#afterPurchase.xhtml"
@@ -364,4 +394,59 @@
   NAME="rules:#employee#packageInsertedSuccessEmployee.xhtml"
   PATH="/employee/packageInsertedSuccessEmployee.xhtml"
   SHAPE="560,1537,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:customer#customerhome.xhtml"
+  PATH="customer/customerhome.xhtml" SHAPE="32,7089,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:customer#customerhome.xhtml:0" NAME="item"
+   PATH="customer/customerhome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="viewGift::#customer#giftList.xhtml"
+    NAME="output" PATH="/customer/giftList.xhtml"
+    TARGET="rules:#customer#giftList.xhtml" TITLE="viewGift" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#customerhome.xhtml:1" NAME="item1"
+   PATH="customer/customerhome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="codeError::#customer#giftListErrorCode.xhtml" NAME="output"
+    PATH="/customer/giftListErrorCode.xhtml"
+    TARGET="rules:#customer#giftListErrorCode.xhtml" TITLE="codeError" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#customerhome.xhtml:2" NAME="item2"
+   PATH="customer/customerhome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="friendCodeCorrect::#customer#packageView.xhtml" NAME="output"
+    PATH="/customer/packageView.xhtml"
+    TARGET="rules:#customer#packageView.xhtml" TITLE="friendCodeCorrect" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#customerhome.xhtml:3" NAME="item3"
+   PATH="customer/customerhome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="friendCodeError::#customer#friendErrorCode.xhtml" NAME="output"
+    PATH="/customer/friendErrorCode.xhtml"
+    TARGET="rules:#customer#friendErrorCode.xhtml"
+    TITLE="friendCodeError" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+  <PROCESS-ITEM ID="rules:customer#customerhome.xhtml:4" NAME="item4"
+   PATH="customer/customerhome.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="friendSoldOut::#customer#friendSoldoutError.xhtml" NAME="output"
+    PATH="/customer/friendSoldoutError.xhtml"
+    TARGET="rules:#customer#friendSoldoutError.xhtml"
+    TITLE="friendSoldOut" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#customer#giftListErrorCode.xhtml"
+  PATH="/customer/giftListErrorCode.xhtml" SHAPE="256,7249,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#giftList.xhtml"
+  PATH="/customer/giftList.xhtml" SHAPE="256,7105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#friendSoldoutError.xhtml"
+  PATH="/customer/friendSoldoutError.xhtml" SHAPE="304,8241,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#friendErrorCode.xhtml"
+  PATH="/customer/friendErrorCode.xhtml" SHAPE="304,7777,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#customer#purchaseError.xhtml"
+  PATH="/customer/purchaseError.xhtml" SHAPE="288,6177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#friendPackageView.xhtml"
+  PATH="/friendPackageView.xhtml" SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#friendErrorSoldout.xhtml"
+  PATH="/friendErrorSoldout.xhtml" SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#friendErrorCode.xhtml"
+  PATH="/friendErrorCode.xhtml" SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

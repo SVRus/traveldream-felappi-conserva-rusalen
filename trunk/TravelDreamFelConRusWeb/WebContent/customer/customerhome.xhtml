@@ -20,7 +20,7 @@
   
   <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
        <h:form style =" text-align : center;">
-        <h:outputText  value="Giovanni Battista Conserva, Marcello Felappi, Selenia Vincenza Rusalen" />  
+        <h:outputText  value="Selenia Vincenza Rusalen, Marcello Felappi, Giovanni Battista Conserva" />  
         </h:form>
     </p:layoutUnit>  
   
@@ -62,13 +62,11 @@
                  <p:column  headerText="Data Fine"  filterBy="#{travelPackage.time_end}" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
                  #{travelPackage.time_end}  
                  </p:column> 
-                     <p:column  headerText="Codice"  filterBy="#{travelPackage.friendCode}" sortBy="#{travelPackage.friendCode}"  id="friendCode">  
-                 #{travelPackage.friendCode}  
-                 </p:column> 
+                    
                
                <f:facet name="footer">
-                    <p:commandButton action="#{customerPackageEdit.show()}" value="Invita amico" icon="ui-icon-cart" />  
-               		
+                	<p:commandButton value="Invita amico" actionListener="#{customerPersonal.viewCode}" oncomplete="PF('codMess').show();"  />
+            
                		
                     
                   
@@ -103,10 +101,9 @@
 		<h:panelGrid columns="1">
 	
 		  <p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
-		  <p:inputText id="gift" name="j_username" required="true" />
-			
-		  <p:commandButton id="submit" value="Invia codice" ajax="false" />		
-		
+			<p:inputText id="gift" name="j_username" required="true" value="#{giftList.code}" />	
+			<p:commandButton id="submit" value="Invia codice" action="#{giftList.checkCode()}" />
+	
 		</h:panelGrid>
 		</p:panel>
 	</h:form> 
@@ -119,9 +116,9 @@
 		<h:panelGrid columns="1">
 	
 		  <p:outputLabel for="friend"   value="Inserisci qui il tuo codice amico"   />
-		  <p:inputText id="friend" name="j_username" required="true" />
+		  <p:inputText id="friend" name="j_username" required="true" value="#{friendManagement.friendCode}"/>
 			
-		  <p:commandButton id="submitFriendCode" value="Invia codice" ajax="false" />		
+		  <p:commandButton id="submitFriendCode" action="#{friendManagement.checkFriendCodeByLogged}" value="Invia codice" ajax="false" />		
 		
 		</h:panelGrid>
 		</p:panel>
@@ -134,6 +131,15 @@
    
   
 </p:layout>  		
-			
+			<p:dialog header="Invita amico" widgetVar="codMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="600" height="150" dynamic="true">      
+             <p:outputLabel value="Codice amico:"  /> 
+		<p:outputLabel value=" #{customerPersonal.friendCode}"  />  
+             <p:outputLabel value="Email amico" for="emailInv" />		
+		<p:inputText id="emailInv" required="true" label="emailInv" 
+		value="" />
+		  <p:commandButton  value="Invia invito" onclick="PF('codMess').hide();" icon="ui-icon-mail-closed" />  
+	     
+         </p:dialog>
 </body> 
 </html>
