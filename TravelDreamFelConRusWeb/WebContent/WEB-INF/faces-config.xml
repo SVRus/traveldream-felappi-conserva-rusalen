@@ -348,6 +348,17 @@
        </navigation-case>
     </navigation-rule>
     
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedError</from-outcome>
+           <to-view-id>
+           /customer/purchaseError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
      <navigation-rule>
        <from-view-id>customer/purchase.xhtml</from-view-id>
        <navigation-case>
@@ -359,6 +370,74 @@
        </navigation-case>
     </navigation-rule>
     
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>giftPurchasedError</from-outcome>
+           <to-view-id>
+           /customer/purchaseError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+     
+      <navigation-rule>
+       <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>viewGift</from-outcome>
+           <to-view-id>
+           /customer/giftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>codeError</from-outcome>
+           <to-view-id>
+           /customer/giftListErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+    
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeCorrect</from-outcome>
+           <to-view-id>
+           /customer/packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+   
+     <navigation-rule>
+     
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeError</from-outcome>
+           <to-view-id>
+           /customer/friendErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+    <navigation-rule>
+      
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendSoldOut</from-outcome>
+           <to-view-id>
+           /customer/friendSoldoutError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
     
     
        <navigation-rule>
@@ -400,6 +479,39 @@
            <from-outcome>codeError</from-outcome>
            <to-view-id>
            /giftListErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeCorrect</from-outcome>
+           <to-view-id>
+           /friendPackageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendSoldOut</from-outcome>
+           <to-view-id>
+           /friendErrorSoldout.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeError</from-outcome>
+           <to-view-id>
+           /friendErrorCode.xhtml
            </to-view-id>
            <redirect/>  
        </navigation-case>

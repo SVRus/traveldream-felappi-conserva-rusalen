@@ -8,7 +8,7 @@
     <body> 
         <p:layout fullPage="true">  
   
-        <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
     		<style type="text/css">
         	.ui-widget{font-size:90% !important;}  
       		</style> 
@@ -16,38 +16,33 @@
          <p:graphicImage  value="logo.jpg" style=" height:100px;" />
          </a>
 		</p:layoutUnit>  
+     
       
-    
-       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
             <p:menu>  
                
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/allPackages.xhtml" />  
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
                      <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
-                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
+                    
            
             </p:menu>   
         </p:layoutUnit>  
       
        
       
-      <p:layoutUnit position="center" header = "Pagamento effettuato">  
+      <p:layoutUnit position="center"  header="Promozioni">  
+       <h:outputLabel for="promo" value="HAHAHAHAHAHAHA seriamente? Promozioni? Ma se non arriviamo a fine mese!" />
+	 </p:layoutUnit>  
       
-	     <h:form id="purchased" style =" text-align : center;">
-	        <h:panelGrid columns="1">
-	           <p:outputLabel value="Bene amico, fuori i soldi!"  /> 
-	           <p:graphicImage  value="Uomo_con_fucile.jpg" style=" height:375px; width:500px" />
-	           <p:button outcome="/index.xhtml" value="Ok, fatto. Alla prossima!"  icon="ui-icon-check" ></p:button>
-            </h:panelGrid>
-         </h:form>   
-      </p:layoutUnit>  
-            
+        </p:layout> 
          
-        
-      
-        </p:layout>  
-                      
          
-      
+        	
+     
+    
+       
+             
+         
       
 <p:growl id="growl" showDetail="true" life="5000" />
          

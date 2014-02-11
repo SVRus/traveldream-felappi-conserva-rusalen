@@ -19,7 +19,16 @@
          <p:graphicImage  value="logo.jpg" style=" height:100px;" />
          </a>
 		</p:layoutUnit>  
- 
+		
+     <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/allPackages.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+           
+            </p:menu>  
+        </p:layoutUnit>  
+      
      	
      <p:layoutUnit position="east" size="550" header="Pacchetto: #{packageEdit.currentTravelPackage.name}" resizable="false" closable="false" collapsible="false" >  
              <h:form id="form">
@@ -51,8 +60,7 @@
                 	
                
                <f:facet name="footer">
-                  <p:commandButton 
-                  action="#{stageManagement.allowed}" value="Visualizza tappa" icon="ui-icon-zoomin" />  
+                  <p:commandButton  action="#{stageManagement.show()}" value="Visualizza tappa" icon="ui-icon-zoomin" />  
              </f:facet>
 				
               </p:dataTable>
@@ -76,20 +84,20 @@
 	
 		<p:outputLabel value="Descrizione:" for="description" />
 		<h:outputText id="description" label="description"
-			value="#{customerPackageEdit.description}"/>  
+			value="#{packageEdit.currentTravelPackage.description}"/>  
 				
 		
 		<p:outputLabel value="Data di partenza:" for="startDate" />
-		<h:outputText id="startDate" value="#{customerPackageEdit.time_start}" 
+		<h:outputText id="startDate" value="#{packageEdit.currentTravelPackage.time_start}" 
 			/>
 			
 		<p:outputLabel value="Data di fine:" for="endDate" />
-		<h:outputText id="endDate" value="#{customerPackageEdit.time_end}" />
-			
+		<h:outputText id="endDate" value="#{packageEdit.currentTravelPackage.time_end}" />
 		
-    
-         <p:commandButton value="Accetta di partecipare"   icon="ui-icon-check"  ajax="false" />
-      
+		<p:outputLabel value="Il pacchetto è disponibile. Per procedere all'acquisto registrarsi, loggarsi e inserire il codice nella pagina utente." />
+		<p:commandButton action="index" value="Vai alla pagina "   icon="ui-icon-check"  ajax="false" />
+ 
+		 <p:commandButton  action="allPackages" value="Ritorna all'elenco" icon="ui-icon-arrowrefresh-1-w" />  
 		
 	</h:panelGrid>
 	
