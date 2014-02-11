@@ -8,6 +8,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
@@ -18,6 +20,7 @@ import dto.HotelDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 @ManagedBean(name="personal")
+@ViewScoped
 public class PersonalBean implements Serializable{
 	
 
@@ -41,35 +44,16 @@ public void setLogin(LoginBeanLocal login) {
 
 
 private EmployeeDTO generic;
-private String username;
-private String firstname;
-private String surname;
+
+private String firstName;
+private String lastName;
 private String email;
-private long code;
+private String message;
+
+
 boolean loggato;
 private ArrayList<ProductDTO> managedproduct;
 private ArrayList<PrepackedTravelPackageDTO> managedTravelPackage;
-private String products;
-private String managed;
-public String getProducts() {
-	return products;
-}
-
-
-public void setProducts(String products) {
-	this.products = products;
-}
-
-
-public String getManaged() {
-	return generic.getManagedTravelPackage().toString();
-}
-
-
-public void setManaged(String managed) {
-	this.managed = managed;
-}
-
 
 public PersonalBean() {
 	
@@ -77,119 +61,58 @@ public PersonalBean() {
 @PostConstruct
 public void update()
 {
-/*
-HotelDTO hotel=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-HotelDTO  hotel1=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area1",  "test",  "test",  "test",State.AVAILABLE);
-HotelDTO  hotel2= new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "are2",  "test",  "test",  "test",State.AVAILABLE);
-HotelDTO  hotel3=new HotelDTO(11, "test", "test",0, 11,new Date() ,new Date(), "area2",  "test",  "test",  "test",State.AVAILABLE);
-
-procrud.createProductFromEmployee(hotel, login.getPrincipalUsername());
-procrud.createProductFromEmployee(hotel1, login.getPrincipalUsername());
-procrud.createProductFromEmployee(hotel2, login.getPrincipalUsername());
-procrud.createProductFromEmployee(hotel3, login.getPrincipalUsername());
-
-generic=(EmployeeDTO)login.findLogIn();
-*/
-
+System.out.println("inizializzato");
 
 
 
 
 }
-public boolean isLoggato() {
-	return login.isLogged();
-}
 
-
-public void setLoggato(boolean loggato) {
-	this.loggato =loggato ;
-}
-
-
-public String getUsername() {
+public void modify(ActionEvent e)
+{
+	EmployeeDTO emp = (EmployeeDTO) login.findLogIn();
+	emp.setEmail(email);
+	emp.setName(firstName);
+	emp.setSurname(lastName);
+	if(login.updateEmployee(emp))
+	{
+		message= "Dati correttamente aggiornati";
+		return;
+	}
+	message= "Si è verificato un errore durante l'aggiornamento";
 	
-	return generic.toString();
 	
 }
 
+public void modify()
+{
+	EmployeeDTO emp = (EmployeeDTO) login.findLogIn();
+	emp.setEmail(email);
+	emp.setName(firstName);
+	emp.setSurname(lastName);
+	if(login.updateEmployee(emp))
+	{
+		message= "Dati correttamente aggiornati";
+		return;
+	}
+	message= "Si è verificato un errore durante l'aggiornamento";
+	
+	
+}
 
-
-public void setUsername(String username) {
-	this.username = username;
+public ProductCRUDBeanLocal getProcrud() {
+	return procrud;
 }
 
 
-
-public String getFirstname() {
-	return generic.getName();
+public void setProcrud(ProductCRUDBeanLocal procrud) {
+	this.procrud = procrud;
 }
 
 
-
-public void setFirstname(String firstname) {
-	this.firstname = firstname;
+public EmployeeDTO getGeneric() {
+	return generic;
 }
-
-
-
-public String getSurname() {
-	return generic.getSurname();
-}
-
-
-
-public void setSurname(String surname) {
-	this.surname = surname;
-}
-
-
-
-public String getEmail() {
-	return generic.getEmail();
-}
-
-
-
-public void setEmail(String email) {
-	this.email = email;
-}
-
-
-
-public long getCode() {
-	return (generic).getCode();
-}
-
-
-
-public void setCode(long code) {
-	this.code = code;
-}
-
-
-
-public ArrayList<ProductDTO> getManagedproduct() {
-	return generic.getManagedproduct();
-}
-
-
-
-public void setManagedproduct(ArrayList<ProductDTO> managedproduct) {
-	this.managedproduct = managedproduct;
-}
-
-
-
-public ArrayList<PrepackedTravelPackageDTO> getManagedTravelPackage() {
-	return generic.getManagedTravelPackage();
-}
-
-
-
-public void setManagedTravelPackage(ArrayList<PrepackedTravelPackageDTO> managedTravelPackage) {
-	this.managedTravelPackage = managedTravelPackage;
-}
-
 
 
 public void setGeneric(EmployeeDTO generic) {
@@ -197,13 +120,85 @@ public void setGeneric(EmployeeDTO generic) {
 }
 
 
+public String getFirstName() {
+	
+	return login.findLogIn().getName();
+}
 
-public GenericUserDTO getGeneric() {
-	return generic;
+
+public void setFirstName(String firstName) {
+	this.firstName = firstName;
+}
+
+
+public String getLastName() {
+	return login.findLogIn().getSurname();
+}
+
+
+public void setLastName(String lastName) {
+	this.lastName = lastName;
+}
+
+
+public String getEmail() {
+	return login.findLogIn().getEmail();
+}
+
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
+
+public boolean isLoggato() {
+	return loggato;
+}
+
+
+public void setLoggato(boolean loggato) {
+	this.loggato = loggato;
+}
+
+
+public ArrayList<ProductDTO> getManagedproduct() {
+	return managedproduct;
+}
+
+
+public void setManagedproduct(ArrayList<ProductDTO> managedproduct) {
+	this.managedproduct = managedproduct;
+}
+
+
+public ArrayList<PrepackedTravelPackageDTO> getManagedTravelPackage() {
+	return managedTravelPackage;
+}
+
+
+public void setManagedTravelPackage(
+		ArrayList<PrepackedTravelPackageDTO> managedTravelPackage) {
+	this.managedTravelPackage = managedTravelPackage;
+}
+
+
+public static long getSerialversionuid() {
+	return serialVersionUID;
+}
+
+
+public String getMessage() {
+	return message;
+}
+
+
+public void setMessage(String message) {
+	this.message = message;
 }
 
 
 	
+
 
 
 

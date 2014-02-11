@@ -32,6 +32,7 @@ public class CustomerPersonalBean {
 	//private int phoneNumber;
 	private Date birthdate;
 	private String friendCode;
+	private String message;
 	
 	private CustomizedTravelPackageDTO selectedTravelPackage;
 
@@ -47,15 +48,38 @@ public class CustomerPersonalBean {
 	@EJB
 	private TravelPackageCRUDBeanLocal packageCRUD;
 	
+	@EJB
+	private LoginBeanLocal login;
+	
 	@PostConstruct
 	public void update()
 	{
 
+	/*
+	 * aggiorna la lista dei pacchetti personalizzati acquistati dall'utente	
+	 */
 	packageList= new ArrayList<CustomizedTravelPackageDTO>();
 	packageList.addAll(packageCRUD.findAllCustomizedForCustomer());
 	packageModel= new CustomizedTravelPackageDataModel(packageList);
 
 	}
+	
+	public void modify(ActionEvent e)
+	{
+		EmployeeDTO emp = (EmployeeDTO) login.findLogIn();
+		emp.setEmail(email);
+		emp.setName(firstName);
+		emp.setSurname(lastName);
+		if(login.updateEmployee(emp))
+		{
+			message= "Dati correttamente aggiornati";
+			return;
+		}
+		message= "Si è verificato un errore durante l'aggiornamento";
+		
+		
+	}
+	
 	public void viewCode(ActionEvent e)
 	{
 		friendCode = packageCRUD.createCustomizedTravelPackageForFriend(selectedTravelPackage);
@@ -159,6 +183,14 @@ public class CustomerPersonalBean {
 	}
 	public void setFriendCode(String friendCode) {
 		this.friendCode = friendCode;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 	
