@@ -88,7 +88,7 @@ packageListAvailable= new ArrayList<PrepackedTravelPackageDTO>();
 packageListAvailable.addAll(packageCRUD.findAllPrepackedTravelPackageByParameter(TravelState.AVAILABLE));
 
 packageModel= new PrepackedTravelPackageDataModel(packageList);
-packageModelAvailable= new PrepackedTravelPackageDataModel(packageList);
+packageModelAvailable= new PrepackedTravelPackageDataModel(packageListAvailable);
 
 
 

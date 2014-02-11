@@ -113,7 +113,7 @@ public class CustomerPackageEditBean implements Serializable{
 		if(purchaseGiftList.persistGiftList(currentTravelPackage))
 			return "purchasedGift";
 		
-		return "";
+		return "giftPurchaseError";
 
 	}
 	/**
