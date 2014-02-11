@@ -1,6 +1,7 @@
 package entitymanagement;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -34,14 +35,21 @@ public class RegisteredUserEntityManagement extends AbstractEntityManagement imp
      public ArrayList <Group> findGroups(String username)
      {	Query query = em.createNativeQuery("SELECT  groupname FROM user_group where username=? ");
 	     query.setParameter(1, username);
-	   ArrayList <Group> groups;
-	    	List result=  query.getResultList();
+	     ArrayList <Group> groupList=new ArrayList <Group> ();
+	    	List <String> result=   query.getResultList();
 	    	if (result==null)
-	    	groups=new ArrayList <Group> ();
+	    	return new ArrayList <Group>();
 	    	else
-	    	groups=new ArrayList <Group> (result);
-	
-	return groups;
+	    	{
+	    	Iterator <String >	iter=result.iterator();
+	    	while(iter.hasNext())
+	    	{
+	    		groupList.add(Group.valueOf(iter.next()));
+	    		
+	    	}
+	    	return groupList;
+	    	}
+	    	
 	
     	 
     	 
