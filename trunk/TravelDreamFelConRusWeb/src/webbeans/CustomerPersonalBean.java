@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import travelstateenum.TravelState;
@@ -30,6 +31,7 @@ public class CustomerPersonalBean {
 	private String email;
 	//private int phoneNumber;
 	private Date birthdate;
+	private String friendCode;
 	
 	private CustomizedTravelPackageDTO selectedTravelPackage;
 
@@ -54,7 +56,12 @@ public class CustomerPersonalBean {
 	packageModel= new CustomizedTravelPackageDataModel(packageList);
 
 	}
-	
+	public void viewCode(ActionEvent e)
+	{
+		friendCode = packageCRUD.createCustomizedTravelPackageForFriend(selectedTravelPackage);
+		return;
+		
+	}
 
 
 	public String getFirstName() {
@@ -146,6 +153,12 @@ public class CustomerPersonalBean {
 
 	public void setPackageCRUD(TravelPackageCRUDBeanLocal packageCRUD) {
 		this.packageCRUD = packageCRUD;
+	}
+	public String getFriendCode() {
+		return friendCode;
+	}
+	public void setFriendCode(String friendCode) {
+		this.friendCode = friendCode;
 	}
 	
 	

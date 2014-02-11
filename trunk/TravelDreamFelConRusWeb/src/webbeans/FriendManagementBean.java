@@ -70,7 +70,6 @@ private List<PrepackedTravelPackageDTO> packageList;
 private List<PrepackedTravelPackageDTO> packageListAvailable;
 
 
-
 private String friendCode;
 
 private Date purchaseTime;
@@ -112,6 +111,10 @@ public String checkFriendCode()
 		packageClone = login.checkFriendException(friendCode);
 		if(packageCRUD.getNumberEquivalentPackage(packageClone)==0 )
 			return "friendSoldOut";	 
+		
+		
+		packBean.setTempCurrentPackage(new PrepackedTravelPackageDTO(packageClone));
+		
 		return "friendCodeCorrect";
 		
 	} catch (FriendNotFoundException e) {
@@ -137,8 +140,9 @@ public String checkFriendCodeByLogged()
 		if(packageCRUD.getNumberEquivalentPackage(packageClone)==0 )
 			return "friendSoldOut";
 		
+	packBean.setTempCurrentPackage(new PrepackedTravelPackageDTO(packageClone));
 		
-		return "friendCodeCorrect";
+	return "friendCodeCorrect";
 		
 	} catch (FriendNotFoundException e) {
 		
@@ -276,6 +280,24 @@ public PrepackedTravelPackageDataModel getPackageModelAvailable() {
 public void setPackageModelAvailable(
 		PrepackedTravelPackageDataModel packageModelAvailable) {
 	this.packageModelAvailable = packageModelAvailable;
+}
+
+
+
+public CustomizedTravelPackageDTO getPackageClone() {
+	return packageClone;
+}
+
+public void setPackageClone(CustomizedTravelPackageDTO packageClone) {
+	this.packageClone = packageClone;
+}
+
+public LoginBeanLocal getLogin() {
+	return login;
+}
+
+public void setLogin(LoginBeanLocal login) {
+	this.login = login;
 }
 
 

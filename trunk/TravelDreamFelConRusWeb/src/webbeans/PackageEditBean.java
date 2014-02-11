@@ -159,6 +159,7 @@ public class PackageEditBean implements Serializable{
 			//permette di mantenere i campi del pacchetto selezionato. Usato nei getter
 			modifyForField=true;
 			setFields();
+			
 			//Indica che in base alla configurazione del file facesConfig occorre reindirizzare alla pagina
 			//di modifica del pacchetto
 			return "notBusy";
@@ -208,6 +209,8 @@ public class PackageEditBean implements Serializable{
 			//permette di svuotare i campi. Usato nei getter
 			newForField=true;
 			setFields();
+			stageModel = new StageDataModel();
+			
 			return "notBusy";
 		}
 		

@@ -212,10 +212,10 @@ public class StageManagementBean {
 			update();
 			
 			hotels
-			  = new ArrayList<HotelDTO>( productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  = new ArrayList<HotelDTO>(productCRUD.findALLHotelByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  hotelModel = new HotelDataModel(hotels);  
 			  outings
-			  =new ArrayList<OutingDTO>( productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
+			  =new ArrayList<OutingDTO>(productCRUD.findALLOutingByStateAndArea(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
 			  outingModel = new OutingDataModel(outings);  
 			  flights
 			  = new ArrayList<FlightDTO>(productCRUD.findALLByStateAndAreaEnd(State.AVAILABLE, currentStage.getTimeStart(),  currentStage.getTimeEnd(),  currentStage.getArea()));
