@@ -13,6 +13,7 @@ import javax.faces.event.ActionEvent;
 
 import productManagement.ProductCRUDBeanLocal;
 import stateenum.State;
+import travelPackageManagement.TravelPackageCRUDBeanLocal;
 import authentication.LoginBeanLocal;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
@@ -33,6 +34,12 @@ public class PersonalBean implements Serializable{
 private LoginBeanLocal login;
 @EJB
 private ProductCRUDBeanLocal procrud;
+@EJB
+private TravelPackageCRUDBeanLocal packcrud;
+
+private ArrayList<PrepackedTravelPackageDTO> allPackages;
+
+
 public LoginBeanLocal getLogin() {
 	return login;
 }
@@ -62,8 +69,7 @@ public PersonalBean() {
 public void update()
 {
 System.out.println("inizializzato");
-
-
+allPackages= packcrud.findAllPackageForEmployee();
 
 
 }
@@ -194,6 +200,26 @@ public String getMessage() {
 
 public void setMessage(String message) {
 	this.message = message;
+}
+
+
+public TravelPackageCRUDBeanLocal getPackcrud() {
+	return packcrud;
+}
+
+
+public void setPackcrud(TravelPackageCRUDBeanLocal packcrud) {
+	this.packcrud = packcrud;
+}
+
+
+public ArrayList<PrepackedTravelPackageDTO> getAllPackages() {
+	return allPackages;
+}
+
+
+public void setAllPackages(ArrayList<PrepackedTravelPackageDTO> allPackages) {
+	this.allPackages = allPackages;
 }
 
 
