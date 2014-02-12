@@ -19,6 +19,7 @@ import dto.GiftListDTO;
 import dto.PrepackedTravelPackageDTO;
 import dto.ProductDTO;
 import dto.StageDTO;
+import dto.TravelPackageDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
@@ -43,6 +44,9 @@ public class CustomerPersonalBean {
 
 
 	private CustomizedTravelPackageDataModel packageModel;
+	
+	private List<TravelPackageDTO> allPackages;
+	
 
 
 	@EJB
@@ -61,16 +65,18 @@ public class CustomerPersonalBean {
 	packageList= new ArrayList<CustomizedTravelPackageDTO>();
 	packageList.addAll(packageCRUD.findAllCustomizedForCustomer());
 	packageModel= new CustomizedTravelPackageDataModel(packageList);
-
+	allPackages = packageCRUD.findAllPackageForCustomer();
+	
 	}
 	
 	public void modify(ActionEvent e)
 	{
-		EmployeeDTO emp = (EmployeeDTO) login.findLogIn();
-		emp.setEmail(email);
-		emp.setName(firstName);
-		emp.setSurname(lastName);
-		if(login.updateEmployee(emp))
+		CustomerDTO cus = (CustomerDTO) login.findLogIn();
+		cus.setEmail(email);
+		cus.setName(firstName);
+		cus.setSurname(lastName);
+		//TODO login.update(cus)
+		if(true)
 		{
 			message= "Dati correttamente aggiornati";
 			return;
@@ -89,7 +95,7 @@ public class CustomerPersonalBean {
 
 
 	public String getFirstName() {
-		return firstName;
+		return login.findLogIn().getName();
 	}
 
 
@@ -99,7 +105,7 @@ public class CustomerPersonalBean {
 
 
 	public String getLastName() {
-		return lastName;
+		return login.findLogIn().getSurname();
 	}
 
 
@@ -109,7 +115,7 @@ public class CustomerPersonalBean {
 
 
 	public String getEmail() {
-		return email;
+		return login.findLogIn().getEmail();
 	}
 
 
@@ -191,6 +197,22 @@ public class CustomerPersonalBean {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public List<TravelPackageDTO> getAllPackages() {
+		return allPackages;
+	}
+
+	public void setAllPackages(List<TravelPackageDTO> allPackages) {
+		this.allPackages = allPackages;
+	}
+
+	public LoginBeanLocal getLogin() {
+		return login;
+	}
+
+	public void setLogin(LoginBeanLocal login) {
+		this.login = login;
 	}
 	
 	
