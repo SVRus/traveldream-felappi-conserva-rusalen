@@ -20,7 +20,7 @@
   
   <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
        <h:form style =" text-align : center;">
-        <h:outputText  value="Selenia Vincenza Rusalen, Marcello Felappi, Giovanni Battista Conserva" />  
+        <h:outputText  value="Marcello Felappi, Selenia Vincenza Rusalen,  Giovanni Battista Conserva" />  
         </h:form>
     </p:layoutUnit>  
   
@@ -32,48 +32,7 @@
          <h:form id="centerImage" styleClass="input-form">
           <p:graphicImage  value="Briatore.jpg" style=" width:310px height:175px;"/>
 		</h:form>
-		 <h:form id="form">
-	   
-    
- <p:dataTable var="travelPackage" value="#{customerPersonal.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
-                selection="#{customerPersonal.selectedTravelPackage}" filteredValue="#{customerPersonal.filteredTravelPackages}" selectionMode="single" 
-               id="traveltable"
-                 rowsPerPageTemplate="10,15,50">  
-    
-
-  
-                <f:facet name="header">
-                   Vuoi invitare un amico? Seleziona un pacchetto e invia la mail
-                </f:facet>  
-                
-                 <p:column  headerText="Nome" filterBy="#{travelPackage.name}" sortBy="#{travelPackage.name}"  id="name">
-                    
-                    
-                 #{travelPackage.name}  
-        		</p:column>  
-        		<p:column  headerText="Descrizione"  filterBy="#{travelPackage.description}" sortBy="#{travelPackage.description}"  id="description">
-                    
-                    
-                 #{travelPackage.description}  
-        		</p:column> 
-        		 <p:column  headerText="Data Inizio"  filterBy="#{travelPackage.time_start}" sortBy="#{travelPackage.time_start}"  id="timeStart">  
-                 #{travelPackage.time_start}  
-                 </p:column> 
-                 <p:column  headerText="Data Fine"  filterBy="#{travelPackage.time_end}" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
-                 #{travelPackage.time_end}  
-                 </p:column> 
-                    
-               
-               <f:facet name="footer">
-                	<p:commandButton value="Invita amico" actionListener="#{customerPersonal.viewCode}" oncomplete="PF('codMess').show();"  />
-            
-               		
-                    
-                  
-               </f:facet>
-				
-              </p:dataTable>
-         </h:form>   
+		
     </p:layoutUnit>  
   
   
@@ -132,15 +91,6 @@
    
   
 </p:layout>  		
-			<p:dialog header="Invita amico" widgetVar="codMess" showEffect="explode" hideEffect="bounce" resizable="false"
-                   width="600" height="150" dynamic="true">      
-             <p:outputLabel value="Codice amico:"  /> 
-		<p:outputLabel value=" #{customerPersonal.friendCode}"  />  
-             <p:outputLabel value="Email amico" for="emailInv" />		
-		<p:inputText id="emailInv" required="true" label="emailInv" 
-		value="" />
-		  <p:commandButton  value="Invia invito" onclick="PF('codMess').hide();" icon="ui-icon-mail-closed" />  
-	     
-         </p:dialog>
+			
 </body> 
 </html>
