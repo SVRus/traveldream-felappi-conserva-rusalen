@@ -31,11 +31,10 @@
          
         <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
             <p:menu>  
-               
-                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
+                      <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
                      <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
                      <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
-           
+        
             </p:menu>  
         </p:layoutUnit>  
       
@@ -318,7 +317,7 @@
                       #{flight.place_start}  
                       </p:column> 
                       <p:column  headerText="Luogo di arrivo" sortBy="#{flight.place_end}" filterBy="#{flight.place_end}" id="place_end">  
-                      #{flight.place_start}  
+                      #{flight.place_end}  
                       </p:column> 
                       <p:column  headerText="Data Inizio" sortBy="#{flight.timeStart}" filterBy="#{flight.timeStart}" id="timeStart">  
                       #{flight.timeStart}  
@@ -367,7 +366,7 @@
                       #{flightBack.place_start}  
                       </p:column> 
                       <p:column  headerText="Luogo di arrivo" sortBy="#{flightBack.place_end}" filterBy="#{flightBack.place_end}" id="place_endBack">  
-                      #{flightBack.place_start}  
+                      #{flightBack.place_end}  
                       </p:column> 
                       <p:column  headerText="Data Inizio" sortBy="#{flightBack.timeStart}" filterBy="#{flightBack.timeStart}" id="timeStartBack">  
                       #{flightBack.timeStart}  
