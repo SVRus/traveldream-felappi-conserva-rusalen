@@ -63,8 +63,6 @@
     
          <h:form id="signupForm" styleClass="input-form" rendered="#{auth.userNone}">
 		<p:panel header="Registrazione" id="panel">
-		<p:messages id="messages" showDetail="true" showSummary="false"
-			autoUpdate="true"/>
 	<h:panelGrid columns="2">
 	    <p:outputLabel value="Username" for="username" />
 		<p:inputText id="username" label="Username"
@@ -175,10 +173,8 @@
        <h:form id="login"
 			onsubmit="document.getElementById('login').action='j_security_check';"
 			prependId="false">
-		<p:panel header="Login" id="panel">
-		<p:messages id="messages" showDetail="true" showSummary="false"
-			autoUpdate="true"/>
-	<h:panelGrid columns="2">
+		<p:panel header="Login" id="panelLogin">
+		<h:panelGrid columns="2">
 	
 		<p:outputLabel for="j_username" value="Username" />
 		<p:inputText id="j_username" name="j_username" required="true" />
@@ -196,9 +192,7 @@
 	
        <h:form id="gift"
 			action = "todo">
-		<p:panel header="Vuoi fare un regalo?" id="panel">
-		<p:messages id="messages" showDetail="true" showSummary="false"
-			autoUpdate="true"/>
+		<p:panel header="Vuoi fare un regalo?" id="panelGift">
 		<h:panelGrid columns="1">
 	
 		<p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
@@ -214,8 +208,6 @@
          <h:form id="join"
 			action = "todo">
 		<p:panel header="Vuoi viaggiare con un amico?" id="panelFriend">
-		<p:messages id="messages" showDetail="true" showSummary="false"
-			autoUpdate="true"/>
 		<h:panelGrid columns="1">
 	
 		  <p:outputLabel for="friend"   value="Inserisci qui il tuo codice amico"   />
@@ -233,6 +225,7 @@
   
 </p:layout>  		
 	
-
+<p:growl id="growl" showDetail="true" life="5000" />
+         
 </body> 
 </html>
