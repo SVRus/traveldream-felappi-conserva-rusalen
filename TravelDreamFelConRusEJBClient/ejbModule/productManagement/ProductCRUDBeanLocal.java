@@ -29,6 +29,7 @@ public interface ProductCRUDBeanLocal {
 	public List<FlightDTO> findALLFlightByStateAndAreaStart(State state, Date  timeStart,Date timeEnd,String area);
 	public List<HotelDTO> findALLHotelByStateAndArea(State state, Date  timeStart,Date timeEnd,String area);
 	public List<OutingDTO> findALLOutingByStateAndArea(State state, Date  timeStart,Date timeEnd,String area);
+	public List <ProductDTO> findAllForEmployee();
 
     
     
