@@ -11,6 +11,8 @@ import javax.ejb.Local;
 
 
 
+
+import dto.CustomerDTO;
 import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
@@ -28,5 +30,6 @@ public interface LoginBeanLocal {
 	public boolean checkGift(String giftCode);
 	public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws GiftListNotFoundException;
 	public CustomizedTravelPackageDTO checkFriendException(String friendCode) throws FriendNotFoundException;
+	public boolean updateCustomer (CustomerDTO custodto);
 
 }
