@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import stateenum.State;
 import travelstateenum.TravelState;
 import authentication.LoginBeanLocal;
+import dto.EmployeeDTO;
 import dto.FlightDTO;
 import dto.HotelDTO;
 import dto.OutingDTO;
@@ -66,7 +67,9 @@ TravelPackageEntityManagementLocal travman;
     public ProductCRUDBean() {
        
     }
-   
+   /**
+    * method that makes the productdto persistent
+    */
     public boolean createProduct(ProductDTO productdto)
     {   Product product=dto.productDTOToEntity(productdto);
    
@@ -123,7 +126,9 @@ TravelPackageEntityManagementLocal travman;
     	
    }
     
-    
+    /**
+     * method that permit an employee to persist a product
+     */
     public boolean createProductFromEmployee(ProductDTO product)
     {   
 		Employee employee=(Employee)emplo.find(log.getPrincipalUsername());
@@ -146,7 +151,9 @@ TravelPackageEntityManagementLocal travman;
     	
     	
     }
- 
+ /**
+  * method that delete a product
+  */
     public boolean delete(ProductDTO productdto)
     {
     	boolean ok=false;
@@ -176,6 +183,9 @@ TravelPackageEntityManagementLocal travman;
     	return ok;  	
     	
     }
+    /**
+     * method that update a product
+     */
     public boolean updateProduct(ProductDTO productdto)
     {   Product product=dto.productDTOToEntityUpdate(productdto);
     	boolean ok=false;
@@ -229,7 +239,9 @@ TravelPackageEntityManagementLocal travman;
     	return ok;
     	
     }
-
+/**
+ * method that find all hotels given a state
+ */
     public List <HotelDTO> findAllHotelsByParameter(State state)
     {
     	
@@ -260,7 +272,9 @@ TravelPackageEntityManagementLocal travman;
     	
     }
 
-  
+  /**
+   * method that find all hotels
+   */
     public List <HotelDTO> findAllHotels()
     {
     	List <Hotel> lista=hotel.findAll();
@@ -292,7 +306,9 @@ TravelPackageEntityManagementLocal travman;
     
     
     
-    
+    /**
+     * method tha finds all outing given a state
+     */
     public List <OutingDTO> findAllOutingsByParameter(State state)
     {
     	
@@ -320,6 +336,9 @@ TravelPackageEntityManagementLocal travman;
     	
     	
     }
+    /**
+     * method that finds all outings
+     */
     public List <OutingDTO> findAllOutings()
     {
     	
@@ -347,6 +366,9 @@ TravelPackageEntityManagementLocal travman;
     	
     	
     }
+    /**
+     * method that finds all flights given a state
+     */
     public List <FlightDTO> findAllFlightsByParameter(State state)
     {
     	
@@ -374,6 +396,9 @@ TravelPackageEntityManagementLocal travman;
     	
     	
     }
+    /**
+     * method that finds all flights
+     */
     public List <FlightDTO> findAllFlights()
     {
     	
@@ -402,31 +427,10 @@ TravelPackageEntityManagementLocal travman;
     	
     }
     
-  /*  public ProductDTO findClonedProduct(ProductDTO toClone)
-    {
     	
-    	ProductDTO prodto=null;
-    	if(toClone instanceof HotelDTO)
-    	{
-    		
-    		prodto=dto.productToDTO((Hotel)hotel.findFirstHotelAvailable((HotelDTO)toClone));
-    		
-    	}
-    	else if(toClone instanceof OutingDTO)
-    	{
-    		prodto=dto.productToDTO((Outing)outing.findFirstOutingAvailable((OutingDTO)toClone));
-    		
-    	}
-    	else if(toClone instanceof FlightDTO)
-    	{
-    		prodto=dto.productToDTO((Flight)flight.findFirstFlightAvailable((FlightDTO)toClone));
-    	}
-    	
-		return prodto;
-    	
-    	
-    	
-    }*/
+   /**
+    * method that finds all outing given a state , an area , a start Date and an end Date
+    */
 	public List<OutingDTO> findALLOutingByStateAndArea(State state, Date  timeStart,Date timeEnd,String area)
 	{
 		List <Outing> outingList=outing.findALLByStateAndArea(state, timeStart.getTime(), timeEnd.getTime(), area);
@@ -434,6 +438,9 @@ TravelPackageEntityManagementLocal travman;
 		return outingDTOList;
 		
 	}
+	/**
+	    * method that finds all outing given a state , an area , a start Date and an end Date
+	    */
 	public List<HotelDTO> findALLHotelByStateAndArea(State state, Date  timeStart,Date timeEnd,String area)
 	{
 		List <Hotel> hotelList=hotel.findAllByStateAndArea(state, timeStart.getTime(), timeEnd.getTime(), area);
@@ -441,6 +448,9 @@ TravelPackageEntityManagementLocal travman;
 		return hotelDTOList;
 		
 	}
+	/**
+	    * method that finds all flights given a state , an area , a start Date and an end Date
+	    */
 	public List<FlightDTO> findALLFlightByStateAndAreaStart(State state, Date  timeStart,Date timeEnd,String area)
 	{
 		List <Flight> outingList=flight.findALLByStateAndAreaStart(state, timeStart.getTime(), timeEnd.getTime(), area);
@@ -448,6 +458,9 @@ TravelPackageEntityManagementLocal travman;
 		return flightDTOList;
 		
 	}
+	/**
+	    * method that finds all outings given a state , an area , a start Date and an end Date
+	    */
 	public List<FlightDTO> findALLByStateAndAreaEnd(State state, Date  timeStart,Date timeEnd,String area)
 	{
 		List <Flight> outingList=flight.findALLByStateAndAreaEnd(state,  timeStart.getTime(), timeEnd.getTime(), area);
@@ -455,4 +468,15 @@ TravelPackageEntityManagementLocal travman;
 		return flightDTOList;
 		
 	}
+	
+	public List <ProductDTO> findAllForEmployee()
+	{
+		EmployeeDTO emplo=(EmployeeDTO)log.findLogIn();
+		
+		return emplo.getManagedproduct();
+		
+	}
+	
+	
+	
 }
