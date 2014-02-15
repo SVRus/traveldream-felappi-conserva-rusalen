@@ -469,11 +469,11 @@ TravelPackageEntityManagementLocal travman;
 		
 	}
 	
-	public List <ProductDTO> findAllForEmployee()
+	public ArrayList <ProductDTO> findAllForEmployee()
 	{
 		EmployeeDTO emplo=(EmployeeDTO)log.findLogIn();
 		
-		return emplo.getManagedproduct();
+		return new ArrayList <ProductDTO>(emplo.getManagedproduct());
 		
 	}
 	
