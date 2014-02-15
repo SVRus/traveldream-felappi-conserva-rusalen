@@ -122,8 +122,9 @@ public class CustomerPackageEditBean implements Serializable{
 	public String show()
 	{
 		currentTravelPackage = tempCurrentPackage;
-		setFields();
 		update();
+		setFields();
+		
 		personalized = false;
 		return "showPackage";
 		
