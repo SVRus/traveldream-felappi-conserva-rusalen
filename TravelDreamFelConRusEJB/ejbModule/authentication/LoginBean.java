@@ -32,8 +32,10 @@ import javax.ejb.Stateless;
 
 
 
+
 import org.apache.commons.codec.digest.DigestUtils;
 
+import dto.CustomerDTO;
 import dto.CustomizedTravelPackageDTO;
 import dto.EmployeeDTO;
 import dto.GenericUserDTO;
@@ -152,6 +154,30 @@ public boolean updateEmployee(EmployeeDTO emplodto)
 		return false;
 	}
 }
+
+
+public boolean updateCustomer (CustomerDTO custodto)
+{
+	Customer custo=factory.customerDTOToEntityUpdate(custodto);
+
+try {
+	customer.edit(custo);
+	
+	return true;
+}
+catch(Exception e)
+{
+	return false;
+
+}
+
+}
+
+
+
+
+
+
 
 public boolean checkGift(String giftCode  )
 {  
