@@ -283,7 +283,12 @@ public class StageManagementBean {
 			  /*Preparo le liste di prodotti già nello stage da visualizzare
 			   * passo sotto forma di lista anche le entità con un solo
 			   * elemento, per poterle mettere nelle table*/
-				
+			  flightStartView= null;
+			  flightEndView= null;
+			  hotelView = null;
+			  outingsView= null;
+			  outingModelView = null;  
+		
 			return "notBusyStage";
 		}
 		
