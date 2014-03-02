@@ -423,4 +423,20 @@ public ArrayList <CustomizedTravelPackageDTO> findAllCustomizedForCustomer()
 
 }
 
+public TravelPackageDTO findTravelPackageByID(Long id)
+{
+	
+TravelPackage travel=trav.find(id);
+return dto.simpleTravelPackageToDTO(travel);
+
+
+
+
+}
+
+
+
+
+
+
 }
