@@ -92,7 +92,7 @@ public Employee employeeDTOToEntityUpdate(EmployeeDTO emplodto)
  * @param cusdto --> the dto representation of the employee
  * @return the entity representation of the customer
  */
-private Customer customerDTOToEntityUpdate(CustomerDTO cusdto)
+public Customer customerDTOToEntityUpdate(CustomerDTO cusdto)
 {
 	List <Group> groups =regman.findGroups(cusdto.getUsername());
 	
@@ -474,6 +474,12 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
   	   return real;
    	
    }
+   
+   /**
+    * method that tranforma the productDTO in the entity Product , used during the creation phase
+    * @param product  --> the productDTO acquired from the web tier
+    * @return the entity Product translated from the ProductDTO
+    */
    public Product productDTOToEntity(ProductDTO product)
    {
    	Product entity=null;
@@ -497,6 +503,14 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    	}
    	return entity;
    }
+   
+   
+   /**
+    * method that tranforma the TravelPackageDTO in the entity TravelPackage , used during the creation phase or the update phase depending on the value of the boolean createUpdate
+    * @param travel  -->the travelPackageDTO  acquired from the web tier
+    * @param createUpdate --> boolean value : true during the creation phase , false during the update phase
+    * @return  the entity TravelPackage translated from the TravelPackageProductDTO
+    */
    public TravelPackage travelPackageDTOToEntity(TravelPackageDTO travel, boolean createUpdate)
    {
 	  TravelPackage travelpackage=null;
@@ -509,7 +523,7 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		  purchaseTimeLong=purchaseTime.getTime();
 	  if(createUpdate)
 	  {
-		  stages=stageListDTOToEntity((new ArrayList<StageDTO>(travel.getStages())));//TODO
+		  stages=stageListDTOToEntity((new ArrayList<StageDTO>(travel.getStages())));
 		  if(travel instanceof PrepackedTravelPackageDTO)
 		  {
 			  travelpackage=new PrepackedTravelPackage(travel.getTime_end().getTime(),travel.getTime_start().getTime(),travel.getDescription(),travel.getName(),stages,travel.getFriendCode(),purchaseTimeLong,travel.getTravelState());
@@ -555,7 +569,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
    }
-   
+   /**
+    * method that transform the CustomizedTravelPackageDTO  List in the  CustomizedTravelPackage entity  List 
+    * @param pretraveldtolist -->the list of CustomizedTravelPackageDTO
+    * @return the list of CustomizedTravelPackage entity  translated from the list of CustomizedTravelPackageDTO
+    */
    
    private List <CustomizedTravelPackage> customizedTravelPackageDTOListToEntity( ArrayList <CustomizedTravelPackageDTO> pretraveldtolist)
    {
@@ -572,7 +590,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    }
    
    
-   
+   /**
+    * method that transform the PrepackedTravelPackageDTO  List in the  PrepackedTravelPackage entity  List 
+    * @param pretraveldtolist -->the list of PrepackedTravelPackageDTO
+    * @return the list of PrepackedTravelPackage entity  translated from the list of PrepackedTravelPackageDTO
+    */
    private List <PrepackedTravelPackage> prepackedTravelPackageDTOListToEntity( ArrayList <PrepackedTravelPackageDTO> pretraveldtolist)
    {
 	   ArrayList <PrepackedTravelPackage> travellist=new ArrayList<PrepackedTravelPackage>();
@@ -586,6 +608,13 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   return travellist;
 	      
    }
+   
+   
+   /**
+    * method that transform a TravelPackageDTO list in a TravelPackage entity
+    * @param traveldtolist --> the travelPackageDTO list
+    * @return the translation of the TravelPackageDTO list in the TravelPackage entity list
+    */
    private List <TravelPackage>  travelPackageDTOListToEntity( ArrayList <TravelPackageDTO> traveldtolist)
    {
 	   ArrayList <TravelPackage> travellist=new ArrayList<TravelPackage>();
@@ -598,7 +627,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   return travellist;
    }
-   
+   /**
+    * method that transform a list of stage dto in a list of stage entity , used during the creation phase
+    * @param stagesDTOList --> the list of StageDTO
+    * @return the translation of the list of stage entity
+    */
    private  List<Stage> stageListDTOToEntity(ArrayList <StageDTO> stagesDTOList)
    {
 	   stagesDTOList.trimToSize();
@@ -613,6 +646,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   return stages;
 	   
    }
+   /**
+    * method that transform a list of stage dto in a list of stage entity , used during the creation phase
+    * @param stagesDTOList stagesDTOList --> the list of StageDTO
+    * @return the translation of the list of stage entity
+    */
    private List <Stage>  stageListDTOToEntityUpdate(ArrayList <StageDTO> stagesDTOList)
    {   stagesDTOList.trimToSize();
 	   List <Stage> stages=new ArrayList <Stage>();
@@ -630,7 +668,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
    }
-	   
+	   /**
+	    * 
+	    * @param productDTOList
+	    * @return
+	    */
 	   private List <Product> productDTOListToEntity(ArrayList <ProductDTO> productDTOList)
 	   {   List <Product> productList= new ArrayList <Product> ();
 		   
@@ -646,6 +688,12 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 		   
 		   
 	   }
+	   
+	   /**
+	    * method that transform the stageDTOin a  stage entity , used during the creation phase
+	    * @param stagedto--> the  stageDTO 
+	    * @return the translation of the stageDTO in the stage entity
+	    */
    private Stage stageDTOToEntity(StageDTO stagedto)
    {
 	   
@@ -656,6 +704,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
    }
+   /**
+    * method that transform the stageDTO in a  stage entity , used during the update phase
+    * @param stagedto--> the  stageDTO
+    * @return the translation of the stageDTO in the stage entity
+    */
    private Stage stageDTOToEntityUpdate(StageDTO stagedto)
    {
 	   
@@ -665,7 +718,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   return new Stage(stagedto.getIdStage(),stagedto.getArea(),productDTOListToEntityUpdate(stagedto.getProducts()),stagedto.getTimeStart().getTime(),stagedto.getTimeEnd().getTime());
    }
    
-   
+   /**
+    * method that transform theproductDTO in a  product entity , used during the update phase
+    * @param product--> the  productDTO
+    * @return the translation of the productDTO in the product entity
+    */
    public Product productDTOToEntityUpdate(ProductDTO product)
    {
    	Product entity=null;
@@ -691,6 +748,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
    }
 
    
+   /**
+    * method that transform the list of productDTO in a List of product entity , used during the creation phase
+    * @param productDTOList --> the list of productDTO
+    * @return the list of product entity
+    */
    private List <Product> productDTOListToEntityUpdate(ArrayList <ProductDTO> productDTOList)
    {   List <Product> productList=new ArrayList <Product> ();
         productDTOList.trimToSize();
@@ -707,6 +769,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	return productList;
 	   
    }
+   /**
+    * method that transform a List of outing entity in a list of hotelDTO
+    * @param outing--> the outing to be transformed
+    * @return translation of the outing list
+    */
    public ArrayList <OutingDTO> outingListToDTO(List <Outing> outing)
    {   
 	   ArrayList <OutingDTO> outingDTO=new ArrayList <OutingDTO>();
@@ -721,6 +788,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
    }
+   /**
+    * method that transform a List of flight entity in a list of hotelDTO
+    * @param flight--> the flight to be tranaformed
+    * @return the translation of the flight list
+    */
    public ArrayList <FlightDTO> flightListToDTO(List <Flight> flight)
    {   
 	   ArrayList <FlightDTO> flightDTO=new ArrayList <FlightDTO>();
@@ -734,7 +806,15 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   return flightDTO;
 	   
 	   
-   } public ArrayList <HotelDTO> hotelListToDTO(List <Hotel> hotel)
+   } 
+   
+   
+   /**
+    * method that transform a List of Hotel entity in a list of hotelDTO
+    * @param hotel--> the hotel to be tranformed
+    * @return the translation of the hotel list
+    */
+   public ArrayList <HotelDTO> hotelListToDTO(List <Hotel> hotel)
    {   
 	   ArrayList <HotelDTO> hotelDTO=new ArrayList <HotelDTO>();
 	   Iterator <Hotel> iter=hotel.iterator();
@@ -748,6 +828,11 @@ public GiftList simpleGiftListDTOToEntity(GiftListDTO giftListDTO)
 	   
 	   
    }
+   /**
+    * method that finds a clone productDTO for the given productDTo
+    * @param toClone -->the product to clone
+    * @return the cloned product if exists otherwise null
+    */
    public ProductDTO findClonedProduct(ProductDTO toClone)
    {
    	
