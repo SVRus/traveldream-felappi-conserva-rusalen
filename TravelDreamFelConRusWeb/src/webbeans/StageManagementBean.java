@@ -140,6 +140,7 @@ public class StageManagementBean {
 		shared.setCurrentStage(currentStage);
 		shared.setStageUpdated(true);
 		shared.setBusyStage(false);
+		//shared.setStageToDeleteForModify(null);
 		
 		return "addedStage";
 		}
@@ -289,6 +290,7 @@ public class StageManagementBean {
 			  outingsView= null;
 			  outingModelView = null;  
 		
+			  shared.setStageToDeleteForModify(null);
 			return "notBusyStage";
 		}
 		
