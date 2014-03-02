@@ -7,7 +7,8 @@
     <h:head></h:head> 
    
   <body> 
-      
+       <h:inputHidden  value="#{customerPackageEdit.update()}"/>
+		
      
    <p:layout fullPage="true">  
         
@@ -24,7 +25,7 @@
             <p:menu>  
                
                      <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
-                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
                      <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
            
             </p:menu>  
@@ -61,7 +62,7 @@
                 	
                
                <f:facet name="footer">
-                  <p:commandButton  action="friendStageView" value="Visualizza tappa" icon="ui-icon-zoomin" />  
+                  <p:commandButton action="#{stageManagement.show()}" value="Visualizza tappa" icon="ui-icon-zoomin" />  
              </f:facet>
 				
               </p:dataTable>
@@ -85,16 +86,16 @@
 	
 		<p:outputLabel value="Descrizione:" for="description" />
 		<h:outputText id="description" label="description"
-			value="#{customerPackageEdit.description}"/>  
+			value="#{customerPackageEdit.currentTravelPackage.description}"/>  
 				
 		
 		<p:outputLabel value="Data di partenza:" for="startDate" />
 		
-		<h:outputText id="startDate" value="#{customerPackageEdit.time_start}" 
+		<h:outputText id="startDate" value="#{customerPackageEdit.currentTravelPackage.time_start}" 
 			/>
 			
 		<p:outputLabel value="Data di fine:" for="endDate" />
-		<h:outputText id="endDate" value="#{customerPackageEdit.time_end}" />
+		<h:outputText id="endDate" value="#{customerPackageEdit.currentTravelPackage.time_end}" />
 			
 		
     
@@ -118,8 +119,7 @@
       
         </p:layout>  
         
-        <h:inputHidden  value="#{customerPackageEdit.update()}"/>
-		
+       
        
     </body> 
     

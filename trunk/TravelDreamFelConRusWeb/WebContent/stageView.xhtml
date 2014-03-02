@@ -162,12 +162,9 @@
                 </f:facet>  
                 
                 <p:column  headerText="Nome" sortBy="#{outingView.name}" filterBy="#{outingView.name}" id="name">
+                    #{outingView.name}
                     
-                    
-                    <p:commandLink value="#{outingView.name}"  oncomplete="userDialog.show()"  title="View">
-                        <f:setPropertyActionListener value="#{outingView}" target="#{stageManagement.selectedOuting}" />    
-                    </p:commandLink>
-                	</p:column>
+                  	</p:column>
                       
                        <p:column  headerText="Luogo" sortBy="#{outingView.place}" filterBy="#{outingView.place}" id="place">  
                       #{outingView.place}  

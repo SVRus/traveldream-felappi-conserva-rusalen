@@ -449,4 +449,27 @@
   PATH="/friendErrorSoldout.xhtml" SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
  <PROCESS-ITEM NAME="rules:#friendErrorCode.xhtml"
   PATH="/friendErrorCode.xhtml" SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:friendPackageView.xhtml"
+  PATH="friendPackageView.xhtml" SHAPE="32,7281,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:friendPackageView.xhtml:0" NAME="item"
+   PATH="friendPackageView.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="showStage::#friendStageView.xhtml"
+    NAME="output" PATH="/friendStageView.xhtml"
+    TARGET="rules:#friendStageView.xhtml" TITLE="showStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#friendStageView.xhtml"
+  PATH="/friendStageView.xhtml" SHAPE="240,7297,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:customer#packageView.xhtml"
+  PATH="customer/packageView.xhtml" SHAPE="32,8497,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:customer#packageView.xhtml:0" NAME="item"
+   PATH="customer/packageView.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="showStage::#customer#customerStageView.xhtml" NAME="output"
+    PATH="/customer/customerStageView.xhtml"
+    TARGET="rules:#customer#customerStageView.xhtml" TITLE="showStage" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#customer#customerStageView.xhtml"
+  PATH="/customer/customerStageView.xhtml" SHAPE="240,8513,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

@@ -461,6 +461,30 @@
            <redirect/>  
        </navigation-case>
     </navigation-rule>
+  
+    <navigation-rule>
+       <from-view-id>friendPackageView.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showStage</from-outcome>
+           <to-view-id>
+           /friendStageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+    <navigation-rule>
+       <from-view-id>customer/packageView.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showStage</from-outcome>
+           <to-view-id>
+           /customer/customerStageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+  
     
       <navigation-rule>
        <from-view-id>index.xhtml</from-view-id>
