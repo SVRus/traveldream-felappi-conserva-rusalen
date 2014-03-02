@@ -43,7 +43,8 @@ public class AuthBean {
 	private boolean userEmployee;
 	private boolean userNone;
 	private boolean userCustomer;
-	
+	private String nameEmp;
+	private String nameCus;
 	
 	
 		public boolean isChecked() {
@@ -105,6 +106,7 @@ public class AuthBean {
 			userEmployee=true;
 			userCustomer=false;
 			userNone=false;
+			nameEmp=login.getPrincipalUsername();
 			
 			return;
 		}
@@ -115,6 +117,7 @@ public class AuthBean {
 			userEmployee=false;
 			userCustomer=true;
 			userNone=false;
+			nameCus=login.getPrincipalUsername();
 			return;
 		}
 		}
@@ -311,6 +314,26 @@ public class AuthBean {
 
 	public void setLogin(LoginBeanLocal login) {
 		this.login = login;
+	}
+
+
+	public String getNameEmp() {
+		return nameEmp;
+	}
+
+
+	public void setNameEmp(String nameEmp) {
+		this.nameEmp = nameEmp;
+	}
+
+
+	public String getNameCus() {
+		return nameCus;
+	}
+
+
+	public void setNameCus(String nameCus) {
+		this.nameCus = nameCus;
 	}
 	
 
