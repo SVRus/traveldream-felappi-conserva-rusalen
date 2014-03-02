@@ -34,7 +34,9 @@
       	window.location = "http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml";
 		if(document.getElementById("customerCheck").value=="true")
 	     window.location = "http://localhost:8080/TravelDreamFelConRusWeb/customer/customerhome.xhtml";
-	      	
+
+
+		
     }
   </script>
   
@@ -105,7 +107,7 @@
 			pattern="MM/dd/yyyy" showOn="button" readonlyInput="true"/>
 		<h:outputText value="" />
 		
-		<h:panelGroup>
+	<h:panelGroup>
 		 
 		<p:selectBooleanCheckbox  id="check"
       			 value="#{auth.checked}"
@@ -123,6 +125,7 @@
     	<script type="text/javascript">
       	function toggle(id) {
         var element = document.getElementById(id);
+        
         if(element.style.display == 'block') {
           element.style.display = 'none';
         } else {
@@ -130,6 +133,9 @@
         }
       }
         </script>	
+        
+	
+		
         
       	<h:panelGroup>
 		<p:selectBooleanCheckbox required="true" id="terms"
