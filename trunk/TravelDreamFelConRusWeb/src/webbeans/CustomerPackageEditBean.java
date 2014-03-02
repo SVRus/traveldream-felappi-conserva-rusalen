@@ -27,8 +27,8 @@ public class CustomerPackageEditBean implements Serializable{
 	 * di creazione o modifica. Serve a tenere traccia della corrispondenza tra un pacchetto e le sue tappe
 	 * e eventuali modifiche. 
 	 */
-	@ManagedProperty(value="#{customerPackageCommon}")
-	private CustomerPackageCommonBean shared;
+	@ManagedProperty(value="#{packageCommon}")
+	private PackageCommonBean shared;
 
 	
 	@ManagedProperty(value="#{stageManagement}")
@@ -152,13 +152,17 @@ public class CustomerPackageEditBean implements Serializable{
 		 */
 		//aggiungo il nuovo stage
 		currentTravelPackage.addStage(sharedStage.getCurrentStage());
+		
 		//rimuovo lo stage precedente
+		
 		currentTravelPackage.removeStage(shared.getStageToDeleteForModify());
 				
 		shared.setStageUpdated(false);
+		
 	}
 	//Aggiorno la struttura dati per la tabella con la lista aggiornata
-	stageModel= new StageDataModel(currentTravelPackage.getStages());
+		stageModel= new StageDataModel(currentTravelPackage.getStages());
+			
 	}
 	//Dopo il primo accesso alla pagina vengono conservate le modifiche dell'utente.
 	modifyForField=false;
@@ -315,10 +319,10 @@ public class CustomerPackageEditBean implements Serializable{
 		
 		
 	}
-	public CustomerPackageCommonBean getShared() {
+	public PackageCommonBean getShared() {
 		return shared;
 	}
-	public void setShared(CustomerPackageCommonBean shared) {
+	public void setShared(PackageCommonBean shared) {
 		this.shared = shared;
 	}
 	public StageManagementBean getSharedStage() {

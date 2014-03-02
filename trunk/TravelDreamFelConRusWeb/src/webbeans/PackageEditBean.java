@@ -96,14 +96,18 @@ public class PackageEditBean implements Serializable{
 		 */
 		//aggiungo il nuovo stage
 		currentTravelPackage.addStage(sharedStage.getCurrentStage());
-		//rimuovo lo stage precedente
+		
+		
+		//Se si tratta di un'operazione di aggiornamento e non di creazione rimuovo lo stage precedente
 		currentTravelPackage.removeStage(shared.getStageToDeleteForModify());
 				
 		shared.setStageUpdated(false);
 	}
 	//Aggiorno la struttura dati per la tabella con la lista aggiornata
 	stageModel= new StageDataModel(currentTravelPackage.getStages());
+	
 	}
+	
 	//Dopo il primo accesso alla pagina vengono conservate le modifiche dell'utente.
 	modifyForField=false;
 	newForField=false;
@@ -135,8 +139,9 @@ public class PackageEditBean implements Serializable{
 	public String show()
 	{
 		currentTravelPackage = tempCurrentPackage;
-		setFields();
 		update();
+		setFields();
+		
 		return "showPackage";
 		
 	}
