@@ -81,7 +81,13 @@ private DTOFactory dto;
     	
     }
     public boolean employeeRegister (EmployeeDTO employee)
-    {   Code code=((Code)(codeejb.find(employee.getCode())));
+   
+    {   
+    	
+    	if(employee.getCode()==0)
+    		return false;
+    	Code code=((Code)(codeejb.find(employee.getCode())));
+       
         if (code==null )
     	return false;
         long codelong=code.getCode();
