@@ -27,6 +27,7 @@ public interface TravelPackageCRUDBeanLocal
 	public ArrayList <PrepackedTravelPackageDTO> findAllPackageForEmployee();
 	public String createCustomizedTravelPackageForFriend(CustomizedTravelPackageDTO customizedTravel);
 	public ArrayList <CustomizedTravelPackageDTO> findAllCustomizedForCustomer();
+	public TravelPackageDTO findTravelPackageByID(Long id);
 
 	
 	
