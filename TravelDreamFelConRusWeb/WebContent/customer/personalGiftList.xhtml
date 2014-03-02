@@ -33,6 +33,16 @@
        
       
       <p:layoutUnit position="center">  
+      
+       	<p:accordionPanel>  
+    		<p:tab title="Invia il codice a un amico e lui potrà farti un regalo">  
+    
+	       <p:dataList value="#{giftListCustomer.giftCodes}" var="gift" itemType="disc">  
+    				#{gift.name}, #{gift.code}
+				</p:dataList> 
+				</p:tab>
+				</p:accordionPanel>
+				
 	    <h:form id="form">
 	  
  <p:dataTable var="giftB" value="#{giftListCustomer.giftListModelBought}" rowKey="#{giftB.product.idProduct}" paginator="true" rows="10"  
