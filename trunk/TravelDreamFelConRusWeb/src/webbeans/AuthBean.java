@@ -33,7 +33,7 @@ public class AuthBean {
 	//private int phoneNumber;
 	private String password;
 	private Date birthdate;
-	private String acceptedTerms;
+	private boolean acceptedTerms;
 	private String username;
 	private String passwordIn;
 	private String result;
@@ -95,6 +95,8 @@ public class AuthBean {
 	@PostConstruct
 	public void redirect()
 	{
+		acceptedTerms=false;
+		
 		if(login.isLogged())
 		{
 			
@@ -158,7 +160,8 @@ public class AuthBean {
 		boolean success;
 		if (!checked)
 		{
-		CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<TravelPackageDTO>(),new ArrayList <GiftListDTO>(),new ArrayList<CustomizedTravelPackageDTO>());
+		
+			CustomerDTO customer= new CustomerDTO(email,firstName,lastName,"telephone", password,username,new ArrayList<TravelPackageDTO>(),new ArrayList <GiftListDTO>(),new ArrayList<CustomizedTravelPackageDTO>());
 		///da modificare
 		success = generic.customerRegister(customer);
 			
@@ -172,6 +175,7 @@ public class AuthBean {
 		}
 		else
 		{
+			checked=false;
 			EmployeeDTO employee= new EmployeeDTO(email,firstName,lastName,"telephone", password,username,code,new ArrayList<ProductDTO>(),new ArrayList<PrepackedTravelPackageDTO> ());
 			
 			success = generic.employeeRegister(employee);
@@ -235,12 +239,17 @@ public class AuthBean {
 	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
-	public String getAcceptedTerms() {
+	
+	public boolean isAcceptedTerms() {
 		return acceptedTerms;
 	}
-	public void setAcceptedTerms(String acceptedTerms) {
+
+
+	public void setAcceptedTerms(boolean acceptedTerms) {
 		this.acceptedTerms = acceptedTerms;
 	}
+
+
 	public String getUsername() {
 		return username;
 	}
