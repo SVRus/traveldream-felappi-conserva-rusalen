@@ -115,8 +115,7 @@ CodeEntityManagementLocal cod;
     public void feed() 
     {    
     	 Code code=new Code(123456789);
-    	 if(cod.find(new Long(123456789))==null)
-    	 {
+    	
     	 codeejb.create(code);
     	 code=new Code(12);
     	 codeejb.create(code);
@@ -283,14 +282,13 @@ CodeEntityManagementLocal cod;
         
        	
        	
-       	Flight flight4=new Flight(127,dateFlight4Start.getTime(),dateFlight4End.getTime(),"volo1","Inghilterra","airFrance","francia","Parigi","Londra","eventuali e varie",State.RESERVED);
-        Flight flight5=new Flight(128,dateFlight5Start.getTime(),dateFlight5End.getTime(),"volo1","francia","airFrance","Inghilterra","Londra","Parigi","eventuali e varie",State.RESERVED);
-       	Hotel hotel3=new Hotel(80,dateHotel3Start.getTime(),dateHotel3End.getTime(),"hilton",State.RESERVED,"Germania","Francoforte","tripla","eventuali e varie");
+       	Flight flight4=new Flight(127,dateFlight4Start.getTime(),dateFlight4End.getTime(),"volo1","Austria","airFrance","francia","Parigi","Vienna","eventuali e varie",State.RESERVED);
+        Flight flight5=new Flight(128,dateFlight5Start.getTime(),dateFlight5End.getTime(),"volo1","francia","airFrance","Austria","Vienna","Parigi","eventuali e varie",State.RESERVED);
+       	Hotel hotel3=new Hotel(80,dateHotel3Start.getTime(),dateHotel3End.getTime(),"hilton",State.RESERVED,"Austria","Vienna","tripla","eventuali e varie");
     	
        	
-       	Hotel hotel4=new Hotel(90,dateHotel4Start.getTime(),dateHotel4End.getTime(),"ibis",State.EXPIRED,"Inghilterra","Londra","singola","eventuali e varie");
-    	
-        Flight flight6=new Flight(129,dateFlight6Start.getTime(),dateFlight6End.getTime(),"volo1","Inghilterra","airFrance","francia","Parigi","Londra","eventuali e varie",State.INCLUDED);
+       	Hotel hotel4=new Hotel(90,dateHotel4Start.getTime(),dateHotel4End.getTime(),"ibis",State.INCLUDED,"Inghilterra","Londra","singola","eventuali e varie");
+    	Flight flight6=new Flight(129,dateFlight6Start.getTime(),dateFlight6End.getTime(),"volo1","Inghilterra","airFrance","francia","Parigi","Londra","eventuali e varie",State.INCLUDED);
         Flight flight7=new Flight(130,dateFlight7Start.getTime(),dateFlight7End.getTime(),"volo1","francia","airFrance","Inghilterra","Londra","Parigi","eventuali e varie",State.INCLUDED);
      
         Flight flight8=new Flight(120,dateFlight2Start.getTime(),dateFlight2End.getTime(),"volo1","italia","alitalia","francia","Parigi","Roma","eventuali e varie",State.AVAILABLE);
@@ -299,35 +297,35 @@ CodeEntityManagementLocal cod;
        
     	Hotel hotel5=new Hotel(60,dateHotel1Start.getTime(),dateHotel1End.getTime(),"excelsior",State.AVAILABLE,"Francia","Parigi","doppia","eventuali e varie");
        	Hotel hotel6=new Hotel(70,dateHotel2Start.getTime(),dateHotel2End.getTime(),"italia",State.AVAILABLE,"Italia","Roma","singola","eventuali e varie");
-       	Hotel hotel7=new Hotel(80,dateHotel3Start.getTime(),dateHotel3End.getTime(),"hilton",State.AVAILABLE,"Germania","Francoforte","tripla","eventuali e varie");
+       	Hotel hotel7=new Hotel(80,dateHotel3Start.getTime(),dateHotel3End.getTime(),"hilton",State.AVAILABLE,"Austria","Vienna","tripla","eventuali e varie");
 
         Flight flight11=new Flight(127,dateFlight4Start.getTime(),dateFlight4End.getTime(),"volo1","Inghilterra","airFrance","francia","Parigi","Londra","eventuali e varie",State.AVAILABLE);
         Flight flight12=new Flight(128,dateFlight5Start.getTime(),dateFlight5End.getTime(),"volo1","francia","airFrance","Inghilterra","Londra","Parigi","eventuali e varie",State.AVAILABLE);
 
          
-        Outing outing1=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","description","Francia",State.INCLUDED,"Louvre");
-        Outing outing2=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","description","Francia",State.INCLUDED,"Museo");
-        Outing outing3=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","description","Italia",State.INCLUDED,"Musei vaticani");
+        Outing outing1=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","per scoprire i più grandi tesori artistici","Francia",State.INCLUDED,"Louvre");
+        Outing outing2=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","sarete completamente immersi tra i quadri di Monet e degli impressionisti","Francia",State.INCLUDED,"Museo");
+        Outing outing3=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","per riscoprire i tesori dell'italia","Italia",State.INCLUDED,"Musei vaticani");
         
         
         
-        Outing outing4=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"museo francoforte","description","area",State.RESERVED,"Francoforte");
+        Outing outing4=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"Teatro di vienna","una straordinaria esperienza musicale","Austria",State.RESERVED,"Vienna");
         
         
         
-        Outing outing5=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","description","Inghilterra",State.EXPIRED,"Londra");
+        Outing outing5=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","scorci caratteristici della londra vittoriana","Inghilterra",State.EXPIRED,"Londra");
         
-        Outing outing6=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","description","Francia",State.AVAILABLE,"Louvre");
-        Outing outing7=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","description","Francia",State.AVAILABLE,"Museo");
-        Outing outing8=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","description","Italia",State.AVAILABLE,"Musei vaticani");
-        
-        
-        
-        Outing outing9=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"museo francoforte","description","area",State.AVAILABLE,"Francoforte");
+        Outing outing6=new Outing(50,dateOuting1Start.getTime(),dateOuting1Start.getTime(),"gita louvre","per scoprire i più grandi tesori artistici","Francia",State.AVAILABLE,"Louvre");
+        Outing outing7=new Outing(50,dateOuting2Start.getTime(),dateOuting2Start.getTime(),"gita museo d'orsai","sarete completamente immersi tra i quadri di Monet e degli impressionisti","Francia",State.AVAILABLE,"Museo");
+        Outing outing8=new Outing(50,dateOuting3Start.getTime(),dateOuting3Start.getTime(),"gita musei vaticani","per riscoprire i tesori dell'italian","Italia",State.AVAILABLE,"Musei vaticani");
         
         
         
-        Outing outing10=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","description","Inghilterra",State.AVAILABLE,"Londra");
+        Outing outing9=new Outing(50,dateOuting4Start.getTime(),dateOuting4End.getTime(),"Teatro di vienna","una straordinaria esperienza musicale","Austria",State.AVAILABLE,"Vienna ");
+        
+        
+        
+        Outing outing10=new Outing(50,dateOuting5Start.getTime(),dateOuting5End.getTime(),"gita centro londra","scorci caratteristici della londra vittoriana","Inghilterra",State.AVAILABLE,"Londra");
 
      List <Product> products=Arrays.asList(hotel1,hotel2,hotel3,hotel4,hotel5,hotel6,hotel7,flight1,flight2,flight3,flight4,flight5,flight6,flight7,flight8,flight9,flight10,flight11,flight12,outing1,outing2,outing3 ,outing4,outing5,outing6,outing7,outing8,outing9,outing10);
      
@@ -340,19 +338,19 @@ CodeEntityManagementLocal cod;
    Stage stage1a=new Stage(hotel1.getArea(),stage1apr,dateStage1aStart.getTime(),dateStage1aEnd.getTime());
    Stage stage1b=new Stage(hotel2.getArea(),stage1bpr,dateStage1bStart.getTime(),dateStage1bEnd.getTime());
    List <Stage> stages1=Arrays.asList(stage1a,stage1b);
-   PrepackedTravelPackage travelPre=new  PrepackedTravelPackage(datePack1End.getTime(),datePack1Start.getTime(),"description", "interrail",stages1,"",null,TravelState.AVAILABLE);
+   PrepackedTravelPackage travelPre=new  PrepackedTravelPackage(datePack1End.getTime(),datePack1Start.getTime(),"Un viaggio tra le meraviglie artistiche di Francia e Italia", "interrail usa-francia-italia-germania: le bellezze artistiche di Francia e Italia",stages1,"",null,TravelState.AVAILABLE);
   List <PrepackedTravelPackage> travels=employee.getManagedTravelPackage();
   travels.add(travelPre);
    List <Product> stage2apr=Arrays.asList(flight4,hotel3,flight5,outing4);
    Stage stage2a=new Stage (hotel3.getArea(),stage2apr,dateFlight4Start.getTime(),dateFlight5End.getTime());
    List <Stage> stages2=Arrays.asList(stage2a);
-   PrepackedTravelPackage travelPreReserved=new  PrepackedTravelPackage(stage2a.getTimeEnd(),stage2a.getTimeStart(),"description", "singlestage",stages2,"",null,TravelState.RESERVED);
+   PrepackedTravelPackage travelPreReserved=new  PrepackedTravelPackage(stage2a.getTimeEnd(),stage2a.getTimeStart(),"Un cammino alla ricerca dei luoghi del compositore Strauss e della sua musica", "Sul bel danubio blu",stages2,"",null,TravelState.RESERVED);
 travels.add(travelPreReserved);
    List <Product> stage3apr=Arrays.asList(flight6,hotel4,flight7,outing5);
 
    Stage stage3a=new Stage (hotel4.getArea(),stage3apr,dateFlight6Start.getTime(),dateFlight7End.getTime());
    List <Stage> stages3=Arrays.asList(stage3a);
-   PrepackedTravelPackage travelPreExpired=new  PrepackedTravelPackage(stage3a.getTimeEnd(),stage3a.getTimeStart(),"description", "singlestage",stages3,"",null,TravelState.EXPIRED);
+   PrepackedTravelPackage travelPreExpired=new  PrepackedTravelPackage(stage3a.getTimeEnd(),stage3a.getTimeStart(),"Un'esaltante viaggio tra i monumenti della londra vittoriana", "londra vittoriana",stages3,"",null,TravelState.EXPIRED);
    travels.add(travelPreExpired);
     employee.addPackages(travels);;
    emploejb.edit(employee);
@@ -388,5 +386,5 @@ travels.add(travelPreReserved);
    giftMan.edit(single);
         
     }
-    }
+    
 }
