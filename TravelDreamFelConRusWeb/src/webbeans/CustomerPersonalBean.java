@@ -23,6 +23,7 @@ import dto.TravelPackageDTO;
 import authentication.LoginBeanLocal;
 import authentication.RegistrationBeanLocal;
 
+
 @ManagedBean(name="customerPersonal")
 @ViewScoped
 public class CustomerPersonalBean {
@@ -75,13 +76,29 @@ public class CustomerPersonalBean {
 		cus.setEmail(email);
 		cus.setName(firstName);
 		cus.setSurname(lastName);
-		//TODO login.update(cus)
-		if(true)
+		if(login.updateCustomer(cus))
 		{
 			message= "Dati correttamente aggiornati";
 			return;
 		}
 		message= "Si è verificato un errore durante l'aggiornamento";
+		
+		
+		
+	}
+	public void modify()
+	{
+		CustomerDTO cus = (CustomerDTO) login.findLogIn();
+		cus.setEmail(email);
+		cus.setName(firstName);
+		cus.setSurname(lastName);
+		if(login.updateCustomer(cus))
+		{
+			message= "Dati correttamente aggiornati";
+			return;
+		}
+		message= "Si è verificato un errore durante l'aggiornamento";
+		
 		
 		
 	}

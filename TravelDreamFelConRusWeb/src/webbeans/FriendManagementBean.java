@@ -90,6 +90,9 @@ private TravelPackageCRUDBeanLocal packageCRUD;
 @ManagedProperty(value="#{packageEdit}")
 private PackageEditBean packBean;
 
+@ManagedProperty(value="#{customerPackageEdit}")
+private CustomerPackageEditBean customerPackBean;
+
 @EJB
 private LoginBeanLocal login;
 
@@ -114,6 +117,8 @@ public String checkFriendCode()
 		
 		
 		packBean.setTempCurrentPackage(new PrepackedTravelPackageDTO(packageClone));
+		
+		String temp= packBean.show();
 		
 		return "friendCodeCorrect";
 		
@@ -140,8 +145,9 @@ public String checkFriendCodeByLogged()
 		if(packageCRUD.getNumberEquivalentPackage(packageClone)==0 )
 			return "friendSoldOut";
 		
-	packBean.setTempCurrentPackage(new PrepackedTravelPackageDTO(packageClone));
-		
+	customerPackBean.setTempCurrentPackage(new PrepackedTravelPackageDTO(packageClone));
+	String temp= customerPackBean.show();
+	
 	return "friendCodeCorrect";
 		
 	} catch (FriendNotFoundException e) {
@@ -298,6 +304,14 @@ public LoginBeanLocal getLogin() {
 
 public void setLogin(LoginBeanLocal login) {
 	this.login = login;
+}
+
+public CustomerPackageEditBean getCustomerPackBean() {
+	return customerPackBean;
+}
+
+public void setCustomerPackBean(CustomerPackageEditBean customerPackBean) {
+	this.customerPackBean = customerPackBean;
 }
 
 
