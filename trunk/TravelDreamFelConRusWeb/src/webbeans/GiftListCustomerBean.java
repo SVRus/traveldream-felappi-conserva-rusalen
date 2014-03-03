@@ -112,7 +112,7 @@ public class GiftListCustomerBean implements Serializable {
 					giftFree.add(giftLists.get(i));
 
 				}
-				tempCode=DigestUtils.sha256Hex(String.valueOf(giftLists.get(i).getTravelPackageid()));
+				tempCode=DigestUtils.sha256Hex(String.valueOf(giftLists.get(i).getTravelPackageid().longValue()));
 				if(!codesAdded.contains(tempCode))
 				{
 					codesAdded.add(tempCode);
