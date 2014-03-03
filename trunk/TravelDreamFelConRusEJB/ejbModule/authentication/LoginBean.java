@@ -186,7 +186,7 @@ public boolean checkGift(String giftCode  )
 	boolean ok=false;
 	while(ok||iter.hasNext())
 	{
-		ok=ok ||DigestUtils.sha256Hex(iter.next().toString()).equals(giftCode);
+		ok=ok ||DigestUtils.sha256Hex(String.valueOf(iter.next().longValue())).equals(giftCode);
 		
 	}
 	
@@ -204,7 +204,7 @@ public ArrayList <GiftListDTO> checkGiftListException(String giftCode) throws Gi
 	boolean ok=false;
 	while(iter.hasNext()&&!ok)
 	{   idFound =iter.next();
-		ok=ok ||DigestUtils.sha256Hex(idFound.toString()).equals(giftCode);
+		ok=ok ||DigestUtils.sha256Hex(String.valueOf(idFound.longValue())).equals(giftCode);
 		
 	}
 	
