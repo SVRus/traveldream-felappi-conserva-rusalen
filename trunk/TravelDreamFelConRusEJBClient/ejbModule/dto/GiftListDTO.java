@@ -9,7 +9,7 @@ public class GiftListDTO {
 	private String idBuyer;
 	private String moreInfo;
 	private boolean bought;
-	private long travelPackageid;
+	private Long travelPackageid;
 	private String idCustomerCreator;
 	//TODO
 	
@@ -23,7 +23,7 @@ public class GiftListDTO {
  * @param idCustomerCreator
  */
 	public GiftListDTO(ProductDTO product, String idBuyer, String moreInfo,
-			boolean bought, long travelPackageid,String idCustomerCreator) {
+			boolean bought, Long travelPackageid,String idCustomerCreator) {
 		super();
 		this.product = product;
 		this.idBuyer = idBuyer;
@@ -41,7 +41,7 @@ public class GiftListDTO {
 	 * @param travelPackageid
 	 */
 	public GiftListDTO(ProductDTO product, String idBuyer, String moreInfo,
-			boolean bought, long travelPackageid) {
+			boolean bought, Long travelPackageid) {
 		super();
 		this.product = product;
 		this.idBuyer = idBuyer;
@@ -81,10 +81,10 @@ public class GiftListDTO {
 	public void setMoreInfo(String moreInfo) {
 		this.moreInfo = moreInfo;
 	}
-	public long getTravelPackageid() {
+	public Long getTravelPackageid() {
 		return travelPackageid;
 	}
-	public void setTravelPackageid(long travelPackageid) {
+	public void setTravelPackageid(Long travelPackageid) {
 		this.travelPackageid = travelPackageid;
 	}
 	
