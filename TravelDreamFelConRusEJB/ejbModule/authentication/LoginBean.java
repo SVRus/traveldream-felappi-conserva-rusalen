@@ -79,7 +79,7 @@ GiftListEntityManagementLocal gift;
 TravelPackageEntityManagementLocal travelMan;
 
 @Resource
-EJBContext context;
+EJBContext context;///,jf,.fh
 
 
 	/**
