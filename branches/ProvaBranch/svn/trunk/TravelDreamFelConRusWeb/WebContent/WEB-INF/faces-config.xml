@@ -1,0 +1,589 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+
+    <navigation-rule>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>packageEdit</from-outcome>
+           <to-view-id>
+           employee/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusy</from-outcome>
+           <to-view-id>
+          /employee/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>employee/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusy</from-outcome>
+           <to-view-id>
+           /employee/packageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /employee/packageManagement.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusyStage</from-outcome>
+           <to-view-id>
+          /employee/stageManagement.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusyStage</from-outcome>
+           <to-view-id>
+           /employee/stageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /employee/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>addedStage</from-outcome>
+           <to-view-id>
+           /employee/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentStage</from-outcome>
+           <to-view-id>
+           /employee/stageErrorInconsistent.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+       </navigation-rule>
+    
+       
+     <navigation-rule>
+       <from-view-id>employee/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentDateStage</from-outcome>
+           <to-view-id>
+           /employee/stageErrorDate.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+       
+       
+    </navigation-rule>
+    
+   
+    
+     <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>modifySuccess</from-outcome>
+           <to-view-id>
+           /employee/packageModifiedSuccessPackageEmployee.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>insertSuccess</from-outcome>
+           <to-view-id>
+           /employee/packageInsertedSuccessEmployee.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+      </navigation-rule> 
+        <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentPackage</from-outcome>
+           <to-view-id>
+           /employee/packageInconsistent.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+      
+    </navigation-rule>
+    
+    
+     <navigation-rule>
+       <from-view-id>employee/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusyStage</from-outcome>
+           <to-view-id>
+           /employee/stageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <navigation-rule>
+       <from-view-id>customer/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>packageEdit</from-outcome>
+           <to-view-id>
+           customer/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+       <from-view-id>customer/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusy</from-outcome>
+           <to-view-id>
+          /customer/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>customer/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusy</from-outcome>
+           <to-view-id>
+           /customer/packageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/packageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showPackage</from-outcome>
+           <to-view-id>
+           /customer/packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /customer/packageManagement.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+        <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>notBusyStage</from-outcome>
+           <to-view-id>
+          /customer/stageManagement.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusyStage</from-outcome>
+           <to-view-id>
+           /customer/stageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+       <from-view-id>customer/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>closed</from-outcome>
+           <to-view-id>
+           /customer/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>addedStage</from-outcome>
+           <to-view-id>
+           /customer/packageEdit.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentStage</from-outcome>
+           <to-view-id>
+           /customer/stageErrorInconsistent.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+       </navigation-rule>
+    
+       
+     <navigation-rule>
+       <from-view-id>customer/stageManagement.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentDateStage</from-outcome>
+           <to-view-id>
+           /customer/stageErrorDate.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+       
+       
+    </navigation-rule>
+    
+   
+    
+     <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>modifySuccess</from-outcome>
+           <to-view-id>
+           /customer/packageModifiedSuccessPackageEmployee.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>insertSuccess</from-outcome>
+           <to-view-id>
+           /customer/packageInsertedSuccesEmployee.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+      </navigation-rule> 
+        <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>inconsistentPackage</from-outcome>
+           <to-view-id>
+           /customer/packageInconsistent.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+      
+    </navigation-rule>
+    
+    
+     <navigation-rule>
+       <from-view-id>customer/packageEdit.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>errorBusyStage</from-outcome>
+           <to-view-id>
+           /customer/stageErrorBusy.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedPackage</from-outcome>
+           <to-view-id>
+           /customer/afterPurchase.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedError</from-outcome>
+           <to-view-id>
+           /customer/purchaseError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>purchasedGift</from-outcome>
+           <to-view-id>
+           /customer/personalGiftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>customer/purchase.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>giftPurchasedError</from-outcome>
+           <to-view-id>
+           /customer/purchaseError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+     
+      <navigation-rule>
+       <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>viewGift</from-outcome>
+           <to-view-id>
+           /customer/giftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>codeError</from-outcome>
+           <to-view-id>
+           /customer/giftListErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+    
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeCorrect</from-outcome>
+           <to-view-id>
+           /customer/packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+   
+     <navigation-rule>
+     
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeError</from-outcome>
+           <to-view-id>
+           /customer/friendErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+    <navigation-rule>
+      
+     <from-view-id>customer/customerhome.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendSoldOut</from-outcome>
+           <to-view-id>
+           /customer/friendSoldoutError.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    
+       <navigation-rule>
+       <from-view-id>allPackages.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showPackage</from-outcome>
+           <to-view-id>
+           /packageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+       <from-view-id>packageView.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showStage</from-outcome>
+           <to-view-id>
+           /stageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+    <navigation-rule>
+       <from-view-id>friendPackageView.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showStage</from-outcome>
+           <to-view-id>
+           /friendStageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+    <navigation-rule>
+       <from-view-id>customer/packageView.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>showStage</from-outcome>
+           <to-view-id>
+           /customer/customerStageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+  
+  
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>viewGift</from-outcome>
+           <to-view-id>
+           /giftList.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>codeError</from-outcome>
+           <to-view-id>
+           /giftListErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeCorrect</from-outcome>
+           <to-view-id>
+           /friendPackageView.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendSoldOut</from-outcome>
+           <to-view-id>
+           /friendErrorSoldout.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+      <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>friendCodeError</from-outcome>
+           <to-view-id>
+           /friendErrorCode.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>redirectEmployee</from-outcome>
+           <to-view-id>
+           /employee/employeehome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id>index.xhtml</from-view-id>
+       <navigation-case>
+           <from-outcome>redirectCustomer</from-outcome>
+           <to-view-id>
+           /customer/customerhome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id></from-view-id>
+       <navigation-case>
+           <from-outcome>redirectEmployee</from-outcome>
+           <to-view-id>
+           /employee/employeehome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+     <navigation-rule>
+       <from-view-id></from-view-id>
+       <navigation-case>
+           <from-outcome>redirectCustomer</from-outcome>
+           <to-view-id>
+           /customer/customerhome.xhtml
+           </to-view-id>
+           <redirect/>  
+       </navigation-case>
+    </navigation-rule>
+    
+
+</faces-config>

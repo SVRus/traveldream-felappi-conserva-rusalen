@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+<h:head></h:head> 
+<body>  
+	
+<p:layout   fullPage="true">  
+  
+    <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+       <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+       </style> 
+       <p:graphicImage  value="logo.jpg" style=" height:100px;"/>
+  
+  
+    </p:layoutUnit>  
+  
+  <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+       <h:form style =" text-align : center;">
+        <h:outputText  value="Marcello Felappi, Selenia Vincenza Rusalen,  Giovanni Battista Conserva" />  
+        </h:form>
+    </p:layoutUnit>  
+  
+   <p:layoutUnit position="center" header="Sogna con noi!" size="320" resizable="false" closable="false" collapsible="false">  
+      
+    
+    
+    
+         <h:form id="centerImage" styleClass="input-form">
+          <p:graphicImage  value="Briatore.jpg" style=" width:310px height:175px;"/>
+		</h:form>
+		
+    </p:layoutUnit>  
+  
+  
+   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
+          
+            </p:menu>   
+        </p:layoutUnit>  
+       
+  
+    <p:layoutUnit position="east" size="400"  resizable="false" closable="false" collapsible="false" >  
+      
+       <h:form id="logout">
+          <p:commandButton action="#{logoutBean.logout}" value="Logout" />
+      </h:form>
+	
+       <h:form id="gift"
+			action = "todo">
+		<p:panel header="Vuoi fare un regalo?" id="panelGift">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+		<h:panelGrid columns="1">
+	
+		  <p:outputLabel for="gift"   value="Inserisci qui il tuo codice giftlist"   />
+			<p:inputText id="gift" name="j_username" required="true" value="#{giftList.code}" />	
+			<p:commandButton id="submit" value="Invia codice" action="#{giftList.checkCode()}" />
+	
+		</h:panelGrid>
+		</p:panel>
+	</h:form> 
+	
+	  <h:form id="join"
+			action = "todo">
+		<p:panel header="Vuoi viaggiare con un amico?" id="panelFriend">
+		<p:messages id="messages" showDetail="true" showSummary="false"
+			autoUpdate="true"/>
+		<h:panelGrid columns="1">
+	
+		  <p:outputLabel for="friend"   value="Inserisci qui il tuo codice amico"   />
+		  <p:inputText id="friend" name="j_username" required="true" value="#{friendManagement.friendCode}"/>
+			
+		  <p:commandButton id="submitFriendCode" action="#{friendManagement.checkFriendCodeByLogged}" value="Invia codice" ajax="false" />		
+		
+		</h:panelGrid>
+		</p:panel>
+	</h:form> 
+       
+       
+    
+    </p:layoutUnit>  
+  
+   
+  
+</p:layout>  		
+			
+</body> 
+</html>

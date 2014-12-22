@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+        <style type="text/css">
+          .ui-widget{font-size:90% !important;}  
+          </style> 
+       	<a href="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+        </p:layoutUnit>  
+      
+        
+      
+       <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>   
+        </p:layoutUnit>  
+      
+    
+      
+      <p:layoutUnit position="center">  
+       <h:inputHidden  value="#{packageManagement.update()}"/>
+		
+	  <h:form id="form">
+	  
+    
+ <p:dataTable var="travelPackage" value="#{packageManagement.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+                selection="#{packageManagement.selectedTravelPackage}" selectionMode="single" 
+               id="traveltable"  filteredValue="#{packageManagement.filteredTravelPackages}"
+                 rowsPerPageTemplate="10,15,50">  
+     <p:ajax event="rowSelect"  listener= "#{packageManagement.updateCurrentPackage}"/>  
+  
+
+  
+                <f:facet name="header">
+                    Pacchetti
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{travelPackage.name}" filterBy="#{travelPackage.name}" id="name">
+                    
+                    
+                 #{travelPackage.name}  
+        		</p:column>  
+        		<p:column  headerText="Descrizione" sortBy="#{travelPackage.description}" filterBy="#{travelPackage.description}" id="description">
+              
+                 #{travelPackage.description}  
+        		</p:column> 
+        		 <p:column  headerText="Data Inizio" sortBy="#{travelPackage.time_start}" filterBy="#{travelPackage.time_start}" id="timeStart">  
+                 #{travelPackage.time_start}  
+                 </p:column> 
+                 <p:column  headerText="Data Fine" sortBy="#{travelPackage.time_end}" filterBy="#{travelPackage.time_end}" id="timeEnd">  
+                 #{travelPackage.time_end}  
+                 </p:column> 
+                 	<p:column  headerText="Stato" sortBy="#{travelPackage.travelState}" filterBy="#{travelPackage.travelState}" id="travelState">
+              
+                 #{travelPackage.travelState}  
+        		</p:column> 
+        		
+               
+               <f:facet name="footer">
+                     <p:commandButton action="#{packageEdit.allowedNew}" value="Nuovo" icon="ui-icon-star" />  
+               		
+                    <p:commandButton action="#{packageEdit.allowed}" value="Modifica"  />  
+               		<p:commandButton value="Elimina" actionListener="#{packageManagement.deletePackage}" update="traveltable" icon="ui-icon-trash"/>
+                  	
+               </f:facet>
+				
+              </p:dataTable>
+         </h:form>   
+         
+       
+    
+    
+        </p:layoutUnit>  
+      
+        </p:layout>  
+    
+                         
+             
+         
+      
+<p:growl id="growl" showDetail="true" life="5000" />
+         
+
+ 
+        
+    </body> 
+    
+    
+</html>

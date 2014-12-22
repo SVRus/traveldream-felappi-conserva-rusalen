@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        
+    </style> 
+          <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml">
+        <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+      
+        <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+         <h:form style =" text-align : center;">
+           <p:commandButton id="closeOp" value="Termina operazione" action="#{stageManagement.closeOperation}" /> 
+         <p:commandButton id="confirmStage" value="Conferma Tappa" action="#{stageManagement.addStage}" />       
+      
+         </h:form>  
+        </p:layoutUnit>  
+      
+         
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                 <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>  
+        </p:layoutUnit>  
+      
+       
+      
+      <p:layoutUnit position="center">  
+       <p:layout style="min-width:400px;min-height:200px;" id="layout">  
+    <p:layoutUnit position="west"  size="420" >  
+       
+	  <h:form id="form1">
+	   <p:dataTable var="flightView" value="#{stageManagement.flightStartView}" id="startFl">  
+	     <f:facet name="header">
+                    Volo di partenza
+                </f:facet> 
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flightView.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Luogo di partenza">  
+            <h:outputText value="#{flightView.place_start}" />  
+        </p:column>  
+        <p:column headerText="Luogo di arrivo">  
+            <h:outputText value="#{flightView.place_end}" />  
+        </p:column>  
+        <p:column headerText="Ora di partenza">  
+            <h:outputText value="#{flightView.timeStart}" />  
+        </p:column>  
+        <p:column headerText="Ora di arrivo">  
+            <h:outputText value="#{flightView.timeEnd}" />  
+        </p:column>  
+        <p:column headerText="Compagnia">  
+            <h:outputText value="#{flightView.flight_company}" />  
+        </p:column>  
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{flightView.more_info}" />  
+        </p:column>  
+        <p:column headerText="Costo">  
+            <h:outputText value="#{flightView.cost}" />  
+        </p:column>  
+        
+        
+        
+         <f:facet name="footer">
+                     <p:commandButton id="newFlightDialog" value="Inserisci" onclick="PF('startFlightDl').show();" type="button" icon="ui-icon-star" /> 
+                     <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteFlight}" update=":form1:startFl :formFlight:flighttable" icon="ui-icon-trash"/>
+                </f:facet>
+      </p:dataTable>  
+      </h:form>
+      <h:form id="form12">
+	 
+      <p:separator id="separator"/>  
+      
+      <p:dataTable var="flightEndView" value="#{stageManagement.flightEndView}" id = "endFl">
+        <f:facet name="header">
+                    Volo di ritorno
+                </f:facet>   
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flightEndView.name}" />  
+        </p:column>  
+        <p:column headerText="Luogo di partenza">  
+            <h:outputText value="#{flightEndView.place_start}" />  
+        </p:column>  
+        <p:column headerText="Luogo di arrivo">  
+            <h:outputText value="#{flightEndView.place_end}" />  
+        </p:column>  
+        <p:column headerText="Ora di partenza">  
+            <h:outputText value="#{flightEndView.timeStart}" />  
+        </p:column>  
+        <p:column headerText="Ora di arrivo">  
+            <h:outputText value="#{flightEndView.timeEnd}" />  
+        </p:column>  
+        <p:column headerText="Compagnia">  
+            <h:outputText value="#{flightEndView.flight_company}" />  
+        </p:column>  
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{flightEndView.more_info}" />  
+        </p:column>  
+        <p:column headerText="Costo">  
+            <h:outputText value="#{flightEndView.cost}" />  
+        </p:column>  
+        
+          <f:facet name="footer">
+                  <p:commandButton id="newFlightEndDialog" value="Inserisci" onclick="PF('EndFlightDl').show();" type="button" icon="ui-icon-star"/> 
+                          <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteFlightBack}" update=":form12:endFl :formFlightRet:flighttableret" icon="ui-icon-trash" />
+                </f:facet>
+      </p:dataTable> 
+      </h:form>
+      
+      <p:separator id="separator1"/>  
+      <h:form id="form13">
+	 
+      <p:dataTable var="hotelView" value="#{stageManagement.hotelView}" id="hot">  
+        <f:facet name="header">
+                    Albergo
+                </f:facet> 
+        <p:column headerText="Nome">  
+            <h:outputText value="#{hotelView.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Luogo">  
+            <h:outputText value="#{hotelView.place}" />  
+        </p:column>
+        <p:column headerText="Data inizio">  
+            <h:outputText value="#{hotelView.timeStart}" />  
+        </p:column>
+        <p:column headerText="Data fine">  
+            <h:outputText value="#{hotelView.timeEnd}" />  
+        </p:column>
+        <p:column headerText="Tipo camera">  
+            <h:outputText value="#{hotelView.room_type}" />  
+        </p:column>
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{hotelView.more_info}" />  
+        </p:column>
+         <p:column headerText="Costo">  
+            <h:outputText value="#{hotelView.cost}" />  
+        </p:column>
+          
+          <f:facet name="footer">
+                     <p:commandButton id="newHotelDialog" value="Inserisci" onclick="PF('hotelDl').show();" type="button" icon="ui-icon-star"/> 
+                     <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteHotel}" update=":form13:hot :formHotel:hoteltable" icon="ui-icon-trash"/>
+                </f:facet>
+      </p:dataTable> 
+      </h:form>
+    
+       </p:layoutUnit>  
+  
+    <p:layoutUnit position="center" size="370">  
+       <h:form id="form">
+         <p:dataTable var="outingView" value="#{stageManagement.outingModelView}" rowKey="#{outingView.idProduct}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedOutingView}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredOutingsView}" id="out"
+                 rowsPerPageTemplate="10,15,50">  
+  
+
+                <f:facet name="header">
+                    Escursioni
+                </f:facet>  
+                
+              
+                      
+                       <p:column  headerText="Luogo" sortBy="#{outingView.place}" filterBy="#{outingView.place}" id="place">  
+                      #{outingView.place}  
+                      </p:column> 
+                       <p:column  headerText="Ora inizio" sortBy="#{outingView.timeStart}" filterBy="#{outingView.timeStart}" id="timeStart">  
+                      #{outingView.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Ora fine" sortBy="#{outingView.timeEnd}" filterBy="#{outingView.timeEnd}" id="timeEnd">  
+                      #{outingView.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Descrizione" sortBy="#{outingView.description}" filterBy="#{outingView.description}" id="description">  
+                      #{outingView.description}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{outingView.cost}" filterBy="#{outingView.cost}" id="cost">
+                      #{outingView.cost}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                    <p:commandButton id="effectsDialogButton" value="Inserisci" onclick="PF('outingDl').show();" type="button" icon="ui-icon-star"/> 
+                     <p:commandButton value="Rimuovi" actionListener="#{stageManagement.deleteOuting}" update=":form:out :formOuting:outingtable" icon="ui-icon-trash"/>
+                </f:facet>
+
+              </p:dataTable>
+                   
+      
+         </h:form>   
+         
+     </p:layoutUnit>  
+	
+	</p:layout>  
+    
+ 	    </p:layoutUnit>
+        </p:layout>
+          
+           <p:dialog header="Aggiungi escursione" widgetVar="outingDl" showEffect="explode" hideEffect="bounce" height="300" width="700">  
+	     <h:form id= "formOuting">
+     <p:dataTable var="outing" value="#{stageManagement.outingModel}" rowKey="#{outing.idProduct}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedOuting}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredOutings}" id="outingtable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                    Escursioni
+                </f:facet>  
+                
+               
+                      
+                       <p:column  headerText="Luogo" sortBy="#{outing.place}" filterBy="#{outing.place}" id="place">  
+                      #{outing.place}  
+                      </p:column> 
+                       <p:column  headerText="Data Inizio" sortBy="#{outing.timeStart}" filterBy="#{outing.timeStart}" id="timeStart">  
+                      #{outing.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data Fine" sortBy="#{outing.timeEnd}" filterBy="#{outing.timeEnd}" id="timeEnd">  
+                      #{outing.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Descrizione" sortBy="#{outing.description}" filterBy="#{outing.description}" id="description">  
+                      #{outing.description}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{outing.cost}" filterBy="#{outing.cost}" id="cost">
+                      #{outing.cost}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertOuting}" update=":form:out :formOuting:outingtable"  icon="ui-icon-star"/>
+                      </f:facet>
+
+              </p:dataTable>
+        </h:form>
+        
+        
+        	</p:dialog> 
+        	
+        	
+           <p:dialog header="Aggiungi albergo" widgetVar="hotelDl" showEffect="explode" hideEffect="bounce" height="300" width="700">  
+              <h:form id="formHotel">
+     			<p:dataTable var="hotel" value="#{stageManagement.hotelModel}" rowKey="#{hotel.idProduct}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedHotel}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredHotels}" id="hoteltable"
+                 rowsPerPageTemplate="10,15,50" >  
+   
+  
+                <f:facet name="header">
+                    Alberghi
+                </f:facet>  
+                
+                  
+                	
+                       <p:column  headerText="Luogo" sortBy="#{hotel.place}" filterBy="#{hotel.place}" id="place">  
+                      #{hotel.place}  
+                      </p:column> 
+                       <p:column  headerText="Data inizio" sortBy="#{hotel.timeStart}" filterBy="#{hotel.timeStart}" id="timeStart">  
+                      #{hotel.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Data fine" sortBy="#{hotel.timeEnd}" filterBy="#{hotel.timeEnd}" id="timeEnd">  
+                      #{hotel.timeEnd}  
+                      </p:column> 
+                        <p:column  headerText="Tipo camera" sortBy="#{hotel.room_type}" filterBy="#{hotel.room_type}" id="room_type">  
+                      #{hotel.room_type}  
+                      </p:column> 
+                       <p:column  headerText="Informazioni" sortBy="#{hotel.more_info}" filterBy="#{hotel.more_info}" id="more_info">  
+                      #{hotel.more_info}  
+                      </p:column> 
+                     <p:column  headerText="Costo" sortBy="#{hotel.cost}" filterBy="#{hotel.cost}" id="cost">  
+                      #{hotel.cost}  
+                      </p:column> 
+               
+               
+               <f:facet name="footer">
+                    
+                    <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertHotel}" update=":form13:hot :formHotel:hoteltable" icon="ui-icon-star"/>
+                    
+                          
+                </f:facet>          
+              </p:dataTable>
+        </h:form>
+        </p:dialog>
+        
+           <p:dialog header="Aggiungi volo di partenza" widgetVar="startFlightDl" showEffect="explode" hideEffect="bounce" height="300" width="700">  
+              <h:form id="formFlight">
+     	       <p:dataTable var="flight" value="#{stageManagement.flightModel}" rowKey="#{flight.idProduct}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedFlight}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredFlights}" id="flighttable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+                <f:facet name="header">
+                    Voli di partenza
+                </f:facet>  
+                
+                
+                    
+                    
+                    
+            
+                      <p:column  headerText="Luogo di partenza" sortBy="#{flight.place_start}" filterBy="#{flight.place_start}" id="place_start">  
+                      #{flight.place_start}  
+                      </p:column> 
+                      <p:column  headerText="Luogo di arrivo" sortBy="#{flight.place_end}" filterBy="#{flight.place_end}" id="place_end">  
+                      #{flight.place_end}  
+                      </p:column> 
+                      <p:column  headerText="Data Inizio" sortBy="#{flight.timeStart}" filterBy="#{flight.timeStart}" id="timeStart">  
+                      #{flight.timeStart}  
+                      </p:column> 
+                      <p:column  headerText="Data Fine" sortBy="#{flight.timeEnd}" filterBy="#{flight.timeEnd}" id="timeEnd">  
+                      #{flight.timeEnd}  
+                      </p:column> 
+                      <p:column  headerText="Compagnia" sortBy="#{flight.flight_company}" filterBy="#{flight.flight_company}" id="flight_company">  
+                      #{flight.flight_company}  
+                      </p:column> 
+                      <p:column  headerText="Informazioni" sortBy="#{flight.more_info}" filterBy="#{flight.more_info}" id="more_info">  
+                      #{flight.more_info}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{flight.cost}" filterBy="#{flight.cost}" id="cost">  
+                      #{flight.cost}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                     <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlight}" update=":form1:startFl :formFlight:flighttable"  icon="ui-icon-star"/>
+                </f:facet>
+
+              </p:dataTable>
+        </h:form>
+        
+        
+        	</p:dialog> 
+          
+           <p:dialog header="Aggiungi volo di ritorno" widgetVar="EndFlightDl" showEffect="explode" hideEffect="bounce" height="300" width="700">  
+             <h:form id="formFlightRet">
+               <p:dataTable var="flightBack" value="#{stageManagement.flightModelBack}" rowKey="#{flightBack.idProduct}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedFlightBack}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredFlightsBack}" id="flighttableret"
+                 rowsPerPageTemplate="10,15,50">  
+ 
+                <f:facet name="header">
+                    Voli di ritorno
+                </f:facet>  
+                
+                
+                    
+                    
+                  
+                 
+                        <p:column  headerText="Luogo di partenza" sortBy="#{flightBack.place_start}" filterBy="#{flightBack.place_start}" id="place_startBack">  
+                      #{flightBack.place_start}  
+                      </p:column> 
+                      <p:column  headerText="Luogo di arrivo" sortBy="#{flightBack.place_end}" filterBy="#{flightBack.place_end}" id="place_endBack">  
+                      #{flightBack.place_end}  
+                      </p:column> 
+                      <p:column  headerText="Data Inizio" sortBy="#{flightBack.timeStart}" filterBy="#{flightBack.timeStart}" id="timeStartBack">  
+                      #{flightBack.timeStart}  
+                      </p:column> 
+                      <p:column  headerText="Data Fine" sortBy="#{flightBack.timeEnd}" filterBy="#{flightBack.timeEnd}" id="timeEndBack">  
+                      #{flightBack.timeEnd}  
+                      </p:column> 
+                      <p:column  headerText="Compagnia" sortBy="#{flightBack.flight_company}" filterBy="#{flightBack.flight_company}" id="flight_companyBack">  
+                      #{flightBack.flight_company}  
+                      </p:column> 
+                      <p:column  headerText="Informazioni" sortBy="#{flightBack.more_info}" filterBy="#{flightBack.more_info}" id="more_infoBack">  
+                      #{flightBack.more_info}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{flightBack.cost}" filterBy="#{flightBack.cost}" id="costBack">  
+                      #{flightBack.cost}  
+                      </p:column> 
+
+               
+               <f:facet name="footer">
+                      <p:commandButton value="Aggiungi" actionListener="#{stageManagement.insertFlightBack}" update=":form12:endFl :formFlightRet:flighttableret"   icon="ui-icon-star"/>
+                </f:facet>
+
+              </p:dataTable>
+        </h:form>
+        
+        
+        	</p:dialog> 
+       
+        
+        	
+        	
+         
+    </body> 
+    
+    
+</html>

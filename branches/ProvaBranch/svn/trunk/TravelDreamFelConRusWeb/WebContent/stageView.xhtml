@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  <style type="text/css">
+        .ui-widget{font-size:90% !important;}  
+        
+    </style> 
+          <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/index.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+      
+        <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+         <h:form style =" text-align : center;">
+           <p:commandButton id="back" value="Ritorna al pacchetto" action="packageView" icon="ui-icon-arrowrefresh-1-w"/> 
+         </h:form>  
+        </p:layoutUnit>  
+      
+         
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/allPackages.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/promotions.xhtml" />   
+           
+            </p:menu>  
+        </p:layoutUnit>  
+      
+       
+      
+      <p:layoutUnit position="center">  
+       <p:layout style="min-width:400px;min-height:200px;" id="layout">  
+    <p:layoutUnit position="west"  size="500" >  
+       
+	  <h:form id="form1">
+	   <p:dataTable var="flight" value="#{stageManagement.flightStartView}" id="startFl">  
+	     <f:facet name="header">
+                    Volo di partenza
+                </f:facet> 
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flight.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Luogo di partenza">  
+            <h:outputText value="#{flight.place_start}" />  
+        </p:column>  
+        <p:column headerText="Luogo di arrivo">  
+            <h:outputText value="#{flight.place_end}" />  
+        </p:column>  
+        <p:column headerText="Ora di partenza">  
+            <h:outputText value="#{flight.timeStart}" />  
+        </p:column>  
+        <p:column headerText="Ora di arrivo">  
+            <h:outputText value="#{flight.timeEnd}" />  
+        </p:column>  
+        <p:column headerText="Compagnia">  
+            <h:outputText value="#{flight.flight_company}" />  
+        </p:column>  
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{flight.more_info}" />  
+        </p:column>  
+        <p:column headerText="Costo">  
+            <h:outputText value="#{flight.cost}" />  
+        </p:column>  
+        
+        
+      </p:dataTable>  
+      </h:form>
+      <h:form id="form12">
+	 
+      <p:separator id="separator"/>  
+      
+      <p:dataTable var="flightEnd" value="#{stageManagement.flightEndView}" id = "endFl">
+        <f:facet name="header">
+                    Volo di ritorno
+                </f:facet>   
+        <p:column headerText="Nome">  
+            <h:outputText value="#{flightEnd.name}" />  
+        </p:column>  
+        <p:column headerText="Luogo di partenza">  
+            <h:outputText value="#{flightEnd.place_start}" />  
+        </p:column>  
+        <p:column headerText="Luogo di arrivo">  
+            <h:outputText value="#{flightEnd.place_end}" />  
+        </p:column>  
+        <p:column headerText="Ora di partenza">  
+            <h:outputText value="#{flightEnd.timeStart}" />  
+        </p:column>  
+        <p:column headerText="Ora di arrivo">  
+            <h:outputText value="#{flightEnd.timeEnd}" />  
+        </p:column>  
+        <p:column headerText="Compagnia">  
+            <h:outputText value="#{flightEnd.flight_company}" />  
+        </p:column>  
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{flightEnd.more_info}" />  
+        </p:column>  
+        <p:column headerText="Costo">  
+            <h:outputText value="#{flightEnd.cost}" />  
+        </p:column>  
+        
+      </p:dataTable> 
+      </h:form>
+      
+      <p:separator id="separator1"/>  
+      
+      <h:form id="form13">
+	 
+      <p:dataTable var="hotel" value="#{stageManagement.hotelView}" id="hot">  
+        <f:facet name="header">
+                    Albergo
+                </f:facet> 
+        <p:column headerText="Nome">  
+            <h:outputText value="#{hotel.name}" />  
+        </p:column>  
+  
+        <p:column headerText="Luogo">  
+            <h:outputText value="#{hotel.place}" />  
+        </p:column>
+        <p:column headerText="Data inizio">  
+            <h:outputText value="#{hotel.timeStart}" />  
+        </p:column>
+        <p:column headerText="Data fine">  
+            <h:outputText value="#{hotel.timeEnd}" />  
+        </p:column>
+        <p:column headerText="Tipo camera">  
+            <h:outputText value="#{hotel.room_type}" />  
+        </p:column>
+        <p:column headerText="Informazioni">  
+            <h:outputText value="#{hotel.more_info}" />  
+        </p:column>
+         <p:column headerText="Costo">  
+            <h:outputText value="#{hotel.cost}" />  
+        </p:column>
+          
+  
+      </p:dataTable> 
+      </h:form>
+    
+       </p:layoutUnit>  
+  
+    <p:layoutUnit position="center" size="500">  
+       <h:form id="form">
+         <p:dataTable var="outingView" value="#{stageManagement.outingModelView}" rowKey="#{outingView.name}" paginator="true" rows="10"  
+                selection="#{stageManagement.selectedOutingView}" selectionMode="single" 
+                filteredValue="#{stageManagement.filteredOutingsView}" id="out"
+                 rowsPerPageTemplate="10,15,50">  
+  
+
+                <f:facet name="header">
+                    Escursioni
+                </f:facet>  
+                
+                <p:column  headerText="Nome" sortBy="#{outingView.name}" filterBy="#{outingView.name}" id="name">
+                    #{outingView.name}
+                    
+                  	</p:column>
+                      
+                       <p:column  headerText="Luogo" sortBy="#{outingView.place}" filterBy="#{outingView.place}" id="place">  
+                      #{outingView.place}  
+                      </p:column> 
+                       <p:column  headerText="Ora inizio" sortBy="#{outingView.timeStart}" filterBy="#{outingView.timeStart}" id="timeStart">  
+                      #{outingView.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Ora fine" sortBy="#{outingView.timeEnd}" filterBy="#{outingView.timeEnd}" id="timeEnd">  
+                      #{outingView.timeEnd}  
+                      </p:column> 
+                       <p:column  headerText="Descrizione" sortBy="#{outingView.description}" filterBy="#{outingView.description}" id="description">  
+                      #{outingView.description}  
+                      </p:column> 
+                      <p:column  headerText="Costo" sortBy="#{outingView.cost}" filterBy="#{outingView.cost}" id="cost">
+                      #{outingView.cost}  
+                      </p:column> 
+
+              </p:dataTable>
+                   
+      
+         </h:form>   
+         
+     </p:layoutUnit>  
+	
+	</p:layout>  
+    
+ 	    </p:layoutUnit>
+        </p:layout>
+          
+         
+  
+         
+    </body> 
+    
+    
+</html>

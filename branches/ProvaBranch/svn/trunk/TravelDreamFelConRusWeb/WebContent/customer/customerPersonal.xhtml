@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+	<h:head></h:head> 
+	<body> 
+		<p:layout fullPage="true">  
+  
+	    <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerhome.xhtml">
+        <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+	  
+	   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/packageManagement.xhtml" />  
+                     <p:menuitem value="Promozioni" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/promotions.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/customer/customerPersonal.xhtml" />  
+           
+            </p:menu>   
+        </p:layoutUnit>  
+      
+	  
+	    <p:layoutUnit position="east" size="600" header="Le mie attività" resizable="false" closable="false" collapsible="false" >  
+	          <h:form style =" text-align : center;">
+        
+	         <p:button outcome="/customer/personalGiftList.xhtml" value="Le mie Gift List" icon="ui-icon-heart" ></p:button>
+			</h:form>
+       	<p:separator id="separatorPack"/>  
+ 
+ 
+       	<p:accordionPanel>  
+    		<p:tab title="I miei viaggi">  
+    
+	       <p:dataList value="#{customerPersonal.allPackages}" var="package" itemType="disc">  
+    				#{package.name}, #{package.time_start},   #{package.time_end}
+				</p:dataList> 
+				</p:tab>
+				</p:accordionPanel>
+				
+				 
+	    </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="center" size="800">  
+	     
+      
+         <h:form id="clientModify" styleClass="input-form">
+				<p:panel header="Modifica dati personali" id="panel">
+				<p:messages id="messages" showDetail="true" showSummary="false"
+					autoUpdate="true"/>
+				<h:panelGrid columns="2">
+				
+			    	<p:outputLabel value="Nome" for="firstname" />
+					<p:inputText id="firstname" label="First Name" value="#{customerPersonal.firstName}" required="true" />
+					
+					<p:outputLabel value="Cognome" for="lastname" />
+					<p:inputText id="lastname" label="Last Name" value="#{customerPersonal.lastName}" required="true" />
+					
+					<p:outputLabel value="Email" for="email" />
+					<p:inputText id="email" required="true" label="email" 
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format"
+					value="#{customerPersonal.email}">
+			 
+				  	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			 
+					</p:inputText>				
+					<p:commandButton value="Salva le modifiche"
+					actionListener="#{customerPersonal.modify}"
+					
+					style="display:block; margin:0 auto;"
+					oncomplete="PF('modMess').show();" update="clientModify"/>
+					   
+				
+				 
+ 
+					
+				</h:panelGrid>
+			
+				</p:panel>
+
+			</h:form>	
+			 <h:form id="form">
+	   
+    
+ <p:dataTable var="travelPackage" value="#{customerPersonal.packageModel}" rowKey="#{travelPackage.idtravelpackage}" paginator="true" rows="10"  
+                selection="#{customerPersonal.selectedTravelPackage}" filteredValue="#{customerPersonal.filteredTravelPackages}" selectionMode="single" 
+               id="traveltable"
+                 rowsPerPageTemplate="10,15,50">  
+    
+
+  
+                <f:facet name="header">
+                   Vuoi invitare un amico? Seleziona un pacchetto e invia la mail
+                </f:facet>  
+                
+                 <p:column  headerText="Nome" filterBy="#{travelPackage.name}" sortBy="#{travelPackage.name}"  id="name">
+                    
+                    
+                 #{travelPackage.name}  
+        		</p:column>  
+        		<p:column  headerText="Descrizione"  filterBy="#{travelPackage.description}" sortBy="#{travelPackage.description}"  id="description">
+                    
+                    
+                 #{travelPackage.description}  
+        		</p:column> 
+        		 <p:column  headerText="Data Inizio"  filterBy="#{travelPackage.time_start}" sortBy="#{travelPackage.time_start}"  id="timeStart">  
+                 #{travelPackage.time_start}  
+                 </p:column> 
+                 <p:column  headerText="Data Fine"  filterBy="#{travelPackage.time_end}" sortBy="#{travelPackage.time_end}"  id="timeEnd">  
+                 #{travelPackage.time_end}  
+                 </p:column> 
+                    
+               
+               <f:facet name="footer">
+                	<p:commandButton value="Invita amico" actionListener="#{customerPersonal.viewCode}" oncomplete="PF('codMess').show();"  />
+            
+               		
+                    
+                  
+               </f:facet>
+				
+              </p:dataTable>
+         </h:form>   
+      
+		 </p:layoutUnit>  
+			
+		
+	  
+		</p:layout>  
+		
+		<p:dialog header="Modifica" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50" dynamic="true">      
+             #{customerPersonal.message}
+            
+         </p:dialog>
+         
+         <p:dialog header="Invita amico" widgetVar="codMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="600" height="150" dynamic="true">      
+             <p:outputLabel value="Codice amico:"  /> 
+		<h:outputText value=" #{customerPersonal.friendCode}"  />  
+		<p:separator id="separator"/>  
+ 
+		      <p:outputLabel value="Email amico" for="emailInv" />		
+		<p:inputText id="emailInv" required="true" label="emailInv" 
+		value="" />
+		  <p:commandButton  value="Invia invito" onclick="PF('codMess').hide();" icon="ui-icon-mail-closed" />  
+	     
+         </p:dialog>
+	</body> 
+	
+	
+</html>

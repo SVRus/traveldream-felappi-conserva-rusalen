@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+    <h:head></h:head> 
+    <body> 
+        <p:layout fullPage="true">  
+  
+         <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml">
+        <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+     
+      <p:layoutUnit position="south" size="50"  resizable="false" closable="false" collapsible="false">  
+         <h:form style =" text-align : center;">
+           <p:button outcome="/employee/employeePersonal.xhtml" value="Ok, fatto"  icon="ui-icon-arrowrefresh-1-w" ></p:button>
+         </h:form>  
+        </p:layoutUnit>  
+      
+        <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                 <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>   
+        </p:layoutUnit>  
+      
+       
+      
+      <p:layoutUnit position="center">  
+	  <h:form id="form">
+ <p:dataTable var="outing" value="#{outingManagement.outingModel}" rowKey="#{outing.idProduct}" paginator="true" rows="10"  
+                selection="#{outingManagement.selectedOuting}" selectionMode="single" 
+                filteredValue="#{outingManagement.filteredOutings}" id="outingtable"
+                 rowsPerPageTemplate="10,15,50">  
+   
+  
+                <f:facet name="header">
+                    Escursioni
+                </f:facet>  
+                
+                    <p:column  headerText="Nome" sortBy="#{outing.name}" filterBy="#{outing.name}" id="name">
+                    
+                    <p:commandLink value="#{outing.name}" update=":modForm:display" oncomplete="modDialog.show()"  title="View">
+                        <f:setPropertyActionListener value="#{outing}" target="#{outingManagement.selectedOuting}" />    
+                    </p:commandLink>
+                    
+                	</p:column>
+                	
+                    <p:column  headerText="Creatore" sortBy="#{outing.employeeCreator}" filterBy="#{outing.employeeCreator}" id="employeeCreator">
+                      #{outing.employeeCreator}  
+                      </p:column> 
+                       <p:column  headerText="Area" sortBy="#{outing.area}" filterBy="#{outing.area}" id="area">
+                      #{outing.area}  
+                      </p:column> 
+                       <p:column  headerText="Luogo" sortBy="#{outing.place}" filterBy="#{outing.place}" id="place">  
+                      #{outing.place}  
+                      </p:column> 
+                       <p:column  headerText="Ora Inizio" sortBy="#{outing.timeStart}" filterBy="#{outing.timeStart}" id="timeStart">  
+                      #{outing.timeStart}  
+                      </p:column> 
+                       <p:column  headerText="Ora Fine" sortBy="#{outing.timeEnd}" filterBy="#{outing.timeEnd}" id="timeEnd">  
+                      #{outing.timeEnd}  
+                      </p:column>  
+                       <p:column  headerText="Descrizione" sortBy="#{outing.description}" filterBy="#{outing.description}" id="description">  
+                      #{outing.description}  
+                      </p:column> 
+                     <p:column  headerText="Costo" sortBy="#{outing.cost}" filterBy="#{outing.cost}" id="cost">  
+                      #{outing.cost}  
+                      </p:column> 
+                      <p:column  headerText="Stato" sortBy="#{outing.state}" filterBy="#{outing.state}" id="state">  
+                      #{outing.state}  
+                      </p:column> 
+                      
+                       
+
+               
+               <f:facet name="footer">
+                    <p:commandButton  value="Aggiungi nuovo" onclick="PF('dlg3').show();" type="button" icon="ui-icon-star"/> 
+                    
+                    <p:commandButton value="Elimina" actionListener="#{outingManagement.deleteOuting}" oncomplete="PF('delMess').show();" update="outingtable" icon="ui-icon-trash"/>
+                  
+                </f:facet>          
+              </p:dataTable>
+                
+         </h:form>   
+       
+           
+        </p:layoutUnit>  
+      
+        </p:layout> 
+         
+          <p:dialog header="Inserisci i dati della nuova escursione" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" resizable="false">  
+     <h:form>
+     <h:panelGrid columns="2" cellpadding="5">  
+     
+           <h:outputLabel for="newname" value="Nome:" />  
+            <p:inputText value="#{outingManagement.name}" id="newname" required="true" label="newname" /> 
+                     
+            <h:outputLabel for="newarea" value="Area:" />  
+            <p:inputText value="#{outingManagement.area}" id="newarea" required="true" label="newarea" />
+            
+            <h:outputLabel for="newplace" value="Luogo:" />  
+            <p:inputText value="#{outingManagement.place}" id="newplace" required="true" label="newplace" />  
+            
+            <h:outputLabel for="newtimeStart" value="Ora inizio:" />  
+            <p:calendar id="newtimeStart" value="#{outingManagement.timeStart}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy HH:mm" showOn="button" readonlyInput="true" label="newtimeStart"/>
+            
+            <h:outputLabel for="newtimeEnd" value="Ora fine:" />  
+             <p:calendar id="newtimeEnd" value="#{outingManagement.timeEnd}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy HH:mm" showOn="button" readonlyInput="true" label="newtimeEnd"/>
+            
+            <h:outputLabel for="newmore_info" value="Descrizione:" />  
+            <p:inputText value="#{outingManagement.description}" id="newdescription" required="true" label="newdescription" />
+            
+            <h:outputLabel for="newcost" value="Costo:" />  
+            <p:inputText value="#{outingManagement.cost}" id="newcost" required="true" label="newcost" />
+            
+            <f:facet name="footer">  
+                <p:commandButton id="createButton" value="Crea" update=":form:outingtable"   
+                    actionListener="#{outingManagement.newOuting}"  
+                   oncomplete="dlg3.hide();"/>  
+                
+               
+            </f:facet>  
+        </h:panelGrid>  
+        </h:form>
+        
+        
+        	</p:dialog> 
+        	
+        <script type="text/javascript">  
+    function handleLoginRequest(xhr, status, args) {  
+        if( !args.loggedIn) {  
+            PF('dlg3').jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            PF('dlg3').hide();  
+            $('#loginLink').fadeOut();  
+        }  
+    }  
+</script>  	
+    
+       <p:dialog header="Modifica i dati dell'escursione" widgetVar="modDialog" resizable="false" id="modDlg" > 
+               <h:form id="modForm">
+               <p:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">
+                  
+			<h:outputText value="Nome:"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.name}" />
+            <h:outputText value="Nuovo nome:"></h:outputText>
+						<h:inputText value="#{outingManagement.selectedOuting.name}"/>			
+						
+			<h:outputText value="Area:"></h:outputText>			
+						<h:outputText value="#{outingManagement.selectedOuting.area}" />
+			<h:outputText value="Nuova area:"></h:outputText>
+						<h:inputText value="#{outingManagement.selectedOuting.area}"/>
+						
+            <h:outputText value="Luogo:"></h:outputText>
+						<h:outputText value="#{outingManagement.selectedOuting.place}" />
+			<h:outputText value="Nuovo luogo:"></h:outputText>
+						<h:inputText value="#{outingManagement.selectedOuting.place}"/>
+						
+		    <h:outputText value="Ora inizio:"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.timeStart}" />
+            <h:outputText value="Nuova ora inizio:"></h:outputText>
+						<p:calendar id="modtimeStart" value="#{outingManagement.selectedOuting.timeStart}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy HH:mm" showOn="button" readonlyInput="true" label="newtimeStart"/>
+						
+			<h:outputText value="Ora fine:"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.timeEnd}" />
+            <h:outputText value="Nuova ora fine:"></h:outputText>
+						<p:calendar id="modtimeEnd" value="#{outingManagement.selectedOuting.timeEnd}" 
+			navigator="true" required="true" yearRange="c-100:c-0"
+			pattern="MM/dd/yyyy HH:mm" showOn="button" readonlyInput="true" label="newtimeEnd"/>
+						
+						
+			<h:outputText value="Descrizione:"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.description}" />
+            <h:outputText value="Nuova descrizione:"></h:outputText>
+						<h:inputText value="#{outingManagement.selectedOuting.description}"/>
+						
+			<h:outputText value="Costo:"></h:outputText>
+                        <h:outputText value="#{outingManagement.selectedOuting.cost}" />
+            <h:outputText value="Nuovo costo:"></h:outputText>
+						<h:inputText value="#{outingManagement.selectedOuting.cost}"/>
+						
+      		<f:facet name="footer">
+                     
+                            <p:commandButton value="Salva modifiche" update=":form:outingtable"  
+                            oncomplete="modDialog.hide(); PF('modMess').show(); " actionListener="#{outingManagement.updateOuting}"/>
+                    </f:facet>
+			
+                </p:panelGrid> 
+             </h:form>
+          </p:dialog> 
+          
+          <p:dialog header="Eliminazione" widgetVar="delMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="100" dynamic="true">      
+             #{outingManagement.messageDelete}
+         </p:dialog>
+         
+        <p:dialog header="Modifica" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="100" dynamic="true">      
+            #{outingManagement.messageModify}
+         </p:dialog>
+                         
+             
+         
+      
+<p:growl id="growl" showDetail="true" life="5000" />
+         
+
+ 
+        
+    </body> 
+    
+    
+</html>

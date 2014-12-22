@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+	<h:head></h:head> 
+	<body> 
+		<p:layout fullPage="true">  
+  
+	    <p:layoutUnit position="north" size="120" style =" text-align : center;"  > 
+    		<style type="text/css">
+        	.ui-widget{font-size:90% !important;}  
+      		</style> 
+      		<a href="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeehome.xhtml">
+         <p:graphicImage  value="logo.jpg" style=" height:100px;" />
+         </a>
+		</p:layoutUnit>  
+	  
+	   <p:layoutUnit position="west" size="200" header="Pagine utili" resizable="false" closable="false" collapsible="false">   
+            <p:menu>  
+               
+                     <p:menuitem value="Pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" />  
+                     <p:menuitem value="Pagina personale" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/employeePersonal.xhtml" />  
+           
+            </p:menu>   
+        </p:layoutUnit>  
+      
+	  
+	     <p:layoutUnit position="east" size="400" header="Funzioni di gestione" resizable="false" closable="false" collapsible="false" >  
+            
+            <p:menu>  
+               
+                     <p:menuitem value="Gestisci alberghi" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/hotelManagement.xhtml" icon="ui-icon-gear"/>  
+                     <p:menuitem value="Gestisci voli" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/flightManagement.xhtml" icon="ui-icon-gear"/>  
+                     <p:menuitem value="Gestisci escursioni" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/outingManagement.xhtml" icon="ui-icon-gear" /> 
+                     <p:menuitem value="Gestisci pacchetti" url="http://localhost:8080/TravelDreamFelConRusWeb/employee/packageManagement.xhtml" icon="ui-icon-gear"/>   
+           
+            </p:menu>  
+            
+            
+        </p:layoutUnit>  
+	  
+	    <p:layoutUnit position="center" size="800">  
+	     
+      
+	        <h:form id="clientModify" styleClass="input-form">
+				<p:panel header="Modifica dati personali" id="panel">
+				<p:messages id="messages" showDetail="true" showSummary="false"
+					autoUpdate="true"/>
+				<h:panelGrid columns="2">
+				
+			    	<p:outputLabel value="Nome" for="firstname" />
+					<p:inputText id="firstname" label="First Name" value="#{personal.firstName}" required="true" />
+					
+					<p:outputLabel value="Cognome" for="lastname" />
+					<p:inputText id="lastname" label="Last Name" value="#{personal.lastName}" required="true" />
+					
+					<p:outputLabel value="Email" for="email" />
+					<p:inputText id="email" required="true" label="email" 
+					requiredMessage="Please enter your email address."
+					validatorMessage="Invalid email format"
+					value="#{personal.email}">
+			 
+				  	<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+			 
+					</p:inputText>				
+					<p:commandButton value="Salva le modifiche"
+					actionListener="#{personal.modify}"
+					
+					style="display:block; margin:0 auto;"
+					oncomplete="PF('modMess').show();" update="clientModify"/>
+					   
+				
+					
+				 
+ 
+					
+				</h:panelGrid>
+			
+				</p:panel>
+
+			</h:form>	
+			
+				<p:accordionPanel>  
+    		<p:tab title="Pacchetti creati">  
+    
+			    <p:dataList value="#{personal.allPackages}" var="package" itemType="disc"   resizable="false" closable="false" collapsible="false" >  
+    				#{package.name}, #{package.time_start},   #{package.time_end}
+				</p:dataList>  
+	    	 
+	     	 </p:tab>  
+	     	 <p:tab title="Hotel creati">  
+    		</p:tab>  
+	     	 <p:tab title="Viaggi creati">  
+    		</p:tab>  
+	     	 <p:tab title="Escursioni create">  
+    		</p:tab>  
+	     	 
+			 </p:accordionPanel>  
+    	
+		
+	  </p:layoutUnit>  
+		
+		</p:layout>  
+		<p:dialog header="Modifica" widgetVar="modMess" showEffect="explode" hideEffect="bounce" resizable="false"
+                   width="200" height="50" dynamic="true">      
+             #{personal.message}
+            
+         </p:dialog>
+	</body> 
+	
+	
+</html>
